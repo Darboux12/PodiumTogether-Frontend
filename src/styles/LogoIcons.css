@@ -1,0 +1,24 @@
+.logo-icons{
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid darkgoldenrod;
+}
+
+.logo-icon{
+    color: red;
+    font-size: 2em;
+    margin-right: 0.05em;
+}
+
+#logo-icon-1{
+    color: brown;
+}
+
+#logo-icon-2{
+    color: silver;
+}
+
+#logo-icon-3{
+    color: gold;
+}

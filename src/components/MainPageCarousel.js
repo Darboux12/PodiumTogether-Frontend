@@ -6,14 +6,13 @@ import carouselImageOne from "../images/carouselPictureOne.jpg"
 import carouselImageTwo from "../images/carouselPictureTwo.jpg"
 import carouselImageThree from "../images/carouselPictureThree.jpg"
 import Carousel from "react-bootstrap/Carousel";
+import "../styles/MainPageCarousel.css"
 
 class MainPageCarousel extends Component{
 
     render() {
         return(
-            <Container>
-
-                <Carousel>
+                <Carousel className="MainPageCarousel">
 
                     <Carousel.Item>
                         <img
@@ -22,15 +21,21 @@ class MainPageCarousel extends Component{
                             alt="First slide"
                         />
                         <Carousel.Caption>
-                            <h3>First slide label</h3>
-                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                            <h3>Find motivation</h3>
+                            <p>
+                                Nothing motivates more then
+                                sharing hard work and tears with other person.
+
+                                Find your training partner to achieve incredible goals together.
+
+                            </p>
                         </Carousel.Caption>
                     </Carousel.Item>
 
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
-                            src={carouselImageOne}
+                            src={carouselImageTwo}
                             alt="Third slide"
                         />
                         <Carousel.Caption>
@@ -42,7 +47,7 @@ class MainPageCarousel extends Component{
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
-                            src={carouselImageOne}
+                            src={carouselImageThree}
                             alt="Third slide"
                         />
                         <Carousel.Caption>
@@ -53,7 +58,7 @@ class MainPageCarousel extends Component{
 
                 </Carousel>
 
-            </Container>
+
 
 
 

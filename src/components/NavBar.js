@@ -14,7 +14,7 @@ class NavBar extends Component {
     render() {
         return (
 
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
 
                 <Navbar.Brand href="#home"><Logo/></Navbar.Brand>
 

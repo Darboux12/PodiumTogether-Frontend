@@ -12,7 +12,7 @@ class MainPageCarousel extends Component{
 
     render() {
         return(
-                <Carousel className="MainPageCarousel">
+                <Carousel className="MainPageCarousel" interval="4000">
 
                     <Carousel.Item>
                         <img
@@ -21,12 +21,10 @@ class MainPageCarousel extends Component{
                             alt="First slide"
                         />
                         <Carousel.Caption>
-                            <h3>Find motivation</h3>
+                            <h3>Make friends</h3>
                             <p>
-                                Nothing motivates more then
-                                sharing hard work and tears with other person.
-
-                                Find your training partner to achieve incredible goals together.
+                                Nothing connects people better then shared passion.
+                                Meet new people, who love sports as you.
 
                             </p>
                         </Carousel.Caption>
@@ -39,8 +37,9 @@ class MainPageCarousel extends Component{
                             alt="Third slide"
                         />
                         <Carousel.Caption>
-                            <h3>Second slide label</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <h3>Make a team</h3>
+                            <p>Strength is in numbers.
+                                Make your dream team and compete with the best</p>
                         </Carousel.Caption>
                     </Carousel.Item>
 
@@ -51,15 +50,12 @@ class MainPageCarousel extends Component{
                             alt="Third slide"
                         />
                         <Carousel.Caption>
-                            <h3>Third slide label</h3>
-                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                            <h3>Share your passion</h3>
+                            <p>Find people who love the same stuff and shere with them your amazing experience.</p>
                         </Carousel.Caption>
                     </Carousel.Item>
 
                 </Carousel>
-
-
-
 
 
         );

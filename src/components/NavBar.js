@@ -7,12 +7,30 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import {Link} from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import "../styles/Navbar.css"
+import LoginModal from "./LoginModal";
 
 
 class NavBar extends Component {
 
+    constructor(props){
+        super(props);
+        this.state = {
+            isVisible : false
+        }
+    }
+
+    closeModal(){
+        this.setState({isVisible : false})
+    }
+
+    openModal(){
+        this.setState({isVisible : true});
+    }
+
     render() {
         return (
+
+            <div>
 
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
 
@@ -41,21 +59,32 @@ class NavBar extends Component {
 
                     <Nav>
                         <Nav.Item>
-                            <Button id="signInButton" variant="outline-light">Sign In</Button>
+                            <Button
+                                id="signInButton"
+                                variant="outline-light"
+                                onClick={() => this.openModal()}
+                            >
+                                Sign In
+                            </Button>
                         </Nav.Item>
 
                         <Nav.Item>
                             <Button id="signUpButton" variant="outline-light">Sign Up</Button>
                         </Nav.Item>
 
-
-
-
                 </Nav>
-
 
                 </Navbar.Collapse>
             </Navbar>
+
+                <LoginModal
+                    isVisible={this.state.isVisible}
+                    closeModal={() => this.closeModal()}
+                />
+
+            </div>
+
+
 
 
 

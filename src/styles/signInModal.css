@@ -1,0 +1,29 @@
+.signInModalHeader{
+    display: flex;
+    flex-direction: column;
+    background: white;
+}
+
+#trophy-icon{
+    margin-right: 0.2em;
+    color: gold;
+}
+
+.signInModalFooter{
+
+    background: darkslategrey;
+
+
+}
+
+.signInModalFooter > a{
+    color: white;
+}
+
+.signInModalFooter > a:hover{
+    color: azure;
+}
+
+.signInModalButton{
+    width: 100%;
+}

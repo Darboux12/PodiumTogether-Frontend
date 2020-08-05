@@ -7,7 +7,8 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import {Link} from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import "../styles/Navbar.css"
-import LoginModal from "./LoginModal";
+import SignInModal from "./SignInModal";
+import SignUpModal from "./SignUpModal";
 
 
 class NavBar extends Component {
@@ -15,16 +16,25 @@ class NavBar extends Component {
     constructor(props){
         super(props);
         this.state = {
-            isVisible : false
+            isSignInModalVisible : false,
+            isSignUpModalVisible : false
         }
     }
 
-    closeModal(){
-        this.setState({isVisible : false})
+    closeSignInModal(){
+        this.setState({isSignInModalVisible : false})
     }
 
-    openModal(){
-        this.setState({isVisible : true});
+    openSignInModal(){
+        this.setState({isSignInModalVisible : true});
+    }
+
+    closeSignUpModal(){
+        this.setState({isSignUpModalVisible : false})
+    }
+
+    openSignUpModal(){
+        this.setState({isSignUpModalVisible : true});
     }
 
     render() {
@@ -62,14 +72,18 @@ class NavBar extends Component {
                             <Button
                                 id="signInButton"
                                 variant="outline-light"
-                                onClick={() => this.openModal()}
+                                onClick={() => this.openSignInModal()}
                             >
-                                Sign In
-                            </Button>
+                                Sign In</Button>
                         </Nav.Item>
 
                         <Nav.Item>
-                            <Button id="signUpButton" variant="outline-light">Sign Up</Button>
+                            <Button
+                                id="signUpButton"
+                                variant="outline-light"
+                                onClick={() => this.openSignUpModal()}
+
+                            >Sign Up</Button>
                         </Nav.Item>
 
                 </Nav>
@@ -77,9 +91,14 @@ class NavBar extends Component {
                 </Navbar.Collapse>
             </Navbar>
 
-                <LoginModal
-                    isVisible={this.state.isVisible}
-                    closeModal={() => this.closeModal()}
+                <SignInModal
+                    isSignInModalVisible={this.state.isSignInModalVisible}
+                    closeSignInModal={() => this.closeSignInModal()}
+                />
+
+                <SignUpModal
+                    isSignUpModalVisible={this.state.isSignUpModalVisible}
+                    closeSignUpModal={() => this.closeSignUpModal()}
                 />
 
             </div>

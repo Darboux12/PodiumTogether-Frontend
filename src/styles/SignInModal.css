@@ -2,12 +2,23 @@
     display: flex;
     flex-direction: column;
     background: white;
+    text-align: center;
 }
 
-#trophy-icon{
-    margin-right: 0.2em;
-    color: gold;
+.signInTitleHeader{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+
+
 }
+
+
+
 
 .signInModalFooter{
 

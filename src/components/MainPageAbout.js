@@ -1,8 +1,7 @@
 import React, {Component} from "react";
 import "../styles/MainPageAbout.css"
+import MainPageCards from "./MainPageCards";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 class MainPageAbout extends Component{
 
@@ -11,19 +10,20 @@ class MainPageAbout extends Component{
         return(
 
             <Container>
-
-                <Row>
-
-                    <Col id="column">Column Column Column Column Column Column</Col>
-                    <Col id="column2">Column Column Column Column Column Column</Col>
-
-
-
-                </Row>
-
-
-
+                <h>A few word about podium together</h>
+                <MainPageCards/>
             </Container>
+
+
+
+
+
+
+
+
+
+
+
         );
 
 

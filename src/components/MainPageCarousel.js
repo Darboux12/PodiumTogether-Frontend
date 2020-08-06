@@ -12,7 +12,7 @@ class MainPageCarousel extends Component{
 
     render() {
         return(
-                <Carousel className="MainPageCarousel" interval="4000">
+                <Carousel className="MainPageCarousel" interval="4000" data-pause="false" pause="false">
 
                     <Carousel.Item>
                         <img

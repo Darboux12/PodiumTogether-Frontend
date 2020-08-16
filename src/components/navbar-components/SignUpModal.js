@@ -1,15 +1,15 @@
 import React, {Component} from "react";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import InputGroup from "react-bootstrap/InputGroup";
-import FormControl from "react-bootstrap/FormControl";
-import {faUser} from "@fortawesome/free-solid-svg-icons";
-import {faUnlock} from "@fortawesome/free-solid-svg-icons";
-import {faTrophy} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import Modal from "react-bootstrap/esm/Modal";
+import Button from "react-bootstrap/esm/Button";
+import InputGroup from "react-bootstrap/esm/InputGroup";
+import FormControl from "react-bootstrap/esm/FormControl";
+import {faUser} from "@fortawesome/free-solid-svg-icons/index";
+import {faUnlock} from "@fortawesome/free-solid-svg-icons/index";
+import {faTrophy} from "@fortawesome/free-solid-svg-icons/index";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index";
 
-import "../styles/SignUpModal.css"
-import Logo from "./Logo";
+import "../../styles/SignUpModal.css"
+import Logo from "../common-components/Logo";
 import SignUpForm from "./SignUpForm";
 
 class SignUpModal extends Component{

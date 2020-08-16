@@ -1,12 +1,12 @@
 import React, {Component} from "react";
-import {Navbar, Nav, Container} from "react-bootstrap";
-import navBarImage from "../images/ball-logo.png"
-import Logo from "./Logo";
-import LogoIcons from "./LogoIcons";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import {Navbar, Nav, Container} from "react-bootstrap/esm/index";
+import navBarImage from "../../images/ball-logo.png"
+import Logo from "../common-components/Logo";
+import LogoIcons from "../common-components/LogoIcons";
+import NavDropdown from "react-bootstrap/esm/NavDropdown";
 import {Link} from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import "../styles/Navbar.css"
+import Button from "react-bootstrap/esm/Button";
+import "../../styles/Navbar.css"
 import SignInModal from "./SignInModal";
 import SignUpModal from "./SignUpModal";
 
@@ -42,7 +42,7 @@ class NavBar extends Component {
 
             <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" sticky="top">
 
-                <Navbar.Brand href="#home"><Logo/></Navbar.Brand>
+                <Navbar.Brand href="home"><Logo/></Navbar.Brand>
 
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
@@ -54,7 +54,7 @@ class NavBar extends Component {
                         <Nav.Link href="#News">News</Nav.Link>
 
                         <NavDropdown title="Events"  id="eventDropdown">
-                            <NavDropdown.Item href="#OrganizeEvent">New Event</NavDropdown.Item>
+                            <NavDropdown.Item href="createEvent">New Event</NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item href="#Football">Football</NavDropdown.Item>
                             <NavDropdown.Item href="#Jogging">Jogging</NavDropdown.Item>

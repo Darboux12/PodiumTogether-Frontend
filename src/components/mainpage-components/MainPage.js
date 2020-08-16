@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 
-import Container from "react-bootstrap/Container";
+import Container from "react-bootstrap/esm/Container";
 import MainPageCarousel from "./MainPageCarousel";
-import "../styles/MainPage.css"
+import "../../styles/MainPage.css"
 import MainPageAbout from "./MainPageAbout";
 
 class MainPage extends Component{

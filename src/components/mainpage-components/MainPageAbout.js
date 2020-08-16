@@ -1,8 +1,6 @@
 import React, {Component} from "react";
-import "../styles/MainPageAbout.css"
-import Logo from "./Logo";
+import "../../styles/MainPageAbout.css"
 
-import carouselImageOne from "../images/carouselPictureOne.jpg"
 
 class MainPageAbout extends Component{
 

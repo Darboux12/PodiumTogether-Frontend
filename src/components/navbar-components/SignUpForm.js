@@ -1,12 +1,12 @@
 import React, {Component} from "react";
-import InputGroup from "react-bootstrap/InputGroup";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faGlobeEurope, faUnlock, faUser} from "@fortawesome/free-solid-svg-icons";
-import FormControl from "react-bootstrap/FormControl";
-import Button from "react-bootstrap/Button";
+import InputGroup from "react-bootstrap/esm/InputGroup";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index";
+import {faGlobeEurope, faUnlock, faUser} from "@fortawesome/free-solid-svg-icons/index";
+import FormControl from "react-bootstrap/esm/FormControl";
+import Button from "react-bootstrap/esm/Button";
 import Modal from "./SignUpModal";
-import Container from "react-bootstrap/Container";
-import {faCalendar, faCalendarAlt, faEnvelope, faFlag} from "@fortawesome/free-regular-svg-icons";
+import Container from "react-bootstrap/esm/Container";
+import {faCalendar, faCalendarAlt, faEnvelope, faFlag} from "@fortawesome/free-regular-svg-icons/index";
 import {faCalendarDay} from "@fortawesome/free-solid-svg-icons/faCalendarDay";
 
 class SignUpForm extends Component{

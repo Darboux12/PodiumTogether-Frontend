@@ -1,11 +1,11 @@
 import React, {Component} from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRunning} from "@fortawesome/free-solid-svg-icons";
-import { faBiking} from "@fortawesome/free-solid-svg-icons";
-import { faSkating} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome/index";
+import { faRunning} from "@fortawesome/free-solid-svg-icons/index";
+import { faBiking} from "@fortawesome/free-solid-svg-icons/index";
+import { faSkating} from "@fortawesome/free-solid-svg-icons/index";
 
-import "../styles/LogoIcons.css"
+import "../../styles/LogoIcons.css"
 
 class LogoIcons extends Component{
 

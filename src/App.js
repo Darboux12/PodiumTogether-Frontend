@@ -1,14 +1,15 @@
 import React from 'react';
 
-import Logo from "./components/Logo";
+import Logo from "./components/common-components/Logo";
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import MainPage from "./components/MainPage"
-import MainPageCarousel from "./components/MainPageCarousel";
+import MainPage from "./components/mainpage-components/MainPage"
+import MainPageCarousel from "./components/mainpage-components/MainPageCarousel";
 
-import CarouselYes from "./components/MainPageCarousel";
+import CarouselYes from "./components/mainpage-components/MainPageCarousel";
 
-import NavBar from "./components/NavBar"
-import Footer from "./components/Footer";
+import NavBar from "./components/navbar-components/NavBar"
+import Footer from "./components/footer-components/Footer";
+import CreateEventPage from "./components/CreateEventPage";
 
 class App extends React.Component {
 
@@ -19,6 +20,8 @@ class App extends React.Component {
           <NavBar/>
           <Switch>
             <Route path="/" exact component={MainPage}/>
+              <Route path="/home" exact component={MainPage}/>
+            <Route path="/createEvent" exact component={CreateEventPage}/>
           </Switch>
             <Footer/>
         </Router>

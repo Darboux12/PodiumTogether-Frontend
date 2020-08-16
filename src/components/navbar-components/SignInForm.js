@@ -1,13 +1,13 @@
 import React, {Component} from "react";
-import Container from "react-bootstrap/Container";
-import InputGroup from "react-bootstrap/InputGroup";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faUnlock, faEnvelope} from "@fortawesome/free-solid-svg-icons";
-import FormControl from "react-bootstrap/FormControl";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
+import Container from "react-bootstrap/esm/Container";
+import InputGroup from "react-bootstrap/esm/InputGroup";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index";
+import {faUnlock, faEnvelope} from "@fortawesome/free-solid-svg-icons/index";
+import FormControl from "react-bootstrap/esm/FormControl";
+import Button from "react-bootstrap/esm/Button";
+import Modal from "react-bootstrap/esm/Modal";
 
-import "../styles/SignInModal.css"
+import "../../styles/SignInModal.css"
 import {faUser} from "@fortawesome/free-regular-svg-icons";
 
 class  SignInForm extends Component{

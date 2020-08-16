@@ -1,12 +1,12 @@
 import React, {Component} from "react";
-import Container from "react-bootstrap/Container";
+import Container from "react-bootstrap/esm/Container";
 
 
-import carouselImageOne from "../images/carouselPictureOne.jpg"
-import carouselImageTwo from "../images/carouselPictureTwo.jpg"
-import carouselImageThree from "../images/carouselPictureThree.jpg"
-import Carousel from "react-bootstrap/Carousel";
-import "../styles/MainPageCarousel.css"
+import carouselImageOne from "../../images/carouselPictureOne.jpg"
+import carouselImageTwo from "../../images/carouselPictureTwo.jpg"
+import carouselImageThree from "../../images/carouselPictureThree.jpg"
+import Carousel from "react-bootstrap/esm/Carousel";
+import "../../styles/MainPageCarousel.css"
 
 class MainPageCarousel extends Component{
 

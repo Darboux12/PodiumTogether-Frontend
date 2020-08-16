@@ -20,7 +20,7 @@ class MainPageCarousel extends Component{
                             src={carouselImageOne}
                             alt="First slide"
                         />
-                        <Carousel.Caption>
+                        <Carousel.Caption className={"d-md-block d-none"}>
                             <h3>Make friends</h3>
                             <p>
                                 Nothing connects people better then shared passion.
@@ -36,7 +36,7 @@ class MainPageCarousel extends Component{
                             src={carouselImageTwo}
                             alt="Third slide"
                         />
-                        <Carousel.Caption>
+                        <Carousel.Caption className={"d-md-block d-none"}>
                             <h3>Make a team</h3>
                             <p>Strength is in numbers.
                                 Make your dream team and compete with the best</p>
@@ -49,7 +49,7 @@ class MainPageCarousel extends Component{
                             src={carouselImageThree}
                             alt="Third slide"
                         />
-                        <Carousel.Caption>
+                        <Carousel.Caption className={"d-md-block d-none"}>
                             <h3>Share your passion</h3>
                             <p>Find people who love the same stuff and shere with them your amazing experience.</p>
                         </Carousel.Caption>

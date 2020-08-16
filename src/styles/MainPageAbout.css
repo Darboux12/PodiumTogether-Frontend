@@ -1,9 +1,23 @@
+.mainPageAboutParagraph{
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 
 
-#column{
-    background: blue;
+
 }
 
-#column2{
-    background: green;
+.aboutHeader{
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 1em;
+    color: green;
+
+
+}
+.aboutParagraph{
+    border-top: 2px solid black;
+    color: black;
+    padding: 0.2em;
 }

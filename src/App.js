@@ -8,6 +8,7 @@ import MainPageCarousel from "./components/MainPageCarousel";
 import CarouselYes from "./components/MainPageCarousel";
 
 import NavBar from "./components/NavBar"
+import Footer from "./components/Footer";
 
 class App extends React.Component {
 
@@ -19,6 +20,7 @@ class App extends React.Component {
           <Switch>
             <Route path="/" exact component={MainPage}/>
           </Switch>
+            <Footer/>
         </Router>
 
     );

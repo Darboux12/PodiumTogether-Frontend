@@ -40,9 +40,7 @@ class NavBar extends Component {
     render() {
         return (
 
-            <div>
-
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
+            <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" sticky="top">
 
                 <Navbar.Brand href="#home"><Logo/></Navbar.Brand>
 
@@ -70,6 +68,7 @@ class NavBar extends Component {
                     <Nav>
                         <Nav.Item>
                             <Button
+                                className={"mt-md-0 mt-3"}
                                 id="signInButton"
                                 variant="outline-light"
                                 onClick={() => this.openSignInModal()}
@@ -79,6 +78,7 @@ class NavBar extends Component {
 
                         <Nav.Item>
                             <Button
+                                className={"mt-md-0 mt-3"}
                                 id="signUpButton"
                                 variant="outline-light"
                                 onClick={() => this.openSignUpModal()}
@@ -89,7 +89,6 @@ class NavBar extends Component {
                 </Nav>
 
                 </Navbar.Collapse>
-            </Navbar>
 
                 <SignInModal
                     isSignInModalVisible={this.state.isSignInModalVisible}
@@ -101,12 +100,7 @@ class NavBar extends Component {
                     closeSignUpModal={() => this.closeSignUpModal()}
                 />
 
-            </div>
-
-
-
-
-
+            </Navbar>
 
 
 

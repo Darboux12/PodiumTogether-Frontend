@@ -12,11 +12,11 @@ class Logo extends Component{
 
     render() {
         return(
-            <div className="logo">
+            <div className={"logo"}>
 
                 <LogoIcons/>
 
-                <h className="logo-header">Podium Together</h>
+                <h className={"logo-header"}>Podium Together</h>
             </div>
 
         );

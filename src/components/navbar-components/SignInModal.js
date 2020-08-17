@@ -10,7 +10,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index";
 
 
 
-import "../../styles/SignInModal.css"
+import "../../styles/navbar-styles/SignInModal.css"
 import Logo from "../common-components/Logo";
 import SignInForm from "./SignInForm";
 

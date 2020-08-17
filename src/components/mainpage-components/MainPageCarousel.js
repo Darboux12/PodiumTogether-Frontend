@@ -6,7 +6,7 @@ import carouselImageOne from "../../images/carouselPictureOne.jpg"
 import carouselImageTwo from "../../images/carouselPictureTwo.jpg"
 import carouselImageThree from "../../images/carouselPictureThree.jpg"
 import Carousel from "react-bootstrap/esm/Carousel";
-import "../../styles/MainPageCarousel.css"
+import "../../styles/mainpage-styles/MainPageCarousel.css"
 
 class MainPageCarousel extends Component{
 

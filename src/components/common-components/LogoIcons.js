@@ -5,7 +5,7 @@ import { faRunning} from "@fortawesome/free-solid-svg-icons/index";
 import { faBiking} from "@fortawesome/free-solid-svg-icons/index";
 import { faSkating} from "@fortawesome/free-solid-svg-icons/index";
 
-import "../../styles/LogoIcons.css"
+import "../../styles/common-styles/LogoIcons.css"
 
 class LogoIcons extends Component{
 

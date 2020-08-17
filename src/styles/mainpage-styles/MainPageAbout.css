@@ -4,8 +4,6 @@
     flex-direction: column;
     text-align: center;
 
-
-
 }
 
 .aboutHeader{
@@ -16,6 +14,7 @@
 
 
 }
+
 .aboutParagraph{
     border-top: 2px solid black;
     color: black;

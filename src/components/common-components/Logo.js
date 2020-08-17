@@ -1,27 +1,28 @@
 import React, {Component} from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome/index";
-import { faRunning} from "@fortawesome/free-solid-svg-icons/index";
-import { faBiking} from "@fortawesome/free-solid-svg-icons/index";
-import { faSkating} from "@fortawesome/free-solid-svg-icons/index";
-
-import "../../styles/Logo.css"
+import "../../styles/common-styles/Logo.css"
 import LogoIcons from "./LogoIcons";
 
 class Logo extends Component{
 
+    constructor(props){
+        super(props);
+    }
+
     render() {
         return(
-            <div className={"logo"}>
 
+            <div className={"logo"}
+                 style={{fontSize: this.props.size}}
+            >
                 <LogoIcons/>
 
                 <h className={"logo-header"}>Podium Together</h>
+
             </div>
 
         );
     }
-
 
 }
 

@@ -3,10 +3,10 @@ import {Navbar, Nav, Container} from "react-bootstrap/esm/index";
 import navBarImage from "../../images/ball-logo.png"
 import Logo from "../common-components/Logo";
 import LogoIcons from "../common-components/LogoIcons";
-import NavDropdown from "react-bootstrap/esm/NavDropdown";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import {Link} from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
-import "../../styles/Navbar.css"
+import "../../styles/navbar-styles/Navbar.css"
 import SignInModal from "./SignInModal";
 import SignUpModal from "./SignUpModal";
 
@@ -42,7 +42,7 @@ class NavBar extends Component {
 
             <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" sticky="top">
 
-                <Navbar.Brand href="home"><Logo/></Navbar.Brand>
+                <Navbar.Brand href="home"><Logo /></Navbar.Brand>
 
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 

@@ -9,7 +9,7 @@ import CarouselYes from "./components/mainpage-components/MainPageCarousel";
 
 import NavBar from "./components/navbar-components/NavBar"
 import Footer from "./components/footer-components/Footer";
-import CreateEventPage from "./components/CreateEventPage";
+import CreateEventPage from "./components/create-event-components/CreateEventPage";
 
 class App extends React.Component {
 

@@ -14,8 +14,6 @@ class MainPage extends Component{
                 <MainPageCarousel/>
                 <MainPageAbout/>
 
-
-
             </Container>
 
 

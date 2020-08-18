@@ -1,15 +1,11 @@
 import React, {Component} from "react";
-import {Navbar, Nav, Container} from "react-bootstrap/esm/index";
-import navBarImage from "../../images/ball-logo.png"
+import {Navbar, Nav} from "react-bootstrap/esm/index";
 import Logo from "../common-components/Logo";
-import LogoIcons from "../common-components/LogoIcons";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import {Link} from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
 import "../../styles/navbar-styles/Navbar.css"
 import SignInModal from "./SignInModal";
 import SignUpModal from "./SignUpModal";
-
 
 class NavBar extends Component {
 
@@ -42,7 +38,7 @@ class NavBar extends Component {
 
             <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" sticky="top">
 
-                <Navbar.Brand href="home"><Logo /></Navbar.Brand>
+                <Navbar.Brand href="home"><Logo isNavbarBrand="true"/></Navbar.Brand>
 
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
@@ -62,13 +58,12 @@ class NavBar extends Component {
                             <NavDropdown.Item href="#Swimming">Swimming</NavDropdown.Item>
                             <NavDropdown.Item href="#Basketball">Basketball</NavDropdown.Item>
                         </NavDropdown>
-
                     </Nav>
 
                     <Nav>
                         <Nav.Item>
                             <Button
-                                className={"mt-md-0 mt-3"}
+                                className={"mt-md-0 mt-3 mr-3"}
                                 id="signInButton"
                                 variant="outline-light"
                                 onClick={() => this.openSignInModal()}
@@ -85,7 +80,6 @@ class NavBar extends Component {
 
                             >Sign Up</Button>
                         </Nav.Item>
-
                 </Nav>
 
                 </Navbar.Collapse>
@@ -102,12 +96,8 @@ class NavBar extends Component {
 
             </Navbar>
 
-
-
-
-
-    );
+        );
     }
-
 }
+
 export default NavBar;

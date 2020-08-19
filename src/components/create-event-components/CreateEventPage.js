@@ -10,6 +10,12 @@ class CreateEventPage extends Component{
 
             <Container className="CreateEventContainer">
 
+                <div className={"createEventHeader"}>
+                    <h>Fill out our form and create your perfect event!</h>
+                </div>
+
+
+
                 <CreateEventForm/>
 
 

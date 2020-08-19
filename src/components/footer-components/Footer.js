@@ -5,16 +5,15 @@ import Nav from "react-bootstrap/esm/Nav";
 import Container from "react-bootstrap/esm/Container";
 import {Link} from "react-router-dom";
 
+import "../../styles/footer-styles/Footer.css"
+
 class Footer extends Component {
 
     render() {
 
 
         return (
-
-
-
-            <Navbar className="justify-content-between" bg={"dark"} variant={"dark"}>
+            <Navbar className="footer justify-content-between" bg={"dark"} variant={"dark"}>
                 <Nav>
                     <Nav.Item>
                         <Link to={""} className="nav-link">Home</Link>

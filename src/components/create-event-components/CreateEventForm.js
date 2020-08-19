@@ -13,31 +13,31 @@ class CreateEventForm extends Component{
     render() {
         return(
 
-            <Form>
+            <Form className={"createEventForm"}>
 
                 <Form.Group controlId="formEventTitle">
-                    <Form.Label>Event Title</Form.Label>
-                    <Form.Control type="text" placeholder="Please, enter event title..." />
+                    <Form.Label className={"FormLabel"}>Event Title</Form.Label>
+                    <Form.Control className={"FormInputField"} type="text" placeholder="Please, enter event title..." />
                 </Form.Group>
 
                 <Form.Group controlId="formEventDate">
-                    <Form.Label>Event Date</Form.Label>
-                    <Form.Control type="date" placeholder="Password" />
+                    <Form.Label className={"FormLabel"}>Event Date</Form.Label>
+                    <Form.Control className={"FormInputField"} type="date" placeholder="Password" />
                 </Form.Group>
 
                 <Form.Group controlId="formEventLocalization">
-                    <Form.Label>Event Localization</Form.Label>
+                    <Form.Label className={"FormLabel"}>Event Localization</Form.Label>
                     <InputGroup >
-                        <Form.Control className={"mr-3"} type="text" placeholder="City..." />
-                        <Form.Control className={"mr-3"} type="text" placeholder="Street..." />
-                        <Form.Control className={"mr-3"} type="text" placeholder="Number..." />
-                        <Form.Control type="text" placeholder="Postal code..." />
+                        <Form.Control className={"mr-3 FormInputField"} type="text" placeholder="City..." />
+                        <Form.Control className={"mr-3 FormInputField"} type="text" placeholder="Street..." />
+                        <Form.Control className={"mr-3 FormInputField"} type="text" placeholder="Number..." />
+                        <Form.Control className={"FormInputField"} type="text" placeholder="Postal code..." />
                     </InputGroup>
                 </Form.Group>
 
                 <Form.Group controlId="formEventDiscipline">
-                    <Form.Label>Example select</Form.Label>
-                    <Form.Control as="select">
+                    <Form.Label className={"FormLabel"}>Example select</Form.Label>
+                    <Form.Control as="select" className={"FormInputField"}>
                         <option>Discipline Example</option>
                         <option>Discipline Example</option>
                         <option>Discipline Example</option>
@@ -47,12 +47,12 @@ class CreateEventForm extends Component{
                 </Form.Group>
 
                 <Form.Group controlId="formEventRequiredPeople">
-                    <Form.Label>Required People Number</Form.Label>
-                    <Form.Control type="number" min="0" placeholder="People number..." />
+                    <Form.Label className={"FormLabel"}>Required People Number</Form.Label>
+                    <Form.Control className={"FormInputField"} type="number" min="0" placeholder="People number..." />
                 </Form.Group>
 
-                <Form.Group controlId="formEventRequiredPeople">
-                    <Form.Label>Preferred gender</Form.Label>
+                <Form.Group controlId="formEventPreferredGender">
+                    <Form.Label className={"FormLabel"}>Preferred gender</Form.Label>
 
                     <InputGroup>
 
@@ -84,28 +84,28 @@ class CreateEventForm extends Component{
 
                 </Form.Group>
 
-                <Form.Group controlId="formEventRequiredPeople">
-                    <Form.Label>Preferred age range</Form.Label>
+                <Form.Group controlId="formEventPreferredAgeRange">
+                    <Form.Label className={"FormLabel"}>Preferred age range</Form.Label>
                     <InputGroup>
-                    <Form.Control type="number" min="1" max="99" className={"mr-3 "} placeholder="Min age..." />
-                    <Form.Control type="number" min="1" max="99" className={"mr-3"} placeholder="Max age..." />
+                    <Form.Control type="number" min="1" max="99" className={"mr-3 FormInputField"} placeholder="Min age..." />
+                    <Form.Control type="number" min="1" max="99" className={"mr-3 FormInputField"} placeholder="Max age..." />
                     </InputGroup>
                 </Form.Group>
 
-                <Form.Group controlId="formEventRequiredPeople">
-                    <Form.Label>Event costs</Form.Label>
+                <Form.Group controlId="formEventCosts">
+                    <Form.Label className={"FormLabel"}>Event costs</Form.Label>
                     <InputGroup>
-                        <Form.Control type="number" min="0" className={"mr-3 "} placeholder="Price in PLN..." />
-                        <Form.Control type="number" min="0" max className={"mr-3"} placeholder="Game time in hours..." />
+                        <Form.Control type="number" min="0" className={"mr-3 FormInputField"} placeholder="Price in PLN..." />
+                        <Form.Control type="number" min="0" max className={"mr-3 FormInputField"} placeholder="Game time in hours..." />
                     </InputGroup>
                 </Form.Group>
 
                 <Form.Group controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>Event Description</Form.Label>
-                    <Form.Control as="textarea" rows="3" />
+                    <Form.Label className={"FormLabel "}>Event Description</Form.Label>
+                    <Form.Control className={"FormInputField"} as="textarea" rows="3" />
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" className={"w-50"}>
                     Create Event
                 </Button>
             </Form>

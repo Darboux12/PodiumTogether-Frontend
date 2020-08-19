@@ -36,7 +36,7 @@ class NavBar extends Component {
     render() {
         return (
 
-            <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" sticky="top">
+            <Navbar className={"Navbar"}collapseOnSelect expand="md" bg="dark" variant="dark" sticky="top">
 
                 <Navbar.Brand href="home"><Logo isNavbarBrand="true"/></Navbar.Brand>
 
@@ -49,8 +49,8 @@ class NavBar extends Component {
                         <Nav.Link href="#Contact">Contact</Nav.Link>
                         <Nav.Link href="#News">News</Nav.Link>
 
-                        <NavDropdown title="Events"  id="eventDropdown">
-                            <NavDropdown.Item href="createEvent">New Event</NavDropdown.Item>
+                        <NavDropdown variant="dark" title="Events"  id="eventDropdown">
+                            <NavDropdown.Item  href="createEvent">New Event</NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item href="#Football">Football</NavDropdown.Item>
                             <NavDropdown.Item href="#Jogging">Jogging</NavDropdown.Item>

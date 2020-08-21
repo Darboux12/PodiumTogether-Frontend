@@ -10,6 +10,7 @@ import CarouselYes from "./components/mainpage-components/MainPageCarousel";
 import NavBar from "./components/navbar-components/NavBar"
 import Footer from "./components/footer-components/Footer";
 import CreateEventPage from "./components/create-event-components/CreateEventPage";
+import DisplayEventsPage from "./components/display-events-page-components/DisplayEventsPage";
 
 class App extends React.Component {
 
@@ -20,8 +21,9 @@ class App extends React.Component {
           <NavBar/>
           <Switch>
             <Route path="/" exact component={MainPage}/>
-              <Route path="/home" exact component={MainPage}/>
+            <Route path="/home" exact component={MainPage}/>
             <Route path="/createEvent" exact component={CreateEventPage}/>
+            <Route path="/displayEvents" exact component={DisplayEventsPage}/>
           </Switch>
             <Footer/>
         </Router>

@@ -1,0 +1,22 @@
+.Event{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    position: relative;
+    background: grey;
+    width: 100%;
+    height: 12em;
+}
+
+.eventImage{
+    display: flex;
+    width: 7em;
+    height: 7em;
+}
+
+.eventBadge{
+    position: absolute;
+    right: 2em;
+    top: 2em;
+    z-index: 2;
+}

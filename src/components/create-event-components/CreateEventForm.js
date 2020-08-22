@@ -52,31 +52,32 @@ class CreateEventForm extends Component{
                 </Form.Group>
 
                 <Form.Group controlId="formEventPreferredGender">
+
                     <Form.Label className={"FormLabel"}>Preferred gender</Form.Label>
 
                     <InputGroup>
 
                     <Form.Check
+                        id="formRadioMale"
+                        name="formRadioMale"
                         type="radio"
                         label="Male"
-                        name="formHorizontalRadios"
-                        id="formHorizontalRadios1"
                         className={"genderRadioButton"}
                     />
 
                     <Form.Check
+                        id="formRadioFemale"
+                        name="formRadioFemale"
                         type="radio"
                         label="Female"
-                        name="formHorizontalRadios"
-                        id="formHorizontalRadios1"
                         className={"genderRadioButton"}
                     />
 
                     <Form.Check
+                        id="formRadioBoth"
+                        name="formRadioBoth"
                         type="radio"
                         label="Both"
-                        name="formHorizontalRadios"
-                        id="formHorizontalRadios1"
                         className={"genderRadioButton"}
                     />
 
@@ -109,10 +110,6 @@ class CreateEventForm extends Component{
                     Create Event
                 </Button>
             </Form>
-
-
-
-
 
         );
     }

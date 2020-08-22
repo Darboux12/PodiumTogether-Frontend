@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome/index";
 import { faRunning} from "@fortawesome/free-solid-svg-icons/index";
 import { faBiking} from "@fortawesome/free-solid-svg-icons/index";
 import { faSkating} from "@fortawesome/free-solid-svg-icons/index";
-import "../../styles/common-styles/LogoIcons.css"
+import "../../styles/logo-styles/LogoIcons.css"
 
 class LogoIcons extends Component{
 

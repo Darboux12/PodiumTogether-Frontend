@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import LogoIcons from "./LogoIcons";
-import "../../styles/common-styles/Logo.css"
+import "../../styles/logo-styles/Logo.css"
 
 class Logo extends Component{
 
@@ -15,11 +15,8 @@ class Logo extends Component{
         return(
 
             <div className={className}>
-
                 <LogoIcons/>
-
                 <h className={"logo-header"}>Podium Together</h>
-
             </div>
 
         );

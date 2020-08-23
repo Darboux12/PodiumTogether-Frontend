@@ -12,6 +12,7 @@ import Footer from "./components/footer/Footer";
 import CreateEventPage from "./components/create-event/CreateEventPage";
 import DisplayEventsPage from "./components/display-events-page/DisplayEventsPage";
 import ForgotPasswordPage from "./components/forgot-password-page/ForgotPasswordPage";
+import AboutPage from "./components/about-page/AboutPage";
 
 class App extends React.Component {
 
@@ -26,6 +27,7 @@ class App extends React.Component {
             <Route path="/event/create" exact component={CreateEventPage}/>
             <Route path="/event/display" exact component={DisplayEventsPage}/>
             <Route path="/new/password" exact component={ForgotPasswordPage}/>
+            <Route path="/about" exact component={AboutPage}/>
           </Switch>
             <Footer/>
         </Router>

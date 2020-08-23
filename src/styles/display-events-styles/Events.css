@@ -1,0 +1,73 @@
+.Event{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    position: relative;
+    background: white;
+    height: 12em;
+    border: 2px solid #000;
+    box-sizing: border-box;
+    margin-top: 1em;
+
+    width: 70%;
+}
+
+.eventImage{
+    display: flex;
+    width: 7em;
+    height: 7em;
+    margin-left: 1em;
+    margin-right: 2em;
+
+}
+
+.eventInformation{
+
+
+ }
+
+ .eventTitle{
+     font-weight: bold;
+     color: #1B75BC;
+     font-size: 1.2em;
+ }
+
+.eventDiscipline{
+    color: black;
+    opacity: 0.6;
+    font-size: 1.1em;
+}
+
+.eventLocalizationItem,
+.eventRequiredPeopleItem,
+.eventDateItem {
+    margin-right: 0.5em;
+}
+
+.eventLocalizationIcon{
+    color: green;
+}
+
+.eventDateIcon{
+    color: green;
+}
+
+.eventPeopleIcon{
+    color: green;
+}
+
+ .eventBadge{
+     position: absolute;
+     right: 1em;
+     top: 1em;
+}
+
+.eventBadgeHeader{
+    font-size: 1.2em;
+}
+
+.eventDetailsButton{
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+}

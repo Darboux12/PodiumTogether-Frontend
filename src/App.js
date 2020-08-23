@@ -1,16 +1,17 @@
 import React from 'react';
 
-import Logo from "./components/common-components/Logo";
+import Logo from "./components/common/Logo";
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import MainPage from "./components/mainpage-components/MainPage"
-import MainPageCarousel from "./components/mainpage-components/MainPageCarousel";
+import MainPage from "./components/main-page/MainPage"
+import MainPageCarousel from "./components/main-page/MainPageCarousel";
 
-import CarouselYes from "./components/mainpage-components/MainPageCarousel";
+import CarouselYes from "./components/main-page/MainPageCarousel";
 
-import NavBar from "./components/navbar-components/NavBar"
-import Footer from "./components/footer-components/Footer";
-import CreateEventPage from "./components/create-event-components/CreateEventPage";
-import DisplayEventsPage from "./components/display-events-page-components/DisplayEventsPage";
+import NavBar from "./components/navbar/NavBar"
+import Footer from "./components/footer/Footer";
+import CreateEventPage from "./components/create-event/CreateEventPage";
+import DisplayEventsPage from "./components/display-events-page/DisplayEventsPage";
+import ForgotPasswordPage from "./components/forgot-password-page/ForgotPasswordPage";
 
 class App extends React.Component {
 
@@ -22,8 +23,9 @@ class App extends React.Component {
           <Switch>
             <Route path="/" exact component={MainPage}/>
             <Route path="/home" exact component={MainPage}/>
-            <Route path="/createEvent" exact component={CreateEventPage}/>
-            <Route path="/displayEvents" exact component={DisplayEventsPage}/>
+            <Route path="/event/create" exact component={CreateEventPage}/>
+            <Route path="/event/display" exact component={DisplayEventsPage}/>
+            <Route path="/new/password" exact component={ForgotPasswordPage}/>
           </Switch>
             <Footer/>
         </Router>

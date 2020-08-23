@@ -9,6 +9,11 @@ import Container from "react-bootstrap/esm/Container";
 import {faCalendar, faCalendarAlt, faEnvelope, faFlag} from "@fortawesome/free-regular-svg-icons/index";
 import {faCalendarDay} from "@fortawesome/free-solid-svg-icons/faCalendarDay";
 
+
+import Form from 'react-bootstrap/Form'
+
+
+
 class SignUpForm extends Component{
 
     render() {
@@ -109,12 +114,20 @@ class SignUpForm extends Component{
                     />
                 </InputGroup>
 
+                <Form.Group controlId="formBasicCheckbox">
+                    <div className={"d-flex flex-row"}>
+                        <Form.Check type="checkbox" label="I agree to the" /><a className={"ml-1"} href={"/terms"}> Terms and Conditions</a>
+                    </div>
+
+                </Form.Group>
+
+
                 <Button
                     variant="primary"
                     onClick={this.props.closeSignUpModal}
                     className="signInModalButton"
                 >
-                    Sign In
+                    Sign Up
                 </Button>
 
 

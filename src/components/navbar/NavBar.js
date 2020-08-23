@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Navbar, Nav} from "react-bootstrap/esm/index";
-import Logo from "../common-components/Logo";
+import Logo from "../common/Logo";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/esm/Button";
 import "../../styles/navbar-styles/Navbar.css"
@@ -36,9 +36,9 @@ class NavBar extends Component {
     render() {
         return (
 
-            <Navbar className={"Navbar"} collapseOnSelect expand="md" bg="dark" variant="dark" sticky="top">
+            <Navbar className={"Navbar"} collapseOnSelect expand="md" bg="dark" variant="dark">
 
-                <Navbar.Brand href="home"><Logo isNavbarBrand="true"/></Navbar.Brand>
+                <Navbar.Brand href="/home"><Logo isNavbarBrand="true"/></Navbar.Brand>
 
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
@@ -50,9 +50,9 @@ class NavBar extends Component {
                         <Nav.Link href="#News">News</Nav.Link>
 
                         <NavDropdown variant="dark" title="Events"  id="eventDropdown">
-                            <NavDropdown.Item  href="createEvent">New Event</NavDropdown.Item>
+                            <NavDropdown.Item  href="/event/create">New Event</NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item href="displayEvents">All disciplines</NavDropdown.Item>
+                            <NavDropdown.Item href="/event/display">All disciplines</NavDropdown.Item>
                             <NavDropdown.Item href="#Football">Football</NavDropdown.Item>
                             <NavDropdown.Item href="#Jogging">Jogging</NavDropdown.Item>
                             <NavDropdown.Item href="#Volleyball">Volleyball</NavDropdown.Item>

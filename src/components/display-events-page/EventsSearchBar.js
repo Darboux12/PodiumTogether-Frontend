@@ -6,12 +6,15 @@ import Nav from "react-bootstrap/Nav";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 
+import "../../styles/display-events-styles/SearchBar.css"
+
+
 class EventsSearchBar extends Component{
 
     render(){
         return(
 
-            <Navbar className="bg-light d-flex flex-column" collapseOnSelect expand="md" sticky="top">
+            <Navbar className="bg-light d-flex flex-column sticky-top SearchBar" collapseOnSelect expand="md">
 
                 <Form inline className={"w-100 d-flex flex-row mb-3"}>
                     <FormControl type="text" placeholder="Event title, discipline, key word..." className={"col-3 mr-sm-3 "} />

@@ -8,11 +8,13 @@ import {faUnlock} from "@fortawesome/free-solid-svg-icons/index";
 import {faTrophy} from "@fortawesome/free-solid-svg-icons/index";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index";
 
-import "../../styles/navbar-styles/SignUpModal.css"
-import Logo from "../common-components/Logo";
-import SignUpForm from "./SignUpForm";
 
-class SignUpModal extends Component{
+
+import "../../styles/navbar-styles/SignInModal.css"
+import Logo from "../common/Logo";
+import SignInForm from "./SignInForm";
+
+class SignInModal extends Component{
 
     constructor(props){
         super(props);
@@ -21,30 +23,30 @@ class SignUpModal extends Component{
     render() {
         return(
 
-            <Modal show={this.props.isSignUpModalVisible} onHide={this.props.closeSignUpModal}>
+            <Modal show={this.props.isSignInModalVisible} onHide={this.props.closeSignInModal}>
 
                 <Modal.Header className="signInModalHeader">
                     <Modal.Title className="signInModalHeaderTitle">
                         <Logo/>
                     </Modal.Title>
                     <div className="signInTitleHeader">
-                        <h2>Sign up</h2>
-                        <h>
-                            We are glad to see you joining your community.
-                            We hope you find your dream team!
-                        </h>
+                    <h2>Sign in</h2>
+                    <h>
+                        Welcome again, we are glad to see you sharing your passion
+                        and searching for another amazing people.
+                    </h>
                     </div>
                 </Modal.Header>
 
                 <Modal.Body>
 
-                    <SignUpForm/>
+                    <SignInForm/>
 
                 </Modal.Body>
 
                 <Modal.Footer className="signInModalFooter">
 
-                    <a href="#forgotPassword">
+                    <a href="/new/password">
                         Forgot your password?
                     </a>
 
@@ -58,4 +60,4 @@ class SignUpModal extends Component{
 
 }
 
-export default SignUpModal;
+export default SignInModal;

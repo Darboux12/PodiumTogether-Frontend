@@ -13,6 +13,10 @@ class DisplayEventsPage extends Component{
 
             <div className={"displayEventPageContainer"}>
 
+                <div className={"Placeholder"}>Placeholder poniewaz nie wiem jak roziwazac overflow</div>
+
+
+
                 <EventsSearchBar/>
 
                 <div className={"EventsList"}>

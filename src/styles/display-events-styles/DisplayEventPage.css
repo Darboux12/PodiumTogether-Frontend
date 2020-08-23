@@ -3,3 +3,11 @@
     flex-direction: column;
     align-items: center;
 }
+
+.Placeholder{
+    width: 100%;
+    height: 15em;
+    background: #1B75BC;
+    margin-bottom: 1.5em;
+}
+

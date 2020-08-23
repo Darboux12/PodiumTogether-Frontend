@@ -8,13 +8,11 @@ import {faUnlock} from "@fortawesome/free-solid-svg-icons/index";
 import {faTrophy} from "@fortawesome/free-solid-svg-icons/index";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index";
 
+import "../../styles/navbar-styles/SignUpModal.css"
+import Logo from "../common/Logo";
+import SignUpForm from "./SignUpForm";
 
-
-import "../../styles/navbar-styles/SignInModal.css"
-import Logo from "../common-components/Logo";
-import SignInForm from "./SignInForm";
-
-class SignInModal extends Component{
+class SignUpModal extends Component{
 
     constructor(props){
         super(props);
@@ -23,33 +21,29 @@ class SignInModal extends Component{
     render() {
         return(
 
-            <Modal show={this.props.isSignInModalVisible} onHide={this.props.closeSignInModal}>
+            <Modal show={this.props.isSignUpModalVisible} onHide={this.props.closeSignUpModal}>
 
                 <Modal.Header className="signInModalHeader">
                     <Modal.Title className="signInModalHeaderTitle">
                         <Logo/>
                     </Modal.Title>
                     <div className="signInTitleHeader">
-                    <h2>Sign in</h2>
-                    <h>
-                        Welcome again, we are glad to see you sharing your passion
-                        and searching for another amazing people.
-                    </h>
+                        <h2>Sign up</h2>
+                        <h>
+                            We are glad to see you joining your community.
+                            We hope you find your dream team!
+                        </h>
                     </div>
                 </Modal.Header>
 
                 <Modal.Body>
 
-                    <SignInForm/>
+                    <SignUpForm/>
 
                 </Modal.Body>
 
                 <Modal.Footer className="signInModalFooter">
-
-                    <a href="#forgotPassword">
-                        Forgot your password?
-                    </a>
-
+                    
                 </Modal.Footer>
 
             </Modal>
@@ -60,4 +54,4 @@ class SignInModal extends Component{
 
 }
 
-export default SignInModal;
+export default SignUpModal;

@@ -11,7 +11,7 @@ class EventsSearchBar extends Component{
     render(){
         return(
 
-            <Navbar className="bg-light d-flex flex-column">
+            <Navbar className="bg-light d-flex flex-column" collapseOnSelect expand="md" sticky="top">
 
                 <Form inline className={"w-100 d-flex flex-row mb-3"}>
                     <FormControl type="text" placeholder="Event title, discipline, key word..." className={"col-3 mr-sm-3 "} />

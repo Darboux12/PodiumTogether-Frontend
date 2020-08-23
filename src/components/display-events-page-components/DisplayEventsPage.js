@@ -3,6 +3,7 @@ import EventsSearchBar from "./EventsSearchBar";
 import Event from "./Event";
 
 import "../../styles/common-styles/Common.css"
+import "../../styles/display-events-styles/DisplayEventPage.css"
 
 class DisplayEventsPage extends Component{
 
@@ -10,21 +11,73 @@ class DisplayEventsPage extends Component{
 
         return(
 
-            <div>
+            <div className={"displayEventPageContainer"}>
 
                 <EventsSearchBar/>
 
-                <Event
-                    title={"Common play on orlik"}
-                    discipline={"Football"}
-                    city={"Kraków"}
-                    street={"Lipowa"}
-                    postalCode={"32-060"}
-                    number={"64"}
-                    date={"12.08.2020"}
-                    bookedPeople={"3"}
-                    numberPeople={"6"}
-                />
+                <div className={"EventsList"}>
+
+                    <Event
+                        title={"Common play on orlik"}
+                        discipline={"Football"}
+                        city={"Kraków"}
+                        street={"Lipowa"}
+                        postalCode={"32-060"}
+                        number={"64"}
+                        date={"12.08.2020"}
+                        bookedPeople={"3"}
+                        numberPeople={"6"}
+                    />
+                    <Event
+                        title={"Common play on orlik"}
+                        discipline={"Football"}
+                        city={"Kraków"}
+                        street={"Lipowa"}
+                        postalCode={"32-060"}
+                        number={"64"}
+                        date={"12.08.2020"}
+                        bookedPeople={"3"}
+                        numberPeople={"6"}
+                    />
+                    <Event
+                        title={"Common play on orlik"}
+                        discipline={"Football"}
+                        city={"Kraków"}
+                        street={"Lipowa"}
+                        postalCode={"32-060"}
+                        number={"64"}
+                        date={"12.08.2020"}
+                        bookedPeople={"3"}
+                        numberPeople={"6"}
+                    />
+                    <Event
+                        title={"Common play on orlik"}
+                        discipline={"Football"}
+                        city={"Kraków"}
+                        street={"Lipowa"}
+                        postalCode={"32-060"}
+                        number={"64"}
+                        date={"12.08.2020"}
+                        bookedPeople={"3"}
+                        numberPeople={"6"}
+                    />
+                    <Event
+                        title={"Common play on orlik"}
+                        discipline={"Football"}
+                        city={"Kraków"}
+                        street={"Lipowa"}
+                        postalCode={"32-060"}
+                        number={"64"}
+                        date={"12.08.2020"}
+                        bookedPeople={"3"}
+                        numberPeople={"6"}
+                    />
+
+
+
+                </div>
+
+
 
 
 

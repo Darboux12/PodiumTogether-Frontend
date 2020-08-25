@@ -7,3 +7,25 @@
 
 }
 
+.userProfileImage{
+    width: 3em;
+    height: auto;
+    border-radius: 30%;
+
+}
+
+.userProfileHeader{
+    color: white;
+    opacity: 0.6;
+    font-weight: bold;
+    margin-left: 0.4em;
+}
+
+.userProfileHeader:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.dataToggle::after{
+    content: none !important;
+}

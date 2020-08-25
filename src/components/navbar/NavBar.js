@@ -6,6 +6,10 @@ import Button from "react-bootstrap/esm/Button";
 import "../../styles/navbar-styles/Navbar.css"
 import SignInModal from "./SignInModal";
 import SignUpModal from "./SignUpModal";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faRunning} from "@fortawesome/free-solid-svg-icons";
+import userProfileImage from "../../images/person.jpg"
+import Dropdown from "react-bootstrap/Dropdown";
 
 class NavBar extends Component {
 
@@ -13,7 +17,8 @@ class NavBar extends Component {
         super(props);
         this.state = {
             isSignInModalVisible : false,
-            isSignUpModalVisible : false
+            isSignUpModalVisible : false,
+            isUserLogged : true
         }
     }
 
@@ -34,9 +39,14 @@ class NavBar extends Component {
     }
 
     render() {
-        return (
 
-            <Navbar className={"Navbar"} collapseOnSelect expand="md" bg="dark" variant="dark">
+        let NavBar;
+
+        if(!this.state.isUserLogged){
+
+            NavBar =
+
+                <Navbar className={"Navbar"} collapseOnSelect expand="md" bg="dark" variant="dark">
 
                 <Navbar.Brand href="/home"><Logo isNavbarBrand="true"/></Navbar.Brand>
 
@@ -81,7 +91,7 @@ class NavBar extends Component {
 
                             >Sign Up</Button>
                         </Nav.Item>
-                </Nav>
+                    </Nav>
 
                 </Navbar.Collapse>
 
@@ -95,9 +105,85 @@ class NavBar extends Component {
                     closeSignUpModal={() => this.closeSignUpModal()}
                 />
 
-            </Navbar>
+            </Navbar>;
+        }
 
-        );
+        else{
+
+            NavBar =
+
+                <Navbar className={"Navbar"} collapseOnSelect expand="md" bg="dark" variant="dark">
+
+                <Navbar.Brand href="/home"><Logo isNavbarBrand="true"/></Navbar.Brand>
+
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
+                <Navbar.Collapse id="responsive-navbar-nav">
+
+                    <Nav className="mr-auto">
+                        <Nav.Link href="#AboutUs">About us</Nav.Link>
+                        <Nav.Link href="#Contact">Contact</Nav.Link>
+                        <Nav.Link href="#News">News</Nav.Link>
+
+                        <NavDropdown variant="dark" title="Events"  id="eventDropdown">
+                            <NavDropdown.Item  href="/event/create">New Event</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item href="/event/display">All disciplines</NavDropdown.Item>
+                            <NavDropdown.Item href="#Football">Football</NavDropdown.Item>
+                            <NavDropdown.Item href="#Jogging">Jogging</NavDropdown.Item>
+                            <NavDropdown.Item href="#Volleyball">Volleyball</NavDropdown.Item>
+                            <NavDropdown.Item href="#Swimming">Swimming</NavDropdown.Item>
+                            <NavDropdown.Item href="#Basketball">Basketball</NavDropdown.Item>
+                        </NavDropdown>
+                    </Nav>
+
+                    <Nav>
+                        <Nav.Item className={"d-flex flex-row align-items-center"}>
+                            <a href={"#profile"}><img className={"userProfileImage"} src={userProfileImage} alt="userProfileImage"/></a>
+
+                            <Dropdown>
+
+                                <Dropdown.Toggle as={"header"} className={"dataToggle"}>
+                                    <h className={"userProfileHeader"}>Janek126p</h>
+                                </Dropdown.Toggle>
+
+                                <Dropdown.Menu>
+                                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                                </Dropdown.Menu>
+
+                            </Dropdown>
+
+
+                        </Nav.Item>
+
+                    </Nav>
+
+                </Navbar.Collapse>
+
+                <SignInModal
+                    isSignInModalVisible={this.state.isSignInModalVisible}
+                    closeSignInModal={() => this.closeSignInModal()}
+                />
+
+                <SignUpModal
+                    isSignUpModalVisible={this.state.isSignUpModalVisible}
+                    closeSignUpModal={() => this.closeSignUpModal()}
+                />
+
+            </Navbar>;
+
+        }
+
+
+
+
+
+
+        return NavBar;
+
+
     }
 }
 

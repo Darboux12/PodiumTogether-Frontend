@@ -18,7 +18,7 @@ class NavBar extends Component {
         this.state = {
             isSignInModalVisible : false,
             isSignUpModalVisible : false,
-            isUserLogged : true
+            isUserLogged : false
         }
     }
 
@@ -176,13 +176,7 @@ class NavBar extends Component {
 
         }
 
-
-
-
-
-
         return NavBar;
-
 
     }
 }

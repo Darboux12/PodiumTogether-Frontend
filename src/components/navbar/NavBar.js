@@ -7,9 +7,10 @@ import "../../styles/navbar-styles/Navbar.css"
 import SignInModal from "./SignInModal";
 import SignUpModal from "./SignUpModal";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faRunning} from "@fortawesome/free-solid-svg-icons";
+import {faGlobeEurope, faMapMarkerAlt, faRunning, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
 import userProfileImage from "../../images/person.jpg"
 import Dropdown from "react-bootstrap/Dropdown";
+import {faCalendarCheck, faUserCircle} from "@fortawesome/free-regular-svg-icons";
 
 class NavBar extends Component {
 
@@ -18,7 +19,7 @@ class NavBar extends Component {
         this.state = {
             isSignInModalVisible : false,
             isSignUpModalVisible : false,
-            isUserLogged : false
+            isUserLogged : true
         }
     }
 
@@ -138,7 +139,7 @@ class NavBar extends Component {
                     </Nav>
 
                     <Nav>
-                        <Nav.Item className={"d-flex flex-row align-items-center"}>
+                        <Nav.Item className={"d-flex flex-row align-items-center userProfileIcon"}>
                             <a href={"#profile"}><img className={"userProfileImage"} src={userProfileImage} alt="userProfileImage"/></a>
 
                             <Dropdown>
@@ -148,9 +149,34 @@ class NavBar extends Component {
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu>
-                                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+
+                                    <Dropdown.Item href="/userProfile">
+                                        <FontAwesomeIcon className={"profileIcon"} icon={faUserCircle}/>
+                                        See your profile
+                                    </Dropdown.Item>
+
+                                    <NavDropdown.Divider />
+
+                                    <Dropdown.Item href="/userEvents">
+                                        <FontAwesomeIcon className={"profileIcon"} icon={faCalendarCheck}/>
+                                        My events
+                                    </Dropdown.Item>
+
+                                    <Dropdown.Item href="/userPlaces">
+                                        <FontAwesomeIcon className={"profileIcon"} icon={faGlobeEurope}/>
+                                        My places
+                                    </Dropdown.Item>
+
+                                    <Dropdown.Item href="/settings">
+                                        <FontAwesomeIcon className={"profileIcon"} icon={faMapMarkerAlt}/>
+                                        Settings
+                                    </Dropdown.Item>
+
+                                    <Dropdown.Item href="/signOut">
+                                        <FontAwesomeIcon className={"profileIcon"} icon={faSignOutAlt}/>
+                                        Sign Out
+                                    </Dropdown.Item>
+
                                 </Dropdown.Menu>
 
                             </Dropdown>

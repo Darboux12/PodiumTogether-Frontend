@@ -38,7 +38,7 @@ class ForgotPasswordForm extends Component{
                     <Button
                         variant="success"
                         onClick={this.props.closeSignUpModal}
-                        className="sendButton mr-3 col-3"
+                        className="sendButton mr-3 col-md-3 col-6"
                     >
                         Send
                     </Button>
@@ -46,7 +46,7 @@ class ForgotPasswordForm extends Component{
                     <Button href={"/home"}
                             variant="secondary"
                             onClick={this.props.closeSignUpModal}
-                            className="closeButton col-2"
+                            className="closeButton col-md-2 col-5"
                     >
                         Close
                     </Button>

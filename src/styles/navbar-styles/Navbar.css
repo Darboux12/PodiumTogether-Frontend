@@ -29,3 +29,11 @@
 .dataToggle::after{
     content: none !important;
 }
+
+.userProfileIcon{
+    margin-right: 6em;
+}
+
+.profileIcon{
+    margin-right: 0.5em;
+}

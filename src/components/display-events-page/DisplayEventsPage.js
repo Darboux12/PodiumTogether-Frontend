@@ -2,8 +2,8 @@ import React, {Component} from "react";
 import EventsSearchBar from "./EventsSearchBar";
 import Event from "./Event";
 
-import "../../styles/common-styles/Common.css"
-import "../../styles/display-events-styles/DisplayEventPage.css"
+import "../../styles/common/Common.css"
+import "../../styles/display-events/DisplayEventPage.css"
 
 class DisplayEventsPage extends Component{
 

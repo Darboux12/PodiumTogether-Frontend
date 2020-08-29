@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import LogoIcons from "./LogoIcons";
-import "../../styles/logo-styles/Logo.css"
+import "../../styles/logo/Logo.css"
 
 class Logo extends Component{
 

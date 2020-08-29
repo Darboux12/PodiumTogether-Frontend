@@ -7,7 +7,7 @@ import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 
 
-import "../../styles/navbar-styles/SignInModal.css"
+import "../../styles/navbar/SignInModal.css"
 import {faUser} from "@fortawesome/free-regular-svg-icons";
 
 class  SignInForm extends Component{

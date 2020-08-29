@@ -1,0 +1,20 @@
+.tabsBarButton{
+
+    background: black;
+    color: white;
+    text-decoration: none;
+    border: none;
+    width: 10em;
+    opacity: 0.7;
+    border-right: grey 1px solid;
+    height: 2em;
+
+
+}
+
+.tabsBarButton:hover{
+    opacity: 1;
+    background: black;
+}
+
+

@@ -3,7 +3,7 @@ import {Navbar, Nav} from "react-bootstrap/esm/index";
 import Logo from "../common/Logo";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/esm/Button";
-import "../../styles/navbar-styles/Navbar.css"
+import "../../styles/navbar/Navbar.css"
 import SignInModal from "./SignInModal";
 import SignUpModal from "./SignUpModal";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -140,7 +140,9 @@ class NavBar extends Component {
 
                     <Nav>
                         <Nav.Item className={"d-flex flex-row align-items-center userProfileIcon"}>
-                            <a href={"#profile"}><img className={"userProfileImage"} src={userProfileImage} alt="userProfileImage"/></a>
+                            <a href={"/userProfile"} className={"d-md-flex d-none"}>
+                                <img className={"userProfileImage"} src={userProfileImage} alt="userProfileImage"/>
+                            </a>
 
                             <Dropdown>
 

@@ -13,6 +13,7 @@ import CreateEventPage from "./components/create-event/CreateEventPage";
 import DisplayEventsPage from "./components/display-events-page/DisplayEventsPage";
 import ForgotPasswordPage from "./components/forgot-password-page/ForgotPasswordPage";
 import TermsPage from "./components/terms/TermsPage";
+import UserProfilePage from "./components/user-profilr-page/UserProfilePage";
 
 class App extends React.Component {
 
@@ -28,6 +29,7 @@ class App extends React.Component {
             <Route path="/event/display" exact component={DisplayEventsPage}/>
             <Route path="/new/password" exact component={ForgotPasswordPage}/>
             <Route path="/terms" exact component={TermsPage}/>
+            <Route path="/userProfile" exact component={UserProfilePage}/>
           </Switch>
             <Footer/>
         </Router>

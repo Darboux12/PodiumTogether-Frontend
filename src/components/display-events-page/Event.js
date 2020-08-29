@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-import "../../styles/display-events-styles/Events.css"
+import "../../styles/display-events/Events.css"
 
 import footballEvent from "../../images/event-football.jpg"
 import Badge from "react-bootstrap/Badge";

@@ -8,7 +8,7 @@ import {faCalendarDay} from "@fortawesome/free-solid-svg-icons/faCalendarDay";
 import Button from "react-bootstrap/esm/Button";
 import Container from "react-bootstrap/esm/Container";
 
-import "../../styles/forgot-password-components/ForgotPasswordForm.css"
+import "../../styles/forgot-password/ForgotPasswordForm.css"
 
 class ForgotPasswordForm extends Component{
 

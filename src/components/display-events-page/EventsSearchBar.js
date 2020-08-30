@@ -6,7 +6,7 @@ import Nav from "react-bootstrap/Nav";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 
-import "../../styles/display-events-styles/SearchBar.css"
+import "../../styles/display-events/SearchBar.css"
 
 
 class EventsSearchBar extends Component{

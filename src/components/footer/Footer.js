@@ -5,7 +5,7 @@ import Nav from "react-bootstrap/esm/Nav";
 import Container from "react-bootstrap/esm/Container";
 import {Link} from "react-router-dom";
 
-import "../../styles/footer-styles/Footer.css"
+import "../../styles/footer/Footer.css"
 
 class Footer extends Component {
 

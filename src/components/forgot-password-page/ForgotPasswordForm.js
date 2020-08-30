@@ -8,7 +8,7 @@ import {faCalendarDay} from "@fortawesome/free-solid-svg-icons/faCalendarDay";
 import Button from "react-bootstrap/esm/Button";
 import Container from "react-bootstrap/esm/Container";
 
-import "../../styles/forgot-password-components/ForgotPasswordForm.css"
+import "../../styles/forgot-password/ForgotPasswordForm.css"
 
 class ForgotPasswordForm extends Component{
 
@@ -17,7 +17,7 @@ class ForgotPasswordForm extends Component{
 
             <div className={"ForgotPasswordFormContainer"}>
 
-                <InputGroup className="mb-3 w-50">
+                <InputGroup className="mb-3 col-md-6 col-12">
 
                     <InputGroup.Prepend>
                         <InputGroup.Text id="emailInputText">
@@ -33,34 +33,25 @@ class ForgotPasswordForm extends Component{
                     />
                 </InputGroup>
 
-                <div className={"ForgotPasswordButtons d-flex flex-row w-50"}>
+                <div className={"ForgotPasswordButtons col-md-6 col-12"}>
 
                     <Button
                         variant="success"
                         onClick={this.props.closeSignUpModal}
-                        className="col-3 mr-3"
+                        className="sendButton mr-3 col-md-3 col-6"
                     >
                         Send
                     </Button>
 
                     <Button href={"/home"}
-                        variant="secondary"
-                        onClick={this.props.closeSignUpModal}
-                        className="col-2 closeButton"
+                            variant="secondary"
+                            onClick={this.props.closeSignUpModal}
+                            className="closeButton col-md-2 col-5"
                     >
                         Close
                     </Button>
 
-
-
-
                 </div>
-
-
-
-
-
-
 
             </div>
 

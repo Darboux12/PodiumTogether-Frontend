@@ -1,0 +1,35 @@
+.header{
+
+    background: black;
+    opacity: 0.7;
+    text-align: center;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+
+    border-top: grey 1px solid;
+    color: white;
+
+
+}
+
+.profileInformation{
+
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.profileImage{
+
+    width: 10em;
+    height: auto;
+
+
+
+}
+
+.imageLeft{
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    border-right: grey 1px solid;
+}

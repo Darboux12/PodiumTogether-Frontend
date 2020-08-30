@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Container from "react-bootstrap/Container";
 import ForgotPasswordForm from "./ForgotPasswordForm";
 
-import "../../styles/forgot-password-components/ForgotPassword.css"
+import "../../styles/forgot-password/ForgotPassword.css"
 
 class ForgotPasswordPage extends Component{
 

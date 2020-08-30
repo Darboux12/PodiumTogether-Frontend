@@ -8,7 +8,7 @@ import {faUnlock} from "@fortawesome/free-solid-svg-icons/index";
 import {faTrophy} from "@fortawesome/free-solid-svg-icons/index";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index";
 
-import "../../styles/navbar-styles/SignUpModal.css"
+import "../../styles/navbar/SignUpModal.css"
 import Logo from "../common/Logo";
 import SignUpForm from "./SignUpForm";
 

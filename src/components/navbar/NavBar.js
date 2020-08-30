@@ -58,7 +58,7 @@ class NavBar extends Component {
                     <Nav className="mr-auto">
                         <Nav.Link href="/about">About us</Nav.Link>
                         <Nav.Link href="/contact">Contact</Nav.Link>
-                        <Nav.Link href="#News">News</Nav.Link>
+                        <Nav.Link href="/news">News</Nav.Link>
 
                         <NavDropdown variant="dark" title="Events"  id="eventDropdown">
                             <NavDropdown.Item  href="/event/create">New Event</NavDropdown.Item>
@@ -124,7 +124,7 @@ class NavBar extends Component {
                     <Nav className="mr-auto">
                         <Nav.Link href="/about">About us</Nav.Link>
                         <Nav.Link href="/contact">Contact</Nav.Link>
-                        <Nav.Link href="#News">News</Nav.Link>
+                        <Nav.Link href="/news">News</Nav.Link>
 
                         <NavDropdown variant="dark" title="Events"  id="eventDropdown">
                             <NavDropdown.Item  href="/event/create">New Event</NavDropdown.Item>

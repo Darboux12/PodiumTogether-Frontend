@@ -1,0 +1,33 @@
+.newsContainer{
+    background: white;
+    padding: 1em;
+    border: solid 5px #6dcb1b;
+    margin-bottom: 1em;
+
+}
+
+.newsImage{
+    width: 10em;
+    height: auto;
+    margin-right: 5em;
+    border-radius: 20%;
+}
+
+.newsHeader{
+    font-weight: bold;
+    font-size: 1.3em;
+
+
+}
+
+.newsParagraph{
+    color: black;
+
+}
+
+
+.newsLink{
+
+    color: blueviolet;
+
+}

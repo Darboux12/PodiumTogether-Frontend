@@ -16,6 +16,7 @@ import TermsPage from "./components/terms/TermsPage";
 import UserProfilePage from "./components/user-profilr-page/UserProfilePage";
 import AboutPage from "./components/about-page/AboutPage";
 import ContactPage from "./components/contact-page/ContactPage";
+import NewsPage from "./components/news-page/NewsPage";
 
 class App extends React.Component {
 
@@ -34,6 +35,7 @@ class App extends React.Component {
             <Route path="/userProfile" exact component={UserProfilePage}/>
             <Route path="/about" exact component={AboutPage}/>
             <Route path="/contact" exact component={ContactPage}/>
+            <Route path="/news" exact component={NewsPage}/>
           </Switch>
             <Footer/>
         </Router>

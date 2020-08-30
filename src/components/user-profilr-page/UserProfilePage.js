@@ -6,8 +6,9 @@ import "../../styles/user-profile/UserProfilePage.css"
 import TabsBar from "./TabsBar";
 import ProfileInformation from "./ProfileInformation";
 import ProfileEvents from "./ProfileEvents";
-import ProfilePlaces from "./ProfilePlaces";
+
 import ProfileWarnings from "./ProfileWarnings";
+import ProfileMarkedPlaces from "./ProfileMarkedPlaces";
 
 class UserProfilePage extends Component{
 
@@ -99,7 +100,7 @@ class UserProfilePage extends Component{
                     <TabsBar
                         onTabChange = {this.handleTabChange.bind(this)}
                     />
-                    <ProfilePlaces/>
+                    <ProfileMarkedPlaces/>
                 </Container>
             );
 

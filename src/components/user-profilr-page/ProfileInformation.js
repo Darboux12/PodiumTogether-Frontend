@@ -3,11 +3,9 @@ import React, {Component} from "react";
 import "../../styles/user-profile/ProfileInformation.css"
 
 import userProfileImage from "../../images/person.jpg"
+import ProfileHeader from "./ProfileHeader";
 
 class ProfileInformation extends Component{
-
-
-
 
     render(){
 
@@ -15,7 +13,7 @@ class ProfileInformation extends Component{
 
             <div>
 
-                <div className={"header"}>Profile of Janek126p</div>
+                <ProfileHeader text={"Profile of Janek126P"}/>
 
                 <div className={"profileInformation d-flex flex-row"}>
 

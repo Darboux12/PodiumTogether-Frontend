@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import Container from "react-bootstrap/Container";
-import AboutItem from "./AboutItem";
+import Container from "react-bootstrap/esm/Container";
+import AboutItem from "../main-page/AboutItem";
 import picture from "../../images/desk.jpg"
 
 class AboutPage extends Component{
@@ -35,7 +35,7 @@ class AboutPage extends Component{
                     most comfortable, and thoughtfully crafted hammocks
                     to your backyard."
                     image={picture}
-                    left={true}
+
                 />
 
 

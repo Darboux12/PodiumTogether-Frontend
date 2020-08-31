@@ -1,9 +1,15 @@
 import React, {Component} from "react";
 
 import Container from "react-bootstrap/esm/Container";
-import MainPageCarousel from "./MainPageCarousel";
+
 import "../../styles/mainpage/MainPage.css"
+import {Rotate} from "react-reveal";
+import AboutItem from "./AboutItem";
 import MainPageAbout from "./MainPageAbout";
+import MainPageCarousel from "./MainPageCarousel";
+
+
+
 
 class MainPage extends Component{
 
@@ -11,8 +17,18 @@ class MainPage extends Component{
         return(
 
             <Container className="MainPageContainer">
+
                 <MainPageCarousel/>
-                <MainPageAbout/>
+
+
+
+
+
+
+
+
+
+
 
             </Container>
 

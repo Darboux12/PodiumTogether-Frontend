@@ -1,5 +1,7 @@
 .aboutItemContainer{
-    border: black 1px solid;
+    border: none;
+    margin-top: 5em;
+    margin-bottom: 5em;
 
 }
 
@@ -11,13 +13,14 @@
 .aboutPageHeader{
     color: green;
     font-weight: bold;
-    font-size: 1.7em;
+    font-size: 2em;
 
 }
 
 
 .aboutPageParagraph{
-     color: black;
+    color: black;
+    font-size: 1.4em;
  }
 
 .aboutItemContainer{

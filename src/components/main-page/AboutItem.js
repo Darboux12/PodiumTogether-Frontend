@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 
-import "../../styles/about-page/AboutItem.css"
+import "../../styles/mainpage/AboutItem.css"
+
+import Rotate from 'react-reveal/Rotate';
+import Fade from "react-bootstrap/Fade";
 
 
 
@@ -21,6 +24,8 @@ class AboutItem extends Component{
             return(
 
                 <div className={"d-flex flex-row aboutItemContainer align-items-center mb-5"}>
+
+
 
                     <div className={"aboutText mr-5"}>
 

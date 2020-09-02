@@ -5,6 +5,24 @@
     border: solid 5px darkslategrey;
     margin-bottom: 1.3em;
 
+
+
+
+}
+
+.newsContainerMobile{
+    font-size: 0.5em;
+    box-sizing: border-box;
+    position: relative;
+    background: white;
+    padding: 1em;
+    border: solid 5px darkslategrey;
+    margin-bottom: 1.3em;
+
+
+
+
+
 }
 
 .newsImage{

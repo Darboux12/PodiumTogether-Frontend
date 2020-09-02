@@ -1,8 +1,9 @@
 .newsContainer{
+    position: relative;
     background: white;
     padding: 1em;
-    border: solid 5px #6dcb1b;
-    margin-bottom: 1em;
+    border: solid 5px darkslategrey;
+    margin-bottom: 1.3em;
 
 }
 
@@ -25,9 +26,17 @@
 
 }
 
-
 .newsLink{
 
     color: blueviolet;
 
 }
+
+.newsDate{
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+    color: black;
+    opacity: 0.2;
+}
+

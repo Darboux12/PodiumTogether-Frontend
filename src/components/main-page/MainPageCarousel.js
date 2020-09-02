@@ -12,6 +12,8 @@ class MainPageCarousel extends Component{
 
     render() {
         return(
+
+            <div>
                 <Carousel className="MainPageCarousel" interval="4000" data-pause="false" pause="false">
 
                     <Carousel.Item>
@@ -56,6 +58,8 @@ class MainPageCarousel extends Component{
                     </Carousel.Item>
 
                 </Carousel>
+
+            </div>
 
 
         );

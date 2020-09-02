@@ -10,7 +10,7 @@ class News extends Component{
 
         return(
 
-            <div className={"newsContainer d-flex flex-row col-md-8 col-12 align-items-center"}>
+            <div className={"newsContainer d-flex flex-row  align-items-center"}>
 
                 <img className={"newsImage"} src={picture} alt={"newsImage"}/>
 
@@ -24,10 +24,14 @@ class News extends Component{
 
                     <a className={"newsLink"} href={"#"}>Find out more about our awesome record...</a>
 
+                    <h className={"newsDate"}>20.05.2020</h>
+
 
 
 
                 </div>
+
+                <h className={"newsDate"}>20.05.2020</h>
 
 
 

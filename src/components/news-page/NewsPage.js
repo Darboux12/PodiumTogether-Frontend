@@ -2,6 +2,7 @@ import React, {Component} from "react";
 
 import "../../styles/news-page/NewsPage.css"
 import News from "./News";
+import Container from "react-bootstrap/Container";
 
 class NewsPage extends Component{
 
@@ -9,21 +10,22 @@ class NewsPage extends Component{
 
         return(
 
-            <div className={"newsPage d-flex flex-column align-items-center"}>
+            <Container>
+
                 <News/>
                 <News/>
-                <News/>
-                <News/>
-                <News/>
-                <News/>
+                 <News/>
+                 <News/>
 
 
 
 
-            </div>
+            </Container>
 
 
 
+
+                         
 
 
 

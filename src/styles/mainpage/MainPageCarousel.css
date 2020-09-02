@@ -1,14 +1,15 @@
 .MainPageCarousel{
-    width: 100%;
+    margin-bottom: 5em;
+
+
+
 
 
 }
 
-h3 {
-    color: white;
-}
 
-p{
-    color: white;
+
+.CaruselContainer{
+    background: black;
 }
 

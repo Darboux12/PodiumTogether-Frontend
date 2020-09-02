@@ -6,6 +6,34 @@
 
 }
 
-.PLaceHolderDiv{
-    height: 15em;
+
+
+.mainPageHeaderDesktop{
+    color: #1B75BC;
+    font-size: 3em;
+    font-weight: bold;
 }
+
+.mainPageHeaderMobile{
+    color: #1B75BC;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+
+.mainPageHeaderBottomDesktop{
+    color: #1B75BC;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    font-size: 2em;
+
+}
+
+.mainPageHeaderBottomMobile{
+    color: #1B75BC;
+    margin-bottom: 1em;
+    font-size: 1.6em;
+
+
+}
+

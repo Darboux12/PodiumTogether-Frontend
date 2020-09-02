@@ -12,7 +12,7 @@ class AboutItem extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            leftImage : false
+            leftImage : false,
         };
     }
 

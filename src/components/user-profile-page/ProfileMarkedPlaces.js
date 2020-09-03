@@ -2,21 +2,19 @@ import React, {Component} from "react";
 import ProfileHeader from "./ProfileHeader";
 import Table from "react-bootstrap/Table";
 
-import "../../styles/user-profile/ProfileWarnings.css"
+import "../../styles/user-profile/ProfileMarkedPlaces.css"
 
-class ProfileWarnings extends Component{
-
-    render(){
+export default function ProfileMarkedPlaces(){
 
         return(
 
             <div>
 
-                <ProfileHeader text={"Warnings"}/>
+                <ProfileHeader text={"Marked Places"}/>
 
                 <Table striped bordered hover variant="dark">
 
-                    <thead className={"EventsTableHead"}>
+                    <thead className={"MarkedPlacesTableHead"}>
                     <tr>
                         <th>Title</th>
                         <th>Discipline</th>
@@ -26,7 +24,7 @@ class ProfileWarnings extends Component{
                     </tr>
                     </thead>
 
-                    <tbody className={"EventsTableBody"}>
+                    <tbody className={"MarkedPlacesTableBody"}>
 
                     <tr>
                         <td>Common game on orlik</td>
@@ -65,10 +63,7 @@ class ProfileWarnings extends Component{
 
             </div>
 
-
         );
-    }
 
 }
 
-export default ProfileWarnings;

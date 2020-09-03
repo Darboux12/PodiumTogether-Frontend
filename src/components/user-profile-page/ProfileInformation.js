@@ -5,9 +5,7 @@ import "../../styles/user-profile/ProfileInformation.css"
 import userProfileImage from "../../images/person.jpg"
 import ProfileHeader from "./ProfileHeader";
 
-class ProfileInformation extends Component{
-
-    render(){
+export default function ProfileInformation(){
 
         return(
 
@@ -23,8 +21,6 @@ class ProfileInformation extends Component{
 
                     </div>
 
-
-
                     <div className={"profileHeaders d-flex flex-column justify-content-center"}>
 
                         <h>Joined: Date</h>
@@ -34,42 +30,13 @@ class ProfileInformation extends Component{
                         <h>Age: Number</h>
                         <h>Contact: Email / Phone Number</h>
 
-
-
-
                     </div>
-
-
-
-
-
-
 
                 </div>
 
-
-
-
-
-
-
-
-
             </div>
-
-
-
-
-
-
 
         );
 
-
-
-
-    }
-
 }
 
-export default ProfileInformation;

@@ -1,39 +1,33 @@
 import React, {Component} from "react";
 import Modal from "react-bootstrap/esm/Modal";
-import Button from "react-bootstrap/esm/Button";
-import InputGroup from "react-bootstrap/esm/InputGroup";
-import FormControl from "react-bootstrap/esm/FormControl";
-import {faUser} from "@fortawesome/free-solid-svg-icons/index";
-import {faUnlock} from "@fortawesome/free-solid-svg-icons/index";
-import {faTrophy} from "@fortawesome/free-solid-svg-icons/index";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index";
-
-import "../../styles/navbar/SignUpModal.css"
-import Logo from "../common/Logo";
+import "../../../styles/navbar/SignUpModal.css"
+import Logo from "../../common/Logo";
 import SignUpForm from "./SignUpForm";
 
-class SignUpModal extends Component{
+export default function SignUpModal(props){
 
-    constructor(props){
-        super(props);
-    }
+    const isSignUpModalVisible = props.isSignUpModalVisible;
+    const closeSignUpModal = props.closeSignUpModal;
 
-    render() {
         return(
 
-            <Modal show={this.props.isSignUpModalVisible} onHide={this.props.closeSignUpModal}>
+            <Modal show={isSignUpModalVisible} onHide={closeSignUpModal}>
 
                 <Modal.Header className="signInModalHeader">
+
                     <Modal.Title className="signInModalHeaderTitle">
                         <Logo/>
                     </Modal.Title>
+
                     <div className="signInTitleHeader">
+
                         <h2>Sign up</h2>
                         <h>
                             We are glad to see you joining your community.
                             We hope you find your dream team!
                         </h>
                     </div>
+
                 </Modal.Header>
 
                 <Modal.Body>
@@ -50,8 +44,7 @@ class SignUpModal extends Component{
 
 
         );
-    }
+
 
 }
 
-export default SignUpModal;

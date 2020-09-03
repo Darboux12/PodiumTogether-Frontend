@@ -1,22 +1,26 @@
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import InputGroup from "react-bootstrap/esm/InputGroup";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index";
-import {faGlobeEurope, faUnlock, faUser} from "@fortawesome/free-solid-svg-icons/index";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faGlobeEurope, faUnlock, faUser} from "@fortawesome/free-solid-svg-icons";
 import FormControl from "react-bootstrap/esm/FormControl";
 import Button from "react-bootstrap/esm/Button";
-import Modal from "./SignUpModal";
 import Container from "react-bootstrap/esm/Container";
-import {faCalendar, faCalendarAlt, faEnvelope, faFlag} from "@fortawesome/free-regular-svg-icons/index";
+import {faCalendar, faCalendarAlt, faEnvelope, faFlag} from "@fortawesome/free-regular-svg-icons";
 import {faCalendarDay} from "@fortawesome/free-solid-svg-icons/faCalendarDay";
-
-
 import Form from 'react-bootstrap/Form'
 
+export default function SignUpForm(){
 
+    const [email,setEmail] = useState("");
+    const [password,setPassword] = useState("");
+    const [repeatPassword,setRepeatPassword] = useState("");
+    const [username,setUsername] = useState("");
+    const [birthdate,setBirthdate] = useState("");
+    const [country,setCountry] = useState("");
+    const [termsAgreement,setTermsAgreement] = useState(false);
 
-class SignUpForm extends Component{
+    const onFormSubmit = () => {alert(termsAgreement);}
 
-    render() {
         return(
 
             <Container>
@@ -34,6 +38,7 @@ class SignUpForm extends Component{
                         placeholder="Please, write your email..."
                         aria-label="Username"
                         aria-describedby="basic-addon1"
+                        onChange = {(e) => setEmail(e.target.value)}
                     />
                 </InputGroup>
 
@@ -50,6 +55,7 @@ class SignUpForm extends Component{
                         placeholder="Please, write your password..."
                         aria-label="Username"
                         aria-describedby="basic-addon1"
+                        onChange = {(e) => setPassword(e.target.value)}
                     />
                 </InputGroup>
 
@@ -66,6 +72,8 @@ class SignUpForm extends Component{
                         placeholder="Please, repeat your password..."
                         aria-label="Username"
                         aria-describedby="basic-addon1"
+                        onChange = {(e) => setRepeatPassword(e.target.value)}
+
                     />
                 </InputGroup>
 
@@ -81,6 +89,7 @@ class SignUpForm extends Component{
                         placeholder="Please, write your username..."
                         aria-label="Username"
                         aria-describedby="basic-addon1"
+                        onChange = {(e) => setUsername(e.target.value)}
                     />
                 </InputGroup>
 
@@ -94,8 +103,9 @@ class SignUpForm extends Component{
 
                     <FormControl type="date"
                         placeholder="Please, write your birth date..."
-                        aria-label="birthDatee"
+                        aria-label="birthDate"
                         aria-describedby="basic-addon1"
+                        onChange = {(e) => setBirthdate(e.target.value)}
                     />
                 </InputGroup>
 
@@ -111,36 +121,33 @@ class SignUpForm extends Component{
                                  placeholder="Please, write your country..."
                                  aria-label="Country"
                                  aria-describedby="basic-addon1"
+                                 onChange = {(e) => setCountry(e.target.value)}
                     />
                 </InputGroup>
 
                 <Form.Group controlId="formBasicCheckbox">
                     <div className={"d-flex flex-row"}>
-                        <Form.Check type="checkbox" label="I agree to the" /><a className={"ml-1"} href={"/terms"}> Terms and Conditions</a>
+                        <Form.Check
+                            type="checkbox"
+                            label="I agree to the"
+                            onChange = {(e) => setTermsAgreement(e.target.checked)}
+                        />
+                        <a className={"ml-1"} href={"/terms"}> Terms and Conditions</a>
                     </div>
 
                 </Form.Group>
 
-
                 <Button
                     variant="primary"
-                    onClick={this.props.closeSignUpModal}
+                    onClick={onFormSubmit}
                     className="signInModalButton"
                 >
                     Sign Up
                 </Button>
 
-
-
-
             </Container>
 
-
-
-
         );
-    }
 
 }
 
-export default SignUpForm;

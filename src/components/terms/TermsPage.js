@@ -3,9 +3,8 @@ import Container from "react-bootstrap/Container";
 
 import "../../styles/terms-page/TermsPage.css"
 
-class TermsPage extends Component{
+export default function TermsPage(){
 
-    render(){
         return(
 
             <Container className={"d-flex flex-column align-items-center"}>
@@ -20,12 +19,6 @@ class TermsPage extends Component{
 
             </Container>
 
-
-
-
         );
-    }
-
 }
 
-export default TermsPage;

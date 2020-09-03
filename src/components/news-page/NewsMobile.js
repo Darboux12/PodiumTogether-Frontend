@@ -3,9 +3,7 @@ import picture from "../../images/person.jpg";
 
 import "../../styles/news-page/News.css"
 
-class NewsMobile extends Component{
-
-    render(){
+export default function NewsMobile(){
 
         return(
 
@@ -25,31 +23,12 @@ class NewsMobile extends Component{
 
                     <h className={"newsDate"}>20.05.2020</h>
 
-
-
-
                 </div>
 
                 <h className={"newsDate"}>20.05.2020</h>
 
-
-
-
             </div>
-
-
-
-
-
-
 
         );
 
-
-
-    }
-
-
 }
-
-export default NewsMobile;

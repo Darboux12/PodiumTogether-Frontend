@@ -5,9 +5,7 @@ import News from "./News";
 import Container from "react-bootstrap/Container";
 import NewsMobile from "./NewsMobile";
 
-class NewsPage extends Component{
-
-    render(){
+export default function NewsPage(){
 
         return(
 
@@ -33,17 +31,7 @@ class NewsPage extends Component{
 
             </Container>
 
-
-
-
-                         
-
-
-
-
         );
-    }
 
 }
 
-export default NewsPage;

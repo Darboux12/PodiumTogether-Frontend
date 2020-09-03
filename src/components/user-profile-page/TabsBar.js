@@ -4,13 +4,7 @@ import Button from "react-bootstrap/Button";
 
 import "../../styles/user-profile/TabsBar.css"
 
-class TabsBar extends Component{
-
-    constructor(props){
-        super(props);
-    }
-
-    render(){
+export default function TabsBar(props){
 
         return(
 
@@ -18,46 +12,31 @@ class TabsBar extends Component{
 
                         <button
                             className={"tabsBarButton"}
-                            onMouseOver={() => this.props.onTabChange("profile")}
+                            onMouseOver={() => props.onTabChange("profile")}
                         >Profile
                         </button>
 
                         <button
                             className={"tabsBarButton"}
-                            onMouseOver={() => this.props.onTabChange("events")}
+                            onMouseOver={() => props.onTabChange("events")}
                         >Organized Events
                         </button>
 
                         <button
                             className={"tabsBarButton"}
-                            onMouseOver={() => this.props.onTabChange("places")}
+                            onMouseOver={() => props.onTabChange("places")}
                         >Marked Places
                         </button>
 
                         <button
                             className={"tabsBarButton"}
-                            onMouseOver={() => this.props.onTabChange("warnings")}
+                            onMouseOver={() => props.onTabChange("warnings")}
                         >Warnings
                         </button>
 
-
-
-
-
-
-
-
-
-
             </div>
 
-
-
-
-
         );
-    }
 
 }
 
-export default TabsBar;

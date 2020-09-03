@@ -4,9 +4,8 @@ import picture from "../../images/desk.jpg"
 
 import "../../styles/news-page/LatestNews.css"
 
-class LatestNews extends Component{
+export default function LatestNews(){
 
-    render(){
         return(
 
             <div className={"d-flex flex-row latestNews"}>
@@ -18,18 +17,7 @@ class LatestNews extends Component{
                         <h>See details...</h>
                     </div>
 
-
-
-
-
-
             </div>
-
-
-
         );
-    }
-
 }
 
-export default LatestNews;

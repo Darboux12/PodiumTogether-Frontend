@@ -1,21 +1,16 @@
 import React, {Component} from "react";
 import EventsSearchBar from "./EventsSearchBar";
 import Event from "./Event";
-
 import "../../styles/common/Common.css"
 import "../../styles/display-events/DisplayEventPage.css"
 
-class DisplayEventsPage extends Component{
-
-    render(){
+export default function DisplayEventsPage(){
 
         return(
 
             <div className={"displayEventPageContainer"}>
 
                 <div className={"Placeholder"}>Placeholder poniewaz nie wiem jak roziwazac overflow</div>
-
-
 
                 <EventsSearchBar/>
 
@@ -77,29 +72,10 @@ class DisplayEventsPage extends Component{
                         numberPeople={"6"}
                     />
 
-
-
                 </div>
-
-
-
-
-
-
 
             </div>
 
-
-
-
-
         );
-
-
-    }
-
-
-
 }
 
-export default DisplayEventsPage;

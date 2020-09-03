@@ -1,55 +1,8 @@
-import React, {Component} from "react";
-import Container from "react-bootstrap/esm/Container";
-import AboutItem from "../main-page/AboutItem";
-import picture from "../../images/desk.jpg"
+import React from "react";
 
-class AboutPage extends Component{
+export default function AboutPage() {
 
-    render(){
-        return(
-
-            <Container>
-
-
-                <h1 className={"mb-5"}>About Podium Together</h1>
-
-                <AboutItem
-                    header = "The journey to relaxation"
-                    paragraph = "
-                    Finding a hammock you can truly relax in didn’t
-                    happen overnight. It started with a chance discovery
-                    while on vacation, and took a lot of hard work
-                    (and a lot of hanging around) to bring the softest,
-                    most comfortable, and thoughtfully crafted hammocks
-                    to your backyard."
-                    image={picture}
-                />
-
-                <AboutItem
-                    header = "The journey to relaxation"
-                    paragraph = "
-                    Finding a hammock you can truly relax in didn’t
-                    happen overnight. It started with a chance discovery
-                    while on vacation, and took a lot of hard work
-                    (and a lot of hanging around) to bring the softest,
-                    most comfortable, and thoughtfully crafted hammocks
-                    to your backyard."
-                    image={picture}
-
-                />
-
-
-
-
-            </Container>
-
-
-
-
-
-        );
-    }
+    return <h>About Page</h>
 
 }
 
-export default AboutPage;

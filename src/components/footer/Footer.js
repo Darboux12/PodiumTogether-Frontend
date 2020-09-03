@@ -7,12 +7,10 @@ import {Link} from "react-router-dom";
 
 import "../../styles/footer/Footer.css"
 
-class Footer extends Component {
-
-    render() {
-
+export default function Footer(){
 
         return (
+
             <Navbar className="footer justify-content-between" bg={"dark"} variant={"dark"}>
                 <Nav>
                     <Nav.Item>
@@ -28,15 +26,9 @@ class Footer extends Component {
 
                <h>Hej</h>
 
-
             </Navbar>
-
-
 
         );
 
-    }
-
 }
 
-export default Footer;

@@ -1,12 +1,15 @@
-import React, {Component} from "react";
-
+import React, {Component, useState} from "react";
 import "../../styles/contact-page/ContactPage.css"
-import Container from "react-bootstrap/Container";
 import {Form} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 
-class ContactPage extends Component{
+export default function ContactPage(){
 
-    render(){
+    const [email, setEmail] = useState("");
+    const [subject, setSubject] = useState("v1");
+    const [message, setMessage] = useState("");
+
+    const onFormSubmit = () => {alert(message); }
 
         return(
 
@@ -21,8 +24,6 @@ class ContactPage extends Component{
 
                     </div>
 
-
-
                     <p className={"contactParagraph"}>
 
                         If you experienced any difficulties or you just have
@@ -32,63 +33,57 @@ class ContactPage extends Component{
                         You can be sure our team will consider and help you with
                         every issue.
 
-
                     </p>
 
                 </div>
 
                 <div className={"contactForm col-md-6 col-12"}>
+
                     <Form>
 
                         <Form.Group controlId="contactForm.email">
                             <Form.Label>Your email address</Form.Label>
-                            <Form.Control type="email" placeholder="Email address..." />
+                            <Form.Control
+                                type="email"
+                                placeholder="Email address..."
+                                onChange = {(e) => setEmail(e.target.value)}/>
                         </Form.Group>
 
                         <Form.Group controlId="contactForm.subject">
                             <Form.Label>Subject</Form.Label>
-                            <Form.Control as="select">
-                                <option>Subject One</option>
-                                <option>Subject Two</option>
-                                <option>Subject Three</option>
-                                <option>Subject Four</option>
-                                <option>Subject FIve</option>
+                            <Form.Control as="select" onChange = {(e) => setSubject(e.target.value)}>
+                                <option value={"v1"}>Subject One</option>
+                                <option value={"v2"}>Subject Two</option>
+                                <option value={"v3"}>Subject Three</option>
+                                <option value={"v4"}>Subject Four</option>
+                                <option value={"v5"}>Subject FIve</option>
                             </Form.Control>
                         </Form.Group>
 
                         <Form.Group controlId="contactForm.message">
                             <Form.Label>Message</Form.Label>
-                            <Form.Control as="textarea" rows="3" />
+                            <Form.Control
+                                as="textarea"
+                                rows="3"
+                                onChange = {(e) => setMessage(e.target.value)}/>
                         </Form.Group>
 
                     </Form>
+
+                    <Button
+                        type={"submit"}
+                        variant="primary"
+                        onClick={onFormSubmit}
+                        className="signInModalButton"
+                    >
+                        Send
+
+                    </Button>
+
                 </div>
-
-
-
-
-
-
-
-
-
 
             </div>
 
-
-
-
-
-
-
-
-
         );
-
-
-
-    }
-
 }
 
-export default ContactPage;

@@ -4,9 +4,7 @@ import picture from "../../images/person.jpg"
 
 import "../../styles/news-page/News.css"
 
-class News extends Component{
-
-    render(){
+export default function News(){
 
         return(
 
@@ -26,30 +24,12 @@ class News extends Component{
 
                     <h className={"newsDate"}>20.05.2020</h>
 
-
-
-
                 </div>
 
                 <h className={"newsDate"}>20.05.2020</h>
 
-
-
-
             </div>
 
-
-
-
-
-
-
         );
-
-
-
-    }
-
 }
 
-export default News;

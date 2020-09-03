@@ -1,18 +1,20 @@
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import Container from "react-bootstrap/Container";
 import InputGroup from "react-bootstrap/InputGroup";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index";
-import {faUnlock, faEnvelope} from "@fortawesome/free-solid-svg-icons/index";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faUnlock, faEnvelope} from "@fortawesome/free-solid-svg-icons";
 import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
-
-
-import "../../styles/navbar/SignInModal.css"
+import "../../../styles/navbar/SignInModal.css"
 import {faUser} from "@fortawesome/free-regular-svg-icons";
 
-class  SignInForm extends Component{
+export default function SignInForm(props){
 
-    render() {
+    const [username,setUsername] = useState("");
+    const [password,setPassword] = useState("");
+
+    const onFormSubmit = () => {alert("Form submitted"); }
+
         return (
 
             <Container>
@@ -29,8 +31,10 @@ class  SignInForm extends Component{
                         placeholder="Please, write your username..."
                         aria-label="Username"
                         aria-describedby="basic-addon1"
+                        onChange = {(e) => setUsername(e.target.value)}
                     />
                 </InputGroup>
+
 
                 <InputGroup className="mb-3">
 
@@ -45,31 +49,24 @@ class  SignInForm extends Component{
                         placeholder="Please, write your password..."
                         aria-label="Username"
                         aria-describedby="basic-addon1"
+                        onChange = {(e) => setPassword(e.target.value)}
                     />
+
                 </InputGroup>
 
                 <Button
+                    type={"submit"}
                     variant="primary"
-                    onClick={this.props.closeSignInModal}
+                    onClick={onFormSubmit}
                     className="signInModalButton"
                 >
                     Sign In
 
                 </Button>
 
-
-
             </Container>
 
-
-
-
-
-
-
         );
-    }
 
 }
 
-export default SignInForm;

@@ -7,13 +7,13 @@ import MainPageCarousel from "./components/main-page/MainPageCarousel";
 
 import CarouselYes from "./components/main-page/MainPageCarousel";
 
-import NavBar from "./components/navbar/NavBar"
+import NavBar from "./components/navbar/navbars/NavBar"
 import Footer from "./components/footer/Footer";
 import CreateEventPage from "./components/create-event/CreateEventPage";
 import DisplayEventsPage from "./components/display-events-page/DisplayEventsPage";
 import ForgotPasswordPage from "./components/forgot-password-page/ForgotPasswordPage";
 import TermsPage from "./components/terms/TermsPage";
-import UserProfilePage from "./components/user-profilr-page/UserProfilePage";
+import UserProfilePage from "./components/user-profile-page/UserProfilePage";
 import AboutPage from "./components/about-page/AboutPage";
 import ContactPage from "./components/contact-page/ContactPage";
 import NewsPage from "./components/news-page/NewsPage";
@@ -24,7 +24,7 @@ class App extends React.Component {
     return (
 
         <Router>
-          <NavBar/>
+          <NavBar userLogged={true}/>
           <Switch>
             <Route path="/" exact component={MainPage}/>
             <Route path="/home" exact component={MainPage}/>

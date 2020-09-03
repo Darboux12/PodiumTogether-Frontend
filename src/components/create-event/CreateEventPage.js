@@ -2,10 +2,8 @@ import React, {Component} from "react";
 import Container from "react-bootstrap/esm/Container";
 import CreateEventForm from "./CreateEventForm";
 
+export default function CreateEventPage(){
 
-class CreateEventPage extends Component{
-
-    render() {
         return(
 
             <Container className="CreateEventContainer">
@@ -14,27 +12,11 @@ class CreateEventPage extends Component{
                     <h>Fill out our form and create your perfect event!</h>
                 </div>
 
-
-
                 <CreateEventForm/>
-
-
-
-
-
 
             </Container>
 
-
-
-
-
-
-
-
         );
-    }
 
 }
 
-export default CreateEventPage;

@@ -4,9 +4,8 @@ import ForgotPasswordForm from "./ForgotPasswordForm";
 
 import "../../styles/forgot-password/ForgotPassword.css"
 
-class ForgotPasswordPage extends Component{
+export default function ForgotPasswordPage(){
 
-    render(){
         return(
 
             <Container className={"forgotPasswordPageContainer"}>
@@ -19,18 +18,11 @@ class ForgotPasswordPage extends Component{
 
                 </div>
 
-
                 <ForgotPasswordForm/>
-
-
 
             </Container>
 
         );
-    }
-
-
 
 }
 
-export default ForgotPasswordPage;

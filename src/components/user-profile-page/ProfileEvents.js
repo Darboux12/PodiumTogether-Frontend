@@ -6,9 +6,8 @@ import "../../styles/user-profile/ProfileEvents.css"
 import Table from "react-bootstrap/Table";
 
 
-class ProfileEvents extends Component{
+export default function ProfileEvents(){
 
-    render(){
         return (
 
             <div>
@@ -66,12 +65,6 @@ class ProfileEvents extends Component{
 
             </div>
 
-
-
-
         );
-    }
-
 }
 
-export default ProfileEvents;

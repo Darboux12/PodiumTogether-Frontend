@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import InputGroup from "react-bootstrap/esm/InputGroup";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index";
 import {faEnvelope} from "@fortawesome/free-regular-svg-icons/index";
@@ -10,9 +10,12 @@ import Container from "react-bootstrap/esm/Container";
 
 import "../../styles/forgot-password/ForgotPasswordForm.css"
 
-class ForgotPasswordForm extends Component{
+export default function ForgotPasswordForm(props){
 
-    render(){
+    const [email,setEmail] = useState("");
+
+    const onFormSubmit = () => {alert(email); }
+
         return(
 
             <div className={"ForgotPasswordFormContainer"}>
@@ -30,6 +33,7 @@ class ForgotPasswordForm extends Component{
                         placeholder="Please, write your trusted email..."
                         aria-label="Username"
                         aria-describedby="basic-addon1"
+                        onChange = {(e) => setEmail(e.target.value)}
                     />
                 </InputGroup>
 
@@ -37,7 +41,7 @@ class ForgotPasswordForm extends Component{
 
                     <Button
                         variant="success"
-                        onClick={this.props.closeSignUpModal}
+                        onClick={onFormSubmit}
                         className="sendButton mr-3 col-md-3 col-6"
                     >
                         Send
@@ -45,8 +49,9 @@ class ForgotPasswordForm extends Component{
 
                     <Button href={"/home"}
                             variant="secondary"
-                            onClick={this.props.closeSignUpModal}
+                            onClick={props.closeSignUpModal}
                             className="closeButton col-md-2 col-5"
+
                     >
                         Close
                     </Button>
@@ -58,8 +63,7 @@ class ForgotPasswordForm extends Component{
 
 
         );
-    }
+
 
 }
 
-export default ForgotPasswordForm;

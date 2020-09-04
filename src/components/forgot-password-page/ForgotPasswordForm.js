@@ -1,12 +1,9 @@
 import React, {Component, useState} from "react";
 import InputGroup from "react-bootstrap/esm/InputGroup";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index";
-import {faEnvelope} from "@fortawesome/free-regular-svg-icons/index";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEnvelope} from "@fortawesome/free-regular-svg-icons";
 import FormControl from "react-bootstrap/esm/FormControl";
-import {faGlobeEurope, faUnlock, faUser} from "@fortawesome/free-solid-svg-icons/index";
-import {faCalendarDay} from "@fortawesome/free-solid-svg-icons/faCalendarDay";
 import Button from "react-bootstrap/esm/Button";
-import Container from "react-bootstrap/esm/Container";
 
 import "../../styles/forgot-password/ForgotPasswordForm.css"
 

@@ -30,89 +30,93 @@ export default function CreateEventFor(){
 
     const onFormSubmit = () => {alert(description); }
 
-        return(
+    return(
 
-            <Form className={"createEventForm"}>
+        <Form className={"createEventForm w-70"}>
 
-                <Form.Group controlId="formEventTitle">
-                    <Form.Label className={"FormLabel"}>Event Title</Form.Label>
+            <h className={"categoryHeader"}>General information</h>
+
+            <Form.Group controlId="formEventTitle">
+                <Form.Label className={"FormLabel mt-3"}>Event Title</Form.Label>
+                <Form.Control
+                    className={"FormInputField"}
+                    type="text" placeholder="Please, enter event title..."
+                    onChange = {(e) => setTitle(e.target.value)}/>
+            </Form.Group>
+
+            <Form.Group controlId="formEventDate">
+                <Form.Label className={"FormLabel"}>Event Date</Form.Label>
+                <Form.Control
+                    className={"FormInputField"}
+                    type="date"
+                    onChange = {(e) => setDate(e.target.value)}
+                />
+            </Form.Group>
+
+            <Form.Group controlId="formEventLocalization">
+                <Form.Label className={"FormLabel"}>Event Localization</Form.Label>
+                <InputGroup >
                     <Form.Control
-                        className={"FormInputField"}
-                        type="text" placeholder="Please, enter event title..."
-                        onChange = {(e) => setTitle(e.target.value)}/>
-                </Form.Group>
-
-                <Form.Group controlId="formEventDate">
-                    <Form.Label className={"FormLabel"}>Event Date</Form.Label>
-                    <Form.Control
-                        className={"FormInputField"}
-                        type="date"
-                        onChange = {(e) => setDate(e.target.value)}
+                        className={"mr-3 FormInputField"}
+                        type="text"
+                        placeholder="City..."
+                        onChange = {(e) => setCity(e.target.value)}
                     />
-                </Form.Group>
-
-                <Form.Group controlId="formEventLocalization">
-                    <Form.Label className={"FormLabel"}>Event Localization</Form.Label>
-                    <InputGroup >
-                        <Form.Control
-                            className={"mr-3 FormInputField"}
-                            type="text"
-                            placeholder="City..."
-                            onChange = {(e) => setCity(e.target.value)}
-                        />
-                        <Form.Control
-                            className={"mr-3 FormInputField"}
-                            type="text"
-                            placeholder="Street..."
-                            onChange = {(e) => setStreet(e.target.value)}
-                        />
-                        <Form.Control
-                            className={"mr-3 FormInputField"}
-                            type="text"
-                            placeholder="Number..."
-                            onChange = {(e) => setNumber(e.target.value)}
-                        />
-                        <Form.Control
-                            className={"FormInputField"}
-                            type="text" p
-                            laceholder="Postal code..."
-                            onChange = {(e) => setPostal(e.target.value)}
-                        />
-                    </InputGroup>
-
-                </Form.Group>
-
-                <Form.Group controlId="formEventDiscipline">
-                    <Form.Label className={"FormLabel"}>Example select</Form.Label>
                     <Form.Control
-                        as="select"
-                        className={"FormInputField"}
-                        onChange = {(e) => setDiscipline(e.target.value)}
-                    >
-                        <option>Discipline Example</option>
-                        <option>Discipline Example</option>
-                        <option>Discipline Example</option>
-                        <option>Discipline Example</option>
-                        <option>Discipline Example</option>
-                    </Form.Control>
-                </Form.Group>
-
-                <Form.Group controlId="formEventRequiredPeople">
-                    <Form.Label className={"FormLabel"}>Required People Number</Form.Label>
-                    <Form.Control
-                        className={"FormInputField"}
-                        type="number"
-                        min="0"
-                        placeholder="People number..."
-                        onChange = {(e) => setPeople(e.target.value)}
+                        className={"mr-3"}
+                        type="text"
+                        placeholder="Street..."
+                        onChange = {(e) => setStreet(e.target.value)}
                     />
-                </Form.Group>
+                    <Form.Control
+                        className={"mr-3"}
+                        type="text"
+                        placeholder="Number..."
+                        onChange = {(e) => setNumber(e.target.value)}
+                    />
+                    <Form.Control
+                        className={""}
+                        type="text"
+                        placeholder="Postal code..."
+                        onChange = {(e) => setPostal(e.target.value)}
+                    />
+                </InputGroup>
 
-                <Form.Group controlId="formEventPreferredGender">
+            </Form.Group>
 
-                    <Form.Label className={"FormLabel"}>Preferred gender</Form.Label>
+            <Form.Group controlId="formEventDiscipline">
+                <Form.Label className={"FormLabel"}>Discipline</Form.Label>
+                <Form.Control
+                    as="select"
+                    className={"FormInputField mb-5"}
+                    onChange = {(e) => setDiscipline(e.target.value)}
+                >
+                    <option>Discipline Example</option>
+                    <option>Discipline Example</option>
+                    <option>Discipline Example</option>
+                    <option>Discipline Example</option>
+                    <option>Discipline Example</option>
+                </Form.Control>
+            </Form.Group>
 
-                    <InputGroup>
+            <h className={"categoryHeader"}>Detailed Information</h>
+
+            <Form.Group controlId="formEventRequiredPeople">
+                <Form.Label className={"FormLabel mt-3"}>Required People Number</Form.Label>
+                <Form.Control
+                    className={"FormInputField"}
+                    type="number"
+                    min="0"
+                    placeholder="People number..."
+                    onChange = {(e) => setPeople(e.target.value)}
+                />
+            </Form.Group>
+
+            <Form.Group controlId="formEventPreferredGender">
+
+                <Form.Label className={"FormLabel"}>Preferred gender</Form.Label>
+
+                <InputGroup>
 
                     <Form.Check
                         id="formRadioMale"
@@ -141,13 +145,13 @@ export default function CreateEventFor(){
                         onChange = {(e) => setBoth(e.target.checked)}
                     />
 
-                    </InputGroup>
+                </InputGroup>
 
-                </Form.Group>
+            </Form.Group>
 
-                <Form.Group controlId="formEventPreferredAgeRange">
-                    <Form.Label className={"FormLabel"}>Preferred age range</Form.Label>
-                    <InputGroup>
+            <Form.Group controlId="formEventPreferredAgeRange">
+                <Form.Label className={"FormLabel"}>Preferred age range</Form.Label>
+                <InputGroup>
                     <Form.Control
                         type="number"
                         min="1" max="99"
@@ -159,55 +163,63 @@ export default function CreateEventFor(){
                         type="number"
                         min="1"
                         max="99"
-                        className={"mr-3 FormInputField"}
+                        className={"FormInputField"}
                         placeholder="Max age..."
                         onChange = {(e) => setMaxAge(e.target.value)}
                     />
-                    </InputGroup>
-                </Form.Group>
+                </InputGroup>
+            </Form.Group>
 
-                <Form.Group controlId="formEventCosts">
-                    <Form.Label className={"FormLabel"}>Event costs</Form.Label>
-                    <InputGroup>
-                        <Form.Control
-                            type="number"
-                            min="0"
-                            step="0.1"
-                            className={"mr-3 FormInputField"}
-                            placeholder="Price in PLN..."
-                            onChange = {(e) => setCost(e.target.value)}
-                        />
-                        <Form.Control
-                            type="number"
-                            min="0"
-                            className={"mr-3 FormInputField"}
-                            placeholder="Game time in hours..."
-                            onChange = {(e) => setTime(e.target.value)}
-                        />
-                    </InputGroup>
-                </Form.Group>
-
-                <Form.Group controlId="exampleForm.ControlTextarea1">
-                    <Form.Label className={"FormLabel "}>Event Description</Form.Label>
+            <Form.Group controlId="formEventCosts">
+                <Form.Label className={"FormLabel"}>Event costs</Form.Label>
+                <InputGroup>
                     <Form.Control
-                        className={"FormInputField"}
-                        as="textarea"
-                        rows="3"
-                        onChange = {(e) => setDescription(e.target.value)}
+                        type="number"
+                        min="0"
+                        step="0.1"
+                        className={"mr-3 FormInputField"}
+                        placeholder="Price in PLN..."
+                        onChange = {(e) => setCost(e.target.value)}
                     />
-                </Form.Group>
+                    <Form.Control
+                        type="number"
+                        min="0"
+                        className={"FormInputField"}
+                        placeholder="Game time in hours..."
+                        onChange = {(e) => setTime(e.target.value)}
+                    />
+                </InputGroup>
+            </Form.Group>
 
-                <Button
-                    variant="primary"
-                    type="submit"
-                    className={"w-50"}
-                    onClick={onFormSubmit}
-                >
-                    Create Event
-                </Button>
-            </Form>
+            <Form.Group controlId="exampleForm.ControlTextarea1">
+                <Form.Label className={"FormLabel "}>Event Description</Form.Label>
+                <Form.Control
+                    className={"FormInputField mb-5"}
+                    as="textarea"
+                    rows="3"
+                    onChange = {(e) => setDescription(e.target.value)}
+                />
+            </Form.Group>
 
-        );
+            <h className={"categoryHeader"}>Additional elements</h>
+
+            <Form.Group controlId="exampleForm.ControlInput1">
+                <Form.Label className={"FormLabel mt-3"} >Necessary file</Form.Label>
+                <Form.Control className={"FormInputField"} type="file"/>
+            </Form.Group>
+
+
+            <Button
+                variant="primary"
+                type="submit"
+                className={"w-50 createEventSubmitButton mt-3"}
+                onClick={onFormSubmit}
+            >
+                Create Event
+            </Button>
+        </Form>
+
+    );
 
 
 }

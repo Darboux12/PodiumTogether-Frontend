@@ -1,19 +1,11 @@
 import React, {Component} from "react";
-
 import Container from "react-bootstrap/esm/Container";
-
 import "../../styles/mainpage/MainPage.css"
-import {Rotate} from "react-reveal";
-import AboutItem from "./AboutItem";
 import MainPageAbout from "./MainPageAbout";
 import MainPageCarousel from "./MainPageCarousel";
 
+export default function MainPage(){
 
-
-
-class MainPage extends Component{
-
-    render() {
         return(
 
             <Container className="MainPageContainer">
@@ -42,28 +34,8 @@ class MainPage extends Component{
                 >Don't hesitate! Sign up and join the best sport app in the world!
                 </h>
 
-
-
-
-
-
-
-
-
-
-
             </Container>
 
-
-
-
-
-
-
-
         );
-    }
-
 }
 
-export default MainPage;

@@ -1,29 +1,18 @@
 import React, {Component} from "react";
 import "../../styles/mainpage/MainPageAbout.css"
-
 import AboutItem from "./AboutItem";
-
 import "../../styles/mainpage/MainPageAbout.css"
-
 import Rotate from 'react-reveal/Rotate';
-
 import achieveGreatThingsImage from "../../images/achieveGreatThingsImage.jpg"
 import haveFunImage from "../../images/haveFunImage.jpg"
 import makeFriendsImage from "../../images/makeFriendsImage.jpg"
 import sharePassionImage from "../../images/sharePassionImage.jpg"
+import discoverAmazingPlaces from "../../images/discoverAmazinPlacesImage.jpg"
 import AboutItemMobile from "./AboutItemMobile";
 
+export default function MainPageAbout(props){
 
-class MainPageAbout extends Component{
-
-    constructor(props){
-        super(props);
-    }
-
-
-    render() {
-
-        if(!this.props.mobile){
+        if(!props.mobile){
 
             return(
 
@@ -83,19 +72,18 @@ class MainPageAbout extends Component{
 
                     </Rotate>
 
+                    <Rotate top left>
+                        <AboutItem
+                            header = "Discover incredible places"
+                            paragraph = "
+                    Amazing places where you can exercise are just around the corner! Discover them
+                    all and make every workout unforgettable experience!
+                    "
+                            image={discoverAmazingPlaces}
+                            left={true}
+                        />
 
-
-
-
-
-
-
-
-
-
-
-
-
+                    </Rotate>
 
                 </div>
 
@@ -103,93 +91,70 @@ class MainPageAbout extends Component{
 
         }
 
-        if(this.props.mobile){
+        if(props.mobile){
 
             return(
 
+                <div>
 
-            <div>
+                    <Rotate top right>
+                        <AboutItemMobile
+                            header = "Share your passion"
+                            paragraph = "
+                        World is full of people who are crazy about same stuff as you and
+                        cannot wait to enjoy it with you. Find them and together create
+                        memories you will never forget!
+                        "
+                            image={sharePassionImage}
+                            left={true}
+                        />
 
-                <Rotate top right>
-                    <AboutItemMobile
-                        header = "Share your passion"
-                        paragraph = "
-                    World is full of people who are crazy about same stuff as you and
-                    cannot wait to enjoy it with you. Find them and together create
-                    memories you will never forget!
-                    "
-                        image={sharePassionImage}
-                        left={true}
-                    />
+                    </Rotate>
 
-                </Rotate>
+                    <Rotate top right>
+                        <AboutItemMobile
+                            header = "Have fun"
+                            paragraph = "
+                        Hard work and giving your best is important, but the most
+                        crucial thing is just having fun. So, do not wait and find
+                        amazing, incredible places and enjoy your time!
+                        "
+                            image={haveFunImage}
 
-                <Rotate top right>
-                    <AboutItemMobile
-                        header = "Have fun"
-                        paragraph = "
-                    Hard work and giving your best is important, but the most
-                    crucial thing is just having fun. So, do not wait and find
-                    amazing, incredible places and enjoy your time!
-                    "
-                        image={haveFunImage}
+                        />
 
-                    />
+                    </Rotate>
 
-                </Rotate>
+                    <Rotate top left>
+                        <AboutItemMobile
+                            header = "Meet new people"
+                            paragraph = "
+                       Nothing connect people better than playing games and doing sports together.
+                        Thousands of people cannot wait to meet you! It can be beginning of a
+                        life-long friendship!
+                        "
+                            image={makeFriendsImage}
+                            left={true}
+                        />
 
-                <Rotate top left>
-                    <AboutItemMobile
-                        header = "Meet new people"
-                        paragraph = "
-                   Nothing connect people better than playing games and doing sports together.
-                    Thousands of people cannot wait to meet you! It can be beginning of a
-                    life-long friendship!
-                    "
-                        image={makeFriendsImage}
-                        left={true}
-                    />
+                    </Rotate>
 
-                </Rotate>
+                    <Rotate top right>
+                        <AboutItemMobile
+                            header = "Achieve great things"
+                            paragraph = "
+                        Working hard together is the best motivation in the world.
+                        Make a team, improve your skills together and one day you will reach a peak!
+                        "
+                            image={achieveGreatThingsImage }
+                        />
 
-                <Rotate top right>
-                    <AboutItemMobile
-                        header = "Achieve great things"
-                        paragraph = "
-                    Working hard together is the best motivation in the world.
-                    Make a team, improve your skills together and one day you will reach a peak!
-                    "
-                        image={achieveGreatThingsImage }
-                    />
-
-                </Rotate>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    </Rotate>
 
             </div>
+
             );
         }
 
-
-
-
-
-
-    }
-
-
 }
 
-export default MainPageAbout;

@@ -151,6 +151,19 @@ export default function MainPageAbout(props){
 
                     </Rotate>
 
+                    <Rotate top left>
+                        <AboutItemMobile
+                            header = "Discover incredible places"
+                            paragraph = "
+                    Amazing places where you can exercise are just around the corner! Discover them
+                    all and make every workout unforgettable experience!
+                    "
+                            image={discoverAmazingPlaces}
+                            left={true}
+                        />
+
+                    </Rotate>
+
             </div>
 
             );

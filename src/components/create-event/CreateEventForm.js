@@ -55,7 +55,8 @@ export default function CreateEventFor(){
 
             <Form.Group controlId="formEventLocalization">
                 <Form.Label className={"FormLabel"}>Event Localization</Form.Label>
-                <InputGroup >
+
+                <InputGroup className={"d-md-flex flex-row d-none"}>
                     <Form.Control
                         className={"mr-3 FormInputField"}
                         type="text"
@@ -76,6 +77,33 @@ export default function CreateEventFor(){
                     />
                     <Form.Control
                         className={""}
+                        type="text"
+                        placeholder="Postal code..."
+                        onChange = {(e) => setPostal(e.target.value)}
+                    />
+                </InputGroup>
+
+                <InputGroup className={"d-md-none flex-row d-flex"}>
+                    <Form.Control
+                        className={"w-100 mb-3"}
+                        type="text"
+                        placeholder="City..."
+                        onChange = {(e) => setCity(e.target.value)}
+                    />
+                    <Form.Control
+                        className={"w-100 mb-3"}
+                        type="text"
+                        placeholder="Street..."
+                        onChange = {(e) => setStreet(e.target.value)}
+                    />
+                    <Form.Control
+                        className={"w-100 mb-3"}
+                        type="text"
+                        placeholder="Number..."
+                        onChange = {(e) => setNumber(e.target.value)}
+                    />
+                    <Form.Control
+                        className={"w-100 mb-3"}
                         type="text"
                         placeholder="Postal code..."
                         onChange = {(e) => setPostal(e.target.value)}
@@ -204,19 +232,33 @@ export default function CreateEventFor(){
             <h className={"categoryHeader"}>Additional elements</h>
 
             <Form.Group controlId="exampleForm.ControlInput1">
-                <Form.Label className={"FormLabel mt-3"} >Necessary file</Form.Label>
+                <Form.Label className={"FormLabel mt-3"} >Necessary documents</Form.Label>
                 <Form.Control className={"FormInputField"} type="file"/>
             </Form.Group>
-
 
             <Button
                 variant="primary"
                 type="submit"
-                className={"w-50 createEventSubmitButton mt-3"}
+                className={"d-md-inline d-none w-50 createEventSubmitButton mt-3"}
                 onClick={onFormSubmit}
             >
                 Create Event
             </Button>
+
+            <Button
+                variant="primary"
+                type="submit"
+                className={"d-md-none d-inline w-100 createEventSubmitButton mt-3"}
+                onClick={onFormSubmit}
+            >
+                Create Event
+            </Button>
+
+
+
+
+
+
         </Form>
 
     );

@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import EventsSearchBar from "./EventsSearchBar";
 import Event from "./Event";
-import "../../styles/common/Common.css"
-import "../../styles/display-events/DisplayEventPage.css"
+import "../../styles/common/Common.css";
+import "../../styles/display-events/DisplayEventPage.css";
+import displayEventsPageImage from "../../images/displayEventsImage.jpg";
 
 export default function DisplayEventsPage(){
 
@@ -10,7 +11,7 @@ export default function DisplayEventsPage(){
 
             <div className={"displayEventPageContainer"}>
 
-                <div className={"Placeholder"}>Placeholder poniewaz nie wiem jak roziwazac overflow</div>
+                <img className={"displayEventImage"} src={displayEventsPageImage} alt={"Display Events Page Image"}/>
 
                 <EventsSearchBar/>
 

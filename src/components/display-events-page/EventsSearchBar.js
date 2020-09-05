@@ -6,13 +6,18 @@ import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 
 import "../../styles/display-events/SearchBar.css"
+import OutsideAlerter from "./SearchFilter";
+import SearchTab from "./SearchTab";
 
 export default function EventsSearchBar(){
 
     const [keyword,setKeyword] = useState("");
     const [localization,setLocalization] = useState("");
 
-    const onFormSubmit = () => {alert("Submit"); }
+    const [showTab, setShowTab] = useState(false);
+
+    const onFormSubmit = () => {alert(keyword); }
+
 
     return(
 
@@ -41,17 +46,11 @@ export default function EventsSearchBar(){
 
                 </Form>
 
-                <Tabs defaultActiveKey="" id="uncontrolled-tab-example" className={"col-12 align-text-center"}>
-                    <Tab eventKey="home" title="Home">
-                        <h>Hejo H</h>
-                    </Tab>
-                    <Tab eventKey="profile" title="Profile">
-                        <h>Hejo</h>
-                    </Tab>
-                    <Tab eventKey="contact" title="Contact">
-                        <h>Hejo</h>
-                    </Tab>
-                </Tabs>
+                <OutsideAlerter id={"kot"}/>
+
+                <Button onClick={() => setShowTab(true)} variant={"primary"}>Click me</Button>
+
+                <SearchTab show={showTab}/>
 
             </Navbar>
 

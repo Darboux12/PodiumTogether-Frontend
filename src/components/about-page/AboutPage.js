@@ -12,13 +12,13 @@ export default function AboutPage() {
 
         <Container className={"AboutContainer"}>
 
+            <Slide left>
+
             <h2 className={"aboutPageHeader"}>About podium together</h2>
 
             <Row>
 
                 <Col className={"d-flex flex-column"}>
-
-                    <Slide left>
 
                         <h className={"aboutPageElement"}>
                             Podium together is a web application, designed and developed by one university student
@@ -46,7 +46,6 @@ export default function AboutPage() {
                             <li>Spring Boot</li>
                         </ul>
 
-                    </Slide>
 
                 </Col>
 
@@ -56,14 +55,11 @@ export default function AboutPage() {
 
             </Row>
 
-        </Container>
+        </Slide>
 
-
+    </Container>
 
         );
-
-
-
 
 }
 

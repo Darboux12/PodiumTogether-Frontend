@@ -4,6 +4,8 @@
 
 .contactTexts{
 
+    font-size: 1.2em;
+
 
 }
 
@@ -11,6 +13,9 @@
 .contactHeader{
     font-weight: bold;
     font-size: 1.5em;
+    color: #1B75BC;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
 
 
 }
@@ -18,6 +23,7 @@
 .contactParagraph{
 
     color: black;
+    margin-bottom:2em;
 
 }
 
@@ -25,4 +31,8 @@
 
 
 
+}
+
+.contactInputLabel{
+    font-size: 1.1em;
 }

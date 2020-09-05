@@ -30,8 +30,10 @@ export default function ContactPage(){
                         some questions about our app, feel free to send us a message
                         with your problem description.
 
+                        <br/><br/>
+
                         You can be sure our team will consider and help you with
-                        every issue.
+                        every issue!
 
                     </p>
 
@@ -42,7 +44,7 @@ export default function ContactPage(){
                     <Form>
 
                         <Form.Group controlId="contactForm.email">
-                            <Form.Label>Your email address</Form.Label>
+                            <Form.Label className={"contactInputLabel"}>Your email address</Form.Label>
                             <Form.Control
                                 type="email"
                                 placeholder="Email address..."
@@ -50,7 +52,7 @@ export default function ContactPage(){
                         </Form.Group>
 
                         <Form.Group controlId="contactForm.subject">
-                            <Form.Label>Subject</Form.Label>
+                            <Form.Label className={"contactInputLabel"}>Subject</Form.Label>
                             <Form.Control as="select" onChange = {(e) => setSubject(e.target.value)}>
                                 <option value={"v1"}>Subject One</option>
                                 <option value={"v2"}>Subject Two</option>
@@ -61,10 +63,10 @@ export default function ContactPage(){
                         </Form.Group>
 
                         <Form.Group controlId="contactForm.message">
-                            <Form.Label>Message</Form.Label>
+                            <Form.Label className={"contactInputLabel"}>Message</Form.Label>
                             <Form.Control
                                 as="textarea"
-                                rows="3"
+                                rows="6"
                                 onChange = {(e) => setMessage(e.target.value)}/>
                         </Form.Group>
 

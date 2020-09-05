@@ -5,7 +5,7 @@ import userProfileImage from "../../../images/person.jpg";
 import Dropdown from "react-bootstrap/Dropdown";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCalendarCheck, faUserCircle} from "@fortawesome/free-regular-svg-icons";
-import {faGlobeEurope, faMapMarkerAlt, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
+import {faGlobeEurope, faMapMarkerAlt, faRunning, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
 import SignInModal from "../modals/SignInModal";
 import SignUpModal from "../modals/SignUpModal";
 import React, {useState} from "react";
@@ -20,11 +20,54 @@ function NavBarUserLogged(){
 
         <Navbar className={"Navbar"} collapseOnSelect expand="md" bg="dark" variant="dark">
 
-        <Navbar.Brand href="/home"><LogoNavbar/></Navbar.Brand>
+            <Navbar.Brand href="/home"><LogoNavbar/></Navbar.Brand>
 
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Brand className={"d-md-none d-flex"}>
 
-        <Navbar.Collapse id="responsive-navbar-nav">
+                <Dropdown className={"d-flex flex-column align-items-center"}>
+
+                <Dropdown.Toggle as={"header"} className={"dataToggle"}>
+                    <FontAwesomeIcon id="logo-icon-1" icon={faUserCircle} className="logo-icon"/>
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu className={"dropdown-menu-center"}>
+
+                    <Dropdown.Item href="/userProfile">
+                        <FontAwesomeIcon className={"profileIcon"} icon={faUserCircle}/>
+                        See your profile
+                    </Dropdown.Item>
+
+                    <NavDropdown.Divider />
+
+                    <Dropdown.Item href="/userEvents">
+                        <FontAwesomeIcon className={"profileIcon"} icon={faCalendarCheck}/>
+                        My events
+                    </Dropdown.Item>
+
+                    <Dropdown.Item href="/userPlaces">
+                        <FontAwesomeIcon className={"profileIcon"} icon={faGlobeEurope}/>
+                        My places
+                    </Dropdown.Item>
+
+                    <Dropdown.Item href="/settings">
+                        <FontAwesomeIcon className={"profileIcon"} icon={faMapMarkerAlt}/>
+                        Settings
+                    </Dropdown.Item>
+
+                    <Dropdown.Item href="/signOut">
+                        <FontAwesomeIcon className={"profileIcon"} icon={faSignOutAlt}/>
+                        Sign Out
+                    </Dropdown.Item>
+
+                </Dropdown.Menu>
+
+            </Dropdown>
+
+            </Navbar.Brand>
+
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
+            <Navbar.Collapse id="responsive-navbar-nav">
 
             <Nav className="mr-auto">
                 <Nav.Link href="/about">About us</Nav.Link>
@@ -45,17 +88,18 @@ function NavBarUserLogged(){
 
             <Nav>
                 <Nav.Item className={"d-flex flex-row align-items-center userProfileIcon"}>
+
                     <a href={"/userProfile"} className={"d-md-flex d-none"}>
                         <img className={"userProfileImage"} src={userProfileImage} alt="userProfileImage"/>
                     </a>
 
                     <Dropdown>
 
-                        <Dropdown.Toggle as={"header"} className={"dataToggle"}>
+                        <Dropdown.Toggle as={"header"} className={"dataToggle d-md-flex d-none"}>
                             <h className={"userProfileHeader"}>Janek126p</h>
                         </Dropdown.Toggle>
 
-                        <Dropdown.Menu>
+                        <Dropdown.Menu className={"dropdown-menu-center"}>
 
                             <Dropdown.Item href="/userProfile">
                                 <FontAwesomeIcon className={"profileIcon"} icon={faUserCircle}/>
@@ -95,17 +139,17 @@ function NavBarUserLogged(){
 
         </Navbar.Collapse>
 
-        <SignInModal
+            <SignInModal
             isSignInModalVisible={signInModalVisible}
             closeSignInModal={() => setSignInModalVisible(false)}
-        />
+            />
 
-        <SignUpModal
+            <SignUpModal
             isSignUpModalVisible={signUpModalVisible}
             closeSignUpModal={() => setSignUpModalVisible(false)}
-        />
+             />
 
-    </Navbar>
+        </Navbar>
 
     );
 

@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-import EventsSearchBar from "./EventsSearchBar";
+import EventsSearchBar from "../search-bar/EventsSearchBar";
 import Event from "./Event";
-import "../../styles/common/Common.css";
-import "../../styles/display-events/DisplayEventPage.css";
-import displayEventsPageImage from "../../images/displayEventsImage.jpg";
+import "../../../styles/common/Common.css";
+import "../../../styles/display-events/page/DisplayEventPage.css";
+import displayEventsPageImage from "../../../images/displayEventsImage.jpg";
 
 export default function DisplayEventsPage(){
 

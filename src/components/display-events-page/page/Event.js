@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 
-import "../../styles/display-events/Events.css"
+import "../../../styles/display-events/page/Events.css"
 
-import footballEvent from "../../images/event-football.jpg"
+import footballEvent from "../../../images/event-football.jpg"
 import Badge from "react-bootstrap/Badge";
 import {faMapMarkedAlt, faRunning, faUsers} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

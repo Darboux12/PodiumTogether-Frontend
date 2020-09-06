@@ -10,7 +10,7 @@ import CarouselYes from "./components/main-page/MainPageCarousel";
 import NavBar from "./components/navbar/navbars/NavBar"
 import Footer from "./components/footer/Footer";
 import CreateEventPage from "./components/create-event/CreateEventPage";
-import DisplayEventsPage from "./components/display-events-page/DisplayEventsPage";
+import DisplayEventsPage from "./components/display-events-page/page/DisplayEventsPage";
 import ForgotPasswordPage from "./components/forgot-password-page/ForgotPasswordPage";
 import TermsPage from "./components/terms/TermsPage";
 import UserProfilePage from "./components/user-profile-page/UserProfilePage";

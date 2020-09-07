@@ -1,0 +1,16 @@
+.starIcon{
+    color: gold !important;
+    margin-left: 0.5em;
+}
+
+.reviewHeader{
+    font-size: 1.2em;
+}
+
+.ratingHeader{
+    color: #1B75BC;
+}
+
+.ReviewContainer{
+    margin-bottom: 1em;
+}

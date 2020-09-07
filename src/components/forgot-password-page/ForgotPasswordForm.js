@@ -6,12 +6,23 @@ import FormControl from "react-bootstrap/esm/FormControl";
 import Button from "react-bootstrap/esm/Button";
 
 import "../../styles/forgot-password/ForgotPasswordForm.css"
+import Modal from "react-bootstrap/Modal";
 
 export default function ForgotPasswordForm(props){
 
     const [email,setEmail] = useState("");
+    const [emailSent,setEmailSent] = useState(false);
 
-    const onFormSubmit = () => {alert(email); }
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const onFormSubmit = () => {
+        alert(email);
+
+       handleShow();
+
+    }
 
         return(
 
@@ -54,6 +65,23 @@ export default function ForgotPasswordForm(props){
                     </Button>
 
                 </div>
+
+                <Modal show={show} onHide={handleClose}>
+
+                    <Modal.Header closeButton>
+                        <Modal.Title>New password sent</Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>New password has been sent on email you gave.</Modal.Body>
+
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+
 
             </div>
 

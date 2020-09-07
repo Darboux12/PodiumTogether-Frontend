@@ -1,60 +1,58 @@
-import React, {Component, useState} from "react";
-
-import Form from 'react-bootstrap/Form'
+import React, {useState} from "react";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
-import InputGroup from 'react-bootstrap/InputGroup'
 
-import "../../styles/create-event/CreateEventForm.css"
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import FormControl from "react-bootstrap/FormControl";
+import "../../styles/tag-place/TagPlaceForm.css"
+import Review from "./Review";
 
-export default function CreateEventFor(){
+export default function TagPlaceForm(){
 
-    const [title,setTitle] = useState("");
-    const [date,setDate] = useState("");
+    const [name,setName] = useState("");
     const [city,setCity] = useState("");
     const [street,setStreet] = useState("");
     const [number,setNumber] = useState("");
     const [postal,setPostal] = useState("");
     const [discipline,setDiscipline] = useState("");
+    const [openingHoursFrom,setOpeningHoursFrom] = useState("");
+    const [openingHoursTo,setOpeningHoursTo] = useState("");
+    const [cost,setCost] = useState(0);
+    const [time,setTime] = useState(0);
+    const [age,setAge] = useState(0);
+    const [description,setDescription] = useState("");
+
+    const [rating,setRating] = useState(0);
+
+
+
+
     const [people,setPeople] = useState("");
     const [male,setMale] = useState(false);
     const [female,setFemale] = useState(false);
     const [both,setBoth] = useState(false);
     const [minAge,setMinAge] = useState(0);
     const [maxAge,setMaxAge] = useState(0);
-    const [cost,setCost] = useState(0);
-    const [time,setTime] = useState(0);
-    const [description,setDescription] = useState("");
 
-    const onFormSubmit = () => {alert(description); }
+
+
+    const onFormSubmit = () => {alert(rating); }
 
     return(
 
-        <Form className={"createEventForm w-70"}>
+        <Form className={"tagPlaceForm w-70"}>
 
             <h className={"categoryHeader"}>General information</h>
 
-            <Form.Group controlId="formEventTitle">
-                <Form.Label className={"FormLabel mt-3"}>Event Title</Form.Label>
+            <Form.Group controlId="placeName">
+                <Form.Label className={"FormLabel mt-3"}>Name</Form.Label>
                 <Form.Control
                     className={"FormInputField"}
-                    type="text" placeholder="Please, enter event title..."
-                    onChange = {(e) => setTitle(e.target.value)}/>
+                    type="text" placeholder="Please, enter place name..."
+                    onChange = {(e) => setName(e.target.value)}/>
             </Form.Group>
 
-            <Form.Group controlId="formEventDate">
-                <Form.Label className={"FormLabel"}>Event Date</Form.Label>
-                <Form.Control
-                    className={"FormInputField"}
-                    type="date"
-                    onChange = {(e) => setDate(e.target.value)}
-                />
-            </Form.Group>
-
-            <Form.Group controlId="formEventLocalization">
-                <Form.Label className={"FormLabel"}>Event Localization</Form.Label>
+            <Form.Group controlId="placeLocalization">
+                <Form.Label className={"FormLabel"}>Place Localization</Form.Label>
 
                 <InputGroup className={"d-md-flex flex-row d-none"}>
                     <Form.Control
@@ -129,77 +127,32 @@ export default function CreateEventFor(){
 
             <h className={"categoryHeader"}>Detailed Information</h>
 
-            <Form.Group controlId="formEventRequiredPeople">
-                <Form.Label className={"FormLabel mt-3"}>Required People Number</Form.Label>
-                <Form.Control
-                    className={"FormInputField"}
-                    type="number"
-                    min="0"
-                    placeholder="People number..."
-                    onChange = {(e) => setPeople(e.target.value)}
-                />
-            </Form.Group>
+            <Form.Group controlId="placeOpeningHours">
+                <Form.Label className={"FormLabel mt-3"}>Opening Hours [From - To]</Form.Label>
 
-            <Form.Group controlId="formEventPreferredGender">
+                    <InputGroup className={"d-md-flex flex-row d-none"}>
 
-                <Form.Label className={"FormLabel"}>Preferred gender</Form.Label>
-
-                <InputGroup>
-
-                    <Form.Check
-                        id="formRadioMale"
-                        name="formRadioMale"
-                        type="radio"
-                        label="Male"
-                        className={"genderRadioButton"}
-                        onChange = {(e) => setMale(e.target.checked)}
-                    />
-
-                    <Form.Check
-                        id="formRadioFemale"
-                        name="formRadioFemale"
-                        type="radio"
-                        label="Female"
-                        className={"genderRadioButton"}
-                        onChange = {(e) => setFemale(e.target.checked)}
-                    />
-
-                    <Form.Check
-                        id="formRadioBoth"
-                        name="formRadioBoth"
-                        type="radio"
-                        label="Both"
-                        className={"genderRadioButton"}
-                        onChange = {(e) => setBoth(e.target.checked)}
-                    />
+                        <Form.Control
+                            className={"FormInputField mr-3"}
+                            type="time"
+                            min="0"
+                            placeholder="People number..."
+                            onChange = {(e) => setOpeningHoursFrom(e.target.value)}
+                        />
+                        <Form.Control
+                            className={"FormInputField"}
+                            type="time"
+                            min="0"
+                            placeholder="People number..."
+                            onChange = {(e) => setOpeningHoursTo(e.target.value)}
+                        />
 
                 </InputGroup>
 
             </Form.Group>
 
-            <Form.Group controlId="formEventPreferredAgeRange">
-                <Form.Label className={"FormLabel"}>Preferred age range</Form.Label>
-                <InputGroup>
-                    <Form.Control
-                        type="number"
-                        min="1" max="99"
-                        className={"mr-3 FormInputField"}
-                        placeholder="Min age..."
-                        onChange = {(e) => setMinAge(e.target.value)}
-                    />
-                    <Form.Control
-                        type="number"
-                        min="1"
-                        max="99"
-                        className={"FormInputField"}
-                        placeholder="Max age..."
-                        onChange = {(e) => setMaxAge(e.target.value)}
-                    />
-                </InputGroup>
-            </Form.Group>
-
-            <Form.Group controlId="formEventCosts">
-                <Form.Label className={"FormLabel"}>Event costs</Form.Label>
+            <Form.Group controlId="placeCosts">
+                <Form.Label className={"FormLabel"}>Included costs</Form.Label>
                 <InputGroup>
                     <Form.Control
                         type="number"
@@ -213,21 +166,46 @@ export default function CreateEventFor(){
                         type="number"
                         min="0"
                         className={"FormInputField"}
-                        placeholder="Game time in hours..."
+                        placeholder="Usage time in hours..."
                         onChange = {(e) => setTime(e.target.value)}
                     />
                 </InputGroup>
             </Form.Group>
 
+            <Form.Group controlId="placeAge">
+                <Form.Label className={"FormLabel"}>Minimal entrance age</Form.Label>
+
+                    <Form.Control
+                        type="number"
+                        min="0"
+                        className={"mr-3 FormInputField"}
+                        placeholder="Age..."
+                        onChange = {(e) => setAge(e.target.value)}
+                    />
+
+            </Form.Group>
+
+            <h className={"categoryHeader"}>Review % Ratings</h>
+
             <Form.Group controlId="exampleForm.ControlTextarea1">
-                <Form.Label className={"FormLabel "}>Event Description</Form.Label>
+                <Form.Label className={"FormLabel mt-3"}>Description</Form.Label>
                 <Form.Control
-                    className={"FormInputField mb-5"}
+                    className={"FormInputField mb-4"}
                     as="textarea"
                     rows="3"
                     onChange = {(e) => setDescription(e.target.value)}
                 />
             </Form.Group>
+
+            <Review id={"reviewOne"} title={"Service"} onChange = {(newRating) => setRating(newRating)}/>
+            <Review id={"reviewTwo"} title={"Service"} onChange = {(newRating) => setRating(newRating)}/>
+
+
+
+
+
+
+
 
             <h className={"categoryHeader"}>Additional elements</h>
 
@@ -235,8 +213,6 @@ export default function CreateEventFor(){
                 <Form.Label className={"FormLabel mt-3"} >Necessary documents</Form.Label>
                 <Form.Control className={"FormInputField"} type="file" multiple/>
             </Form.Group>
-
-
 
             <Button
                 variant="primary"
@@ -262,9 +238,12 @@ export default function CreateEventFor(){
 
 
         </Form>
-
     );
 
 
-}
 
+
+
+
+
+}

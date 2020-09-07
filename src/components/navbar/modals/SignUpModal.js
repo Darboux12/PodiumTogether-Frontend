@@ -36,7 +36,7 @@ export default function SignUpModal(props){
 
                 </Modal.Body>
 
-                <Modal.Footer className="signInModalFooter">
+                <Modal.Footer className="signUpModalFooter">
                     
                 </Modal.Footer>
 

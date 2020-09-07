@@ -15,8 +15,9 @@ import ForgotPasswordPage from "./components/forgot-password-page/ForgotPassword
 import TermsPage from "./components/terms/TermsPage";
 import UserProfilePage from "./components/user-profile-page/UserProfilePage";
 import AboutPage from "./components/about-page/AboutPage";
-import ContactPage from "./components/contact-page/ContactPage";
+import ContactPage from "./components/contact/ContactPage";
 import NewsPage from "./components/news-page/NewsPage";
+import TagPlacePage from "./components/tag-place/TagPlacePage";
 
 class App extends React.Component {
 
@@ -24,7 +25,7 @@ class App extends React.Component {
     return (
 
         <Router>
-          <NavBar userLogged={true}/>
+          <NavBar userLogged={false}/>
           <Switch>
             <Route path="/" exact component={MainPage}/>
             <Route path="/home" exact component={MainPage}/>
@@ -36,6 +37,7 @@ class App extends React.Component {
             <Route path="/about" exact component={AboutPage}/>
             <Route path="/contact" exact component={ContactPage}/>
             <Route path="/news" exact component={NewsPage}/>
+            <Route path="/places/create" exact component={TagPlacePage}/>
           </Switch>
             <Footer/>
         </Router>

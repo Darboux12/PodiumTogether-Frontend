@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import Modal from "react-bootstrap/esm/Modal";
+import Modal from "react-bootstrap/Modal";
 import "../../../styles/navbar/SignInModal.css"
 import Logo from "../../common/Logo";
 import SignInForm from "./SignInForm";

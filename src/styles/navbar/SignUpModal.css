@@ -20,9 +20,12 @@
 
 
 
-.signInModalFooter{
+.signUpModalFooter{
 
+    height: 3em;
     background: darkslategrey;
+
+
 
 
 }

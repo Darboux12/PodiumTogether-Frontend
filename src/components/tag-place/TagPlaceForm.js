@@ -19,23 +19,16 @@ export default function TagPlaceForm(){
     const [cost,setCost] = useState(0);
     const [time,setTime] = useState(0);
     const [age,setAge] = useState(0);
-    const [description,setDescription] = useState("");
-
-    const [rating,setRating] = useState(0);
-
-
-
-
-    const [people,setPeople] = useState("");
-    const [male,setMale] = useState(false);
-    const [female,setFemale] = useState(false);
-    const [both,setBoth] = useState(false);
-    const [minAge,setMinAge] = useState(0);
-    const [maxAge,setMaxAge] = useState(0);
+    const [serviceRating,setServiceRating] = useState(0);
+    const [localizationRating,setLocalizationRating] = useState(0);
+    const [pricesRating,setPricesRating] = useState(0);
+    const [openingHoursRating,setOpeningHoursRating] = useState(0);
+    const [equipmentRating,setEquipmentRating] = useState(0);
+    const [review,setReview] = useState("");
+    const [files,setFiles] = useState("");
 
 
-
-    const onFormSubmit = () => {alert(rating); }
+    const onFormSubmit = () => {alert(files); }
 
     return(
 
@@ -178,46 +171,47 @@ export default function TagPlaceForm(){
                     <Form.Control
                         type="number"
                         min="0"
-                        className={"mr-3 FormInputField"}
+                        className={"mr-3 FormInputField mb-5"}
                         placeholder="Age..."
                         onChange = {(e) => setAge(e.target.value)}
                     />
 
             </Form.Group>
 
-            <h className={"categoryHeader"}>Review % Ratings</h>
+            <h className={"categoryHeader"}>Ratings & Review</h>
+
+            <div className={"mt-3"}>
+                <Review id={"reviewOne"} title={"Service"} onChange = {(newRating) => setServiceRating(newRating)}/>
+                <Review id={"reviewTwo"} title={"Localization"} onChange = {(newRating) => setLocalizationRating(newRating)}/>
+                <Review id={"reviewThree"} title={"Prices"} onChange = {(newRating) => setPricesRating(newRating)}/>
+                <Review id={"reviewFour"} title={"Opening hours"} onChange = {(newRating) => setOpeningHoursRating(newRating)}/>
+            </div>
 
             <Form.Group controlId="exampleForm.ControlTextarea1">
-                <Form.Label className={"FormLabel mt-3"}>Description</Form.Label>
+                <Form.Label className={"FormLabel mt-3"}>Review - tell us about your experience</Form.Label>
                 <Form.Control
-                    className={"FormInputField mb-4"}
+                    className={"FormInputField mb-5"}
                     as="textarea"
                     rows="3"
-                    onChange = {(e) => setDescription(e.target.value)}
+                    onChange = {(e) => setReview(e.target.value)}
                 />
             </Form.Group>
-
-            <Review id={"reviewOne"} title={"Service"} onChange = {(newRating) => setRating(newRating)}/>
-            <Review id={"reviewTwo"} title={"Service"} onChange = {(newRating) => setRating(newRating)}/>
-
-
-
-
-
-
-
 
             <h className={"categoryHeader"}>Additional elements</h>
 
             <Form.Group controlId="exampleForm.ControlInput1">
-                <Form.Label className={"FormLabel mt-3"} >Necessary documents</Form.Label>
-                <Form.Control className={"FormInputField"} type="file" multiple/>
+                <Form.Label className={"FormLabel mt-3"} >Necessary documents, photos...</Form.Label>
+                <Form.Control
+                    className={"FormInputField"}
+                    type="file"
+                    onChange = {(e) => setFiles(e.target.value)}
+                    multiple/>
             </Form.Group>
 
             <Button
                 variant="primary"
                 type="submit"
-                className={"d-md-inline d-none w-50 createEventSubmitButton mt-3"}
+                className={"d-md-inline d-none w-50 createEventSubmitButton mt-5"}
                 onClick={onFormSubmit}
             >
                 Create Event

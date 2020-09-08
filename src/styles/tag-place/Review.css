@@ -9,8 +9,15 @@
 
 .ratingHeader{
     color: #1B75BC;
+    position: absolute;
+    left: 50%;
 }
 
 .ReviewContainer{
     margin-bottom: 1em;
+
+}
+.ratings{
+    position: absolute;
+    left: 30%;
 }

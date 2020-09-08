@@ -5,6 +5,8 @@
 .FormLabel{
     font-size: 1.1em;
     color: black;
+    opacity: 0.8;
+    font-weight: bold;
 
 }
 
@@ -29,6 +31,7 @@
     font-size: 1.5em;
     color: #1B75BC;
     margin-bottom: 2em;
+    font-weight: bold;
 }
 
 .FormInputFieldFile{

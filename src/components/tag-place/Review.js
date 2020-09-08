@@ -29,9 +29,12 @@ export default function Review(props){
 
         <div className={"d-flex flex-row align-items-center ReviewContainer"}>
 
-            <h className={"reviewHeader mr-3"}>{props.title}</h>
+            <h className={"reviewHeader mr-5 FormLabel"}>{props.title}</h>
+
+            <div className={"ratings"}>
 
                 <Ratings
+                    className={"ratings"}
                     rating={rating}
                     widgetRatedColors="blue"
                     changeRating={(newRating) => setRating(newRating)}
@@ -43,6 +46,11 @@ export default function Review(props){
                     <Ratings.Widget />
                     <Ratings.Widget />
                 </Ratings>
+
+
+            </div>
+
+
 
             <h id={props.id} className={"ratingHeader ml-3"}> </h>
 

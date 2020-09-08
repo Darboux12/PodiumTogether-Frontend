@@ -1,0 +1,10 @@
+.displayPlacesImage{
+    width: 100%;
+    height: 20em;
+}
+
+.PlacesList{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

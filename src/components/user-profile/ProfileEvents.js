@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import Event from "../display-events-page/page/Event";
+import Event from "../display-events/page/Event";
 import ProfileHeader from "./ProfileHeader";
 
 import "../../styles/user-profile/ProfileEvents.css"

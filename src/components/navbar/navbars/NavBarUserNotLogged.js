@@ -14,7 +14,7 @@ function NavBarUserNotLogged(){
 
     return (
 
-        <Navbar className={"Navbar"} collapseOnSelect expand="md" bg="dark" variant="dark">
+        <Navbar className={"Navbar"} sticky={"top"} collapseOnSelect expand="md" bg="dark" variant="dark">
 
         <Navbar.Brand href="/home"><LogoNavbar/></Navbar.Brand>
 

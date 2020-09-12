@@ -29,7 +29,6 @@ export default function SignInForm(props){
             body: JSON.stringify(user)
         };
 
-        alert("Post send");
 
         fetch(PostUrl,requestOptions)
 

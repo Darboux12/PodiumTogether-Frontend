@@ -1,10 +1,6 @@
 import React from 'react';
-
-import Logo from "./components/common/Logo";
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import MainPage from "./components/main/MainPage"
-
-
 import NavBar from "./components/navbar/navbars/NavBar"
 import Footer from "./components/footer/Footer";
 import CreateEventPage from "./components/create-event/CreateEventPage";
@@ -18,11 +14,6 @@ import NewsPage from "./components/news/NewsPage";
 import TagPlacePage from "./components/tag-place/TagPlacePage";
 import DisplayPlacesPage from "./components/display-places/page/DisplayPlacesPage";
 import PrivateRoute from "./components/security/PrivateRouter";
-import Dashboard from "./components/Dashboard";
-import {Provider} from "react-redux";
-import {createStore} from "redux";
-
-
 
 class App extends React.Component {
 
@@ -44,7 +35,7 @@ class App extends React.Component {
             <Route path="/news" exact component={NewsPage}/>
             <Route path="/places/create" exact component={TagPlacePage}/>
             <Route path="/places/display" exact component={DisplayPlacesPage}/>
-            <PrivateRoute path={"/dashboard"} component={Dashboard}/>
+            <PrivateRoute path={"/dashboard"} component={CreateEventPage}/>
           </Switch>
             <Footer/>
         </Router>

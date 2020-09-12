@@ -1,0 +1,12 @@
+.authenticationModalHeader{
+    color: green;
+}
+
+.authenticationModalImage{
+    font-size: 5em;
+    color: #FF0000 !important;
+}
+
+.authenticationModalText{
+    font-size: 1.4em;
+}

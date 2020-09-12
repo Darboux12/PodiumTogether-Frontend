@@ -1,7 +1,9 @@
 import React, { useEffect, useState} from 'react';
 import { Route, Redirect } from 'react-router-dom'
 import jwtDecode from 'jwt-decode';
-import Dashboard from "../Dashboard";
+
+import AuthenticationRefusedModal from "./AuthenticationRefusedModal";
+import MainPage from "../main/MainPage";
 
 export default function PrivateRoute(props){
 
@@ -32,7 +34,22 @@ export default function PrivateRoute(props){
     });
 
     if(isAuthenticated === false){
-        return <h1>Authentication failed</h1>
+        return (
+
+            <div>
+
+                <MainPage/>
+
+
+
+                <AuthenticationRefusedModal/>
+
+
+            </div>
+
+
+
+    );
     }
 
     return (

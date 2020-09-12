@@ -7,13 +7,56 @@ import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import "../../../styles/navbar/SignInModal.css"
 import {faUser} from "@fortawesome/free-regular-svg-icons";
+import { axios} from "axios";
 
 export default function SignInForm(props){
 
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
 
-    const onFormSubmit = () => {alert("Form submitted"); }
+    const onFormSubmit = () => {
+
+        const PostUrl = 'http://localhost:8080/authenticate';
+
+        const user = {
+            username: username,
+            password: password
+        };
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user)
+        };
+
+        alert("Post send");
+
+        fetch(PostUrl,requestOptions)
+
+            .then((res) => {
+
+                if (!res.ok){
+                    throw new Error(res.status);
+                }
+
+                else return res.json()
+            })
+
+            .then(res => {
+                localStorage.setItem("authorizationToken", res.token);
+                localStorage.setItem("userLogged", true);
+                window.location.reload();
+            })
+
+            .catch((error) => {
+                console.log(error);
+            });
+
+
+    };
+
+
+
 
         return (
 

@@ -3,9 +3,7 @@ import React from 'react';
 import Logo from "./components/common/Logo";
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import MainPage from "./components/main/MainPage"
-import MainPageCarousel from "./components/main/MainPageCarousel";
 
-import CarouselYes from "./components/main/MainPageCarousel";
 
 import NavBar from "./components/navbar/navbars/NavBar"
 import Footer from "./components/footer/Footer";
@@ -19,6 +17,12 @@ import ContactPage from "./components/contact/ContactPage";
 import NewsPage from "./components/news/NewsPage";
 import TagPlacePage from "./components/tag-place/TagPlacePage";
 import DisplayPlacesPage from "./components/display-places/page/DisplayPlacesPage";
+import PrivateRoute from "./components/security/PrivateRouter";
+import Dashboard from "./components/Dashboard";
+import {Provider} from "react-redux";
+import {createStore} from "redux";
+
+
 
 class App extends React.Component {
 
@@ -26,7 +30,7 @@ class App extends React.Component {
     return (
 
         <Router>
-          <NavBar userLogged={true}/>
+          <NavBar/>
           <Switch>
             <Route path="/" exact component={MainPage}/>
             <Route path="/home" exact component={MainPage}/>
@@ -40,13 +44,13 @@ class App extends React.Component {
             <Route path="/news" exact component={NewsPage}/>
             <Route path="/places/create" exact component={TagPlacePage}/>
             <Route path="/places/display" exact component={DisplayPlacesPage}/>
+            <PrivateRoute path={"/dashboard"} component={Dashboard}/>
           </Switch>
             <Footer/>
         </Router>
 
     );
   }
-
 
 }
 

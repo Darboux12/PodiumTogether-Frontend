@@ -16,6 +16,18 @@ function NavBarUserLogged(){
     const [signInModalVisible,setSignInModalVisible] = useState(false);
     const [signUpModalVisible,setSignUpModalVisible] = useState(false);
 
+    const logOut = () => {
+
+        let userLogged = localStorage.getItem('userLogged');
+
+        if(userLogged){
+            localStorage.clear();
+            window.location.reload();
+        }
+
+
+    };
+
     return (
 
         <Navbar className={"Navbar"} collapseOnSelect expand="md" bg="dark" variant="dark">
@@ -54,7 +66,7 @@ function NavBarUserLogged(){
                         Settings
                     </Dropdown.Item>
 
-                    <Dropdown.Item href="/signOut">
+                    <Dropdown.Item onClick={logOut}>
                         <FontAwesomeIcon className={"profileIcon"} icon={faSignOutAlt}/>
                         Sign Out
                     </Dropdown.Item>
@@ -138,7 +150,7 @@ function NavBarUserLogged(){
                                 Settings
                             </Dropdown.Item>
 
-                            <Dropdown.Item href="/signOut">
+                            <Dropdown.Item onClick={logOut}>
                                 <FontAwesomeIcon className={"profileIcon"} icon={faSignOutAlt}/>
                                 Sign Out
                             </Dropdown.Item>

@@ -1,17 +1,26 @@
-import React, {Component, useState} from "react";
+import React, {Component, useEffect, useState} from "react";
 
 import "../../../styles/navbar/Navbar.css"
 
 import NavBarUserNotLogged from "./NavBarUserNotLogged";
 import NavBarUserLogged from "./NavBarUserLogged";
 
-function NavBar(props){
+function NavBar(){
 
-    const userLogged = props.userLogged;
+    const [isUserLogged, setIsUserLogged] = useState(false);
 
-    if(!userLogged)
+    useEffect(() => {
+
+        let userLoggedSession = localStorage.getItem('userLogged');
+
+        if(userLoggedSession)
+            setIsUserLogged(true);
+
+    });
+
+    if(!isUserLogged)
         return <NavBarUserNotLogged/>
-    if(userLogged)
+    if(isUserLogged)
         return <NavBarUserLogged/>
 
 }

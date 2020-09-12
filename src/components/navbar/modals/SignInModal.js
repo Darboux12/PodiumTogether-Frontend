@@ -6,8 +6,8 @@ import SignInForm from "./SignInForm";
 
 export default function SignInModal(props){
 
-    const isSignInModalVisible = props.isSignInModalVisible;
-    const onHide = props.closeSignInModal;
+    let isSignInModalVisible = props.isSignInModalVisible;
+    let onHide = props.closeSignInModal;
 
         return(
 

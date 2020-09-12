@@ -44,7 +44,7 @@ function NavBarUserLogged(){
 
                 <Dropdown.Menu className={"dropdown-menu-center"}>
 
-                    <Dropdown.Item href="/userProfile">
+                    <Dropdown.Item href="/user/profile">
                         <FontAwesomeIcon className={"profileIcon"} icon={faUserCircle}/>
                         See your profile
                     </Dropdown.Item>
@@ -128,7 +128,7 @@ function NavBarUserLogged(){
 
                         <Dropdown.Menu className={"dropdown-menu-center"}>
 
-                            <Dropdown.Item href="/userProfile">
+                            <Dropdown.Item href="/user/profile">
                                 <FontAwesomeIcon className={"profileIcon"} icon={faUserCircle}/>
                                 See your profile
                             </Dropdown.Item>

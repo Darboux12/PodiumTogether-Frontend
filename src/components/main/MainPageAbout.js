@@ -3,7 +3,7 @@ import "../../styles/mainpage/MainPageAbout.css"
 import AboutItem from "./AboutItem";
 import "../../styles/mainpage/MainPageAbout.css"
 import Rotate from 'react-reveal/Rotate';
-import achieveGreatThingsImage from "../../images/achieveGreatThingsImage.jpg"
+import achieveGreatThingsImage from "../../images/achieveGreatThings.jpg"
 import haveFunImage from "../../images/haveFunImage.jpg"
 import makeFriendsImage from "../../images/makeFriendsImage.jpg"
 import sharePassionImage from "../../images/sharePassionImage.jpg"

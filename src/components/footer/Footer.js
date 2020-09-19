@@ -10,37 +10,36 @@ import LogoIcons from "../common/LogoIcons";
 
 export default function Footer(){
 
-        return (
+    return (
 
-            <Navbar className="footer justify-content-between" bg={"dark"} variant={"dark"}>
+        <Navbar className="footer justify-content-between" bg={"dark"} variant={"dark"}>
 
-                <Nav className={"d-md-flex flex-md-row flex-column"}>
-                    <Nav.Item>
-                        <Link to={"/home"} className="nav-link">Home</Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Link to={"/about"} className="nav-link">About</Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Link to={"/contact"} className="nav-link">Contact</Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Link to={"/event/create"} className="nav-link">Create Event</Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Link to={"/event/display"} className="nav-link">Show events</Link>
-                    </Nav.Item>
-                </Nav>
+            <Nav className={"d-md-flex flex-md-row flex-column"}>
+                <Nav.Item>
+                    <Link to={"/home"} className="nav-link">Home</Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Link to={"/about"} className="nav-link">About</Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Link to={"/contact"} className="nav-link">Contact</Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Link to={"/event/create"} className="nav-link">Create Event</Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Link to={"/event/display"} className="nav-link">Show events</Link>
+                </Nav.Item>
+            </Nav>
 
-                <div className={"d-md-flex d-none"}>
-                    <LogoIcons/>
-                </div>
+            <div className={"d-md-flex d-none"}>
+                <LogoIcons/>
+            </div>
 
 
 
-            </Navbar>
+        </Navbar>
 
-        );
+    );
 
 }
-

@@ -9,6 +9,7 @@ export default function MainPageCarousel(){
 
         return(
 
+
             <div>
 
                 <Carousel className="MainPageCarousel" interval="4000" data-pause="false" pause="false">

@@ -1,0 +1,45 @@
+.EventDetailsFileRowContainerMobile {
+
+    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
+
+
+
+
+}
+
+.EventDetailsFileIconRowContainerMobile{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1B75BC;
+    padding: 1em;
+
+}
+
+.EventDetailsFileIconMobile{
+
+    font-size: 1.4em;
+    color: gainsboro;
+}
+
+.EventDetailsFileLinkIconMobile{
+
+
+
+
+}
+
+.EventDetailsFileLinkTextMobile{
+
+    font-size: 1.2em;
+
+}
+
+.EventDetailsFilesColumnMobile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+}

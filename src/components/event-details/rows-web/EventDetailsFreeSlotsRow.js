@@ -3,7 +3,7 @@ import Col from "react-bootstrap/esm/Col";
 import peopleWeb from "../../../images/peopleWeb.png";
 import React from "react";
 
-import "../../../styles/event-details/EventDetailsFreeSlotsRow.css"
+import "../../../styles/event-details/rows-web/EventDetailsFreeSlotsRow.css"
 
 export default function EventDetailsFreeSlotsRow() {
 

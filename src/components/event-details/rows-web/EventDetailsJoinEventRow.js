@@ -1,4 +1,4 @@
-import "../../../styles/event-details/EventDetailsJoinEventRow.css"
+import "../../../styles/event-details/rows-web/EventDetailsJoinEventRow.css"
 import React from "react";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";

@@ -5,7 +5,7 @@ import React from "react";
 import {faCalendarAlt} from "@fortawesome/free-regular-svg-icons/index";
 import Col from "react-bootstrap/esm/Col";
 
-import "../../../styles/event-details/EventDetailsInformationIconsRow.css"
+import "../../../styles/event-details/rows-web/EventDetailsInformationIconsRow.css"
 
 export default function EventDetailsInformationIconRow() {
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../../../styles/event-details/EventDetailsPage.css"
+import "../../../styles/event-details/page/EventDetailsPage.css"
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -8,51 +8,32 @@ import eventImage from "../../../images/event-football.jpg"
 import peopleWeb from "../../../images/peopleWeb.png"
 import {faMapMarkedAlt} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import EventDetailsTitleRow from "../rows/EventDetailsTitleRow";
-import EventDetailsFreeSlotsRow from "../rows/EventDetailsFreeSlotsRow";
-import EventDetailsInformationIconRow from "../rows/EventDetailsInformationIconsRow";
-import EventDetailsDescriptionRow from "../rows/EventDetailsDescriptionRow";
+import EventDetailsTitleRow from "../rows-web/EventDetailsTitleRow";
+import EventDetailsFreeSlotsRow from "../rows-web/EventDetailsFreeSlotsRow";
+import EventDetailsInformationIconRow from "../rows-web/EventDetailsInformationIconsRow";
+import EventDetailsDescriptionRow from "../rows-web/EventDetailsDescriptionRow";
 import Badge from "react-bootstrap/Badge";
-import EventDetailsFileRow from "../rows/EventDetailsFileRow";
-import EventDetailsJoinEventRow from "../rows/EventDetailsJoinEventRow";
+import EventDetailsFileRow from "../rows-web/EventDetailsFileRow";
+import EventDetailsJoinEventRow from "../rows-web/EventDetailsJoinEventRow";
+import EventDetailsPageWeb from "./EventDetailsPageWeb";
+import EventDetailsPageMobile from "./EventDetailsPageMobile";
 
 
 export default function EventDetailsPage() {
 
     return(
 
-        <Container fluid className={"EventDetailsMainContainer"}>
+        <Container fluid>
 
-            <Row>
+            <EventDetailsPageWeb/>
 
-                <Col md={7} className={"eventDetailsMainInformationContainer"}>
-
-                    <Badge className={"eventDetailsBadge"} variant="primary">Football</Badge>
-
-                    <EventDetailsTitleRow/>
-
-                    <EventDetailsFreeSlotsRow/>
-
-                    <EventDetailsInformationIconRow/>
-
-                    <EventDetailsDescriptionRow/>
-
-                    <EventDetailsFileRow/>
-
-                </Col>
+            <EventDetailsPageMobile/>
 
 
-                <Col className={"EventDetailsApplyAnotherEventsContainer"}>
-
-                    <EventDetailsJoinEventRow/>
-
-
-
-                </Col>
-
-            </Row>
 
         </Container>
+
+
 
 
 

@@ -2,7 +2,7 @@ import eventImage from "../../../images/event-football.jpg";
 import Row from "react-bootstrap/esm/Row";
 import React from "react";
 
-import "../../../styles/event-details/EventDetailsTitleRow.css"
+import "../../../styles/event-details/rows-web/EventDetailsTitleRow.css"
 
 export default function EventDetailsTitleRow() {
 

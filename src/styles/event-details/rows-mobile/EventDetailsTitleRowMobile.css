@@ -1,0 +1,28 @@
+.eventDetailsImageTitleRowMobile{
+    align-items: center;
+    margin-bottom: 1em;
+    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
+
+
+}
+
+.eventDetailsImageMobile{
+    width: 100%;
+    height: auto;
+    margin-top: 1em;
+
+}
+
+.eventDetailsTitleMobile{
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.eventDetailsAuthorMobile{
+    margin-right: 0.5em;
+
+}
+
+.eventDetailsAuthorLinkMobile{
+
+}

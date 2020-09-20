@@ -1,7 +1,15 @@
-.EventDetailsMainContainer{
+.EventDetailsMainContainerWeb{
 
     padding-right: 4em !important;
     padding-left: 4em !important;
+
+}
+
+.EventDetailsMainContainerMobile{
+
+    font-size: 1em;
+
+
 
 }
 

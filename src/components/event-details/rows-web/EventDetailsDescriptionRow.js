@@ -1,7 +1,7 @@
 import React from "react";
 import Row from "react-bootstrap/esm/Row";
 
-import "../../../styles/event-details/EventDetailsDescriptionRow.css"
+import "../../../styles/event-details/rows-web/EventDetailsDescriptionRow.css"
 
 import descriptionImage from "../.././../images/basketBallMoon.jpg"
 import Col from "react-bootstrap/Col";

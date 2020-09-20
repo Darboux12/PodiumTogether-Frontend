@@ -4,7 +4,8 @@ import Col from "react-bootstrap/esm/Col";
 import {faCalendarAlt, faFileAlt} from "@fortawesome/free-regular-svg-icons/index";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index";
 import {faFileDownload} from "@fortawesome/free-solid-svg-icons/faFileDownload";
-import "../../../styles/event-details/EventDetailsFileRow.css"
+import "../../../styles/event-details/rows-web/EventDetailsFileRow.css"
+
 export default function EventDetailsFileRow() {
 
     return(
@@ -43,11 +44,6 @@ export default function EventDetailsFileRow() {
 
 
         </Row>
-
-
-
-
-
 
     )
 

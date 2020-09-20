@@ -1,83 +1,23 @@
+.EventDetailsMainContainer{
+
+    padding-right: 4em !important;
+    padding-left: 4em !important;
+
+}
+
+
 .eventDetailsMainInformationContainer{
-   border: black 3px solid;
-}
-
-.eventDetailsImageTitleRow{
-    align-items: center;
-}
-
-.eventDetailsImage{
-    width: 50%;
-    height: auto;
-    margin-left: 0 !important;
-    margin-right: 2em;
-}
-
-.eventDetailsTitle{
-    font-size: 1.8em;
-    font-weight: bold;
-}
-
-.eventDetailsAuthor{
-    margin-right: 0.5em;
-
-}
-
-.eventDetailsAuthorLink{
-
-}
-
-.eventDetailFreeSlotsLeftRow{
-
-    background: #1B75BC;
-}
-
-.eventDetailFreeSlotsLeftImage{
-    width: 100%;
-    padding: 1em;
-
-}
-
-.eventDetailFreeSlotsLeftHeader{
-
-}
-
-.InformationIconsRow{
-
-
-}
-
-.eventDetailsIcon{
-
-
-
-
-}
-
-.eventDetailsIconInformation{
-
-    position: absolute;
-    left: 25%;
-
-}
-
-.displayEventIconHeaderElement{
-
-    padding: 0.5em;
-
+    margin-right: 1em;
 }
 
 .eventDetailsBadge{
+    font-size: 1.3em !important;
     position: absolute;
     right: 1em;
     top: 1em;
 }
 
-.eventDetailsBadgeHeader{
-    font-size: 1.2em;
+.EventDetailsApplyAnotherEventsContainer{
+
 }
 
-.DetailsIconContainer{
-    background: #FF0000;
-    width: 2em;
-}

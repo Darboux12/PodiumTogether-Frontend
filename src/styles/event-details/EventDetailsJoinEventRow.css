@@ -1,0 +1,59 @@
+.EventDetailsJoinEventContainer{
+    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
+    position: sticky;
+    top: 5em;
+}
+
+.EventDetailsJoinEventUpperRow{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2em;
+
+}
+
+.EventDetailsJoinEventLowerRow{
+
+
+
+}
+
+.EventDetailsJoinEventButton{
+    width: 70%;
+    padding: 1em !important;
+}
+
+.EventDetailsJoinEventLowerButton{
+    width: 100%;
+}
+
+.EventDetailsJoinEventLowerColumn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: gainsboro solid 1px;
+    border-right: gainsboro solid 1px;
+}
+
+.EventJonLastColumn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: gainsboro solid 1px;
+    padding: 1em;
+}
+
+.EventDetailsJoinEventIcon{
+    font-size: 1.4em;
+    margin-right: 0.3em;
+
+}
+
+.EventDetailsJoinEventHeader{
+
+}
+
+.EventDetailsJoinEventLink{
+
+}

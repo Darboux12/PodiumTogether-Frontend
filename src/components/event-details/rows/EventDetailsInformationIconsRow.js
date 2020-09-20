@@ -1,15 +1,20 @@
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChild, faMapMarkedAlt, faMoneyBill, faUsers, faVenusMars} from "@fortawesome/free-solid-svg-icons";
-import Row from "react-bootstrap/Row";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index";
+import {faChild, faMapMarkedAlt, faMoneyBill, faUsers, faVenusMars} from "@fortawesome/free-solid-svg-icons/index";
+import Row from "react-bootstrap/esm/Row";
 import React from "react";
-import {faCalendarAlt} from "@fortawesome/free-regular-svg-icons";
-import Col from "react-bootstrap/Col";
+import {faCalendarAlt} from "@fortawesome/free-regular-svg-icons/index";
+import Col from "react-bootstrap/esm/Col";
+
+import "../../../styles/event-details/EventDetailsInformationIconsRow.css"
 
 export default function EventDetailsInformationIconRow() {
 
     return(
 
-        <div>
+        <Row className={"IconRowsContainer"}>
+
+            <Col>
+
 
             <Row className={"InformationIconsRow"}>
 
@@ -32,7 +37,7 @@ export default function EventDetailsInformationIconRow() {
                         <div className={"DetailsIconContainer"}>
                             <FontAwesomeIcon className={"eventDetailsIcon"} icon={faCalendarAlt}/>
                         </div>
-                        <h className={"eventDetailsIconInformation"}>12.08.2020 (3 days to the event)</h>
+                        <h className={"eventDetailsIconInformation"}>12.08.2020 <h className={"eventDetailsIconInformationDaysLeft"}>(3 days to the event)</h></h>
                     </div>
 
                 </Col>
@@ -105,47 +110,9 @@ export default function EventDetailsInformationIconRow() {
 
         </Row>
 
-            <Row className={"InformationIconsRow"}>
+            </Col>
 
-                <Col className={"d-flex align-items-center"}>
-
-                    <div className={"d-flex flex-row align-items-center displayEventIconHeaderElement"}>
-                        <div className={"DetailsIconContainer"}>
-                            <FontAwesomeIcon className={"eventDetailsIcon"} icon={faChild}/>
-                        </div>
-                        <div className={"eventDetailsIconInformation d-flex flex-row"}>
-
-                            <h className={"mr-2"}>12</h>
-                            <h className={"mr-2"}>-</h>
-                            <h className={"mr-2"}>14</h>
-                            <h>years old</h>
-                        </div>
-
-                    </div>
-
-                </Col>
-
-                <Col>
-
-                    <div className={"d-flex flex-row align-items-center displayEventIconHeaderElement"}>
-                        <div className={"DetailsIconContainer"}>
-                            <FontAwesomeIcon className={"eventDetailsIcon"} icon={faMoneyBill}/>
-                        </div>
-                        <h className={"eventDetailsIconInformation"}>20 PLN per hour</h>
-                    </div>
-
-                </Col>
-
-            </Row>
-
-
-
-
-        </div>
-
-
-
-
+        </Row>
 
     )
 

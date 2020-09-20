@@ -1,0 +1,46 @@
+.EventDetailsFileRowContainer {
+
+    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
+
+
+}
+
+.EventDetailsFileIconRowContainer{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1B75BC;
+    padding: 1em;
+
+}
+
+.EventDetailsFileIcon{
+
+    font-size: 1.4em;
+    color: gainsboro;
+}
+
+
+
+.EventDetailsFileLinkIcon{
+
+}
+
+.EventDetailsFileLinkIcon{
+
+    margin-right: 0.2em;
+
+}
+
+.EventDetailsFileLinkText{
+
+    font-size: 1.2em;
+
+}
+
+.EventDetailsFilesColumn{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}

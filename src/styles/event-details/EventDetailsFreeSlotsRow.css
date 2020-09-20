@@ -1,0 +1,19 @@
+.eventDetailFreeSlotsLeftRow{
+
+    background: #1B75BC;
+    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
+    margin-bottom: 1em;
+}
+
+.eventDetailFreeSlotsLeftImage{
+    width: 100%;
+    padding: 1em;
+
+}
+
+.eventDetailFreeSlotsLeftHeader{
+
+    font-size: 1.3em;
+    font-weight: bold;
+
+}

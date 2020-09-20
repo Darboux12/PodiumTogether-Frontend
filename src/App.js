@@ -14,7 +14,7 @@ import NewsPage from "./components/news/NewsPage";
 import TagPlacePage from "./components/tag-place/TagPlacePage";
 import DisplayPlacesPage from "./components/display-places/page/DisplayPlacesPage";
 import PrivateRoute from "./components/security/PrivateRouter";
-import EventDetailsPage from "./components/event-details/EventDetailsPage";
+import EventDetailsPage from "./components/event-details/page/EventDetailsPage";
 
 class App extends React.Component {
 

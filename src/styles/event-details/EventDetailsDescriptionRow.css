@@ -1,0 +1,23 @@
+.EventDetailsDescriptionRowContainer{
+
+    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
+    margin-bottom: 1em;
+}
+
+.EventDetailsDescriptionRowImage{
+    width: 100%;
+}
+
+.EventDetailsDescriptionRowText{
+
+    padding: 2em;
+
+
+
+}
+
+.EventDetailsDescriptionRowTextLink{
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
+}

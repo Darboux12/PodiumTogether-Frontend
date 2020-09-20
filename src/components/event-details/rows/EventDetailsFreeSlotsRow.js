@@ -1,7 +1,9 @@
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import peopleWeb from "../../images/peopleWeb.png";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
+import peopleWeb from "../../../images/peopleWeb.png";
 import React from "react";
+
+import "../../../styles/event-details/EventDetailsFreeSlotsRow.css"
 
 export default function EventDetailsFreeSlotsRow() {
 

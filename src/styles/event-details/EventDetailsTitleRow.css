@@ -1,0 +1,26 @@
+.eventDetailsImageTitleRow{
+    align-items: center;
+    margin-bottom: 1em;
+    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
+}
+
+.eventDetailsImage{
+    width: 50%;
+    height: auto;
+    margin-left: 0 !important;
+    margin-right: 2em;
+}
+
+.eventDetailsTitle{
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.eventDetailsAuthor{
+    margin-right: 0.5em;
+
+}
+
+.eventDetailsAuthorLink{
+
+}

@@ -21,7 +21,7 @@ export default function EventDetailsPageMobile() {
         <Container fluid className={"EventDetailsMainContainerMobile d-md-none"}>
             <Row>
 
-                <Col md={7} className={"eventDetailsMainInformationContainer"}>
+                <Col md={7} className={"eventDetailsMainInformationContainerMobile"}>
 
 
                     <EventDetailsTitleRowMobile/>

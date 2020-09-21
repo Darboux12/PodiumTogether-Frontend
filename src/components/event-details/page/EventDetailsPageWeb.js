@@ -17,7 +17,7 @@ export default function EventDetailsPageWeb() {
         <Container fluid className={"EventDetailsMainContainerWeb d-md-flex d-none"}>
             <Row>
 
-                <Col md={7} className={"eventDetailsMainInformationContainer"}>
+                <Col md={8} className={"eventDetailsMainInformationContainer"}>
 
                     <Badge className={"eventDetailsBadge"} variant="primary">Football</Badge>
 

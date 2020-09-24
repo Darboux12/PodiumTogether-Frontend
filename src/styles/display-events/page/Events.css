@@ -5,11 +5,13 @@
     position: relative;
     background: white;
     height: 12em;
-    border: 2px solid #000;
+
     box-sizing: border-box;
     margin-top: 1em;
 
     width: 70%;
+
+    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
 }
 
 .eventImage{

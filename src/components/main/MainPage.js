@@ -26,14 +26,6 @@ export default function MainPage(){
                     <MainPageAbout mobile={true}/>
                 </div>
 
-                <h className={"d-md-flex d-none w-100 align-items-start mainPageHeaderBottomDesktop"}
-                >Don't hesitate! Sign up and join the best sport app in the world!
-                </h>
-
-                <h className={"d-md-none d-flex w-100 align-items-start mainPageHeaderBottomMobile"}
-                >Don't hesitate! Sign up and join the best sport app in the world!
-                </h>
-
             </Container>
 
         );

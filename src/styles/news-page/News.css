@@ -2,11 +2,8 @@
     position: relative;
     background: white;
     padding: 1em;
-    border: solid 5px darkslategrey;
     margin-bottom: 1.3em;
-
-
-
+    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
 
 }
 

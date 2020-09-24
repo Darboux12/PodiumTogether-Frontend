@@ -1,6 +1,8 @@
 .aboutPageElement{
     margin-bottom: 1em;
     font-size: 1.2em;
+
+
 }
 
 .aboutPageHeader{
@@ -17,5 +19,14 @@
 .AboutContainer{
 
 
+}
+.AboutLeftColumn{
+    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
+    padding: 2em !important;
+}
 
+.AboutRightColumn{
+    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
+    margin-left: 2em;
+    padding: 0 !important;
 }

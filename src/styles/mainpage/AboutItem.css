@@ -2,11 +2,13 @@
     border: none;
     margin-top: 8em;
     margin-bottom: 8em;
+    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
 
 }
 
 .aboutText{
     text-align: start;
+    padding: 2em;
 
 }
 

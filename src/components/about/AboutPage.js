@@ -14,11 +14,12 @@ export default function AboutPage() {
 
             <Slide left>
 
+
             <h2 className={"aboutPageHeader"}>About podium together</h2>
 
             <Row>
 
-                <Col className={"d-flex flex-column"}>
+                <Col className={"d-flex flex-column AboutLeftColumn"}>
 
                         <h className={"aboutPageElement"}>
                             Podium together is a web application, designed and developed by one university student
@@ -49,11 +50,13 @@ export default function AboutPage() {
 
                 </Col>
 
-                <Col className={"d-md-flex d-none"}>
+                <Col className={"d-md-flex d-none AboutRightColumn"}>
                     <img className={"AboutImage"} src={AboutImage} alt={"About Image"}/>
                 </Col>
 
             </Row>
+
+
 
         </Slide>
 

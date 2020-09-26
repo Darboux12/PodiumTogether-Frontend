@@ -1,0 +1,23 @@
+.PlaceDetailsStarRatingStars{
+
+}
+
+.PlaceDetailsStarRatingStar{
+    color: gold;
+    font-size: 2em;
+
+}
+
+.PlaceDetailsStarRatingStarType{
+    font-weight: bold;
+    font-size: 1.4em;
+}
+
+.PlaceDetailsStarRatingNumber{
+    font-size: 1.2em;
+}
+
+
+.PlaceDetailsStarRatingRow{
+    padding: 1em;
+}

@@ -32,7 +32,7 @@ export default function EventDetailsInformationIconsRowMobile() {
                             <div className={"DetailsIconContainer"}>
                                 <FontAwesomeIcon className={"eventDetailsIcon"} icon={faCalendarAlt}/>
                             </div>
-                            <h className={"eventDetailsIconInformation"}>12.08.2020</h>
+                            <h className={"eventDetailsIconInformation"}>12.08.2020 10:00 - 12:00</h>
                         </div>
 
                     </Row>

@@ -40,9 +40,9 @@ function NavBarUserNotLogged(){
                 </NavDropdown>
 
                 <NavDropdown variant="dark" title="Places & Objects"  id="placesDropdown">
-                    <NavDropdown.Item  href="/places/create">Tag place</NavDropdown.Item>
+                    <NavDropdown.Item  href="/place/create">Tag place</NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="/places/display">All places & objects</NavDropdown.Item>
+                    <NavDropdown.Item href="/place/display">All places & objects</NavDropdown.Item>
                     <NavDropdown.Item href="#Football">Football</NavDropdown.Item>
                     <NavDropdown.Item href="#Jogging">Jogging</NavDropdown.Item>
                     <NavDropdown.Item href="#Volleyball">Volleyball</NavDropdown.Item>

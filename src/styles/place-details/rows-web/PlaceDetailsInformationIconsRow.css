@@ -1,0 +1,44 @@
+.IconRowsContainer{
+    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
+}
+
+.InformationIconsRow{
+    margin-bottom: 1em;
+
+
+
+}
+
+.PlaceDetailsIcon{
+    font-size: 1.4em;
+    color: darkblue;
+
+}
+
+.PlaceDetailsIconInformation{
+
+
+    font-size: 1.2em;
+
+}
+
+.PlaceDetailsIconInformationHeader{
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+
+
+.DetailsIconContainer{
+    display: flex;
+    background: rgba(27, 117, 188,0.3);
+    width: 3em;
+    height: 3em;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.PlaceDetailsIconInformationDaysLeft{
+    opacity: 0.4;
+}

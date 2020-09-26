@@ -27,6 +27,8 @@ export default function CreateEventFor(){
     const [cost,setCost] = useState(0);
     const [time,setTime] = useState(0);
     const [description,setDescription] = useState("");
+    const [startHour,setStartHour] = useState("");
+    const [endHour,setEndHour] = useState("");
 
     const onFormSubmit = () => {alert(description); }
 
@@ -47,10 +49,27 @@ export default function CreateEventFor(){
             <Form.Group controlId="formEventDate">
                 <Form.Label className={"FormLabel"}>Event Date</Form.Label>
                 <Form.Control
-                    className={"FormInputField"}
+                    className={"FormInputField mb-4"}
                     type="date"
                     onChange = {(e) => setDate(e.target.value)}
                 />
+
+                <div className={"d-flex flex-row"}>
+
+                    <Form.Control
+                        className={"FormInputField mr-5"}
+                        type="time"
+                        onChange = {(e) => setStartHour(e.target.value)}
+                    />
+
+                    <Form.Control
+                        className={"FormInputField"}
+                        type="time"
+                        onChange = {(e) => setEndHour(e.target.value)}
+                    />
+
+                </div>
+
             </Form.Group>
 
             <Form.Group controlId="formEventLocalization">

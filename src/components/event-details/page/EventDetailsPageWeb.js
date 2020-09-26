@@ -38,8 +38,6 @@ export default function EventDetailsPageWeb() {
 
                     <EventDetailsJoinEventRow/>
 
-
-
                 </Col>
 
             </Row>

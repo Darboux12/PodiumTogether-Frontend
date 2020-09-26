@@ -16,7 +16,7 @@ import DisplayPlacesPage from "./components/display-places/page/DisplayPlacesPag
 import PrivateRoute from "./components/security/PrivateRouter";
 import EventDetailsPage from "./components/event-details/page/EventDetailsPage";
 import EditProfilePage from "./components/edit-profile/EditProfilePage";
-import PlaceDetailsPage from "./components/place-details/PlaceDetailsPage";
+import PlaceDetailsPage from "./components/place-details/page/PlaceDetailsPage";
 
 class App extends React.Component {
 
@@ -36,11 +36,11 @@ class App extends React.Component {
             <Route path="/about" exact component={AboutPage}/>
             <Route path="/contact" exact component={ContactPage}/>
             <Route path="/news" exact component={NewsPage}/>
-            <Route path="/places/create" exact component={TagPlacePage}/>
-            <Route path="/places/display" exact component={DisplayPlacesPage}/>
+            <Route path="/place/create" exact component={TagPlacePage}/>
+            <Route path="/place/display" exact component={DisplayPlacesPage}/>
             <Route path="/event/details" exact component={EventDetailsPage}/>
             <Route path="/user/profile/edit" exact component={EditProfilePage}/>
-            <Route path="/places/details" exact component={PlaceDetailsPage}/>
+            <Route path="/place/details" exact component={PlaceDetailsPage}/>
             <PrivateRoute path={"/dashboard"} component={CreateEventPage}/>
           </Switch>
             <Footer/>

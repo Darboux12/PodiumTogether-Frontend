@@ -15,7 +15,6 @@ export default function EventDetailsInformationIconRow() {
 
             <Col>
 
-
             <Row className={"InformationIconsRow"}>
 
                 <Col className={"d-flex align-items-center"}>
@@ -37,7 +36,7 @@ export default function EventDetailsInformationIconRow() {
                         <div className={"DetailsIconContainer"}>
                             <FontAwesomeIcon className={"eventDetailsIcon"} icon={faCalendarAlt}/>
                         </div>
-                        <h className={"eventDetailsIconInformation"}>12.08.2020 <h className={"eventDetailsIconInformationDaysLeft"}>(3 days to the event)</h></h>
+                        <h className={"eventDetailsIconInformation"}>12.08.2020 10:00 - 12:00 <h className={"eventDetailsIconInformationDaysLeft"}>(3 days to the event)</h></h>
                     </div>
 
                 </Col>

@@ -9,7 +9,9 @@ import PlaceDetailsTitleRow from "../rows-web/PlaceDetailsTitleRow";
 import PlaceDetailsMapRow from "../rows-web/PlaceDetailsMapRow";
 import PlaceDetailsInformationIconRow from "../rows-web/PlaceDetailsInformationRow";
 import PlaceDetailsStarRatingRow from "../rows-web/PlaceDetailsStarRatingRow";
-import PlaceDetailsDescriptionRow from "../rows-web/PlaceDetailsDescriptionRow";
+import PlaceDetailsCommentRow from "../rows-web/PlaceDetailsCommentRow";
+import PlaceDetailsTagPlaceRow from "../rows-web/PlaceDetailsTagPlaceRow";
+
 
 export default function PlaceDetailsPageWeb() {
 
@@ -31,16 +33,14 @@ export default function PlaceDetailsPageWeb() {
 
                     <PlaceDetailsStarRatingRow/>
 
-                    <PlaceDetailsDescriptionRow/>
-
-                    <EventDetailsFileRow/>
+                    <PlaceDetailsCommentRow/>
 
                 </Col>
 
 
                 <Col className={"PlaceDetailsApplyAnotherEventsContainer"}>
 
-                    <EventDetailsJoinEventRow/>
+                    <PlaceDetailsTagPlaceRow/>
 
 
 

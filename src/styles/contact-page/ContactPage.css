@@ -1,10 +1,16 @@
 .contactContainer{
+    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
+    padding: 1em !important;
+
 
 }
 
 .contactTexts{
 
-    font-size: 1.2em;
+    font-size: 1.3em;
+    text-align: center;
+
+
 
 
 }

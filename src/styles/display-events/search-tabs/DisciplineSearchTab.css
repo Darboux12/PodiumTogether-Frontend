@@ -1,10 +1,18 @@
 .searchTabContainer{
 
 }
-.eventSearchbarButton:focus{
+.eventSearchBarButton:focus{
 
     box-shadow: none !important;
 
 
 
+}
+
+.searchTabButton{
+    margin-left: 1em;
+}
+
+.searchTabButton:focus{
+    box-shadow: none !important;
 }

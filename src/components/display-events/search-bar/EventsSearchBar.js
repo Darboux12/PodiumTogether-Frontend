@@ -12,50 +12,53 @@ export default function EventsSearchBar(){
     const [keyword,setKeyword] = useState("");
     const [localization,setLocalization] = useState("");
 
+    const [footballOption,setFootballOption] = useState(false);
+    const [volleyballOption,setVolleyballOption] = useState(false);
+
+
     const [showDisciplineTab, setShowDisciplineTab] = useState(false);
-
-    useEffect(() => {
-
-        if(showDisciplineTab){
-            document.getElementById("kot").style.background= "#007bff";
-            document.getElementById("kot").style.color= "white";
-        }
-
-        if(!showDisciplineTab){
-            document.getElementById("kot").style.background= "white";
-            document.getElementById("kot").style.color= "#007bff";
-        }
-
-
-
-    });
-
+    useEffect((() => changeButtonColor("eventDisciplineButton",showDisciplineTab)));
 
 
     const [showDateTab, setShowDateTab] = useState(false);
+    useEffect((() => changeButtonColor("eventDateButton",showDateTab)));
+
+
+
     const [showPeopleNumberTab, setShowPeopleNumberTab] = useState(false);
     const [showAgeTab, setShowAgeTab] = useState(false);
     const [showGenderTab, setShowGenderTab] = useState(false);
     const [showCostsTab, setShowCostsTab] = useState(false);
 
-    const [disciplineButton,setDisciplineButton] = useState(false);
-
-    const onFormSubmit = () => {alert(keyword); }
-
-    const onButtonClick = (id) => {
-
-        setShowDisciplineTab(!showDisciplineTab);
 
 
+    const onFormSubmit = () => {alert(footballOption); };
+
+
+    const changeButtonColor = (id,show) => {
+
+            let btn = document.getElementById(id);
+
+            if(show){
+                btn.style.backgroundColor = "rgb(0, 123, 255)";
+                btn.style.color = "white"
+            }
+
+            else {
+                btn.style.backgroundColor = "white";
+                btn.style.color = "rgb(0, 123, 255)"
+            }
 
 
 
-    }
+
+        };
+
 
     return(
 
             <Navbar
-                className="bg-light d-flex flex-column sticky-top SearchBar"
+                className="bg-light d-flex flex-column SearchBar"
                 collapseOnSelect
                 expand="md"
             >
@@ -90,43 +93,44 @@ export default function EventsSearchBar(){
                         <h className={"filterHeader"}>Filter: </h>
 
                         <Button
-                            id={"kot"}
-                            className={"eventSearchbarButton"}
+                            id={"eventDisciplineButton"}
+                            className={"eventSearchBarButton"}
                             variant={"outline-primary"}
                             onClick={() => setShowDisciplineTab(!showDisciplineTab)}
                         >Discipline
                         </Button>
 
                         <Button
-                            className={"eventSearchbarButton"}
+                            id={"eventDateButton"}
+                            className={"eventSearchBarButton"}
                             variant={"outline-primary"}
                             onClick={() => setShowDateTab(!showDateTab)}
                         >Date
                         </Button>
 
                         <Button
-                            className={"eventSearchbarButton"}
+                            className={"eventSearchBarButton"}
                             variant={"outline-primary"}
                             onClick={() => setShowPeopleNumberTab(!showPeopleNumberTab)}
                         >People number
                         </Button>
 
                         <Button
-                            className={"eventSearchbarButton"}
+                            className={"eventSearchBarButton"}
                             variant={"outline-primary"}
                             onClick={() => setShowAgeTab(!showAgeTab)}
                         >Age
                         </Button>
 
                         <Button
-                            className={"eventSearchbarButton"}
+                            className={"eventSearchBarButton"}
                             variant={"outline-primary"}
                             onClick={() => setShowGenderTab(!showGenderTab)}
                         >Gender
                         </Button>
 
                         <Button
-                            className={"eventSearchbarButton"}
+                            className={"eventSearchBarButton"}
                             variant={"outline-primary"}
                             onClick={() => setShowCostsTab(!showCostsTab)}
                         >Gender
@@ -136,7 +140,13 @@ export default function EventsSearchBar(){
 
                     <Row>
 
-                        <DisciplineSearchTab id={"disciplineSearchTab"} show={showDisciplineTab}/>
+                        <DisciplineSearchTab
+                            id={"disciplineSearchTab"}
+                            show={showDisciplineTab}
+                            footballOptionClick = {() => setFootballOption(!footballOption)}
+                            footballOption = {footballOption}
+                            volleyballOptionClick ={() => setVolleyballOption(!volleyballOption)}
+                        />
 
 
 

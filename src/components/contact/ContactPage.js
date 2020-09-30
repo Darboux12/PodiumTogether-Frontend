@@ -2,6 +2,7 @@ import React, {Component, useState} from "react";
 import "../../styles/contact-page/ContactPage.css"
 import {Form} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
 
 export default function ContactPage(){
 
@@ -13,11 +14,11 @@ export default function ContactPage(){
 
         return(
 
-            <div className={"contactContainer d-flex flex-column align-items-center"}>
+            <Container className={"contactContainer d-flex flex-column align-items-center"}>
 
-                <div className={"contactTexts d-flex flex-column align-items-center col-md-6 col-12"}>
+                <div className={"contactTexts d-flex flex-column align-items-center col-md-10 col-12"}>
 
-                    <div className={"d-flex flex-md-row flex-column align-items-center mb-2"}>
+                    <div className={"d-flex flex-column align-items-center mb-2"}>
 
                         <h className={"contactHeader mr-md-1 mr-0"}>Have any problem? </h>
                         <h className={"contactHeader"}> Contact us!</h>
@@ -84,7 +85,7 @@ export default function ContactPage(){
 
                 </div>
 
-            </div>
+            </Container>
 
         );
 }

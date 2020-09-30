@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 
 import "../../../styles/place-details/page/PlaceDetailsPage.css"
 import PlaceDetailsPageWeb from "./PlaceDetailsPageWeb";
+import PlaceDetailsPageMobile from "./PlaceDetailsPageMobile";
 
 export default function PlaceDetailsPage(){
 
@@ -13,6 +14,8 @@ export default function PlaceDetailsPage(){
         <Container fluid>
 
             <PlaceDetailsPageWeb/>
+
+            <PlaceDetailsPageMobile/>
 
 
 

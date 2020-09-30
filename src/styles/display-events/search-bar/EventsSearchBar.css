@@ -5,7 +5,7 @@
 
 }
 
-.eventSearchbarButton{
+.eventSearchBarButton{
     text-decoration: none;
     margin-left: 1em;
 
@@ -14,5 +14,8 @@
 
 .SearchBar{
     box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
+    position: sticky !important;
+    top: 4em !important;
+    z-index: 2 !important;
 }
 

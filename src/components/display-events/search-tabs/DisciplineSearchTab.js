@@ -83,7 +83,6 @@ export default function DisciplineSearchTab(props){
             }
         }
 
-
     });
 
     const handleChange = (e) => {
@@ -137,7 +136,7 @@ export default function DisciplineSearchTab(props){
 
             <Roll>
 
-            <div className={"searchTabContainer mt-3"}>
+            <div className={"searchTabContainer mt-3 ml-5"}>
 
                 <Button
                     id={"footballOption"}

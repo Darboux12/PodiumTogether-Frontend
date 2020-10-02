@@ -17,6 +17,8 @@ import PrivateRoute from "./components/security/PrivateRouter";
 import EventDetailsPage from "./components/event-details/page/EventDetailsPage";
 import EditProfilePage from "./components/edit-profile/EditProfilePage";
 import PlaceDetailsPage from "./components/place-details/page/PlaceDetailsPage";
+import AdminPanel from "./components/admin/AdminPanel";
+import AddNews from "./components/admin/AddNews";
 
 class App extends React.Component {
 
@@ -41,6 +43,8 @@ class App extends React.Component {
             <Route path="/event/details" exact component={EventDetailsPage}/>
             <Route path="/user/profile/edit" exact component={EditProfilePage}/>
             <Route path="/place/details" exact component={PlaceDetailsPage}/>
+            <Route path="/admin/panel" exact component={AdminPanel}/>
+            <Route path="/news/create" exact component={AddNews}/>
             <PrivateRoute path={"/dashboard"} component={CreateEventPage}/>
           </Switch>
             <Footer/>

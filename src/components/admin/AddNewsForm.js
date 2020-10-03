@@ -30,12 +30,13 @@ export default function AddNewsForm(){
             method: 'POST',
             body: formData
 
-        }).then(
-            response => response.json() // if the response is a JSON object
-        ).then(
-            success => console.log(success) // Handle the success response object
-        ).catch(
-            error => console.log(error) // Handle the error response object
+        })
+            .then(response => {
+
+                if(response.ok)
+                    alert("News was successfully added!");
+            }
+
         );
 
     };
@@ -91,12 +92,6 @@ export default function AddNewsForm(){
 
                 />
             </Form.Group>
-
-
-
-
-            <input type="file" className="form-control" name="file" onChange={(e) => setImage(e.target.files[0])}/>
-
 
             <Button
                 variant="primary"

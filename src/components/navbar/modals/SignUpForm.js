@@ -19,7 +19,34 @@ export default function SignUpForm(){
     const [country,setCountry] = useState("");
     const [termsAgreement,setTermsAgreement] = useState(false);
 
-    const onFormSubmit = () => {alert(termsAgreement);}
+    const onFormSubmit = () => {
+
+        const formData = {
+
+            email : email,
+            password : password,
+            username : username,
+            birthday : birthday,
+            country : country
+        };
+
+        fetch('http://localhost:8080/user/add', { // Your POST endpoint
+            method: 'POST',
+            headers : {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+
+        }).then(
+            response => response.json() // if the response is a JSON object
+        ).then(
+            success => console.log(success) // Handle the success response object
+        ).catch(
+            error => console.log(error) // Handle the error response object
+        );
+
+    };
 
         return(
 

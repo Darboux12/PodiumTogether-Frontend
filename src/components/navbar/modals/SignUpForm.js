@@ -15,7 +15,7 @@ export default function SignUpForm(){
     const [password,setPassword] = useState("");
     const [repeatPassword,setRepeatPassword] = useState("");
     const [username,setUsername] = useState("");
-    const [birthdate,setBirthdate] = useState("");
+    const [birthday,setBirthday] = useState("");
     const [country,setCountry] = useState("");
     const [termsAgreement,setTermsAgreement] = useState(false);
 
@@ -105,7 +105,7 @@ export default function SignUpForm(){
                         placeholder="Please, write your birth date..."
                         aria-label="birthDate"
                         aria-describedby="basic-addon1"
-                        onChange = {(e) => setBirthdate(e.target.value)}
+                        onChange = {(e) => setBirthday(e.target.value)}
                     />
                 </InputGroup>
 

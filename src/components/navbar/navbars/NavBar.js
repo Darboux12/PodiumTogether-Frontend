@@ -4,10 +4,12 @@ import "../../../styles/navbar/Navbar.css"
 
 import NavBarUserNotLogged from "./NavBarUserNotLogged";
 import NavBarUserLogged from "./NavBarUserLogged";
+import NavBarUserAdmin from "./NavBarUserAdmin";
 
 function NavBar(){
 
     const [isUserLogged, setIsUserLogged] = useState(false);
+    const [isUserAdmin, setIsUSerAdmin] = useState(true);
 
     useEffect(() => {
 
@@ -19,9 +21,11 @@ function NavBar(){
     });
 
     if(!isUserLogged)
-        return <NavBarUserNotLogged/>
-    if(isUserLogged)
-        return <NavBarUserLogged/>
+        return <NavBarUserNotLogged/>;
+    if(isUserLogged && !isUserAdmin)
+        return <NavBarUserLogged/>;
+    if(isUserAdmin)
+        return <NavBarUserAdmin/>;
 
 }
 

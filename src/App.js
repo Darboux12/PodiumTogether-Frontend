@@ -19,6 +19,8 @@ import EditProfilePage from "./components/edit-profile/EditProfilePage";
 import PlaceDetailsPage from "./components/place-details/page/PlaceDetailsPage";
 import AdminPanel from "./components/admin/AdminPanel";
 import AddNews from "./components/admin/AddNews";
+import EmptyFooter from "./components/footer/EmptyFooter";
+import TestComponent from "./components/TestComponent";
 
 class App extends React.Component {
 
@@ -45,9 +47,10 @@ class App extends React.Component {
             <Route path="/place/details" exact component={PlaceDetailsPage}/>
             <Route path="/admin/panel" exact component={AdminPanel}/>
             <Route path="/news/create" exact component={AddNews}/>
+            <Route path="/test" exact component={TestComponent}/>
             <PrivateRoute path={"/dashboard"} component={CreateEventPage}/>
           </Switch>
-            <Footer/>
+            <EmptyFooter/>
         </Router>
 
     );

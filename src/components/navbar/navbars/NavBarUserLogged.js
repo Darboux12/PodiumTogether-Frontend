@@ -10,6 +10,7 @@ import SignInModal from "../modals/SignInModal";
 import SignUpModal from "../modals/SignUpModal";
 import React, {useState} from "react";
 import LogoNavbar from "../../common/LogoNavbar";
+import {faUserCog} from "@fortawesome/free-solid-svg-icons/faUserCog";
 
 function NavBarUserLogged(){
 
@@ -132,6 +133,7 @@ function NavBarUserLogged(){
                                 <FontAwesomeIcon className={"profileIcon"} icon={faUserCircle}/>
                                 See your profile
                             </Dropdown.Item>
+
 
                             <NavDropdown.Divider />
 

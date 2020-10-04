@@ -77,7 +77,7 @@ export default function ContactPage(){
                         type={"submit"}
                         variant="primary"
                         onClick={onFormSubmit}
-                        className="signInModalButton"
+                        className="signInModalButton mb-3"
                     >
                         Send
 

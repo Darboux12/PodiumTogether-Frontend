@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import "../../styles/mainpage/MainPageAbout.css"
-import AboutItem from "./AboutItem";
+import AboutItem from "../about-item/AboutItem";
 import "../../styles/mainpage/MainPageAbout.css"
 import Rotate from 'react-reveal/Rotate';
 import achieveGreatThingsImage from "../../images/achieveGreatThings.jpg"
@@ -8,7 +8,8 @@ import haveFunImage from "../../images/haveFunImage.jpg"
 import makeFriendsImage from "../../images/makeFriendsImage.jpg"
 import sharePassionImage from "../../images/sharePassionImage.jpg"
 import discoverAmazingPlaces from "../../images/discoverAmazinPlacesImage.jpg"
-import AboutItemMobile from "./AboutItemMobile";
+import AboutItemMobile from "../about-item/AboutItemMobile";
+import dontHesitate from "../../images/dontHesisateIamge.jpg"
 
 export default function MainPageAbout(props){
 
@@ -81,6 +82,18 @@ export default function MainPageAbout(props){
                     "
                             image={discoverAmazingPlaces}
                             left={true}
+                        />
+
+                    </Rotate>
+
+                    <Rotate top right>
+                        <AboutItem
+                            header = "Don't hesitate! Join us now!"
+                            paragraph = "Our community cannot wait to meet you
+                            and share with you our amazing resources. Sign out and
+                            discover everything on your own! :)"
+
+                            image={dontHesitate}
                         />
 
                     </Rotate>
@@ -160,6 +173,18 @@ export default function MainPageAbout(props){
                     "
                             image={discoverAmazingPlaces}
                             left={true}
+                        />
+
+                    </Rotate>
+
+                    <Rotate top right>
+                        <AboutItem
+                            header = "Don't hesitate! Join us now!"
+                            paragraph = "Our community cannot wait to meet you
+                            and share with you our amazing resources. Sign out and
+                            discover everything on your own! :)"
+
+                            image={dontHesitate}
                         />
 
                     </Rotate>

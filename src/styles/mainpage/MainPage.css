@@ -4,13 +4,15 @@
     justify-content: center;
     flex-direction: column;
 
+
+
 }
 
 
 
 .mainPageHeaderDesktop{
     color: #1B75BC;
-    font-size: 3em;
+    font-size: 2em;
     font-weight: bold;
 
 }

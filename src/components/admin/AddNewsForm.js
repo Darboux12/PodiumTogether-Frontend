@@ -102,14 +102,6 @@ export default function AddNewsForm(){
                 Create News
             </Button>
 
-
-
-
-
-
-
-
-
         </Form>
 
     );

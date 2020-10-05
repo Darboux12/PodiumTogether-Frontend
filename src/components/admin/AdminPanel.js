@@ -14,7 +14,6 @@ export default function AdminPanel() {
 
         <Container>
 
-
             <Row>
 
                 <Col className={"AdminDisplayColumn col-10"}>
@@ -53,21 +52,22 @@ export default function AdminPanel() {
 
                 <Col className={"AdminMenuColumn col-2"}>
 
-
-                        <Button
-                            variant={"outline-dark"}
-                            className={"AdminMenuButton"}
-                            href={"/news/create"}>Display all users
-                        </Button>
+                    <Button
+                        variant={"outline-dark"}
+                        className={"AdminMenuButton"}
+                        href={"/news/create"}>Display all users
+                    </Button>
 
                     <Button
+                        variant={"outline-dark"}
                         className={"AdminMenuButton"}
                         href={"/news/create"}>Add news
                     </Button>
 
                     <Button
+                        variant={"outline-dark"}
                         className={"AdminMenuButton"}
-                        href={"/news/create"}>Add news
+                        href={"/subject/add"}>Add subject
                     </Button>
 
 

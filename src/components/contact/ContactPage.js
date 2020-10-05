@@ -1,4 +1,4 @@
-import React, {Component, useState} from "react";
+import React, {Component, useEffect, useState} from "react";
 import "../../styles/contact-page/ContactPage.css"
 import {Form} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
@@ -10,18 +10,67 @@ export default function ContactPage(){
     const [subject, setSubject] = useState("v1");
     const [message, setMessage] = useState("");
 
-    const onFormSubmit = () => {alert(message); }
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [subjectItems, setSubjectItems] = useState([]);
+
+    useEffect(() => {
+
+        fetch('http://localhost:8080/subject/get/all')
+            .then(res => res.json())
+            .then(res => {
+
+                setIsLoaded(true);
+                setSubjectItems(res);
+
+            })
+
+    });
+
+    const onFormSubmit = () => {
+
+        const PostUrl = 'http://localhost:8080/contact/add';
+
+        const contactRequest = {
+            userEmail: email,
+            subject: subject,
+            message: message
+        };
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(contactRequest)
+        };
+
+        alert("Fetch try");
+
+
+        fetch(PostUrl,requestOptions)
+
+            .then((res) => {
+
+                if (res.ok){
+                    alert("Response ok");
+                }
+
+
+            })
+
+
+    };
 
         return(
 
-            <Container className={"contactContainer d-flex flex-column align-items-center"}>
+            <div className={"contactContainer d-flex flex-column align-items-center"}>
+
+                <div className={"contactMain"}>
+
 
                 <div className={"contactTexts d-flex flex-column align-items-center col-md-10 col-12"}>
 
                     <div className={"d-flex flex-column align-items-center mb-2"}>
 
-                        <h className={"contactHeader mr-md-1 mr-0"}>Have any problem? </h>
-                        <h className={"contactHeader"}> Contact us!</h>
+                        <h className={"contactHeader"}>Contact us</h>
 
                     </div>
 
@@ -33,8 +82,8 @@ export default function ContactPage(){
 
                         <br/><br/>
 
-                        You can be sure our team will consider and help you with
-                        every issue!
+                        You can be sure our team will consider individually your issue and help you with
+                        it!
 
                     </p>
 
@@ -55,11 +104,9 @@ export default function ContactPage(){
                         <Form.Group controlId="contactForm.subject">
                             <Form.Label className={"contactInputLabel"}>Subject</Form.Label>
                             <Form.Control as="select" onChange = {(e) => setSubject(e.target.value)}>
-                                <option value={"v1"}>Subject One</option>
-                                <option value={"v2"}>Subject Two</option>
-                                <option value={"v3"}>Subject Three</option>
-                                <option value={"v4"}>Subject Four</option>
-                                <option value={"v5"}>Subject FIve</option>
+                                {subjectItems.map(item =>
+                                    <option key={item.name} value={item.name}>{item.name}</option>
+                                )};
                             </Form.Control>
                         </Form.Group>
 
@@ -85,7 +132,9 @@ export default function ContactPage(){
 
                 </div>
 
-            </Container>
+                </div>
+
+            </div>
 
         );
 }

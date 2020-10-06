@@ -4,32 +4,36 @@ import picture from "../../images/person.jpg"
 
 import "../../styles/news-page/News.css"
 
-export default function News(){
+import { format } from "date-fns";
+
+export default function News(props){
+
+    const date =  new Date(props.date);
 
         return(
 
             <div className={"newsContainer d-flex flex-row  align-items-center"}>
 
-                <img className={"newsImage"} src={picture} alt={"newsImage"}/>
+                <img className={"newsImage"} src={`data:image/jpeg;base64,${props.image}`}  alt={"newsImage"}/>
 
                 <div className={"newsTexts"}>
 
-                    <h className={"newsHeader"}>Podium Together is most popular app in the world</h>
+                    <h className={"newsHeader"}>{props.title}</h>
 
-                    <p  className={"newsParagraph mt-3 mb-3"}>We would like to announce that podium together is the most popular
-                    app in the world. Seriously, there is no one better then we.
-                    We wouldn't have achieved it without out. Thank you!</p>
+                    <p  className={"newsParagraph mt-3 mb-3"}>{props.text}</p>
 
-                    <a className={"newsLink"} href={"#"}>Find out more about our awesome record...</a>
+                    <a className={"newsLink"} href={"#"}>{props.linkText}</a>
 
-                    <h className={"newsDate"}>20.05.2020</h>
+                    <h className={"newsDate"}>{format(date, "dd-MMMM-yyyy")}</h>
+
+
 
                 </div>
 
-                <h className={"newsDate"}>20.05.2020</h>
+
 
             </div>
 
-        );
+        )
 }
 

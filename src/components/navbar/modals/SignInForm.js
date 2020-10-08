@@ -1,4 +1,4 @@
-import React, {Component, useState} from "react";
+import React, {Component, useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
 import InputGroup from "react-bootstrap/InputGroup";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -13,6 +13,9 @@ export default function SignInForm(props){
 
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
+
+    const [usernameError,setUsernameError] = useState("");
+    const [passwordError,setPasswordError] = useState("");
 
     const onFormSubmit = () => {
 
@@ -29,37 +32,57 @@ export default function SignInForm(props){
             body: JSON.stringify(user)
         };
 
+        if(user.username === ""){
+            setUsernameError("Username cannot be empty!")
+        }
 
-        fetch(PostUrl,requestOptions)
+        else if(user.password === ""){
+            setPasswordError("Password cannot be empty!")
+        }
 
-            .then((res) => {
+        else
 
-                if (!res.ok){
-                    throw new Error(res.status);
-                }
+            fetch(PostUrl,requestOptions)
 
-                else return res.json()
-            })
+                .then((res) => {
 
-            .then(res => {
-                localStorage.setItem("authorizationToken", res.token);
-                localStorage.setItem("userLogged", true);
-                window.location.reload();
-            })
+                    if (res.status === 409){
+                       console.log("Server error 409");
+                    }
 
-            .catch((error) => {
-                console.log(error);
-            });
+                    else return res.json()
+                })
+
+                .then(res => {
+
+                    if(res.token !== undefined){
+
+                        localStorage.setItem("authorizationToken", res.token);
+                        localStorage.setItem("Username", res.username);
+                        localStorage.setItem("userLogged", true);
+                        window.location.reload();
+
+                    }
+
+                })
+
+                .catch((error) => {
+                    console.log(error);
+                });
+
+
+
 
 
     };
 
 
 
-
         return (
 
             <Container>
+
+                <h className={"ErrorHeader"}>{usernameError}</h>
 
                 <InputGroup className="mb-3">
 
@@ -75,8 +98,10 @@ export default function SignInForm(props){
                         aria-describedby="basic-addon1"
                         onChange = {(e) => setUsername(e.target.value)}
                     />
+
                 </InputGroup>
 
+                <h className={"ErrorHeader"}>{passwordError}</h>
 
                 <InputGroup className="mb-3">
 

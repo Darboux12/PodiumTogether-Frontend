@@ -13,7 +13,7 @@ export default function NewsPage(){
 
     useEffect(() => {
 
-        fetch('http://localhost:8080/news/get/all')
+        fetch('http://localhost:8080/news/find/all')
             .then(res => res.json())
             .then(res => {
 

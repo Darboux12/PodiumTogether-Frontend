@@ -1,4 +1,4 @@
-import React, {Component, useState} from "react";
+import React, {Component, useEffect, useState} from "react";
 import InputGroup from "react-bootstrap/esm/InputGroup";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faGlobeEurope, faUnlock, faUser} from "@fortawesome/free-solid-svg-icons";
@@ -18,6 +18,27 @@ export default function SignUpForm(){
     const [birthday,setBirthday] = useState("");
     const [country,setCountry] = useState("");
     const [termsAgreement,setTermsAgreement] = useState(false);
+
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [countryItems, setCountryItems] = useState([]);
+
+    useEffect(() => {
+
+
+
+        fetch('http://localhost:8080/country/find/all')
+            .then(res => res.json())
+            .then(res => {
+
+                setIsLoaded(true);
+                setCountryItems(res);
+
+            });
+
+
+
+
+    },[]);
 
     const onFormSubmit = () => {
 
@@ -47,6 +68,8 @@ export default function SignUpForm(){
         );
 
     };
+
+    if(isLoaded){
 
         return(
 
@@ -129,10 +152,10 @@ export default function SignUpForm(){
                     </InputGroup.Prepend>
 
                     <FormControl type="date"
-                        placeholder="Please, write your birth date..."
-                        aria-label="birthDate"
-                        aria-describedby="basic-addon1"
-                        onChange = {(e) => setBirthday(e.target.value)}
+                                 placeholder="Please, write your birth date..."
+                                 aria-label="birthDate"
+                                 aria-describedby="basic-addon1"
+                                 onChange = {(e) => setBirthday(e.target.value)}
                     />
                 </InputGroup>
 
@@ -145,11 +168,19 @@ export default function SignUpForm(){
                     </InputGroup.Prepend>
 
                     <FormControl
-                                 placeholder="Please, write your country..."
-                                 aria-label="Country"
-                                 aria-describedby="basic-addon1"
-                                 onChange = {(e) => setCountry(e.target.value)}
-                    />
+                        as="select"
+                        size={3}
+                        onChange = {(e) => setCountry(e.target.value)}
+                    >
+                        {countryItems.map(item =>
+                            <option key={item.name} value={item.name}>{item.name}</option>
+                        )};
+
+                    </FormControl>
+
+
+
+
                 </InputGroup>
 
                 <Form.Group controlId="formBasicCheckbox">
@@ -175,6 +206,12 @@ export default function SignUpForm(){
             </Container>
 
         );
+
+    }
+
+    else return <div/>
+
+
 
 }
 

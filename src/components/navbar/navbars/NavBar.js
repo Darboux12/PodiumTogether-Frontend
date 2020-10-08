@@ -11,6 +11,8 @@ function NavBar(){
     const [isUserLogged, setIsUserLogged] = useState(false);
     const [isUserAdmin, setIsUSerAdmin] = useState(true);
 
+    const username = localStorage.getItem('Username');
+
     useEffect(() => {
 
         let userLoggedSession = localStorage.getItem('userLogged');
@@ -21,11 +23,11 @@ function NavBar(){
     });
 
     if(!isUserLogged)
-        return <NavBarUserNotLogged/>;
+        return <NavBarUserNotLogged username = {username}/>;
     if(isUserLogged && !isUserAdmin)
-        return <NavBarUserLogged/>;
+        return <NavBarUserLogged username = {username}/>;
     if(isUserAdmin)
-        return <NavBarUserAdmin/>;
+        return <NavBarUserAdmin username = {username}/>;
 
 }
 

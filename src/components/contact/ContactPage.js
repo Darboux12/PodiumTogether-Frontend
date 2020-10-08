@@ -15,7 +15,7 @@ export default function ContactPage(){
 
     useEffect(() => {
 
-        fetch('http://localhost:8080/subject/get/all')
+        fetch('http://localhost:8080/subject/find/all')
             .then(res => res.json())
             .then(res => {
 
@@ -24,7 +24,7 @@ export default function ContactPage(){
 
             })
 
-    });
+    },[]);
 
     const onFormSubmit = () => {
 
@@ -59,6 +59,8 @@ export default function ContactPage(){
 
     };
 
+    if(isLoaded){
+
         return(
 
             <div className={"contactContainer d-flex flex-column align-items-center"}>
@@ -66,76 +68,83 @@ export default function ContactPage(){
                 <div className={"contactMain"}>
 
 
-                <div className={"contactTexts d-flex flex-column align-items-center col-md-10 col-12"}>
+                    <div className={"contactTexts d-flex flex-column align-items-center col-md-10 col-12"}>
 
-                    <div className={"d-flex flex-column align-items-center mb-2"}>
+                        <div className={"d-flex flex-column align-items-center mb-2"}>
 
-                        <h className={"contactHeader"}>Contact us</h>
+                            <h className={"contactHeader"}>Contact us</h>
+
+                        </div>
+
+                        <p className={"contactParagraph"}>
+
+                            If you experienced any difficulties or you just have
+                            some questions about our app, feel free to send us a message
+                            with your problem description.
+
+                            <br/><br/>
+
+                            You can be sure our team will consider individually your issue and help you with
+                            it!
+
+                        </p>
 
                     </div>
 
-                    <p className={"contactParagraph"}>
+                    <div className={"contactForm col-md-6 col-12"}>
 
-                        If you experienced any difficulties or you just have
-                        some questions about our app, feel free to send us a message
-                        with your problem description.
+                        <Form>
 
-                        <br/><br/>
+                            <Form.Group controlId="contactForm.email">
+                                <Form.Label className={"contactInputLabel"}>Your email address</Form.Label>
+                                <Form.Control
+                                    type="email"
+                                    placeholder="Email address..."
+                                    onChange = {(e) => setEmail(e.target.value)}/>
+                            </Form.Group>
 
-                        You can be sure our team will consider individually your issue and help you with
-                        it!
+                            <Form.Group controlId="contactForm.subject">
+                                <Form.Label className={"contactInputLabel"}>Subject</Form.Label>
+                                <Form.Control as="select" onChange = {(e) => setSubject(e.target.value)}>
+                                    {subjectItems.map(item =>
+                                        <option key={item.name} value={item.name}>{item.name}</option>
+                                    )};
+                                </Form.Control>
+                            </Form.Group>
 
-                    </p>
+                            <Form.Group controlId="contactForm.message">
+                                <Form.Label className={"contactInputLabel"}>Message</Form.Label>
+                                <Form.Control
+                                    as="textarea"
+                                    rows="6"
+                                    onChange = {(e) => setMessage(e.target.value)}/>
+                            </Form.Group>
 
-                </div>
+                        </Form>
 
-                <div className={"contactForm col-md-6 col-12"}>
+                        <Button
+                            type={"submit"}
+                            variant="primary"
+                            onClick={onFormSubmit}
+                            className="signInModalButton mb-3"
+                        >
+                            Send
 
-                    <Form>
+                        </Button>
 
-                        <Form.Group controlId="contactForm.email">
-                            <Form.Label className={"contactInputLabel"}>Your email address</Form.Label>
-                            <Form.Control
-                                type="email"
-                                placeholder="Email address..."
-                                onChange = {(e) => setEmail(e.target.value)}/>
-                        </Form.Group>
-
-                        <Form.Group controlId="contactForm.subject">
-                            <Form.Label className={"contactInputLabel"}>Subject</Form.Label>
-                            <Form.Control as="select" onChange = {(e) => setSubject(e.target.value)}>
-                                {subjectItems.map(item =>
-                                    <option key={item.name} value={item.name}>{item.name}</option>
-                                )};
-                            </Form.Control>
-                        </Form.Group>
-
-                        <Form.Group controlId="contactForm.message">
-                            <Form.Label className={"contactInputLabel"}>Message</Form.Label>
-                            <Form.Control
-                                as="textarea"
-                                rows="6"
-                                onChange = {(e) => setMessage(e.target.value)}/>
-                        </Form.Group>
-
-                    </Form>
-
-                    <Button
-                        type={"submit"}
-                        variant="primary"
-                        onClick={onFormSubmit}
-                        className="signInModalButton mb-3"
-                    >
-                        Send
-
-                    </Button>
-
-                </div>
+                    </div>
 
                 </div>
 
             </div>
 
         );
+
+
+    }
+
+    else return <div/>
+
+
 }
 

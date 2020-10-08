@@ -42,3 +42,7 @@
 .signInModalButton{
     width: 100%;
 }
+
+.ErrorHeader{
+    color: #FF0000;
+}

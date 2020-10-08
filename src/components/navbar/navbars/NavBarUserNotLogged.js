@@ -7,7 +7,7 @@ import SignUpModal from "../modals/SignUpModal";
 import React, {useState} from "react";
 import LogoNavbar from "../../common/LogoNavbar";
 
-function NavBarUserNotLogged(){
+function NavBarUserNotLogged(props){
 
     const [signInModalVisible,setSignInModalVisible] = useState(false);
     const [signUpModalVisible,setSignUpModalVisible] = useState(false);

@@ -12,10 +12,11 @@ import React, {useState} from "react";
 import LogoNavbar from "../../common/LogoNavbar";
 import {faUserCog} from "@fortawesome/free-solid-svg-icons/faUserCog";
 
-function NavBarUserAdmin(){
+function NavBarUserAdmin(props){
 
     const [signInModalVisible,setSignInModalVisible] = useState(false);
     const [signUpModalVisible,setSignUpModalVisible] = useState(false);
+
 
     const logOut = () => {
 
@@ -129,7 +130,7 @@ function NavBarUserAdmin(){
                         <Dropdown>
 
                             <Dropdown.Toggle as={"header"} className={"dataToggle d-md-flex d-none"}>
-                                <h className={"userProfileHeader"}>Janek126p</h>
+                                <h className={"userProfileHeader"}>{props.username}</h>
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu className={"dropdown-menu-center"}>

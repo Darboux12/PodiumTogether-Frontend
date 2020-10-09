@@ -11,24 +11,19 @@ import SignUpModal from "../modals/SignUpModal";
 import React, {useState} from "react";
 import LogoNavbar from "../../common/LogoNavbar";
 import {faUserCog} from "@fortawesome/free-solid-svg-icons/faUserCog";
+import emptyProfile from "../../../images/emptyProfile.png";
 
 function NavBarUserAdmin(props){
 
     const [signInModalVisible,setSignInModalVisible] = useState(false);
     const [signUpModalVisible,setSignUpModalVisible] = useState(false);
+    const [profileImage, setProfileImage] = useState(emptyProfile);
 
+    const logOut = props.logOut;
 
-    const logOut = () => {
-
-        let userLogged = localStorage.getItem('userLogged');
-
-        if(userLogged){
-            localStorage.clear();
-            window.location.reload();
-        }
-
-
-    };
+    if(props.profileImage !== undefined){
+        setProfileImage(props.profileImage);
+    }
 
     return (
 

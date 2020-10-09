@@ -32,15 +32,20 @@ export default function SignInForm(props){
             body: JSON.stringify(user)
         };
 
+        setUsernameError("");
+        setPasswordError("");
+
         if(user.username === ""){
             setUsernameError("Username cannot be empty!")
         }
 
-        else if(user.password === ""){
+        if(user.password === ""){
             setPasswordError("Password cannot be empty!")
         }
 
-        else
+
+
+        if(user.username !== "" && user.password !== "")
 
             fetch(PostUrl,requestOptions)
 

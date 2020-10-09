@@ -6,11 +6,21 @@ import SignInModal from "../modals/SignInModal";
 import SignUpModal from "../modals/SignUpModal";
 import React, {useState} from "react";
 import LogoNavbar from "../../common/LogoNavbar";
+import SignUpSuccessModal from "../modals/SignUpSuccessModal";
 
 function NavBarUserNotLogged(props){
 
     const [signInModalVisible,setSignInModalVisible] = useState(false);
     const [signUpModalVisible,setSignUpModalVisible] = useState(false);
+
+    const [signUpSuccessModalVisible,setSignUpSuccessModalVisible] = useState(false);
+
+    const showSignUpSuccessModal = () => {
+
+        setSignUpModalVisible(false);
+        setSignUpSuccessModalVisible(true);
+
+    };
 
     return (
 
@@ -84,6 +94,12 @@ function NavBarUserNotLogged(props){
         <SignUpModal
             isSignUpModalVisible={signUpModalVisible}
             closeSignUpModal={() => setSignUpModalVisible(false)}
+            showSignUpSuccessModal = {() =>  showSignUpSuccessModal()}
+        />
+
+        <SignUpSuccessModal
+            isSignUpModalVisible={signUpSuccessModalVisible}
+            closeSignUpModal={() => setSignUpSuccessModalVisible(false)}
         />
 
     </Navbar>

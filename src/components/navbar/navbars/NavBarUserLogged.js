@@ -11,23 +11,19 @@ import SignUpModal from "../modals/SignUpModal";
 import React, {useState} from "react";
 import LogoNavbar from "../../common/LogoNavbar";
 import {faUserCog} from "@fortawesome/free-solid-svg-icons/faUserCog";
+import emptyProfile from "../../../images/emptyProfile.png"
 
 function NavBarUserLogged(props){
 
     const [signInModalVisible,setSignInModalVisible] = useState(false);
     const [signUpModalVisible,setSignUpModalVisible] = useState(false);
+    const [profileImage, setProfileImage] = useState(emptyProfile);
 
-    const logOut = () => {
+    const logOut = props.logOut;
 
-        let userLogged = localStorage.getItem('userLogged');
-
-        if(userLogged){
-            localStorage.clear();
-            window.location.reload();
-        }
-
-
-    };
+    if(props.profileImage !== undefined){
+        setProfileImage(props.profileImage);
+    }
 
     return (
 
@@ -117,8 +113,8 @@ function NavBarUserLogged(props){
             <Nav>
                 <Nav.Item className={"d-flex flex-row align-items-center userProfileIcon"}>
 
-                    <a href={"/userProfile"} className={"d-md-flex d-none"}>
-                        <img className={"userProfileImage"} src={userProfileImage} alt="userProfileImage"/>
+                    <a href={"/user/profile"} className={"d-md-flex d-none"}>
+                        <img className={"userProfileImage"} src={profileImage} alt="userProfileImage"/>
                     </a>
 
                     <Dropdown>

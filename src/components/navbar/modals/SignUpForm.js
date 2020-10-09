@@ -9,7 +9,10 @@ import {faCalendar, faCalendarAlt, faEnvelope, faFlag} from "@fortawesome/free-r
 import {faCalendarDay} from "@fortawesome/free-solid-svg-icons/faCalendarDay";
 import Form from 'react-bootstrap/Form'
 
-export default function SignUpForm(){
+import * as emailValidator from "email-validator";
+import isValidBirthdate from "is-valid-birthdate";
+
+export default function SignUpForm(props){
 
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
@@ -19,12 +22,17 @@ export default function SignUpForm(){
     const [country,setCountry] = useState("");
     const [termsAgreement,setTermsAgreement] = useState(false);
 
+    const [emailError,setEmailError] = useState("");
+    const [passwordError,setPasswordError] = useState("");
+    const [repeatPasswordError,setRepeatPasswordError] = useState("");
+    const [usernameError,setUsernameError] = useState("");
+    const [birthdayError,setBirthdayError] = useState("");
+    const [termsAgreementError,setTermsAgreementError] = useState("");
+
     const [isLoaded, setIsLoaded] = useState(false);
     const [countryItems, setCountryItems] = useState([]);
 
     useEffect(() => {
-
-
 
         fetch('http://localhost:8080/country/find/all')
             .then(res => res.json())
@@ -34,9 +42,6 @@ export default function SignUpForm(){
                 setCountryItems(res);
 
             });
-
-
-
 
     },[]);
 
@@ -50,6 +55,82 @@ export default function SignUpForm(){
             birthday : birthday,
             country : country
         };
+
+        setEmailError("");
+        setPasswordError("");
+        setRepeatPasswordError("");
+        setUsernameError("");
+        setBirthdayError("");
+        setTermsAgreementError("");
+
+        if(username === ""){
+            setUsernameError("Username cannot be empty!");
+        }
+
+        if(email === ""){
+            setEmailError("Email cannot be empty!");
+        }
+
+        if(password === ""){
+            setPasswordError("Password cannot be empty!");
+        }
+
+        if(repeatPassword === ""){
+            setRepeatPasswordError("Repeat password cannot be empty!");
+        }
+
+        if(birthday === ""){
+            setBirthdayError("Birthday cannot be empty!");
+        }
+
+        if(!termsAgreement){
+            setTermsAgreementError("You must accept terms agreement!");
+        }
+
+        if(email !== "" && !emailValidator.validate(email)){
+            setEmailError("This is not correct email address!");
+        }
+
+        if(birthday !== "" && !isValidBirthdate(birthday,{ minAge: 13 })){
+            setBirthdayError("THis is not valid birthday or you are under 13")
+        }
+
+        fetch('http://localhost:8080/user/exist/username/' + username)
+            .then((res) =>{
+
+                if(!res.ok){
+                    setUsernameError("User with this username already exist!");
+                }
+
+
+            }).catch(
+            error => console.log(error) // Handle the error response object
+        );
+
+        fetch('http://localhost:8080/user/exist/email/' + email)
+            .then((res) =>{
+
+                if(!res.ok){
+                    alert(res.status);
+                    setEmailError("Email address is already in usage!");
+                }
+
+
+            }).catch(
+            error => console.log(error) // Handle the error response object
+        );
+
+        if(
+            emailError === "" &&
+            passwordError === "" &&
+            repeatPasswordError === "" &&
+            usernameError === "" &&
+            birthdayError === "" &&
+            termsAgreement
+        ){
+
+
+
 
         fetch('http://localhost:8080/user/add', { // Your POST endpoint
             method: 'POST',
@@ -67,13 +148,19 @@ export default function SignUpForm(){
             error => console.log(error) // Handle the error response object
         );
 
+            props.showSignUpSuccessModal();
+
+        }
+
     };
 
-    if(isLoaded){
+
 
         return(
 
             <Container>
+
+                <h className={"ErrorHeader"}>{emailError}</h>
 
                 <InputGroup className="mb-3">
 
@@ -92,6 +179,8 @@ export default function SignUpForm(){
                     />
                 </InputGroup>
 
+                <h className={"ErrorHeader"}>{passwordError}</h>
+
                 <InputGroup className="mb-3">
 
                     <InputGroup.Prepend>
@@ -108,6 +197,8 @@ export default function SignUpForm(){
                         onChange = {(e) => setPassword(e.target.value)}
                     />
                 </InputGroup>
+
+                <h className={"ErrorHeader"}>{repeatPasswordError}</h>
 
                 <InputGroup className="mb-3">
 
@@ -127,6 +218,8 @@ export default function SignUpForm(){
                     />
                 </InputGroup>
 
+                <h className={"ErrorHeader"}>{usernameError}</h>
+
                 <InputGroup className="mb-3">
 
                     <InputGroup.Prepend>
@@ -142,6 +235,8 @@ export default function SignUpForm(){
                         onChange = {(e) => setUsername(e.target.value)}
                     />
                 </InputGroup>
+
+                <h className={"ErrorHeader"}>{birthdayError}</h>
 
                 <InputGroup className="mb-3">
 
@@ -183,6 +278,8 @@ export default function SignUpForm(){
 
                 </InputGroup>
 
+                <h className={"ErrorHeader"}>{termsAgreementError}</h>
+
                 <Form.Group controlId="formBasicCheckbox">
                     <div className={"d-flex flex-row"}>
                         <Form.Check
@@ -206,12 +303,6 @@ export default function SignUpForm(){
             </Container>
 
         );
-
-    }
-
-    else return <div/>
-
-
 
 }
 

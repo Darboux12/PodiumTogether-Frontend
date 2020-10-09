@@ -32,7 +32,7 @@ export default function SignUpModal(props){
 
                 <Modal.Body>
 
-                    <SignUpForm/>
+                    <SignUpForm showSignUpSuccessModal = {() =>  props.showSignUpSuccessModal()}/>
 
                 </Modal.Body>
 

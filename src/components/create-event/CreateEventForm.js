@@ -1,4 +1,4 @@
-import React, {Component, useState} from "react";
+import React, {Component, useEffect, useState} from "react";
 
 import Form from 'react-bootstrap/Form'
 import Button from "react-bootstrap/Button";
@@ -30,7 +30,38 @@ export default function CreateEventFor(){
     const [startHour,setStartHour] = useState("");
     const [endHour,setEndHour] = useState("");
 
-    const onFormSubmit = () => {alert(description); }
+    const [titleError,setTitleError] = useState("");
+    const [dateError,setDateError] = useState("");
+    const [localizationError,setlLcalizationError] = useState("");
+
+
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [disciplineItems, setDisciplineItems] = useState([]);
+
+    useEffect(() => {
+
+        fetch('http://localhost:8080/discipline/find/all')
+            .then(res => res.json())
+            .then(res => {
+
+                setIsLoaded(true);
+                setDisciplineItems(res);
+
+            })
+
+    },[]);
+
+
+
+    const onFormSubmit = () => {
+
+
+
+
+
+
+
+    };
 
     return(
 
@@ -138,11 +169,10 @@ export default function CreateEventFor(){
                     className={"FormInputField mb-5"}
                     onChange = {(e) => setDiscipline(e.target.value)}
                 >
-                    <option>Discipline Example</option>
-                    <option>Discipline Example</option>
-                    <option>Discipline Example</option>
-                    <option>Discipline Example</option>
-                    <option>Discipline Example</option>
+                    {disciplineItems.map(item =>
+                        <option key={item.discipline} value={item.discipline}>{item.discipline}</option>
+                    )};
+
                 </Form.Control>
             </Form.Group>
 
@@ -168,7 +198,7 @@ export default function CreateEventFor(){
                     <Form.Check
                         id="formRadioMale"
                         name="formRadioMale"
-                        type="radio"
+                        type="checkbox"
                         label="Male"
                         className={"genderRadioButton"}
                         onChange = {(e) => setMale(e.target.checked)}
@@ -177,19 +207,10 @@ export default function CreateEventFor(){
                     <Form.Check
                         id="formRadioFemale"
                         name="formRadioFemale"
-                        type="radio"
+                        type="checkbox"
                         label="Female"
                         className={"genderRadioButton"}
                         onChange = {(e) => setFemale(e.target.checked)}
-                    />
-
-                    <Form.Check
-                        id="formRadioBoth"
-                        name="formRadioBoth"
-                        type="radio"
-                        label="Both"
-                        className={"genderRadioButton"}
-                        onChange = {(e) => setBoth(e.target.checked)}
                     />
 
                 </InputGroup>

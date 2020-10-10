@@ -42,7 +42,7 @@ export default function ContactPage(){
             body: JSON.stringify(contactRequest)
         };
 
-        alert("Fetch try");
+
 
 
         fetch(PostUrl,requestOptions)

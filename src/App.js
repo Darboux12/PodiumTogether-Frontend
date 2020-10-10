@@ -22,6 +22,7 @@ import AddNews from "./components/admin/AddNews";
 import EmptyFooter from "./components/footer/EmptyFooter";
 import TestComponent from "./components/TestComponent";
 import AddSubject from "./components/admin/AddSubject";
+import AddDiscipline from "./components/admin/AddDiscipline";
 
 class App extends React.Component {
 
@@ -49,6 +50,7 @@ class App extends React.Component {
             <Route path="/admin/panel" exact component={AdminPanel}/>
             <Route path="/news/create" exact component={AddNews}/>
             <Route path="/subject/add" exact component={AddSubject}/>
+            <Route path="/discipline/add" exact component={AddDiscipline}/>
             <Route path="/test" exact component={TestComponent}/>
             <PrivateRoute path={"/dashboard"} component={CreateEventPage}/>
           </Switch>

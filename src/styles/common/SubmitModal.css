@@ -1,0 +1,32 @@
+.submitModalHeader{
+
+    flex-direction: column;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+}
+
+.submitModalUpperHeader{
+    font-weight: bold;
+    color: forestgreen;
+    margin-bottom: 1em;
+}
+
+.submitModalLowerHeader{
+    font-size: 1.2em;
+}
+
+.submitModalHeaderIcon{
+    align-items: center;
+    justify-content: center;
+
+
+    width: 100%;
+
+}
+
+.submitModalIcon{
+    font-size: 3em;
+    color: forestgreen !important;
+}

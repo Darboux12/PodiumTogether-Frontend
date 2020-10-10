@@ -70,6 +70,12 @@ export default function AdminPanel() {
                         href={"/subject/add"}>Add subject
                     </Button>
 
+                    <Button
+                        variant={"outline-dark"}
+                        className={"AdminMenuButton"}
+                        href={"/discipline/add"}>Add discipline
+                    </Button>
+
 
 
 

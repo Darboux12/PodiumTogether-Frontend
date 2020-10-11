@@ -18,7 +18,7 @@ export default function CreateEventFor(){
     const [number,setNumber] = useState("");
     const [postal,setPostal] = useState("");
     const [discipline,setDiscipline] = useState("");
-    const [people,setPeople] = useState("");
+    const [people,setPeople] = useState(0);
     const [male,setMale] = useState(false);
     const [female,setFemale] = useState(false);
     const [both,setBoth] = useState(false);
@@ -29,14 +29,22 @@ export default function CreateEventFor(){
     const [description,setDescription] = useState("");
     const [startHour,setStartHour] = useState("");
     const [endHour,setEndHour] = useState("");
+    const  [documents, setDocuments] = useState([]);
 
     const [titleError,setTitleError] = useState("");
     const [dateError,setDateError] = useState("");
-    const [localizationError,setlLcalizationError] = useState("");
+    const [localizationError,setlLocalizationError] = useState("");
+    const [peopleError,setPeopleError] = useState("");
+    const [genderError,setGenderError] = useState("");
+    const [ageError,setAgeError] = useState("");
+    const [costError,setCostError] = useState("");
+    const [descriptionError,setDescriptionError] = useState("");
+    const [documentsError,setDocumentsError] = useState("");
 
 
     const [isLoaded, setIsLoaded] = useState(false);
     const [disciplineItems, setDisciplineItems] = useState([]);
+
 
     useEffect(() => {
 
@@ -51,9 +59,59 @@ export default function CreateEventFor(){
 
     },[]);
 
+    const resetErrors = () => {
 
+        setTitleError("");
+        setDateError("");
+        setlLocalizationError("");
+        setPeopleError("");
+        setGenderError("");
+        setAgeError("");
+        setCostError("");
+        setDescriptionError("");
+        setDocumentsError("");
+
+    };
 
     const onFormSubmit = () => {
+
+        resetErrors();
+
+        if(title === ""){
+            setTitleError("Title cannot be empty!");
+        }
+
+        if(date === "" || startHour === "" || endHour === ""){
+            setDateError("All date fields must be filled!");
+        }
+
+        if(city === "" || street === "" || number === "" || postal === ""){
+            setlLocalizationError("All localization fields must be filled!");
+        }
+
+        if(people === 0){
+            setPeopleError("People number cannot be null!");
+        }
+
+        if(!(male || female)){
+            setGenderError("You must check at least one gender!");
+        }
+
+        if(minAge === 0 || maxAge === 0){
+            setAgeError("Both age fields must be filled!")
+        }
+
+        if(cost === 0 || time === 0){
+            setCostError("Both cost fields must be filled!")
+        }
+
+        if(description === ""){
+            setDescriptionError("Description cannot be empty!");
+        }
+
+
+
+
 
 
 
@@ -71,6 +129,7 @@ export default function CreateEventFor(){
 
             <Form.Group controlId="formEventTitle">
                 <Form.Label className={"FormLabel mt-3"}>Event Title</Form.Label>
+                <h className={"ErrorHeader ml-4"}>{titleError}</h>
                 <Form.Control
                     className={"FormInputField"}
                     type="text" placeholder="Please, enter event title..."
@@ -79,6 +138,7 @@ export default function CreateEventFor(){
 
             <Form.Group controlId="formEventDate">
                 <Form.Label className={"FormLabel"}>Event Date</Form.Label>
+                <h className={"ErrorHeader ml-4"}>{dateError}</h>
                 <Form.Control
                     className={"FormInputField mb-4"}
                     type="date"
@@ -105,7 +165,7 @@ export default function CreateEventFor(){
 
             <Form.Group controlId="formEventLocalization">
                 <Form.Label className={"FormLabel"}>Event Localization</Form.Label>
-
+                <h className={"ErrorHeader ml-4"}>{localizationError}</h>
                 <InputGroup className={"d-md-flex flex-row d-none"}>
                     <Form.Control
                         className={"mr-3 FormInputField"}
@@ -180,6 +240,7 @@ export default function CreateEventFor(){
 
             <Form.Group controlId="formEventRequiredPeople">
                 <Form.Label className={"FormLabel mt-3"}>Required People Number</Form.Label>
+                <h className={"ErrorHeader ml-4"}>{peopleError}</h>
                 <Form.Control
                     className={"FormInputField"}
                     type="number"
@@ -190,9 +251,8 @@ export default function CreateEventFor(){
             </Form.Group>
 
             <Form.Group controlId="formEventPreferredGender">
-
                 <Form.Label className={"FormLabel"}>Preferred gender</Form.Label>
-
+                <h className={"ErrorHeader ml-4"}>{genderError}</h>
                 <InputGroup>
 
                     <Form.Check
@@ -219,6 +279,7 @@ export default function CreateEventFor(){
 
             <Form.Group controlId="formEventPreferredAgeRange">
                 <Form.Label className={"FormLabel"}>Preferred age range</Form.Label>
+                <h className={"ErrorHeader ml-4"}>{ageError}</h>
                 <InputGroup>
                     <Form.Control
                         type="number"
@@ -240,6 +301,7 @@ export default function CreateEventFor(){
 
             <Form.Group controlId="formEventCosts">
                 <Form.Label className={"FormLabel"}>Event costs</Form.Label>
+                <h className={"ErrorHeader ml-4"}>{costError}</h>
                 <InputGroup>
                     <Form.Control
                         type="number"
@@ -261,6 +323,7 @@ export default function CreateEventFor(){
 
             <Form.Group controlId="exampleForm.ControlTextarea1">
                 <Form.Label className={"FormLabel "}>Event Description</Form.Label>
+                <h className={"ErrorHeader ml-4"}>{descriptionError}</h>
                 <Form.Control
                     className={"FormInputField mb-5"}
                     as="textarea"
@@ -273,33 +336,21 @@ export default function CreateEventFor(){
 
             <Form.Group controlId="exampleForm.ControlInput1">
                 <Form.Label className={"FormLabel mt-3"} >Necessary documents</Form.Label>
-                <Form.Control className={"FormInputField"} type="file" multiple/>
+                <h className={"ErrorHeader ml-4"}>{documentsError}</h>
+                <Form.Control
+                    className={"FormInputField"}
+                    type="file" multiple
+                    onChange = {(e) => setDocuments(e.target.files)}
+                />
             </Form.Group>
-
-
 
             <Button
                 variant="primary"
-                type="submit"
                 className={"d-md-inline d-none w-50 createEventSubmitButton mt-3"}
                 onClick={onFormSubmit}
             >
                 Create Event
             </Button>
-
-            <Button
-                variant="primary"
-                type="submit"
-                className={"d-md-none d-inline w-100 createEventSubmitButton mt-3"}
-                onClick={onFormSubmit}
-            >
-                Create Event
-            </Button>
-
-
-
-
-
 
         </Form>
 

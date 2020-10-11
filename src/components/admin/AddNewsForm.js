@@ -14,7 +14,7 @@ export default function AddNewsForm(){
     const [shortText,setShortText] = useState("");
     const [linkText,setLinkText] = useState("");
     const [fullText,setFullText] = useState("");
-    const [image,setImage] = useState(null);
+    const [images,setImages] = useState([]);
 
     const onFormSubmit = () => {
 
@@ -24,7 +24,10 @@ export default function AddNewsForm(){
         formData.append('shortText',shortText);
         formData.append('linkText',linkText);
         formData.append('fullText',fullText);
-        formData.append('image',image);
+      //  formData.append('images',images);
+
+        for(const file of images)
+            formData.append("images",file);
 
         fetch('http://localhost:8080/news/add', { // Your POST endpoint
             method: 'POST',
@@ -84,12 +87,10 @@ export default function AddNewsForm(){
                 <ImageUploader
                     withIcon={false}
                     buttonText='Choose images'
-                    onChange={(pic) => setImage(pic[0])}
+                    onChange={(pic) => setImages(pic)}
                     imgExtension={['.jpg', '.gif', '.png', '.gif']}
                     withPreview = {true}
                     label=""
-                    singleImage = {true}
-
                 />
             </Form.Group>
 

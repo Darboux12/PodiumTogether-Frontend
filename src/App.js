@@ -23,6 +23,7 @@ import EmptyFooter from "./components/footer/EmptyFooter";
 import TestComponent from "./components/TestComponent";
 import AddSubject from "./components/admin/AddSubject";
 import AddDiscipline from "./components/admin/AddDiscipline";
+import NewsDetails from "./components/news/NewsDetails";
 
 class App extends React.Component {
 
@@ -42,6 +43,7 @@ class App extends React.Component {
             <Route path="/about" exact component={AboutPage}/>
             <Route path="/contact" exact component={ContactPage}/>
             <Route path="/news" exact component={NewsPage}/>
+            <Route path="/news/details/:id" exact component={NewsDetails}/>
             <Route path="/place/create" exact component={TagPlacePage}/>
             <Route path="/place/display" exact component={DisplayPlacesPage}/>
             <Route path="/event/details" exact component={EventDetailsPage}/>

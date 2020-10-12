@@ -14,15 +14,15 @@ export default function News(props){
 
             <div className={"newsContainer d-flex flex-row  align-items-center"}>
 
-                <img className={"newsImage"} src={`data:image/jpeg;base64,${props.image}`}  alt={"newsImage"}/>
+                <img className={"newsImage"} src={`data:image/jpeg;base64,${props.images[0].content}`}  alt={"newsImage"}/>
 
                 <div className={"newsTexts"}>
 
                     <h className={"newsHeader"}>{props.title}</h>
 
-                    <p  className={"newsParagraph mt-3 mb-3"}>{props.text}</p>
+                    <p  className={"newsParagraph mt-3 mb-3"}>{props.shortText}</p>
 
-                    <a className={"newsLink"} href={"#"}>{props.linkText}</a>
+                    <a className={"newsLink"} href={"/news/details/" + props.id}>{props.linkText}</a>
 
                     <h className={"newsDate"}>{format(date, "dd-MMMM-yyyy")}</h>
 

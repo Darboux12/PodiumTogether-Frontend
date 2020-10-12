@@ -22,8 +22,7 @@ export default function NewsPage(){
 
             })
 
-    });
-
+    },[]);
 
         return(
 
@@ -33,12 +32,13 @@ export default function NewsPage(){
 
                     {newsItems.map(item =>
                         <News
-                            title = {item.title}
-                            shortText = {item.shortText}
-                            image = {item.image}
-                            date = {item.date}
-                            text = {item.text}
-                            linkText = {item.linkText}
+                            title = {item.news.title}
+                            shortText = {item.news.shortText}
+                            images = {item.podiumFiles}
+                            date = {item.news.date}
+                            text = {item.news.text}
+                            linkText = {item.news.linkText}
+                            id = {item.news.newsId}
 
                         />
                     )}
@@ -49,10 +49,18 @@ export default function NewsPage(){
 
                 <div className={"d-md-none d-flex flex-column"}>
 
-                    <NewsMobile/>
-                    <NewsMobile/>
-                    <NewsMobile/>
-                    <NewsMobile/>
+                    {newsItems.map(item =>
+                        <NewsMobile
+                            title = {item.news.title}
+                            shortText = {item.news.shortText}
+                            images = {item.podiumFiles}
+                            date = {item.news.date}
+                            text = {item.news.text}
+                            linkText = {item.news.linkText}
+                            id = {item.news.newsId}
+
+                        />
+                    )}
 
                 </div>
 

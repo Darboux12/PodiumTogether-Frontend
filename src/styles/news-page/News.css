@@ -1,9 +1,12 @@
 .newsContainer{
-    position: relative;
+
     background: white;
     padding: 1em;
     margin-bottom: 1.3em;
     box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
+    font-size: 1.1em;
+
+
 
 }
 
@@ -18,9 +21,9 @@
 }
 
 .newsImage{
-    width: 10em;
-    height: 10em;
-    margin-right: 5em;
+    width: 100%;
+    height: 15em;
+
     border-radius: 20%;
 }
 
@@ -44,9 +47,33 @@
 
 .newsDate{
     position: absolute;
-    bottom: 1em;
+    bottom: 0em;
     right: 1em;
     color: black;
     opacity: 0.2;
 }
 
+.NewsMainRow{
+    position: relative;
+    display: flex;
+    align-items: center !important;
+    justify-content: center !important;
+
+}
+
+.NewsImageColumn{
+
+    display: flex;
+    align-items: center !important;
+    justify-content: center !important;
+
+}
+
+.NewsTextColumn{
+
+    display: flex;
+    flex-direction: column;
+    align-items: start !important;
+    justify-content: center !important;
+
+}

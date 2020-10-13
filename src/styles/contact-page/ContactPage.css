@@ -1,33 +1,21 @@
-.contactContainer{
 
-
-    width: 100%;
-
-
-
-}
-
-.contactMain{
-
-    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
-    padding: 1em !important;
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-}
-
-.contactTexts{
-
-    font-size: 1.3em;
-    text-align: start;
-
+.contactForm{
 
 
 
 }
 
+.contactInputLabel{
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.contactParagraph{
+
+    color: black;
+    margin-bottom:2em;
+
+}
 
 .contactHeader{
     font-weight: bold;
@@ -39,20 +27,22 @@
 
 }
 
-.contactParagraph{
+.ContactUpperRow{
 
-    color: black;
-    margin-bottom:2em;
-
-}
-
-.contactForm{
-
-
+    display: flex;
+    align-items: center !important;
+    justify-content: center !important;
 
 }
 
-.contactInputLabel{
-    font-size: 1.1em;
-    font-weight: bold;
+.ContactLowerRow{
+    display: flex;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.ContactContainer{
+    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
+    font-size: 1.2em;
+
 }

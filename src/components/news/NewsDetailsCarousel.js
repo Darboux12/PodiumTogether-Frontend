@@ -2,6 +2,8 @@
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
 
+import "../../styles/news-page/NewsImagesCarousel.css"
+
 export default function NewsDetailsCarousel(props) {
 
     const images = props.images;
@@ -20,8 +22,8 @@ export default function NewsDetailsCarousel(props) {
                 <Carousel.Item>
 
                     <img
-                        className="d-block w-100"
-                        src={`data:image/jpeg;base64,${images[0].content}`}
+                        className="d-block w-100 newsCarouselImage"
+                        src={`data:image/jpeg;base64,${item.content}`}
                         alt="First slide"
                     />
 

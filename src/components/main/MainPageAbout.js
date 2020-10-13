@@ -178,7 +178,7 @@ export default function MainPageAbout(props){
                     </Rotate>
 
                     <Rotate top right>
-                        <AboutItem
+                        <AboutItemMobile
                             header = "Don't hesitate! Join us now!"
                             paragraph = "Our community cannot wait to meet you
                             and share with you our amazing resources. Sign out and

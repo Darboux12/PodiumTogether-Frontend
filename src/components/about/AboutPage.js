@@ -17,7 +17,9 @@ export default function AboutPage() {
 
     return (
 
-        <Container className={"AboutContainer d-md-flex  flex-column d-none"}>
+        <Container className={"AboutContainer flex-column "}>
+
+            <div className={"d-md-flex flex-column d-none"}>
 
             <AboutItem
                 header = "Podium together?"
@@ -65,6 +67,60 @@ export default function AboutPage() {
 
                 image={springBrand}
             />
+
+            </div>
+
+            <div className={"d-md-none flex-column d-flex"}>
+
+                <AboutItemMobile
+                    header = "Podium together?"
+                    paragraph = "
+                        Podium together is a web application, designed and developed by one university student
+                            as an engineering thesis to graduate from Cracow University of Technology.
+
+                        "
+                    image={ universityBrand}
+                />
+
+                <AboutItemMobile
+
+                    header="The Idea"
+
+                    paragraph = "
+                         The idea
+                            of creating application was derived from sports passion and strong will of creating
+                            tool, that let people share their interests and sort out and simplify organizing
+                            sport events in their neighbourhood.
+
+                        "
+                    image={aboutIdea}
+                />
+
+                <AboutItemMobile
+
+                    header="Frontend & User Interface"
+
+                    paragraph =
+                        "All frontend & user Interface was designed and implemented
+                         using java script library ReactJS, including
+                         react hooks, react bootstrap and react reveal"
+
+                    image={reactBrand}
+                />
+
+                <AboutItemMobile
+
+                    header="Backend & Server side"
+
+                    paragraph =
+                        "Backend & Server side was designed and implemented
+                        using java framework spring, including spring boot"
+
+                    image={springBrand}
+                />
+
+            </div>
+
 
 
         </Container>

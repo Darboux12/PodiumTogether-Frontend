@@ -6,6 +6,8 @@ import Container from "react-bootstrap/Container";
 import NewsMobile from "./NewsMobile";
 import {Form} from "react-bootstrap";
 
+import serverAddress from "../config/Constants"
+
 export default function NewsPage(){
 
     const [isLoaded,setIsLoaded] = useState(false);
@@ -13,7 +15,7 @@ export default function NewsPage(){
 
     useEffect(() => {
 
-        fetch('http://localhost:8080/news/find/all')
+        fetch(serverAddress + '/news/find/all')
             .then(res => res.json())
             .then(res => {
 
@@ -28,7 +30,7 @@ export default function NewsPage(){
 
             <Container>
 
-                <div className={"d-md-flex flex-column d-none"}>
+                <div className={""}>
 
                     {newsItems.map(item =>
                         <News
@@ -47,22 +49,7 @@ export default function NewsPage(){
 
                 </div>
 
-                <div className={"d-md-none d-flex flex-column"}>
 
-                    {newsItems.map(item =>
-                        <NewsMobile
-                            title = {item.news.title}
-                            shortText = {item.news.shortText}
-                            images = {item.podiumFiles}
-                            date = {item.news.date}
-                            text = {item.news.text}
-                            linkText = {item.news.linkText}
-                            id = {item.news.newsId}
-
-                        />
-                    )}
-
-                </div>
 
             </Container>
 

@@ -3,6 +3,8 @@ import "../../styles/contact-page/ContactPage.css"
 import {Form} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export default function ContactPage(){
 
@@ -59,92 +61,86 @@ export default function ContactPage(){
 
     };
 
-    if(isLoaded){
-
         return(
 
-            <div className={"contactContainer d-flex flex-column align-items-center"}>
+            <Container className={"col-md-8 col-11 ContactContainer"}>
 
-                <div className={"contactMain"}>
+                <Row className={"ContactUpperRow"}>
 
+                    <Col className={""}>
 
-                    <div className={"contactTexts d-flex flex-column align-items-center col-md-10 col-12"}>
+                            <div className={"d-flex flex-column align-items-center mb-2"}>
 
-                        <div className={"d-flex flex-column align-items-center mb-2"}>
+                                <h className={"contactHeader"}>Contact us</h>
 
-                            <h className={"contactHeader"}>Contact us</h>
+                            </div>
 
-                        </div>
+                            <p className={"contactParagraph"}>
 
-                        <p className={"contactParagraph"}>
+                                If you experienced any difficulties or you just have
+                                some questions about our app, feel free to send us a message
+                                with your problem description.
 
-                            If you experienced any difficulties or you just have
-                            some questions about our app, feel free to send us a message
-                            with your problem description.
+                                <br/><br/>
 
-                            <br/><br/>
+                                You can be sure our team will consider individually your issue and help you with
+                                it!
 
-                            You can be sure our team will consider individually your issue and help you with
-                            it!
+                            </p>
 
-                        </p>
+                    </Col>
 
-                    </div>
+                </Row>
 
-                    <div className={"contactForm col-md-6 col-12"}>
+                <Row className={"ContactLowerRow mt-4"}>
 
-                        <Form>
+                    <Col>
 
-                            <Form.Group controlId="contactForm.email">
-                                <Form.Label className={"contactInputLabel"}>Your email address</Form.Label>
-                                <Form.Control
-                                    type="email"
-                                    placeholder="Email address..."
-                                    onChange = {(e) => setEmail(e.target.value)}/>
-                            </Form.Group>
+                                <Form>
 
-                            <Form.Group controlId="contactForm.subject">
-                                <Form.Label className={"contactInputLabel"}>Subject</Form.Label>
-                                <Form.Control as="select" onChange = {(e) => setSubject(e.target.value)}>
-                                    {subjectItems.map(item =>
-                                        <option key={item.name} value={item.name}>{item.name}</option>
-                                    )};
-                                </Form.Control>
-                            </Form.Group>
+                                    <Form.Group controlId="contactForm.email">
+                                        <Form.Label className={"contactInputLabel"}>Your email address</Form.Label>
+                                        <Form.Control
+                                            type="email"
+                                            placeholder="Email address..."
+                                            onChange = {(e) => setEmail(e.target.value)}/>
+                                    </Form.Group>
 
-                            <Form.Group controlId="contactForm.message">
-                                <Form.Label className={"contactInputLabel"}>Message</Form.Label>
-                                <Form.Control
-                                    as="textarea"
-                                    rows="6"
-                                    onChange = {(e) => setMessage(e.target.value)}/>
-                            </Form.Group>
+                                    <Form.Group controlId="contactForm.subject">
+                                        <Form.Label className={"contactInputLabel"}>Subject</Form.Label>
+                                        <Form.Control as="select" onChange = {(e) => setSubject(e.target.value)}>
+                                            {subjectItems.map(item =>
+                                                <option key={item.name} value={item.name}>{item.name}</option>
+                                            )};
+                                        </Form.Control>
+                                    </Form.Group>
 
-                        </Form>
+                                    <Form.Group controlId="contactForm.message">
+                                        <Form.Label className={"contactInputLabel"}>Message</Form.Label>
+                                        <Form.Control
+                                            as="textarea"
+                                            rows="6"
+                                            onChange = {(e) => setMessage(e.target.value)}/>
+                                    </Form.Group>
 
-                        <Button
-                            type={"submit"}
-                            variant="primary"
-                            onClick={onFormSubmit}
-                            className="signInModalButton mb-3"
-                        >
-                            Send
+                                </Form>
 
-                        </Button>
+                                <Button
+                                    type={"submit"}
+                                    variant="primary"
+                                    onClick={onFormSubmit}
+                                    className="signInModalButton mb-3"
+                                >
+                                    Send
 
-                    </div>
+                                </Button>
 
-                </div>
+                    </Col>
 
-            </div>
+                </Row>
+
+            </Container>
 
         );
-
-
-    }
-
-    else return <div/>
-
-
 }
 

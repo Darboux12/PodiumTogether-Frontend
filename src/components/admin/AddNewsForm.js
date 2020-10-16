@@ -6,6 +6,7 @@ import ImageUploader from 'react-images-upload';
 import "../../styles/admin/AddNewsForm.css"
 import {Form, InputGroup} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import serverAddress from "../config/Constants";
 
 
 export default function AddNewsForm(){
@@ -18,29 +19,55 @@ export default function AddNewsForm(){
 
     const onFormSubmit = () => {
 
-        const formData = new FormData();
+       const  ImageData  = new FormData();
 
-        formData.append('title',title);
-        formData.append('shortText',shortText);
-        formData.append('linkText',linkText);
-        formData.append('fullText',fullText);
-      //  formData.append('images',images);
+        const NewsData = {
+            title : title,
+            shortText : shortText,
+            linkText : linkText,
+            fullText : fullText
+        };
+
+
+
 
         for(const file of images)
-            formData.append("images",file);
+            ImageData.append("images",file);
 
-        fetch('http://localhost:8080/news/add', { // Your POST endpoint
+        ImageData.append("title",title);
+
+        fetch(serverAddress + '/news/add', { // Your POST endpoint
             method: 'POST',
-            body: formData
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify(NewsData)
 
         })
+            .then(response => response.json())
             .then(response => {
+
+                console.log(response);
 
                 if(response.ok)
                     alert("News was successfully added!");
             }
 
-        );
+             );
+
+        fetch(serverAddress + '/image/upload/news', { // Your POST endpoint
+            method: 'POST',
+            body: ImageData
+
+        })
+            .then(response => {
+
+                    if(response.ok)
+                        alert("Images was successfully added!");
+                }
+
+            );
 
     };
 
@@ -96,7 +123,6 @@ export default function AddNewsForm(){
 
             <Button
                 variant="primary"
-                type="submit"
                 className={"d-md-inline d-none w-50 createNewsSubmitButton mt-3"}
                 onClick={onFormSubmit}
             >

@@ -5,9 +5,11 @@ import Button from "react-bootstrap/Button";
 import InputGroup from 'react-bootstrap/InputGroup'
 
 import "../../styles/create-event/CreateEventForm.css"
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import FormControl from "react-bootstrap/FormControl";
+
+import serverAddress from "../config/Constants"
+import * as now from "date-fns";
+import ImageUploader from "react-images-upload";
+
 
 export default function CreateEventFor(){
 
@@ -21,7 +23,6 @@ export default function CreateEventFor(){
     const [people,setPeople] = useState(0);
     const [male,setMale] = useState(false);
     const [female,setFemale] = useState(false);
-    const [both,setBoth] = useState(false);
     const [minAge,setMinAge] = useState(0);
     const [maxAge,setMaxAge] = useState(0);
     const [cost,setCost] = useState(0);
@@ -29,7 +30,8 @@ export default function CreateEventFor(){
     const [description,setDescription] = useState("");
     const [startHour,setStartHour] = useState("");
     const [endHour,setEndHour] = useState("");
-    const  [documents, setDocuments] = useState([]);
+    const [documents, setDocuments] = useState([]);
+    const [images,setImages] = useState([]);
 
     const [titleError,setTitleError] = useState("");
     const [dateError,setDateError] = useState("");
@@ -48,7 +50,7 @@ export default function CreateEventFor(){
 
     useEffect(() => {
 
-        fetch('http://localhost:8080/discipline/find/all')
+        fetch(serverAddress + '/discipline/find/all')
             .then(res => res.json())
             .then(res => {
 
@@ -75,47 +77,142 @@ export default function CreateEventFor(){
 
     const onFormSubmit = () => {
 
+        const titleMaxLength = 70;
+        const peopleMaxNumber = 50;
+        const ageMin = 1;
+        const ageMax = 100;
+        const maxTIme = 168;
+        let noErrors = true;
+
         resetErrors();
 
         if(title === ""){
             setTitleError("Title cannot be empty!");
+            noErrors = false;
+        }
+
+        if (now.isAfter(new Date(), new Date(date))) {
+            setDateError("Date cannot be in the past!")
+            noErrors = false;
+        }
+
+        if(startHour > endHour){
+            setDateError("Start hour cannot be late then end hour!");
+            noErrors = false;
+        }
+
+        if(title.length > titleMaxLength){
+            setTitleError("Title cannot be longer than " + titleMaxLength + " characters!");
+            noErrors = false;
         }
 
         if(date === "" || startHour === "" || endHour === ""){
             setDateError("All date fields must be filled!");
+            noErrors = false;
         }
 
         if(city === "" || street === "" || number === "" || postal === ""){
             setlLocalizationError("All localization fields must be filled!");
+            noErrors = false;
         }
 
         if(people === 0){
             setPeopleError("People number cannot be null!");
+            noErrors = false;
+        }
+
+        if(people > peopleMaxNumber){
+            setPeopleError("People number cannot be bigger than " + peopleMaxNumber + " !")
+            noErrors = false;
         }
 
         if(!(male || female)){
             setGenderError("You must check at least one gender!");
+            noErrors = false;
         }
 
         if(minAge === 0 || maxAge === 0){
             setAgeError("Both age fields must be filled!")
+            noErrors = false;
+        }
+
+        if(minAge < ageMin || maxAge > ageMax){
+           setAgeError("Age must be contained in range 1 - 100 years old");
+           noErrors = false;
         }
 
         if(cost === 0 || time === 0){
-            setCostError("Both cost fields must be filled!")
+            setCostError("Both cost fields must be filled!");
+            noErrors = false;
+        }
+
+        if(cost <= "0" || time <= "0"){
+            setCostError("Both cost fields must be bigger than 0!");
+            noErrors = false;
+        }
+
+
+
+
+
+        if(time > '168'){
+            setCostError("Time cannot be longer than one week!");
+            noErrors = false;
         }
 
         if(description === ""){
             setDescriptionError("Description cannot be empty!");
+            noErrors = false;
         }
 
+        if(noErrors){
+
+            const formData = new FormData();
+            formData.append('title',title);
+            formData.append('city',city);
+            formData.append('street',street);
+            formData.append('postal',postal);
+            formData.append('discipline',discipline);
+            formData.append('people',people);
+            formData.append('minAge',minAge);
+            formData.append('maxAge',maxAge);
+            formData.append('cost',cost);
+            formData.append('time',time);
+            formData.append('description',description);
+            formData.append('startHour',startHour);
+            formData.append('endHour',endHour);
+            formData.append('date',date);
+            formData.append('number',number);
+
+            if(male)
+                formData.append('genders','male');
+            if(female)
+                formData.append('genders','female');
+
+            for(const file of documents)
+                formData.append("documents",file);
+
+            for(const file of images)
+                formData.append("images",file);
+
+            fetch(serverAddress + '/event/add', { // Your POST endpoint
+                method: 'POST',
+                body: formData
+
+            })
+                .then(response => {
+
+                        if(response.ok)
+                            alert("Event was successfully added!");
+                    }
+
+                );
 
 
 
 
 
-
-
+        }
 
 
 
@@ -181,7 +278,7 @@ export default function CreateEventFor(){
                     />
                     <Form.Control
                         className={"mr-3"}
-                        type="text"
+                        type="number"
                         placeholder="Number..."
                         onChange = {(e) => setNumber(e.target.value)}
                     />
@@ -283,7 +380,8 @@ export default function CreateEventFor(){
                 <InputGroup>
                     <Form.Control
                         type="number"
-                        min="1" max="99"
+                        min="1"
+                        max="100"
                         className={"mr-3 FormInputField"}
                         placeholder="Min age..."
                         onChange = {(e) => setMinAge(e.target.value)}
@@ -291,7 +389,7 @@ export default function CreateEventFor(){
                     <Form.Control
                         type="number"
                         min="1"
-                        max="99"
+                        max="100"
                         className={"FormInputField"}
                         placeholder="Max age..."
                         onChange = {(e) => setMaxAge(e.target.value)}
@@ -344,9 +442,21 @@ export default function CreateEventFor(){
                 />
             </Form.Group>
 
+            <Form.Group controlId="exampleForm.ControlInput1">
+                <Form.Label className={"FormLabel mt-1"} >Event Images</Form.Label>
+                <ImageUploader
+                    withIcon={false}
+                    buttonText='Choose images'
+                    onChange={(pic) => setImages(pic)}
+                    imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                    withPreview = {true}
+                    label=""
+                />
+            </Form.Group>
+
             <Button
                 variant="primary"
-                className={"d-md-inline d-none w-50 createEventSubmitButton mt-3"}
+                className={"d-inline col-md-6 col-12 createEventSubmitButton mt-3"}
                 onClick={onFormSubmit}
             >
                 Create Event

@@ -25,11 +25,8 @@ export default function AddNewsForm(){
             title : title,
             shortText : shortText,
             linkText : linkText,
-            fullText : fullText
+            text : fullText
         };
-
-
-
 
         for(const file of images)
             ImageData.append("images",file);
@@ -45,29 +42,31 @@ export default function AddNewsForm(){
             body: JSON.stringify(NewsData)
 
         })
-            .then(response => response.json())
+
             .then(response => {
 
-                console.log(response);
+                if(response.ok){
 
-                if(response.ok)
-                    alert("News was successfully added!");
+                    fetch(serverAddress + '/image/upload/news', { // Your POST endpoint
+                        method: 'POST',
+                        body: ImageData
+
+                    })
+                        .then(response => {
+
+                                if(response.ok)
+                                    alert("News was successfully added!");
+                            }
+
+                        );
+
+                }
+
             }
 
              );
 
-        fetch(serverAddress + '/image/upload/news', { // Your POST endpoint
-            method: 'POST',
-            body: ImageData
 
-        })
-            .then(response => {
-
-                    if(response.ok)
-                        alert("Images was successfully added!");
-                }
-
-            );
 
     };
 

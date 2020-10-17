@@ -34,13 +34,13 @@ export default function NewsPage(){
 
                     {newsItems.map(item =>
                         <News
-                            title = {item.news.title}
-                            shortText = {item.news.shortText}
+                            title = {item.title}
+                            shortText = {item.shortText}
                             images = {item.podiumFiles}
-                            date = {item.news.date}
-                            text = {item.news.text}
-                            linkText = {item.news.linkText}
-                            id = {item.news.newsId}
+                            date = {item.date}
+                            text = {item.text}
+                            linkText = {item.linkText}
+                            id = {item.id}
 
                         />
                     )}

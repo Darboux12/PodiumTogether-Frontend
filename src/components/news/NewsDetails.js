@@ -26,12 +26,12 @@ export default function NewsDetails(props) {
 
     useEffect(() => {
 
-        fetch(serverAddress + '/news/find/' + id)
+        fetch(serverAddress + '/news/find/id/' + id)
             .then(res => res.json())
             .then(res => {
 
                 setNewsItems(res);
-                setDate(new Date(res.news.date));
+                setDate(new Date(res.date));
                 setIsLoaded(true);
 
             });
@@ -70,7 +70,7 @@ export default function NewsDetails(props) {
                 </Col>
 
                 <Col className={"TitleColumn mt-md-0 mt-4 p-md-0 p-2 d-flex align-items-center justify-content-center"}>
-                    <h className={"NewsDetailsTitle"}>{newsItems.news.title}</h>
+                    <h className={"NewsDetailsTitle"}>{newsItems.title}</h>
 
                     <h
                         className={"NewsDetailsDate d-md-flex d-none"}>

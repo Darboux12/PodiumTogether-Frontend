@@ -11,24 +11,35 @@ export default function AddSubject() {
 
         const PostUrl = 'http://localhost:8080/subject/add';
 
-        const formData = new FormData();
-        formData.append("subject",subject);
+       const subjectData = {subject : subject};
 
         const requestOptions = {
             method: 'POST',
-            body: formData
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(subjectData)
         };
 
         fetch(PostUrl,requestOptions)
 
+            .then(res => res.json())
+
+            .then(res =>{
+
+                console.log("Tesponse: " + res.error);
+            })
+
+
             .then((res) => {
 
                 if (res.ok){
-                    alert("Response ok");
+                    alert("Subject was added!");
                 }
 
 
             })
+
 
 
     };
@@ -53,7 +64,6 @@ export default function AddSubject() {
 
                 <Button
                     variant="outline-primary"
-                    type="submit"
                     className={"d-md-inline d-none w-50 createNewsSubmitButton mt-3 mr-4"}
                     onClick={onFormSubmit}
                 >
@@ -62,7 +72,6 @@ export default function AddSubject() {
 
                 <Button
                     variant="outline-info"
-                    type="submit"
                     className={"d-md-inline d-none w-50 createNewsSubmitButton mt-3"}
                     href={"/admin/panel"}
                 >

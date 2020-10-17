@@ -54,11 +54,15 @@ export default function AddNewsForm(){
                     })
                         .then(response => {
 
+                            console.log(response.error);
+
                                 if(response.ok)
                                     alert("News was successfully added!");
                             }
 
-                        );
+                        )
+
+                .catch(err => { console.log(err) });
 
                 }
 

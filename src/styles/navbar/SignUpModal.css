@@ -12,22 +12,12 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-
-
-
 }
-
-
-
 
 .signUpModalFooter{
 
     height: 3em;
     background: darkslategrey;
-
-
-
-
 }
 
 .signInModalFooter > a{

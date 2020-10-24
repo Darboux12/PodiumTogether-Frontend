@@ -12,6 +12,20 @@ import Form from 'react-bootstrap/Form'
 import * as emailValidator from "email-validator";
 import isValidBirthdate from "is-valid-birthdate";
 
+import {existUserByUsernameEndpoint} from "../../config/Constants";
+import {existUserByEmailEndpoint} from "../../config/Constants";
+import {addUserEndpoint} from "../../config/Constants";
+import {findAllCountryEndpoint} from "../../config/Constants";
+
+import serverAddress from "../../config/Constants"
+
+import {minUsernameLength} from "../../config/Limits";
+import {maxUsernameLength} from "../../config/Limits";
+import {minPasswordLength} from "../../config/Limits";
+import {maxPasswordLength} from "../../config/Limits";
+import {maxEmailLength} from "../../config/Limits";
+import {minSignUpAge} from "../../config/Limits";
+
 export default function SignUpForm(props){
 
     const [email,setEmail] = useState("");
@@ -34,7 +48,7 @@ export default function SignUpForm(props){
 
     useEffect(() => {
 
-        fetch('http://localhost:8080/country/find/all')
+        fetch(serverAddress + findAllCountryEndpoint)
             .then(res => res.json())
             .then(res => {
 
@@ -45,16 +59,9 @@ export default function SignUpForm(props){
 
     },[]);
 
-    const onFormSubmit = () => {
+    const formValidation = () => {
 
-        const formData = {
-
-            email : email,
-            password : password,
-            username : username,
-            birthday : birthday,
-            country : country
-        };
+        let isOk = true;
 
         setEmailError("");
         setPasswordError("");
@@ -65,41 +72,70 @@ export default function SignUpForm(props){
 
         if(username === ""){
             setUsernameError("Username cannot be empty!");
+            isOk = false;
         }
+
+        if(username.length < minUsernameLength)
+            setUsernameError("Username must be longer than " + minUsernameLength + "!");
+
+        if(username.length > maxUsernameLength)
+            setUsernameError("Username must be shorter than " + maxUsernameLength + "!");
 
         if(email === ""){
             setEmailError("Email cannot be empty!");
+            isOk = false;
         }
+
+        if(email.length > maxEmailLength)
+            setEmailError("Email must be shorter than" + maxEmailLength + "!");
 
         if(password === ""){
             setPasswordError("Password cannot be empty!");
+            isOk = false;
         }
+
+        if(password.length < minPasswordLength)
+            setPasswordError("Password must be longer than " + minPasswordLength + "!");
+
+        if(password.length > maxPasswordLength)
+            setPasswordError("Password must be shorter than " + maxPasswordLength + "!");
 
         if(repeatPassword === ""){
             setRepeatPasswordError("Repeat password cannot be empty!");
+            isOk = false;
+        }
+
+        if(password !== repeatPassword){
+            setRepeatPasswordError("Repeat password must be the same as password!");
+            isOk = false;
         }
 
         if(birthday === ""){
             setBirthdayError("Birthday cannot be empty!");
+            isOk = false;
         }
 
         if(!termsAgreement){
             setTermsAgreementError("You must accept terms agreement!");
+            isOk = false;
         }
 
         if(email !== "" && !emailValidator.validate(email)){
             setEmailError("This is not correct email address!");
+            isOk = false;
         }
 
-        if(birthday !== "" && !isValidBirthdate(birthday,{ minAge: 13 })){
-            setBirthdayError("THis is not valid birthday or you are under 13")
+        if(birthday !== "" && !isValidBirthdate(birthday,{ minAge: minSignUpAge})){
+            setBirthdayError("THis is not valid birthday or you are under 13");
+            isOk = false;
         }
 
-        fetch('http://localhost:8080/user/exist/username/' + username)
+        fetch(serverAddress + existUserByUsernameEndpoint + username)
             .then((res) =>{
 
-                if(!res.ok){
+                if(res.ok){
                     setUsernameError("User with this username already exist!");
+                    isOk = false;
                 }
 
 
@@ -107,12 +143,12 @@ export default function SignUpForm(props){
             error => console.log(error) // Handle the error response object
         );
 
-        fetch('http://localhost:8080/user/exist/email/' + email)
+        fetch(serverAddress + existUserByEmailEndpoint + email)
             .then((res) =>{
 
-                if(!res.ok){
-                    alert(res.status);
+                if(res.ok){
                     setEmailError("Email address is already in usage!");
+                    isOk = false;
                 }
 
 
@@ -120,41 +156,50 @@ export default function SignUpForm(props){
             error => console.log(error) // Handle the error response object
         );
 
-        if(
-            emailError === "" &&
-            passwordError === "" &&
-            repeatPasswordError === "" &&
-            usernameError === "" &&
-            birthdayError === "" &&
-            termsAgreement
-        ){
 
-
-
-
-        fetch('http://localhost:8080/user/add', { // Your POST endpoint
-            method: 'POST',
-            headers : {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-
-        }).then(
-            response => response.json() // if the response is a JSON object
-        ).then(
-            success => console.log(success) // Handle the success response object
-        ).catch(
-            error => console.log(error) // Handle the error response object
-        );
-
-            props.showSignUpSuccessModal();
-
-        }
+        return isOk;
 
     };
 
+    const onFormSubmit = () => {
 
+        if(formValidation()){
+
+            const formData = {
+
+                email : email,
+                password : password,
+                username : username,
+                birthday : birthday,
+                country : country
+            };
+
+            fetch(serverAddress + addUserEndpoint, {
+            method: 'POST',
+            headers : {'Content-Type': 'application/json'},
+            body: JSON.stringify(formData)
+
+        }).then( res => {
+
+            if(res.ok){props.showSignUpSuccessModal();}
+
+            else return res.json();
+        })
+
+        .then( res => {
+
+                console.log(res);
+
+
+        });
+
+
+
+        }
+
+
+
+    };
 
         return(
 

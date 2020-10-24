@@ -5,24 +5,41 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import {serverAddress} from "../config/Constants";
+import {findAllSubjectEndpoint} from "../config/Constants";
+import {addContactEndpoint} from "../config/Constants";
+import * as emailValidator from "email-validator";
+import {maxEmailLength} from "../config/Limits";
+import {minContactMessageLength} from "../config/Limits";
+import {maxContactMessageLength} from "../config/Limits";
+import SubmitModal from "../common/SubmitModal";
+import SignInModal from "../navbar/modals/SignInModal";
 
 export default function ContactPage(){
 
     const [email, setEmail] = useState("");
-    const [subject, setSubject] = useState("v1");
+    const [subject, setSubject] = useState("");
     const [message, setMessage] = useState("");
+
+    const [emailError,setEmailError] = useState("");
+    const [subjectError,setSubjectError] = useState("");
+    const [messageError,setMessageError] = useState("");
 
     const [isLoaded, setIsLoaded] = useState(false);
     const [subjectItems, setSubjectItems] = useState([]);
 
+    const [submitModalVisible,setSubmitModalVisible] = useState(false);
+
     useEffect(() => {
 
-        fetch('http://localhost:8080/subject/find/all')
+        fetch(serverAddress + findAllSubjectEndpoint)
             .then(res => res.json())
             .then(res => {
 
                 setIsLoaded(true);
                 setSubjectItems(res);
+
+                setSubject(res[0].subject);
 
             })
 
@@ -30,7 +47,32 @@ export default function ContactPage(){
 
     const onFormSubmit = () => {
 
-        const PostUrl = 'http://localhost:8080/contact/add';
+        setEmailError("");
+        setMessageError("");
+        setSubjectError("");
+
+        if(email === "")
+            setEmailError("Email cannot be empty!");
+
+        if(subject === "")
+            setSubjectError("Subject cannot be empty!");
+
+        if(message === "")
+            setMessageError("Message cannot be empty!");
+
+        if(!emailValidator.validate(email))
+            setEmailError("This is not valid email address!");
+
+        if(email.length > maxEmailLength)
+            setEmailError("Email cannot be longer than " + maxEmailLength + " signs !");
+
+        if(message.length < minContactMessageLength)
+            setMessageError("Message cannot be shorter than " + minContactMessageLength + " signs !");
+
+        if(message.length > maxContactMessageLength)
+            setMessageError("Message cannot be longer than " + maxContactMessageLength + "signs !");
+
+        const PostUrl = serverAddress + addContactEndpoint;
 
         const contactRequest = {
             userEmail: email,
@@ -45,18 +87,23 @@ export default function ContactPage(){
         };
 
 
-
-
+        if(emailError === "" && subjectError === "" && messageError === "")
         fetch(PostUrl,requestOptions)
-
             .then((res) => {
 
                 if (res.ok){
-                    alert("Response ok");
+                    setSubmitModalVisible(true);
                 }
 
-
+               else return res.json();
             })
+
+            .then(res => {
+
+                console.log(res);
+            })
+
+
 
 
     };
@@ -96,48 +143,59 @@ export default function ContactPage(){
 
                     <Col>
 
-                                <Form>
+                        <Form>
 
-                                    <Form.Group controlId="contactForm.email">
+                            <Form.Group controlId="contactForm.email">
                                         <Form.Label className={"contactInputLabel"}>Your email address</Form.Label>
+                                        <h className={"ErrorHeader ml-3"}>{emailError}</h>
                                         <Form.Control
                                             type="email"
                                             placeholder="Email address..."
                                             onChange = {(e) => setEmail(e.target.value)}/>
-                                    </Form.Group>
+                            </Form.Group>
 
-                                    <Form.Group controlId="contactForm.subject">
-                                        <Form.Label className={"contactInputLabel"}>Subject</Form.Label>
-                                        <Form.Control as="select" onChange = {(e) => setSubject(e.target.value)}>
+                            <Form.Group controlId="contactForm.subject">
+                                <Form.Label className={"contactInputLabel"}>Subject</Form.Label>
+                                <h className={"ErrorHeader ml-3"}>{subjectError}</h>
+                                <Form.Control as="select" onChange = {(e) => setSubject(e.target.value)}>
                                             {subjectItems.map(item =>
-                                                <option key={item.name} value={item.name}>{item.name}</option>
+                                                <option key={item.subject} value={item.subject}>{item.subject}</option>
                                             )};
-                                        </Form.Control>
-                                    </Form.Group>
+                                </Form.Control>
+                            </Form.Group>
 
-                                    <Form.Group controlId="contactForm.message">
-                                        <Form.Label className={"contactInputLabel"}>Message</Form.Label>
-                                        <Form.Control
+                            <Form.Group controlId="contactForm.message">
+                                <Form.Label className={"contactInputLabel"}>Message</Form.Label>
+                                <h className={"ErrorHeader ml-3"}>{messageError}</h>
+                                <Form.Control
                                             as="textarea"
                                             rows="6"
                                             onChange = {(e) => setMessage(e.target.value)}/>
-                                    </Form.Group>
+                            </Form.Group>
 
-                                </Form>
+                        </Form>
 
-                                <Button
-                                    type={"submit"}
-                                    variant="primary"
-                                    onClick={onFormSubmit}
-                                    className="signInModalButton mb-3"
-                                >
-                                    Send
+                        <Button
+                            type={"submit"}
+                            variant="primary"
+                            onClick={onFormSubmit}
+                            className="signInModalButton mb-3 col-md-6 col-12"
+                        >
+                            Send
 
-                                </Button>
+                        </Button>
 
                     </Col>
 
                 </Row>
+
+                <SubmitModal
+                    isSubmitModalVisible={submitModalVisible}
+                    closeSubmitModal={() => setSubmitModalVisible(false)}
+                    text = "Contact request"
+                />
+
+
 
             </Container>
 

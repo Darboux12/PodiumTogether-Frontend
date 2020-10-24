@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import "../../../styles/navbar/SignInModal.css"
 import {faUser} from "@fortawesome/free-regular-svg-icons";
 import { axios} from "axios";
+import serverAddress, {existUserByUsernameEndpoint} from "../../config/Constants";
 
 export default function SignInForm(props){
 
@@ -17,50 +18,75 @@ export default function SignInForm(props){
     const [usernameError,setUsernameError] = useState("");
     const [passwordError,setPasswordError] = useState("");
 
-    const onFormSubmit = () => {
+    const formValidation = () => {
 
-        const PostUrl = 'http://localhost:8080/authenticate';
-
-        const user = {
-            username: username,
-            password: password
-        };
-
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(user)
-        };
+        let isOk = true;
 
         setUsernameError("");
         setPasswordError("");
 
-        if(user.username === ""){
-            setUsernameError("Username cannot be empty!")
+        if(username.username === ""){
+            setUsernameError("Username cannot be empty!");
+            isOk = false;
         }
 
-        if(user.password === ""){
-            setPasswordError("Password cannot be empty!")
+        if(password === ""){
+            setPasswordError("Password cannot be empty!");
+            isOk = false;
         }
 
+        fetch(serverAddress + existUserByUsernameEndpoint + username)
+            .then((res) =>{
+
+                if(!res.ok){
+                    setUsernameError("User with this username does not exist!");
+                    isOk = false;
+                }
 
 
-        if(user.username !== "" && user.password !== "")
+            }).catch(
+            error => console.log(error) // Handle the error response object
+        );
 
-            fetch(PostUrl,requestOptions)
+
+        return isOk;
+
+
+
+
+    };
+
+    const onFormSubmit = () => {
+
+        if(formValidation()) {
+
+
+            const PostUrl = 'http://localhost:8080/authenticate';
+
+            const user = {
+                username: username,
+                password: password
+            };
+
+            const requestOptions = {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(user)
+            };
+
+            fetch(PostUrl, requestOptions)
 
                 .then((res) => {
 
-                    if (res.status === 409){
-                       console.log("Server error 409");
-                    }
+                    if (!res.ok) {
 
-                    else return res.json()
+                        setPasswordError("Password is incorrect!");
+
+                    } else return res.json()
                 })
 
                 .then(res => {
-
-                    if(res.token !== undefined){
+                    if (res.token !== undefined) {
 
                         localStorage.setItem("authorizationToken", res.token);
                         localStorage.setItem("Username", res.username);
@@ -68,15 +94,13 @@ export default function SignInForm(props){
                         window.location.reload();
 
                     }
-
                 })
 
                 .catch((error) => {
                     console.log(error);
                 });
 
-
-
+        }
 
 
     };

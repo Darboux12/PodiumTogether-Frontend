@@ -12,6 +12,7 @@ export default function SubmitModal(props){
 
     let isSubmitModalVisible = props.isSubmitModalVisible;
     let onHide = props.closeSubmitModal;
+    let text = props.text;
 
     return(
 
@@ -21,7 +22,7 @@ export default function SubmitModal(props){
 
                 <div className={"d-flex flex-row submitModalHeaderIcon"}>
 
-                    <h className={"submitModalLowerHeader col-7"}>Data was successfully sent!</h>
+                    <h className={"submitModalLowerHeader col-7"}>{text} was successfully sent!</h>
 
                     <FontAwesomeIcon className={"submitModalIcon col-5"} id="logo-icon-2" icon={faCheckCircle}/>
 

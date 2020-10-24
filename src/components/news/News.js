@@ -33,7 +33,7 @@ export default function News(props){
 
                     </Col>
 
-                    <h className={"newsDate"}>{format(date, "dd-MMMM-yyyy")}</h>
+                    <h className={"newsDate"}>{format(date, "dd-MM-yyyy hh:mm")}</h>
 
                 </Row>
 

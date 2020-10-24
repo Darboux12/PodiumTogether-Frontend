@@ -1,10 +1,6 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
-import Slide from "react-reveal";
 import "../../styles/about-page/AboutPage.css"
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import achieveGreatThingsImage from "../../images/achieveGreatThings.jpg";
 import AboutItemMobile from "../about-item/AboutItemMobile";
 import AboutItem from "../about-item/AboutItem";
 
@@ -12,6 +8,7 @@ import universityBrand from "../../images/universityBrand.jpg"
 import aboutIdea from "../../images/aboutIdea.jpg"
 import reactBrand from "../../images/reactBrand.png"
 import springBrand from "../../images/springBrand.png"
+import restAssuredBrand from "../../images/restAssuredBrand.jpg"
 
 export default function AboutPage() {
 
@@ -68,6 +65,17 @@ export default function AboutPage() {
                 image={springBrand}
             />
 
+                <AboutItem
+
+                    header="Testing & validating"
+
+                    paragraph =
+                        "Testing of REST service was implemented using
+                        REST assured and JUnit"
+
+                    image={restAssuredBrand}
+                />
+
             </div>
 
             <div className={"d-md-none flex-column d-flex"}>
@@ -117,6 +125,17 @@ export default function AboutPage() {
                         using java framework spring, including spring boot"
 
                     image={springBrand}
+                />
+
+                <AboutItemMobile
+
+                    header="Testing & validating"
+
+                    paragraph =
+                        "Testing of REST service was implemented using
+                        REST assured and JUnit"
+
+                    image={restAssuredBrand}
                 />
 
             </div>

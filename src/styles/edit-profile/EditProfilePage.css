@@ -1,14 +1,37 @@
-.formEditLabel{
+.EditProfileRow{
+    justify-content: space-between;
 
 }
 
-.formEditInput{
+.EditProfileCategoryTitle{
+    font-weight: bold;
+}
+
+.AccordionToggle{
+
+    background: white !important;
+    cursor: pointer !important;
+    padding-left: 3em !important;
+    padding-right: 3em !important;
 
 }
 
-.formEditChange{
+.AccordionContainer{
+
+
 
 }
-.formEditSaveButton{
+
+.AccordionCard{
+
+    border: 1px solid grey !important;
+
+    margin-bottom: 2em;
+}
+.EditProfileEditHeader{
+
+}
+
+.EditProfileCategoryText{
 
 }

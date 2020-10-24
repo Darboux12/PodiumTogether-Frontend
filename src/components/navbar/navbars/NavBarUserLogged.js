@@ -58,7 +58,7 @@ function NavBarUserLogged(props){
                         My places
                     </Dropdown.Item>
 
-                    <Dropdown.Item href="/settings">
+                    <Dropdown.Item href="/user/profile/edit">
                         <FontAwesomeIcon className={"profileIcon"} icon={faMapMarkerAlt}/>
                         Settings
                     </Dropdown.Item>
@@ -143,7 +143,7 @@ function NavBarUserLogged(props){
                                 My places
                             </Dropdown.Item>
 
-                            <Dropdown.Item href="/settings">
+                            <Dropdown.Item href="/user/profile/edit">
                                 <FontAwesomeIcon className={"profileIcon"} icon={faMapMarkerAlt}/>
                                 Settings
                             </Dropdown.Item>

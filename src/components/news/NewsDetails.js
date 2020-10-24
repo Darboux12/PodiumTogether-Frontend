@@ -74,7 +74,7 @@ export default function NewsDetails(props) {
 
                     <h
                         className={"NewsDetailsDate d-md-flex d-none"}>
-                        {format(date, "dd-MMMM-yyyy")}
+                        {format(date, "dd-MM-yyyy")}
                     </h>
 
                 </Col>
@@ -83,16 +83,7 @@ export default function NewsDetails(props) {
 
             <Row className={"NewsDetailsTextRow mt-4"}>
 
-                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet animi, autem beatae, eum
-                    exercitationem illum ipsa ipsum magnam magni odit optio praesentium quam qui quibusdam reprehenderit
-                    ullam unde voluptas!
-                </div>
-                <div>Eos facilis labore quidem quisquam repellendus vel vitae! Debitis est minus quas rerum. Cupiditate
-                    deserunt eligendi illo iure molestiae necessitatibus nulla, numquam officia optio perspiciatis
-                    ratione saepe unde vel velit!
-                </div>
-
-
+                {newsItems.text}
 
 
             </Row>

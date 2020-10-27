@@ -89,7 +89,6 @@ export default function SignInForm(props){
                     if (res.token !== undefined) {
 
                         localStorage.setItem("authorizationToken", res.token);
-                        localStorage.setItem("Username", res.username);
                         localStorage.setItem("userLogged", true);
                         window.location.reload();
 

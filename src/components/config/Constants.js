@@ -13,3 +13,9 @@ export const addUserEndpoint = "/user/add";
 export const findUserByUsernameEndpoint = "/user/find/"; // Path variable {username}
 
 export const findAllCountryEndpoint = "/country/find/all";
+
+export const authenticateNoToken = "/authenticate/check";
+
+export const updateUserProfileEndpoint = "/user/update/profile";
+
+export const findUsernameFromTokenEndpoint = "/token/find/username";

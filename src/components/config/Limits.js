@@ -96,4 +96,6 @@ export const acceptedImagesTypes = (
     "image/raw"
 );
 
-export  const minSignUpAge = 13
+export const minSignUpAge = 13;
+
+export const maxUserDescriptionLength = 500;

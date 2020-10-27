@@ -75,30 +75,40 @@ export default function SignUpForm(props){
             isOk = false;
         }
 
-        if(username.length < minUsernameLength)
+        if(username.length < minUsernameLength){
             setUsernameError("Username must be longer than " + minUsernameLength + "!");
+            isOk = false;
+        }
 
-        if(username.length > maxUsernameLength)
+        if(username.length > maxUsernameLength){
             setUsernameError("Username must be shorter than " + maxUsernameLength + "!");
+            isOk = false;
+        }
 
         if(email === ""){
             setEmailError("Email cannot be empty!");
             isOk = false;
         }
 
-        if(email.length > maxEmailLength)
+        if(email.length > maxEmailLength){
             setEmailError("Email must be shorter than" + maxEmailLength + "!");
+            isOk = false;
+        }
 
         if(password === ""){
             setPasswordError("Password cannot be empty!");
             isOk = false;
         }
 
-        if(password.length < minPasswordLength)
+        if(password.length < minPasswordLength){
             setPasswordError("Password must be longer than " + minPasswordLength + "!");
+            isOk = false;
+        }
 
-        if(password.length > maxPasswordLength)
+        if(password.length > maxPasswordLength){
             setPasswordError("Password must be shorter than " + maxPasswordLength + "!");
+            isOk = false;
+        }
 
         if(repeatPassword === ""){
             setRepeatPasswordError("Repeat password cannot be empty!");
@@ -126,7 +136,7 @@ export default function SignUpForm(props){
         }
 
         if(birthday !== "" && !isValidBirthdate(birthday,{ minAge: minSignUpAge})){
-            setBirthdayError("THis is not valid birthday or you are under 13");
+            setBirthdayError("This is not valid birthday or you are under " + minSignUpAge);
             isOk = false;
         }
 

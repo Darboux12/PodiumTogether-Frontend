@@ -25,6 +25,8 @@ function NavBarUserLogged(props){
         setProfileImage(props.profileImage);
     }
 
+    if(props.loaded)
+
     return (
 
         <Navbar className={"Navbar"} sticky={"top"} collapseOnSelect expand="md" bg="dark" variant="dark">
@@ -177,6 +179,8 @@ function NavBarUserLogged(props){
         </Navbar>
 
     );
+
+    else return <div/>
 
 }
 

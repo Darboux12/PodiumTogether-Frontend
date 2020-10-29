@@ -8,7 +8,7 @@ import {faCalendarCheck, faUserCircle} from "@fortawesome/free-regular-svg-icons
 import {faGlobeEurope, faMapMarkerAlt, faRunning, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
 import SignInModal from "../modals/SignInModal";
 import SignUpModal from "../modals/SignUpModal";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import LogoNavbar from "../../common/LogoNavbar";
 import {faUserCog} from "@fortawesome/free-solid-svg-icons/faUserCog";
 import emptyProfile from "../../../images/emptyProfile.png"
@@ -20,12 +20,6 @@ function NavBarUserLogged(props){
     const [profileImage, setProfileImage] = useState(emptyProfile);
 
     const logOut = props.logOut;
-
-    if(props.profileImage !== undefined){
-        setProfileImage(props.profileImage);
-    }
-
-    if(props.loaded)
 
     return (
 
@@ -115,25 +109,24 @@ function NavBarUserLogged(props){
             <Nav>
                 <Nav.Item className={"d-flex flex-row align-items-center userProfileIcon"}>
 
-                    <a href={"/user/profile"} className={"d-md-flex d-none"}>
-                        <img className={"userProfileImage"} src={profileImage} alt="userProfileImage"/>
-                    </a>
+
 
                     <Dropdown>
 
                         <Dropdown.Toggle as={"header"} className={"dataToggle d-md-flex d-none"}>
-                            <h className={"userProfileHeader"}>{props.username}</h>
+                            <img className={"userProfileImage"} src={profileImage} alt="userProfileImage"/>
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu className={"dropdown-menu-center"}>
+
+                            <Dropdown.ItemText className={"ProfileNavbarUser"}>{props.username}</Dropdown.ItemText>
+
+                            <NavDropdown.Divider />
 
                             <Dropdown.Item href="/user/profile">
                                 <FontAwesomeIcon className={"profileIcon"} icon={faUserCircle}/>
                                 See your profile
                             </Dropdown.Item>
-
-
-                            <NavDropdown.Divider />
 
                             <Dropdown.Item href="/userEvents">
                                 <FontAwesomeIcon className={"profileIcon"} icon={faCalendarCheck}/>
@@ -180,7 +173,7 @@ function NavBarUserLogged(props){
 
     );
 
-    else return <div/>
+
 
 }
 

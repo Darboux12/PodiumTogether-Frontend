@@ -23,7 +23,7 @@ export default function SignUpSuccessModal(props){
 
             <Modal.Body>
 
-                <h>You were successfully signed up!</h>
+                <h>You were successfully signed up! </h>
 
                 <h>You can sign in now!</h>
 

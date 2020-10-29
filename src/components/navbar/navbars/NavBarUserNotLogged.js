@@ -89,6 +89,7 @@ function NavBarUserNotLogged(props){
         <SignInModal
             isSignInModalVisible={signInModalVisible}
             closeSignInModal={() => setSignInModalVisible(false)}
+            signInUser = {() => props.signInUser()}
         />
 
         <SignUpModal

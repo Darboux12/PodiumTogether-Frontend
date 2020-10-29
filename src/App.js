@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import MainPage from "./components/main/MainPage"
 import NavBar from "./components/navbar/navbars/NavBar"
@@ -25,9 +25,8 @@ import AddSubject from "./components/admin/AddSubject";
 import AddDiscipline from "./components/admin/AddDiscipline";
 import NewsDetails from "./components/news/NewsDetails";
 
-class App extends React.Component {
+function App() {
 
-  render() {
     return (
 
         <Router>
@@ -60,7 +59,8 @@ class App extends React.Component {
         </Router>
 
     );
-  }
+
+
 
 }
 

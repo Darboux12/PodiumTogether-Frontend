@@ -1,14 +1,22 @@
-import React, {Component, useEffect, useState} from "react";
+import React, {useState} from "react";
 import Container from "react-bootstrap/Container";
 import InputGroup from "react-bootstrap/InputGroup";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faUnlock, faEnvelope} from "@fortawesome/free-solid-svg-icons";
+import {faUnlock} from "@fortawesome/free-solid-svg-icons";
 import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import "../../../styles/navbar/SignInModal.css"
 import {faUser} from "@fortawesome/free-regular-svg-icons";
-import { axios} from "axios";
-import serverAddress, {existUserByUsernameEndpoint} from "../../config/Constants";
+import serverAddress, {
+    authenticateEndpoint,
+    existUserByUsernameEndpoint,
+    findExpirationDateFromTokenEndpoint,
+    findUsernameFromTokenEndpoint
+} from "../../config/Constants";
+import podiumStorage from "../../config/Storage";
+
+
+
 
 export default function SignInForm(props){
 
@@ -56,55 +64,120 @@ export default function SignInForm(props){
 
     };
 
-    const onFormSubmit = () => {
+    const findUserFetch = (token) => {
 
-        if(formValidation()) {
+        const formData = new FormData();
+        formData.append("token",token);
 
-
-            const PostUrl = 'http://localhost:8080/authenticate';
-
-            const user = {
-                username: username,
-                password: password
-            };
-
-            const requestOptions = {
+        fetch(serverAddress + findUsernameFromTokenEndpoint,
+            {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(user)
-            };
+                body: formData
+            })
 
-            fetch(PostUrl, requestOptions)
+            .then((res) => {
 
-                .then((res) => {
+                if (res.status !== 200)
+                    console.log("Token is invalid");
 
-                    if (!res.ok) {
+                else return res.json();
+            })
 
-                        setPasswordError("Password is incorrect!");
+            .then((res) => {
 
-                    } else return res.json()
-                })
+                podiumStorage.set("username", res.username);
 
-                .then(res => {
-                    if (res.token !== undefined) {
+        })
 
-                        localStorage.setItem("authorizationToken", res.token);
-                        localStorage.setItem("userLogged", true);
-                        window.location.reload();
-
-                    }
-                })
-
-                .catch((error) => {
-                    console.log(error);
-                });
-
-        }
+            .catch((error) => {
+                console.log(error);
+            });
 
 
     };
 
+    const findExpirationDateFetch = (token) => {
 
+        const formData = new FormData();
+        formData.append("token",token);
+
+        fetch(serverAddress + findExpirationDateFromTokenEndpoint,
+            {
+                method: 'POST',
+                body: formData
+            })
+
+            .then((res) => {
+
+                if (res.status !== 200)
+                    console.log("Token is invalid");
+
+                else return res.json();
+            })
+
+            .then((res) => {
+
+                const {expirationDate} = res;
+                podiumStorage.set("tokenExpirationDate", new Date(expirationDate));
+
+            })
+
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    const authenticateFetch = () => {
+
+        const user = {
+            username: username,
+            password: password
+        };
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(user)
+        };
+
+        fetch(serverAddress + authenticateEndpoint, requestOptions)
+
+            .then((res) => {
+
+                if (!res.ok) {
+                    setPasswordError("Password is incorrect!");
+
+                } else return res.json()
+            })
+
+            .then(res => {
+
+                    podiumStorage.set("authorizationToken",res.token);
+
+                    findUserFetch(res.token);
+
+                    findExpirationDateFetch(res.token);
+
+                    props.signInUser();
+
+            })
+
+            .catch((error) => {
+                console.log(error);
+            });
+
+
+
+
+    };
+
+    const onFormSubmit = () => {
+
+        if(formValidation()) {
+           authenticateFetch()
+        }
+
+    };
 
         return (
 

@@ -6,6 +6,8 @@ export const findAllSubjectEndpoint = "/subject/find/all";
 
 export default serverAddress;
 
+export const authenticateEndpoint = "/authenticate";
+
 
 export const existUserByUsernameEndpoint = "/user/exist/username/"; // Path variable {username}
 export const existUserByEmailEndpoint = "/user/exist/email/"; // Path variable {email}
@@ -19,3 +21,5 @@ export const authenticateNoToken = "/authenticate/check";
 export const updateUserProfileEndpoint = "/user/update/profile";
 
 export const findUsernameFromTokenEndpoint = "/token/find/username";
+
+export const findExpirationDateFromTokenEndpoint = "/token/find/expiration";

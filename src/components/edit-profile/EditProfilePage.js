@@ -23,6 +23,8 @@ import SubmitModal from "../common/SubmitModal";
 import FormControl from "react-bootstrap/FormControl";
 import isValidBirthdate from "is-valid-birthdate";
 import {maxUserDescriptionLength} from "../config/Limits";
+import podiumStorage from "../config/Storage";
+import ImageUploader from 'react-images-upload';
 
 export default function EditProfilePage() {
 
@@ -50,6 +52,7 @@ export default function EditProfilePage() {
     const [repeatPassword,setRepeatPassword] = useState("");
     const [oldPassword,setOldPassword] = useState("");
     const [description,setDescription] = useState("");
+    const [image,setImage] = useState([]);
 
 
     const [emailError,setEmailError] = useState("");
@@ -60,6 +63,7 @@ export default function EditProfilePage() {
     const [repeatPasswordError,setRepeatPasswordError] = useState("");
     const [oldPasswordError,setOldPasswordError] = useState("");
     const [descriptionError,setDescriptionError] = useState("");
+    const [imagesError,setImagesError] = useState("");
 
 
     const [emailConfirmation,setEmailConfirmation] = useState(false);
@@ -79,7 +83,7 @@ export default function EditProfilePage() {
 
     const [userData,setUserData] = useState("");
 
-    useEffect(() => {
+    const findAllCountriesFetch = () => {
 
         fetch(serverAddress + findAllCountryEndpoint)
             .then(res => res.json())
@@ -89,49 +93,38 @@ export default function EditProfilePage() {
                 setCountryItems(res);
 
             });
+    };
 
+    const findUserByUsernameFetch = () => {
 
+        let username = podiumStorage.get('username');
 
-        let usernameSession = localStorage.getItem('Username');
-
-        const PostUrl = serverAddress + findUserByUsernameEndpoint + usernameSession;
-
-
-
-        fetch(PostUrl)
+        fetch(serverAddress + findUserByUsernameEndpoint + username)
 
             .then((res) => {
 
-                    if (res.status === 409){
-                        console.log("Server error 409");
-                    }
+                if (res.status === 409)
+                    console.log("Server error 409");
 
-                    else return res.json()
-                })
+                else return res.json()
+            })
 
             .then(res => {
 
 
-                   setEmail(res.email);
-                   setUsername(res.username);
-                   setBirth(new Date(res.birthday));
-                   setCountry(res.country);
-                   setProfileImages(res.profileImages);
-
-                   setUserData(res);
-
-
-
-
-
-
-
-                })
+                setUserData(res);
+            })
 
             .catch((error) => {
-                    console.log(error);
-                });
+                console.log(error);
+            });
+    };
 
+    useEffect(() => {
+
+        findAllCountriesFetch();
+
+        findUserByUsernameFetch();
 
     },[]);
 
@@ -307,12 +300,9 @@ export default function EditProfilePage() {
                 isOk = false;
             }
 
-
-
-
-
-
         }
+
+
 
 
         return isOk;
@@ -347,33 +337,68 @@ export default function EditProfilePage() {
 
             };
 
-
-            if(id === usernameSubmitButtonId){
-
-                alert("Fetch try");
-
+            if(id === usernameSubmitButtonId)
                 updateRequest.username = username;
 
-                fetch(serverAddress + updateUserProfileEndpoint, {
+            if(id === emailSubmitButtonId)
+                updateRequest.email = email;
+
+            if(id === birthSubmitButtonId)
+                updateRequest.birthday = birth;
+
+            if(id === countrySubmitButtonId)
+                updateRequest.country = country;
+
+            if(id === passwordSubmitButtonId)
+                updateRequest.password = password;
+
+            if(id === descriptionSubmitButtonId)
+                updateRequest.description = description;
+
+            fetch(serverAddress + updateUserProfileEndpoint, {
                     method: 'POST',
                     headers : {'Content-Type': 'application/json'},
                     body: JSON.stringify(updateRequest)
 
-                }).then( res => {
-
-                    if(res.ok){setSubmitModalVisible(true);}
-
-                    else return res.json();
                 })
 
-                    .then( res => {
+                .then( res => {
+
+
+
+                        if(res.ok){
+
+                            if(id === usernameSubmitButtonId)
+                                podiumStorage.set('username',username);
+
+                        setSubmitModalVisible(true);
+
+
+                        setTimeout( () => {
+                            window.location.reload()
+                        },2000);
+
+
+
+
+                    }
+
+                        else return res.json();
+                })
+
+                .then( res => {
 
                         console.log(res);
 
 
                     });
 
-            }
+
+
+
+
+
+
 
 
 
@@ -392,7 +417,6 @@ export default function EditProfilePage() {
 
 
     };
-
 
 
     return(
@@ -574,7 +598,7 @@ export default function EditProfilePage() {
 
                         <Row className={"EditProfileRow"}>
                             <h className={"EditProfileCategoryTitle"}>Country</h>
-                            <h className={"EditProfileCategoryText"}>{country}</h>
+                            <h className={"EditProfileCategoryText"}>{userData.country}</h>
                             <h className={"EditProfileEditHeader"}>Edit</h>
                         </Row>
 
@@ -647,7 +671,7 @@ export default function EditProfilePage() {
 
                             <Form.Group controlId={""}>
 
-                                <Form.Label>Old Password</Form.Label>
+                                <Form.Label>Current Password</Form.Label>
 
                                 <h className={"ErrorHeader ml-3"}>{oldPasswordError}</h>
 
@@ -748,6 +772,7 @@ export default function EditProfilePage() {
 
                                     <Form.Control
                                         as="textarea" rows={6}
+                                        defaultValue={userData.description}
                                         className={"EditProfileInput col-6"}
                                         onChange = {(e) => setDescription(e.target.value)}
                                     />
@@ -781,7 +806,7 @@ export default function EditProfilePage() {
 
                 <Card className={"AccordionCard"}>
 
-                    <Accordion.Toggle as={Card.Header} eventKey="4" className={"AccordionToggle"}>
+                    <Accordion.Toggle as={Card.Header} eventKey="6" className={"AccordionToggle"}>
 
                         <Row className={"EditProfileRow"}>
                             <h className={"EditProfileCategoryTitle"}>Profile Images</h>
@@ -790,9 +815,39 @@ export default function EditProfilePage() {
 
                     </Accordion.Toggle>
 
-                    <Accordion.Collapse eventKey="4">
+                    <Accordion.Collapse eventKey="6">
 
                         <Card.Body>
+
+                            <Form.Group controlId="exampleForm.ControlInput1">
+                                <Form.Label className={"FormLabel mt-1"} >New Image</Form.Label>
+                                <h className={"ErrorHeader ml-3"}>{imagesError}</h>
+                                <ImageUploader
+                                    withIcon={false}
+                                    buttonText='Choose images'
+                                    onChange={(pic) => setImage(pic)}
+                                    imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                                    withPreview = {true}
+                                    label=""
+                                />
+                            </Form.Group>
+
+                            <Form.Group
+                                controlId={descriptionCheckboxId}
+                            >
+                                <Form.Check
+                                    className={"EditProfileCheckBox"}
+                                    type="checkbox"
+                                    label="Confirm change"
+                                    onChange = {(e) => setDescriptionConfirmation(e.target.checked)}/>
+                            </Form.Group>
+
+                            <Button
+                                id={descriptionSubmitButtonId}
+                                variant={"outline-primary"}
+                                onClick={(e) => onFormSubmit(e.target.id)}
+
+                            >Submit change</Button>
 
 
 

@@ -31,7 +31,7 @@ export default function SignInModal(props){
 
                 <Modal.Body>
 
-                    <SignInForm/>
+                    <SignInForm signInUser = {() => props.signInUser()}/>
 
                 </Modal.Body>
 

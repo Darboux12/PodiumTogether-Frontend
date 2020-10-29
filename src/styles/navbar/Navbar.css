@@ -8,8 +8,7 @@
     width: 3em;
     height: auto;
     border-radius: 30%;
-
-
+    margin-right: 2em;
 
 }
 
@@ -19,8 +18,9 @@
     font-weight: bold;
     margin-left: 0.4em;
     margin-right: 2em;
-}
 
+
+}
 
 .userProfileHeader:hover{
     opacity: 0.8;
@@ -45,4 +45,10 @@
     -webkit-transform: translate(-50%, 0);
     -o-transform: translate(-50%, 0);
     transform: translate(-50%, 0);
+}
+
+.ProfileNavbarUser{
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
 }

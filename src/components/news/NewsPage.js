@@ -26,11 +26,13 @@ export default function NewsPage(){
 
     },[]);
 
+    if(isLoaded)
+
         return(
 
-            <Container>
+            <Container className={"NewsContainerBitch"}>
 
-                <div className={""}>
+
 
                     {newsItems.map(item =>
                         <News
@@ -47,13 +49,15 @@ export default function NewsPage(){
 
 
 
-                </div>
+
 
 
 
             </Container>
 
         );
+
+    else return <div className={"EmptyNewsPage"}/>
 
 }
 

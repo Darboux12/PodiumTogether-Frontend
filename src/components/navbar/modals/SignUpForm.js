@@ -198,10 +198,13 @@ export default function SignUpForm(props){
 
         .then( res => {
 
+                console.log("Hello");
                 console.log(res);
 
 
-        });
+        })
+
+                .catch(err => { console.log(err) })
 
 
 

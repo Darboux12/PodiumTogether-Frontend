@@ -1,61 +1,75 @@
 import React, {Component, useEffect, useState} from "react";
-
 import Form from 'react-bootstrap/Form'
 import Button from "react-bootstrap/Button";
 import InputGroup from 'react-bootstrap/InputGroup'
-
 import "../../styles/create-event/CreateEventForm.css"
-
-import serverAddress from "../config/Constants"
+import serverAddress, {
+    findAllDisciplineEndpoint,
+    findAllGenderEndpoint, uploadEventFilesEndpoint,
+    uploadEventImagesEndpoint
+} from "../config/Constants"
 import * as now from "date-fns";
 import ImageUploader from "react-images-upload";
-
+import {maxEventMaxAge, maxEventPeopleLength, maxEventTitleLength, minEventMinAge} from "../config/Limits";
+import podiumStorage from "../config/Storage";
+import jwtDecode from "jwt-decode";
 
 export default function CreateEventFor(){
 
     const [title,setTitle] = useState("");
-    const [date,setDate] = useState("");
+    const [dateFrom,setDateFrom] = useState("");
+    const [dateTo,setDateTo] = useState("");
     const [city,setCity] = useState("");
     const [street,setStreet] = useState("");
     const [number,setNumber] = useState("");
     const [postal,setPostal] = useState("");
     const [discipline,setDiscipline] = useState("");
     const [people,setPeople] = useState(0);
-    const [male,setMale] = useState(false);
-    const [female,setFemale] = useState(false);
     const [minAge,setMinAge] = useState(0);
     const [maxAge,setMaxAge] = useState(0);
     const [cost,setCost] = useState(0);
-    const [time,setTime] = useState(0);
     const [description,setDescription] = useState("");
-    const [startHour,setStartHour] = useState("");
-    const [endHour,setEndHour] = useState("");
     const [documents, setDocuments] = useState([]);
     const [images,setImages] = useState([]);
+    const [genders,setGenders] = useState([]);
 
     const [titleError,setTitleError] = useState("");
     const [dateError,setDateError] = useState("");
-    const [localizationError,setlLocalizationError] = useState("");
+    const [localizationError,setLocalizationError] = useState("");
     const [peopleError,setPeopleError] = useState("");
     const [genderError,setGenderError] = useState("");
     const [ageError,setAgeError] = useState("");
     const [costError,setCostError] = useState("");
     const [descriptionError,setDescriptionError] = useState("");
     const [documentsError,setDocumentsError] = useState("");
-
-
-    const [isLoaded, setIsLoaded] = useState(false);
     const [disciplineItems, setDisciplineItems] = useState([]);
-
+    const [genderItems, setGenderItems] = useState([]);
 
     useEffect(() => {
 
-        fetch(serverAddress + '/discipline/find/all')
+        fetch(serverAddress + findAllDisciplineEndpoint)
+
             .then(res => res.json())
+
             .then(res => {
 
-                setIsLoaded(true);
                 setDisciplineItems(res);
+
+                setDiscipline(res[0].discipline);
+
+            })
+
+    },[]);
+
+    useEffect(() => {
+
+        fetch(serverAddress + findAllGenderEndpoint)
+
+            .then(res => res.json())
+
+            .then(res => {
+
+                setGenderItems(res);
 
             })
 
@@ -65,7 +79,7 @@ export default function CreateEventFor(){
 
         setTitleError("");
         setDateError("");
-        setlLocalizationError("");
+        setLocalizationError("");
         setPeopleError("");
         setGenderError("");
         setAgeError("");
@@ -75,138 +89,235 @@ export default function CreateEventFor(){
 
     };
 
-    const onFormSubmit = () => {
+    const addEventFetch = (eventRequest,imagesRequest,documentsRequest) => {
 
-        const titleMaxLength = 70;
-        const peopleMaxNumber = 50;
-        const ageMin = 1;
-        const ageMax = 100;
-        const maxTIme = 168;
-        let noErrors = true;
+        console.log(eventRequest);
 
-        resetErrors();
+        fetch(serverAddress + '/event/add', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(eventRequest)
+
+        })
+
+            .then(response => {
+
+                    if(response.ok){
+                        console.log("Event was successfully added!");
+                        uploadEventImagesFetch(imagesRequest);
+                        uploadEventFilesFetch(documentsRequest)
+                    }
+
+
+                    else return response.json()
+            })
+
+            .then(res => {
+
+                console.log(res);
+
+        })
+
+            .catch((error) => {
+                console.log(error);
+            });
+
+    };
+
+    const uploadEventImagesFetch = (requestBody) => {
+
+        fetch(serverAddress + uploadEventImagesEndpoint, {
+            method: 'POST',
+            body: requestBody
+        })
+
+            .then(response => {
+
+                if(response.ok)
+                    console.log("Images was successfully uploaded!");
+
+                else return response.json()
+            })
+
+            .then(res => {
+
+                console.log(res);
+
+            })
+
+            .catch((error) => {
+                console.log(error);
+            });
+
+    };
+
+    const uploadEventFilesFetch = (requestBody) => {
+
+
+
+        fetch(serverAddress + uploadEventFilesEndpoint, {
+            method: 'POST',
+            body: requestBody
+        })
+
+            .then(response => {
+
+                if(response.ok){
+                    console.log("Files was successfully uploaded!");
+                    alert("Files send");
+                }
+
+
+                else return response.json()
+            })
+
+            .then(res => {
+
+                console.log(res);
+
+            })
+
+            .catch((error) => {
+                console.log(error);
+            });
+
+    };
+
+    const formValidation = () => {
+
+        let isOk = true;
 
         if(title === ""){
             setTitleError("Title cannot be empty!");
-            noErrors = false;
+            isOk = false;
         }
 
-        if (now.isAfter(new Date(), new Date(date))) {
-            setDateError("Date cannot be in the past!")
-            noErrors = false;
+        if (now.isAfter(new Date(), new Date(dateFrom))) {
+            setDateError("Start date cannot be in the past!");
+            isOk = false;
         }
 
-        if(startHour > endHour){
-            setDateError("Start hour cannot be late then end hour!");
-            noErrors = false;
+        if (now.isAfter(new Date(), new Date(dateTo))) {
+            setDateError("End date cannot be in the past!");
+            isOk = false;
         }
 
-        if(title.length > titleMaxLength){
-            setTitleError("Title cannot be longer than " + titleMaxLength + " characters!");
-            noErrors = false;
+        if(now.isAfter(dateFrom,dateTo)){
+            setDateError("End date cannot be before date from!");
+            isOk = false;
         }
 
-        if(date === "" || startHour === "" || endHour === ""){
-            setDateError("All date fields must be filled!");
-            noErrors = false;
+        if(title.length > maxEventTitleLength){
+            setTitleError("Title cannot be longer than " + maxEventTitleLength + " characters!");
+            isOk = false;
         }
 
         if(city === "" || street === "" || number === "" || postal === ""){
-            setlLocalizationError("All localization fields must be filled!");
-            noErrors = false;
+            setLocalizationError("All localization fields must be filled!");
+            isOk = false;
         }
 
         if(people === 0){
             setPeopleError("People number cannot be null!");
-            noErrors = false;
+            isOk = false;
         }
 
-        if(people > peopleMaxNumber){
-            setPeopleError("People number cannot be bigger than " + peopleMaxNumber + " !")
-            noErrors = false;
+        if(people > maxEventPeopleLength){
+            setPeopleError("People number cannot be bigger than " + maxEventPeopleLength + " !");
+            isOk = false;
         }
 
-        if(!(male || female)){
+        if(genders.length === 0){
             setGenderError("You must check at least one gender!");
-            noErrors = false;
+            isOk = false;
         }
 
         if(minAge === 0 || maxAge === 0){
-            setAgeError("Both age fields must be filled!")
-            noErrors = false;
+            setAgeError("Both age fields must be filled!");
+            isOk = false;
         }
 
-        if(minAge < ageMin || maxAge > ageMax){
-           setAgeError("Age must be contained in range 1 - 100 years old");
-           noErrors = false;
+        if(minAge < minEventMinAge|| maxAge > maxEventMaxAge){
+            setAgeError("Age must be contained in range " + minEventMinAge + " - " + maxEventMaxAge);
+            isOk = false;
         }
 
-        if(cost === 0 || time === 0){
-            setCostError("Both cost fields must be filled!");
-            noErrors = false;
+        if(cost === 0){
+            setCostError("Cost field cannot be empty!");
+            isOk  = false;
         }
 
-        if(cost <= "0" || time <= "0"){
-            setCostError("Both cost fields must be bigger than 0!");
-            noErrors = false;
-        }
-
-
-
-
-
-        if(time > '168'){
-            setCostError("Time cannot be longer than one week!");
-            noErrors = false;
+        if(cost <= "0"){
+            setCostError("Event cost must be bigger than 0!");
+            isOk  = false;
         }
 
         if(description === ""){
             setDescriptionError("Description cannot be empty!");
-            noErrors = false;
+            isOk  = false;
         }
 
-        if(noErrors){
+        return isOk;
 
-            const formData = new FormData();
-            formData.append('title',title);
-            formData.append('city',city);
-            formData.append('street',street);
-            formData.append('postal',postal);
-            formData.append('discipline',discipline);
-            formData.append('people',people);
-            formData.append('minAge',minAge);
-            formData.append('maxAge',maxAge);
-            formData.append('cost',cost);
-            formData.append('time',time);
-            formData.append('description',description);
-            formData.append('startHour',startHour);
-            formData.append('endHour',endHour);
-            formData.append('date',date);
-            formData.append('number',number);
+    };
 
-            if(male)
-                formData.append('genders','male');
-            if(female)
-                formData.append('genders','female');
+    const onFormSubmit = () => {
+
+        resetErrors();
+
+        if(formValidation()){
+
+            const author =
+                podiumStorage.get("authorizationToken")
+                ? jwtDecode(podiumStorage.get("authorizationToken")).sub
+                    : "";
+
+            const eventRequest = {
+
+                title : title,
+                dateFrom : dateFrom,
+                dateTo : dateTo,
+                city : city,
+                street : street,
+                postal : postal,
+                number : number,
+                discipline : discipline,
+                people : people,
+                genders : genders,
+                minAge : minAge,
+                maxAge : maxAge,
+                cost : cost,
+                author : author,
+                description : description
+            };
+
+            const documentsRequest = new FormData();
 
             for(const file of documents)
-                formData.append("documents",file);
+                documentsRequest.append("files",file);
+
+            documentsRequest.append("title",title);
+
+            const imagesRequest = new FormData();
 
             for(const file of images)
-                formData.append("images",file);
+                imagesRequest.append("images",file);
 
-            fetch(serverAddress + '/event/add', { // Your POST endpoint
-                method: 'POST',
-                body: formData
+            imagesRequest.append("title",title);
 
-            })
-                .then(response => {
+            addEventFetch(eventRequest,imagesRequest,documentsRequest);
 
-                        if(response.ok)
-                            alert("Event was successfully added!");
-                    }
 
-                );
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -234,29 +345,22 @@ export default function CreateEventFor(){
             </Form.Group>
 
             <Form.Group controlId="formEventDate">
-                <Form.Label className={"FormLabel"}>Event Date</Form.Label>
+                <Form.Label className={"FormLabel"}>Start Date</Form.Label>
                 <h className={"ErrorHeader ml-4"}>{dateError}</h>
+
                 <Form.Control
                     className={"FormInputField mb-4"}
-                    type="date"
-                    onChange = {(e) => setDate(e.target.value)}
+                    type="datetime-local"
+                    onChange = {(e) => setDateFrom(e.target.value)}
+                />
+                <Form.Label className={"FormLabel"}>End Date</Form.Label>
+                <Form.Control
+                    className={"FormInputField mb-4"}
+                    type="datetime-local"
+                    onChange = {(e) => setDateTo(e.target.value)}
                 />
 
-                <div className={"d-flex flex-row"}>
 
-                    <Form.Control
-                        className={"FormInputField mr-5"}
-                        type="time"
-                        onChange = {(e) => setStartHour(e.target.value)}
-                    />
-
-                    <Form.Control
-                        className={"FormInputField"}
-                        type="time"
-                        onChange = {(e) => setEndHour(e.target.value)}
-                    />
-
-                </div>
 
             </Form.Group>
 
@@ -352,23 +456,24 @@ export default function CreateEventFor(){
                 <h className={"ErrorHeader ml-4"}>{genderError}</h>
                 <InputGroup>
 
-                    <Form.Check
-                        id="formRadioMale"
-                        name="formRadioMale"
-                        type="checkbox"
-                        label="Male"
-                        className={"genderRadioButton"}
-                        onChange = {(e) => setMale(e.target.checked)}
-                    />
+                    {genderItems.map(item =>
 
-                    <Form.Check
-                        id="formRadioFemale"
-                        name="formRadioFemale"
-                        type="checkbox"
-                        label="Female"
-                        className={"genderRadioButton"}
-                        onChange = {(e) => setFemale(e.target.checked)}
-                    />
+                        <Form.Check
+                            id="formRadio"
+                            name="formRadio"
+                            type="checkbox"
+                            label={item.gender}
+                            className={"genderRadioButton"}
+                            onChange = {(e) => setGenders(genders.concat(item.gender))}
+                        />
+
+                    )}
+
+
+
+
+
+
 
                 </InputGroup>
 
@@ -405,16 +510,9 @@ export default function CreateEventFor(){
                         type="number"
                         min="0"
                         step="0.1"
-                        className={"mr-3 FormInputField"}
+                        className={"FormInputField"}
                         placeholder="Price in PLN..."
                         onChange = {(e) => setCost(e.target.value)}
-                    />
-                    <Form.Control
-                        type="number"
-                        min="0"
-                        className={"FormInputField"}
-                        placeholder="Game time in hours..."
-                        onChange = {(e) => setTime(e.target.value)}
                     />
                 </InputGroup>
             </Form.Group>

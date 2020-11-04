@@ -13,7 +13,7 @@ import ContactPage from "./components/contact/ContactPage";
 import NewsPage from "./components/news/NewsPage";
 import TagPlacePage from "./components/tag-place/TagPlacePage";
 import DisplayPlacesPage from "./components/display-places/page/DisplayPlacesPage";
-import PrivateRoute from "./components/security/PrivateRouter";
+import PrivateRoute from "./components/security/PrivateRoute";
 import EventDetailsPage from "./components/event-details/page/EventDetailsPage";
 import EditProfilePage from "./components/edit-profile/EditProfilePage";
 import PlaceDetailsPage from "./components/place-details/page/PlaceDetailsPage";

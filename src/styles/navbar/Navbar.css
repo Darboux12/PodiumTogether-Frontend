@@ -2,15 +2,24 @@
 .Navbar{
     margin-bottom: 1.5em;
     font-size: 1.1em;
+
 }
 
 .userProfileImage{
-    width: 3em;
-    height: auto;
+    width: 4em;
+    height: 4em;
     border-radius: 30%;
     margin-right: 2em;
+    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
 
 }
+
+.userProfileImage:hover{
+    cursor: pointer;
+    box-shadow: 0 0 14px -3px white;
+
+}
+
 
 .userProfileHeader{
     color: white;

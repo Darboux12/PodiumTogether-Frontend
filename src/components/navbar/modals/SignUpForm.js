@@ -198,7 +198,14 @@ export default function SignUpForm(props){
 
         .then( res => {
 
-                console.log("Hello");
+            if(res.message === "email is not valid email address")
+                setEmailError("This is not valid email address!");
+
+
+
+
+
+
                 console.log(res);
 
 

@@ -1,0 +1,27 @@
+.AdminActionIcon{
+    font-size: 1.3em;
+
+}
+
+.AdminActionIcon:hover{
+    cursor: pointer;
+}
+
+.ActionIconsContainer{
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.DeleteIcon{
+    color: red;
+}
+
+.BanIcon{
+    color: navy;
+}
+
+.UnBanIcon{
+    color: forestgreen;
+}

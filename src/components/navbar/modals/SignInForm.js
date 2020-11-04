@@ -10,13 +10,11 @@ import {faUser} from "@fortawesome/free-regular-svg-icons";
 import serverAddress, {
     authenticateEndpoint,
     existUserByUsernameEndpoint,
-    findExpirationDateFromTokenEndpoint,
-    findUsernameFromTokenEndpoint
+    findUserByUsernameEndpoint,
+
 } from "../../config/Constants";
 import podiumStorage from "../../config/Storage";
-
-
-
+import jwtDecode from "jwt-decode";
 
 export default function SignInForm(props){
 
@@ -64,67 +62,30 @@ export default function SignInForm(props){
 
     };
 
-    const findUserFetch = (token) => {
+    const findUserFetch = () => {
 
-        const formData = new FormData();
-        formData.append("token",token);
+        let username = jwtDecode(podiumStorage.get("authorizationToken")).sub;
 
-        fetch(serverAddress + findUsernameFromTokenEndpoint,
-            {
-                method: 'POST',
-                body: formData
-            })
+        fetch(serverAddress + findUserByUsernameEndpoint + username)
 
-            .then((res) => {
+                    .then((res) => {
 
-                if (res.status !== 200)
-                    console.log("Token is invalid");
+                        if (res.status !== 200)
+                            console.log("Cannot find user by username");
 
-                else return res.json();
-            })
+                        else return res.json();
+                    })
 
             .then((res) => {
 
-                podiumStorage.set("username", res.username);
+                        podiumStorage.set("profileImage", res.profileImage);
 
-        })
+                    })
 
             .catch((error) => {
-                console.log(error);
-            });
+                        console.log(error);
+                    });
 
-
-    };
-
-    const findExpirationDateFetch = (token) => {
-
-        const formData = new FormData();
-        formData.append("token",token);
-
-        fetch(serverAddress + findExpirationDateFromTokenEndpoint,
-            {
-                method: 'POST',
-                body: formData
-            })
-
-            .then((res) => {
-
-                if (res.status !== 200)
-                    console.log("Token is invalid");
-
-                else return res.json();
-            })
-
-            .then((res) => {
-
-                const {expirationDate} = res;
-                podiumStorage.set("tokenExpirationDate", new Date(expirationDate));
-
-            })
-
-            .catch((error) => {
-                console.log(error);
-            });
     };
 
     const authenticateFetch = () => {
@@ -153,12 +114,12 @@ export default function SignInForm(props){
             .then(res => {
 
                     podiumStorage.set("authorizationToken",res.token);
-
                     findUserFetch(res.token);
 
-                    findExpirationDateFetch(res.token);
+                    setTimeout(() => {
+                        props.signInUser();
 
-                    props.signInUser();
+                    },500);
 
             })
 
@@ -166,15 +127,12 @@ export default function SignInForm(props){
                 console.log(error);
             });
 
-
-
-
     };
 
     const onFormSubmit = () => {
 
         if(formValidation()) {
-           authenticateFetch()
+           authenticateFetch();
         }
 
     };

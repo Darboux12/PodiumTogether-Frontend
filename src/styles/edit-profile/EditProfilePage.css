@@ -24,15 +24,22 @@
 
 .AccordionCard{
 
-    border: 1px solid grey !important;
 
     margin-bottom: 2em;
+    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
 }
 .EditProfileEditHeader{
+    color: #1B75BC;
 
+}
+
+.EditProfileEditHeader:hover{
+    text-decoration: underline;
 }
 
 .EditProfileCategoryText{
+
+
 
 }
 
@@ -40,6 +47,7 @@
     margin-right: 1em;
 }
 
-body{
-
+.EditProfileCurrentImage{
+    width: 6em;
+    height: 6em;
 }

@@ -1,14 +1,33 @@
 import Container from "react-bootstrap/Container";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 import "../../styles/admin/AdminPanel.css"
 import Table from "react-bootstrap/Table";
+import UsersTable from "./UsersTable";
+import podiumStorage from "../config/Storage";
+import jwtDecode from "jwt-decode";
 
 export default function AdminPanel() {
 
+    const [isUserTableVisible, setIsUserTableVisible] = useState(false);
+
+    const userTable = isUserTableVisible ? <UsersTable/> : <div/>;
+
+    const userButtonText = isUserTableVisible ? 'Hide all users' : 'Display all users';
+
+
+    const testFun = () => {
+
+        let token = podiumStorage.get("authorizationToken");
+
+        let tokenExpiration = jwtDecode(token);
+
+        console.log(tokenExpiration);
+
+    };
 
     return(
 
@@ -18,35 +37,7 @@ export default function AdminPanel() {
 
                 <Col className={"AdminDisplayColumn col-10"}>
 
-                    <Table striped bordered hover variant="dark">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td colSpan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
-                        </tbody>
-                    </Table>
+                    {userTable}
 
                 </Col>
 
@@ -55,7 +46,9 @@ export default function AdminPanel() {
                     <Button
                         variant={"outline-dark"}
                         className={"AdminMenuButton"}
-                        href={"/news/create"}>Display all users
+                        onClick={() => setIsUserTableVisible(!isUserTableVisible)}
+                    >{userButtonText}
+
                     </Button>
 
                     <Button
@@ -74,6 +67,14 @@ export default function AdminPanel() {
                         variant={"outline-dark"}
                         className={"AdminMenuButton"}
                         href={"/discipline/add"}>Add discipline
+                    </Button>
+
+
+                    <Button
+                    onClick={testFun}>
+
+
+                        Test
                     </Button>
 
 

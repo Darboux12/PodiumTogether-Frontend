@@ -20,12 +20,12 @@ export default function AddDiscipline() {
 
         const PostUrl = 'http://localhost:8080/discipline/add';
 
-        const formData = new FormData();
-        formData.append("discipline",discipline);
+        const disciplineRequest = {discipline : discipline};
 
         const requestOptions = {
             method: 'POST',
-            body: formData
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(disciplineRequest)
         };
 
         fetch('http://localhost:8080/discipline/exist/' + discipline)

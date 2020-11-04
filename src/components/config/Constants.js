@@ -23,3 +23,17 @@ export const updateUserProfileEndpoint = "/user/update/profile";
 export const findUsernameFromTokenEndpoint = "/token/find/username";
 
 export const findExpirationDateFromTokenEndpoint = "/token/find/expiration";
+
+export const newsImagesUploadEndpoint = "/image/upload/news";
+
+export const profileImageUploadEndpoint = "/image/upload/profile";
+
+export const deleteUserEndpoint = "/user/delete/"; // Path variable {username}
+
+export const findAllGenderEndpoint = "/gender/find/all";
+
+export const findAllDisciplineEndpoint = "/discipline/find/all";
+
+export const uploadEventImagesEndpoint =  "/image/upload/event";
+
+export const uploadEventFilesEndpoint = "/file/upload/event";

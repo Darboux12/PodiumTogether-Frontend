@@ -5,21 +5,34 @@ import userProfileImage from "../../../images/person.jpg";
 import Dropdown from "react-bootstrap/Dropdown";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCalendarCheck, faUserCircle} from "@fortawesome/free-regular-svg-icons";
-import {faGlobeEurope, faMapMarkerAlt, faRunning, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
+import {faCog, faGlobeEurope, faMapMarkerAlt, faRunning, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
 import SignInModal from "../modals/SignInModal";
 import SignUpModal from "../modals/SignUpModal";
 import React, {useEffect, useState} from "react";
 import LogoNavbar from "../../common/LogoNavbar";
 import {faUserCog} from "@fortawesome/free-solid-svg-icons/faUserCog";
 import emptyProfile from "../../../images/emptyProfile.png"
+import podiumStorage from "../../config/Storage";
+import jwtDecode from "jwt-decode";
 
 function NavBarUserLogged(props){
 
     const [signInModalVisible,setSignInModalVisible] = useState(false);
     const [signUpModalVisible,setSignUpModalVisible] = useState(false);
-    const [profileImage, setProfileImage] = useState(emptyProfile);
-
     const logOut = props.logOut;
+    const [profileImage,setProfileImage] = useState(emptyProfile);
+    const username = jwtDecode(podiumStorage.get("authorizationToken")).sub;
+
+    useEffect(() =>{
+
+        if(podiumStorage.get("profileImage")){
+
+            setProfileImage(
+                `data:image/jpeg;base64,${ podiumStorage.get("profileImage").content}`
+            );
+        }
+
+        });
 
     return (
 
@@ -55,7 +68,7 @@ function NavBarUserLogged(props){
                     </Dropdown.Item>
 
                     <Dropdown.Item href="/user/profile/edit">
-                        <FontAwesomeIcon className={"profileIcon"} icon={faMapMarkerAlt}/>
+                        <FontAwesomeIcon className={"profileIcon"} icon={faCog}/>
                         Settings
                     </Dropdown.Item>
 
@@ -107,19 +120,21 @@ function NavBarUserLogged(props){
             </Nav>
 
             <Nav>
+
                 <Nav.Item className={"d-flex flex-row align-items-center userProfileIcon"}>
-
-
 
                     <Dropdown>
 
                         <Dropdown.Toggle as={"header"} className={"dataToggle d-md-flex d-none"}>
-                            <img className={"userProfileImage"} src={profileImage} alt="userProfileImage"/>
+                            <img
+                                className={"userProfileImage"}
+                                src={profileImage}
+                                alt="userProfileImage"/>
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu className={"dropdown-menu-center"}>
 
-                            <Dropdown.ItemText className={"ProfileNavbarUser"}>{props.username}</Dropdown.ItemText>
+                            <Dropdown.ItemText className={"ProfileNavbarUser"}>{username}</Dropdown.ItemText>
 
                             <NavDropdown.Divider />
 
@@ -139,7 +154,7 @@ function NavBarUserLogged(props){
                             </Dropdown.Item>
 
                             <Dropdown.Item href="/user/profile/edit">
-                                <FontAwesomeIcon className={"profileIcon"} icon={faMapMarkerAlt}/>
+                                <FontAwesomeIcon className={"profileIcon"} icon={faCog}/>
                                 Settings
                             </Dropdown.Item>
 

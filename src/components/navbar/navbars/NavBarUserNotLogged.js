@@ -103,7 +103,7 @@ function NavBarUserNotLogged(props){
             closeSignUpModal={() => setSignUpSuccessModalVisible(false)}
         />
 
-    </Navbar>
+        </Navbar>
 
     );
 

@@ -6,7 +6,7 @@ import ImageUploader from 'react-images-upload';
 import "../../styles/admin/AddNewsForm.css"
 import {Form, InputGroup} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import serverAddress from "../config/Constants";
+import serverAddress, {newsImagesUploadEndpoint} from "../config/Constants";
 import {minNewsTitleLength} from "../config/Limits";
 import {maxNewsTitleLength} from "../config/Limits";
 import {minNewsShortTextLength} from "../config/Limits";
@@ -112,7 +112,7 @@ export default function AddNewsForm(props){
 
             ImageData.append("title",title);
 
-            fetch(serverAddress + '/news/add', { // Your POST endpoint
+            fetch(serverAddress + '/news/add', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(NewsData)
@@ -122,7 +122,7 @@ export default function AddNewsForm(props){
 
                     if(response.ok){
 
-                        fetch(serverAddress + '/image/upload/news', { // Your POST endpoint
+                        fetch(serverAddress + newsImagesUploadEndpoint, { // Your POST endpoint
                             method: 'POST',
                             body: ImageData
 

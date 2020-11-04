@@ -7,7 +7,12 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
-import serverAddress, {addUserEndpoint, authenticateNoToken, findAllCountryEndpoint} from "../config/Constants"
+import serverAddress, {
+    addUserEndpoint,
+    authenticateNoToken,
+    findAllCountryEndpoint,
+    profileImageUploadEndpoint
+} from "../config/Constants"
 import {findUserByUsernameEndpoint} from "../config/Constants";
 import {updateUserProfileEndpoint} from "../config/Constants";
 import {
@@ -25,6 +30,7 @@ import isValidBirthdate from "is-valid-birthdate";
 import {maxUserDescriptionLength} from "../config/Limits";
 import podiumStorage from "../config/Storage";
 import ImageUploader from 'react-images-upload';
+import jwtDecode from "jwt-decode";
 
 export default function EditProfilePage() {
 
@@ -34,7 +40,7 @@ export default function EditProfilePage() {
     const countrySubmitButtonId = "CountrySubmitButton";
     const passwordSubmitButtonId = "PasswordSubmitButton";
     const descriptionSubmitButtonId = "DescriptionSubmitButton";
-
+    const imageSubmitButtonId = "ImageSubmitButton";
 
     const emailCheckboxId = "EmailCheckbox";
     const usernameCheckboxId = "UsernameCheckbox";
@@ -42,7 +48,7 @@ export default function EditProfilePage() {
     const countryCheckboxId = "CountryCheckbox";
     const passwordCheckboxId = "PasswordCheckbox";
     const descriptionCheckboxId = "DescriptionCheckbox";
-
+    const imageCheckboxId = "ImageCheckbox";
 
     const [email,setEmail] = useState("");
     const [username,setUsername] = useState("");
@@ -52,8 +58,7 @@ export default function EditProfilePage() {
     const [repeatPassword,setRepeatPassword] = useState("");
     const [oldPassword,setOldPassword] = useState("");
     const [description,setDescription] = useState("");
-    const [image,setImage] = useState([]);
-
+    const [image,setImage] = useState("");
 
     const [emailError,setEmailError] = useState("");
     const [usernameError,setUsernameError] = useState("");
@@ -65,23 +70,21 @@ export default function EditProfilePage() {
     const [descriptionError,setDescriptionError] = useState("");
     const [imagesError,setImagesError] = useState("");
 
-
     const [emailConfirmation,setEmailConfirmation] = useState(false);
     const [usernameConfirmation,setUsernameConfirmation] = useState(false);
     const [birthConfirmation,setBirthConfirmation] = useState(false);
     const [countryConfirmation,setCountryConfirmation] = useState(false);
     const [passwordConfirmation,setPasswordConfirmation] = useState(false);
     const [descriptionConfirmation,setDescriptionConfirmation] = useState(false);
+    const [imageConfirmation,setImageConfirmation] = useState(false);
 
-
-    const [isLoaded, setIsLoaded] = useState(false);
     const [countryItems, setCountryItems] = useState([]);
-
-    const [profileImages,setProfileImages] = useState([]);
-
     const [submitModalVisible,setSubmitModalVisible] = useState(false);
-
     const [userData,setUserData] = useState("");
+    const [isLoaded,setIsLoaded] = useState(false);
+    const profileImage = podiumStorage.get("profileImage")
+    ? `data:image/jpeg;base64,${podiumStorage.get("profileImage").content}` :
+        "";
 
     const findAllCountriesFetch = () => {
 
@@ -89,7 +92,6 @@ export default function EditProfilePage() {
             .then(res => res.json())
             .then(res => {
 
-                setIsLoaded(true);
                 setCountryItems(res);
 
             });
@@ -97,7 +99,33 @@ export default function EditProfilePage() {
 
     const findUserByUsernameFetch = () => {
 
-        let username = podiumStorage.get('username');
+        let username = podiumStorage.get("authorizationToken")
+            ? jwtDecode(podiumStorage.get("authorizationToken")).sub : "";
+
+        fetch(serverAddress + findUserByUsernameEndpoint + username)
+
+            .then((res) => {
+
+                if (res.status === 409)
+                    console.log("Server error 409");
+
+                else return res.json()
+            })
+
+            .then(res => {
+                setUserData(res);
+                setIsLoaded(true);
+            })
+
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    const changeUserProfileImage = () => {
+
+        let username = podiumStorage.get("authorizationToken")
+            ? jwtDecode(podiumStorage.get("authorizationToken")).sub : "";
 
         fetch(serverAddress + findUserByUsernameEndpoint + username)
 
@@ -111,13 +139,25 @@ export default function EditProfilePage() {
 
             .then(res => {
 
+                podiumStorage.set("profileImage", res.profileImage);
 
-                setUserData(res);
+                setSubmitModalVisible(true);
+
+                setTimeout(() => {
+                    window.location.reload()
+                }, 2000);
+
+
+
             })
 
             .catch((error) => {
                 console.log(error);
             });
+
+
+
+
     };
 
     useEffect(() => {
@@ -125,6 +165,8 @@ export default function EditProfilePage() {
         findAllCountriesFetch();
 
         findUserByUsernameFetch();
+
+
 
     },[]);
 
@@ -139,6 +181,7 @@ export default function EditProfilePage() {
         setPasswordError("");
         setOldPasswordError("");
         setRepeatPasswordError("");
+        setImagesError("");
 
         if(id === emailSubmitButtonId){
 
@@ -281,6 +324,10 @@ export default function EditProfilePage() {
 
                 .catch((error) => {console.log(error);});
 
+            setTimeout( () => {
+
+            },1000);
+
         }
 
         if(id === descriptionSubmitButtonId){
@@ -302,14 +349,16 @@ export default function EditProfilePage() {
 
         }
 
+        if(id === imageSubmitButtonId){
 
+            if(!imageConfirmation){
+                setImagesError("You must confirm change!");
+                isOk = false;
+            }
 
+        }
 
         return isOk;
-
-
-
-
 
     };
 
@@ -324,74 +373,101 @@ export default function EditProfilePage() {
             document.getElementById(countryCheckboxId).checked = false;
             document.getElementById(passwordCheckboxId).checked = false;
             document.getElementById(descriptionCheckboxId).checked = false;
+            document.getElementById(imageCheckboxId).checked = false;
 
-            let updateRequest = {
+            if(id !== imageSubmitButtonId) {
 
-                id : userData.id,
-                username : userData.username,
-                email : userData.email,
-                password : userData.password,
-                country : userData.country,
-                birthday : userData. birthday,
-                description : userData.description
+                let updateRequest = {
 
-            };
+                    id: userData.id,
+                    username: userData.username,
+                    email: userData.email,
+                    password: userData.password,
+                    country: userData.country,
+                    birthday: userData.birthday,
+                    description: userData.description
 
-            if(id === usernameSubmitButtonId)
-                updateRequest.username = username;
+                };
 
-            if(id === emailSubmitButtonId)
-                updateRequest.email = email;
+                if (id === usernameSubmitButtonId)
+                    updateRequest.username = username;
 
-            if(id === birthSubmitButtonId)
-                updateRequest.birthday = birth;
+                if (id === emailSubmitButtonId)
+                    updateRequest.email = email;
 
-            if(id === countrySubmitButtonId)
-                updateRequest.country = country;
+                if (id === birthSubmitButtonId)
+                    updateRequest.birthday = birth;
 
-            if(id === passwordSubmitButtonId)
-                updateRequest.password = password;
+                if (id === countrySubmitButtonId)
+                    updateRequest.country = country;
 
-            if(id === descriptionSubmitButtonId)
-                updateRequest.description = description;
+                if (id === passwordSubmitButtonId)
+                    updateRequest.password = password;
 
-            fetch(serverAddress + updateUserProfileEndpoint, {
+                if (id === descriptionSubmitButtonId)
+                    updateRequest.description = description;
+
+                fetch(serverAddress + updateUserProfileEndpoint, {
                     method: 'POST',
-                    headers : {'Content-Type': 'application/json'},
+                    headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify(updateRequest)
 
                 })
 
-                .then( res => {
+                    .then(res => {
+
+                        if (res.ok) {
+
+                            if (id === usernameSubmitButtonId)
+                                podiumStorage.set('username', username);
+
+                            setSubmitModalVisible(true);
 
 
-
-                        if(res.ok){
-
-                            if(id === usernameSubmitButtonId)
-                                podiumStorage.set('username',username);
-
-                        setSubmitModalVisible(true);
+                            setTimeout(() => {
+                                window.location.reload()
+                            }, 1000);
 
 
-                        setTimeout( () => {
-                            window.location.reload()
-                        },2000);
+                        } else return res.json();
+                    })
 
-
-
-
-                    }
-
-                        else return res.json();
-                })
-
-                .then( res => {
+                    .then(res => {
 
                         console.log(res);
 
 
                     });
+
+            }
+
+            else if(id === imageSubmitButtonId) {
+
+                const ProfileImageData = new FormData();
+
+                ProfileImageData.append("username",userData.username);
+                ProfileImageData.append("image",image);
+
+
+                fetch(serverAddress + profileImageUploadEndpoint, {
+                    method: 'POST',
+                    body: ProfileImageData
+
+                })
+
+                    .then(res => {
+
+                        if (res.ok) {
+
+                            changeUserProfileImage();
+
+                        } else return res.json();
+
+
+                        })
+
+                    .catch(err => { console.log(err) });
+            }
 
 
 
@@ -418,10 +494,11 @@ export default function EditProfilePage() {
 
     };
 
+    if (isLoaded)
 
     return(
 
-        <Container>
+        <Container className={"col-10"}>
 
             <Accordion className={"AccordionContainer"}>
 
@@ -819,31 +896,44 @@ export default function EditProfilePage() {
 
                         <Card.Body>
 
+                            <div className={"d-flex flex-column"}>
+
+                                <Form.Label className={"FormLabel mt-1"} >Current Image</Form.Label>
+
+                                <img className={"EditProfileCurrentImage mb-3"}
+                                     src={profileImage}
+                                     alt={"Profile photo is empty"}/>
+
+                            </div>
+
+
+
                             <Form.Group controlId="exampleForm.ControlInput1">
                                 <Form.Label className={"FormLabel mt-1"} >New Image</Form.Label>
                                 <h className={"ErrorHeader ml-3"}>{imagesError}</h>
                                 <ImageUploader
                                     withIcon={false}
-                                    buttonText='Choose images'
-                                    onChange={(pic) => setImage(pic)}
+                                    buttonText='Choose profile image'
+                                    onChange={(pic) => setImage(pic[0])}
                                     imgExtension={['.jpg', '.gif', '.png', '.gif']}
                                     withPreview = {true}
                                     label=""
+                                    singleImage = {true}
                                 />
                             </Form.Group>
 
                             <Form.Group
-                                controlId={descriptionCheckboxId}
+                                controlId={imageCheckboxId}
                             >
                                 <Form.Check
                                     className={"EditProfileCheckBox"}
                                     type="checkbox"
                                     label="Confirm change"
-                                    onChange = {(e) => setDescriptionConfirmation(e.target.checked)}/>
+                                    onChange = {(e) => setImageConfirmation(e.target.checked)}/>
                             </Form.Group>
 
                             <Button
-                                id={descriptionSubmitButtonId}
+                                id={imageSubmitButtonId}
                                 variant={"outline-primary"}
                                 onClick={(e) => onFormSubmit(e.target.id)}
 
@@ -854,13 +944,9 @@ export default function EditProfilePage() {
 
                         </Card.Body>
 
-
                     </Accordion.Collapse>
 
                 </Card>
-
-
-
 
             </Accordion>
 
@@ -870,15 +956,10 @@ export default function EditProfilePage() {
                 text = "Change request"
             />
 
-
-
-
-
-
-
-
         </Container>
-    )
+    );
+
+    else return <div/>
 
 
 

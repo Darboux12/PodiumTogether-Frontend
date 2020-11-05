@@ -1,69 +1,70 @@
-import Table from "react-bootstrap/Table";
+import Table from "react-bootstrap/esm/Table";
 import React, {useEffect, useState} from "react";
-import serverAddress, {deleteUserEndpoint} from "../config/Constants";
-import News from "../news/News";
+import serverAddress, {deleteUserEndpoint} from "../../config/Constants";
+import News from "../../news/News";
 import ActionIcons from "./ActionIcons";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import SubmitModal from "../common/SubmitModal";
+import Modal from "react-bootstrap/esm/Modal";
+import Button from "react-bootstrap/esm/Button";
+import SubmitModal from "../../common/SubmitModal";
+import Container from "react-bootstrap/Container";
+import "../../../styles/admin/AdminPanel.css"
+import {deleteUserFetch, findAllUsersFetch} from "../../fetch/Fetch";
 
 export default function UsersTable() {
 
     const [users,setUsers] = useState([]);
-
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-
     const [submitModalVisible,setSubmitModalVisible] = useState(false);
-
     const [userUsernameAction,setUserUsernameAction] = useState("");
-
 
     useEffect(() => {
 
-        fetch(serverAddress + '/user/find/all')
+        findAllUsersFetch()
+
             .then(res => res.json())
-            .then(res => {
 
-                setUsers(res);
+            .then(res => {setUsers(res);})
 
-            })
+            .catch(error => console.log(error));
 
     },[]);
-
 
     const deleteUser = (username) => {
 
         setUserUsernameAction(username);
-
         setIsDeleteModalVisible(true);
-
 
     };
 
-    const deleteUserFetch = () => {
+    const deleteUserConfirmed = () => {
 
         setIsDeleteModalVisible(false);
 
-        fetch(serverAddress + deleteUserEndpoint + userUsernameAction,
-            { // Your POST endpoint
-                method: 'DELETE'
-            })
+        deleteUserFetch(userUsernameAction)
 
             .then((res) => {
 
-            if(res.ok)
+            if(res.ok){
                 setSubmitModalVisible(true);
+                setTimeout(() => {window.location.reload()},2000);
+            }
+
+
+            else return res.json();
 
             })
 
-            .catch(err => { console.log(err) })
+            .then(res => console.log(res))
 
+            .catch(err => { console.log(err) })
 
     };
 
     return(
 
-        <div>
+        <Container>
+
+            <h className={"AdminPanelUserTableHeader"}>User Table</h>
 
             <Table striped bordered hover variant="dark">
 
@@ -121,7 +122,7 @@ export default function UsersTable() {
                         Close
                     </Button>
 
-                    <Button variant="danger" onClick={() => deleteUserFetch()}>
+                    <Button variant="danger" onClick={() => deleteUserConfirmed()}>
                         Delete user
                     </Button>
 
@@ -134,11 +135,7 @@ export default function UsersTable() {
                 text = "Delete request"
             />
 
-
-
-
-
-        </div>
+        </Container>
 
     )
 

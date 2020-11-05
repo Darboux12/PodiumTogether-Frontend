@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 
 export default function AboutItemMobile(props){
 
@@ -9,7 +9,11 @@ export default function AboutItemMobile(props){
                 <div className={"aboutText"}>
 
                     <h className={"aboutPageHeader"}>{props.header}</h>
-                    <img className={"aboutImage w-100 mt-2 mb-2"} src={props.image} alt="aboutPageImage"/>
+
+                    <img
+                        className={"aboutImage w-100 mt-2 mb-2"}
+                        src={props.image} alt="aboutPageImage"/>
+
                     <p className={"aboutPageParagraph"}>{props.paragraph}</p>
 
                 </div>

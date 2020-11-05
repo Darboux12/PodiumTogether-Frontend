@@ -1,8 +1,8 @@
 
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
-
 import "../../styles/common/ImagesCarousel.css"
+import Container from "react-bootstrap/Container";
 
 export default function ImageCarousel(props) {
 
@@ -10,10 +10,9 @@ export default function ImageCarousel(props) {
 
     return(
 
-        <div>
+        <Container>
 
             <Carousel className="" interval="4000" data-pause="false" pause="false">
-
 
                 {images.map(item =>
 
@@ -29,11 +28,9 @@ export default function ImageCarousel(props) {
 
                 )}
 
-
-
             </Carousel>
 
-        </div>
+        </Container>
     )
 
 }

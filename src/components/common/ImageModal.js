@@ -2,19 +2,18 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import ImageCarousel from "./ImageCarousel";
 
-
 export default function ImageModal(props) {
 
-    let isImagesModalVisible = props.isImagesModalVisible;
-    let onHide = props.closeImagesModal;
+    const {closeImagesModal, isImagesModalVisible: isImagesModalVisible1, images} = props;
 
     return(
 
-        <Modal className={"ImagesCarousel"} show={isImagesModalVisible} onHide={onHide}>
+        <Modal
+            className={"ImagesCarousel"}
+            show={isImagesModalVisible1}
+            onHide={closeImagesModal}>
 
-            <ImageCarousel
-                images = {props.images}
-            />
+            <ImageCarousel images = {images} />
 
         </Modal>
 

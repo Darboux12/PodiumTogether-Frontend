@@ -1,15 +1,18 @@
-import React, {Component} from "react";
+import React from "react";
 import LogoIcons from "./LogoIcons";
 import "../../styles/logo/Logo.css"
+import Container from "react-bootstrap/Container";
 
 export default function Logo(){
 
         return(
 
-            <div className={"d-flex flex-column align-items-center justify-content-center"}>
+            <Container
+                className={"d-flex flex-column align-items-center justify-content-center"}
+            >
                 <LogoIcons/>
                 <h className={"logo-header"}>Podium Together</h>
-            </div>
+            </Container>
 
         );
 

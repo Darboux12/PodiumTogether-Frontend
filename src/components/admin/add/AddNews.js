@@ -1,8 +1,7 @@
-import CreateEventForm from "../create-event/CreateEventForm";
 import React, {useState} from "react";
 import AddNewsForm from "./AddNewsForm";
-import Container from "react-bootstrap/Container";
-import SubmitModal from "../common/SubmitModal";
+import Container from "react-bootstrap/esm/Container";
+import SubmitModal from "../../common/SubmitModal";
 
 export default function AddNews() {
 
@@ -21,7 +20,6 @@ export default function AddNews() {
             />
 
         </Container>
-
 
     )
 

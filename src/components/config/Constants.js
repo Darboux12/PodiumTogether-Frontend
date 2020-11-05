@@ -37,3 +37,11 @@ export const findAllDisciplineEndpoint = "/discipline/find/all";
 export const uploadEventImagesEndpoint =  "/image/upload/event";
 
 export const uploadEventFilesEndpoint = "/file/upload/event";
+
+export const existDisciplineByNameEndpoint = "/discipline/exist/";
+
+export const addDisciplineEndpoint = "/discipline/add";
+
+export const addNewsEndpoint = "/news/add";
+
+export const findAllUsersEndpoint = "/user/find/all";

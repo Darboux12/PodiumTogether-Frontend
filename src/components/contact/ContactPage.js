@@ -1,19 +1,16 @@
-import React, {Component, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import "../../styles/contact-page/ContactPage.css"
 import {Form} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import {serverAddress} from "../config/Constants";
-import {findAllSubjectEndpoint} from "../config/Constants";
-import {addContactEndpoint} from "../config/Constants";
 import * as emailValidator from "email-validator";
 import {maxEmailLength} from "../config/Limits";
 import {minContactMessageLength} from "../config/Limits";
 import {maxContactMessageLength} from "../config/Limits";
 import SubmitModal from "../common/SubmitModal";
-import SignInModal from "../navbar/modals/SignInModal";
+import {addContactFetch, findAllSubjectsFetch} from "../fetch/Fetch";
 
 export default function ContactPage(){
 
@@ -25,87 +22,98 @@ export default function ContactPage(){
     const [subjectError,setSubjectError] = useState("");
     const [messageError,setMessageError] = useState("");
 
-    const [isLoaded, setIsLoaded] = useState(false);
     const [subjectItems, setSubjectItems] = useState([]);
-
     const [submitModalVisible,setSubmitModalVisible] = useState(false);
 
     useEffect(() => {
 
-        fetch(serverAddress + findAllSubjectEndpoint)
+        findAllSubjectsFetch()
+
             .then(res => res.json())
+
             .then(res => {
 
-                setIsLoaded(true);
                 setSubjectItems(res);
-
                 setSubject(res[0].subject);
 
             })
 
+            .catch(error => console.log(error));
+
     },[]);
 
-    const onFormSubmit = () => {
+    const resetErrors = () => {
 
         setEmailError("");
         setMessageError("");
         setSubjectError("");
 
-        if(email === "")
+    };
+
+    const formValidation = () => {
+
+        let isOk = true;
+
+        resetErrors();
+
+        if(email === ""){
             setEmailError("Email cannot be empty!");
+            isOk = false;
+        }
 
-        if(subject === "")
+        if(subject === ""){
             setSubjectError("Subject cannot be empty!");
+            isOk = false;
+        }
 
-        if(message === "")
+        if(message === ""){
             setMessageError("Message cannot be empty!");
+            isOk = false;
+        }
 
-        if(!emailValidator.validate(email))
+        if(!emailValidator.validate(email)){
             setEmailError("This is not valid email address!");
+            isOk = false;
+        }
 
-        if(email.length > maxEmailLength)
+        if(email.length > maxEmailLength){
             setEmailError("Email cannot be longer than " + maxEmailLength + " signs !");
+            isOk = false;
+        }
 
-        if(message.length < minContactMessageLength)
+        if(message.length < minContactMessageLength){
             setMessageError("Message cannot be shorter than " + minContactMessageLength + " signs !");
+            isOk = false;
+        }
 
-        if(message.length > maxContactMessageLength)
+        if(message.length > maxContactMessageLength){
             setMessageError("Message cannot be longer than " + maxContactMessageLength + "signs !");
+            isOk = false;
+        }
 
-        const PostUrl = serverAddress + addContactEndpoint;
+        return isOk;
+    };
 
-        const contactRequest = {
-            userEmail: email,
-            subject: subject,
-            message: message
-        };
+    const onFormSubmit = () => {
 
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(contactRequest)
-        };
+        if(formValidation()){
 
+            addContactFetch(email,subject,message)
 
-        if(emailError === "" && subjectError === "" && messageError === "")
-        fetch(PostUrl,requestOptions)
-            .then((res) => {
+                .then((res) => {
 
-                if (res.ok){
-                    setSubmitModalVisible(true);
-                }
-
-               else return res.json();
-            })
-
-            .then(res => {
-
-                console.log(res);
-            })
+                    if (res.ok)
+                        setSubmitModalVisible(true);
 
 
+                    else return res.json();
+                })
 
+                .then(res => {console.log(res);})
 
+                .catch(error => console.log(error));
+
+        }
     };
 
         return(

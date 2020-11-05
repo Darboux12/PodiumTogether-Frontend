@@ -1,12 +1,8 @@
-import Container from "react-bootstrap/Container";
 import React from "react";
-import {faRunning, faUserMinus, faUserSlash} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
-import "../../styles/admin/ActionIcons.css"
+import {faUserMinus, faUserSlash} from "@fortawesome/free-solid-svg-icons/index";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index";
+import "../../../styles/admin/ActionIcons.css"
 import {faUserCheck} from "@fortawesome/free-solid-svg-icons/faUserCheck";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Tooltip from "react-bootstrap/Tooltip";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 
@@ -29,7 +25,6 @@ export default function ActionIcons(props) {
         <Tooltip id="button-tooltip" {...props}>
             Unban user
         </Tooltip>);
-
 
     return(
 

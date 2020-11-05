@@ -1,21 +1,20 @@
-import React, {Component, useEffect, useState} from "react";
-
+import React, {useState} from "react";
 import ImageUploader from 'react-images-upload';
-
-
-import "../../styles/admin/AddNewsForm.css"
-import {Form, InputGroup} from "react-bootstrap";
+import "../../../styles/admin/AddNewsForm.css"
+import {Form} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import serverAddress, {newsImagesUploadEndpoint} from "../config/Constants";
-import {minNewsTitleLength} from "../config/Limits";
-import {maxNewsTitleLength} from "../config/Limits";
-import {minNewsShortTextLength} from "../config/Limits";
-import {maxNewsShortTextLength} from "../config/Limits";
-import {minNewsLinkTextLength} from "../config/Limits";
-import {maxNewsLinkTextLength} from "../config/Limits";
-import {minNewsFullTextLength} from "../config/Limits";
-import {maxNewsFullTextLength} from "../config/Limits";
-import {maxImagesNumber} from "../config/Limits";
+import {minNewsTitleLength} from "../../config/Limits";
+import {maxNewsTitleLength} from "../../config/Limits";
+import {minNewsShortTextLength} from "../../config/Limits";
+import {maxNewsShortTextLength} from "../../config/Limits";
+import {minNewsLinkTextLength} from "../../config/Limits";
+import {maxNewsLinkTextLength} from "../../config/Limits";
+import {minNewsFullTextLength} from "../../config/Limits";
+import {maxNewsFullTextLength} from "../../config/Limits";
+import {maxImagesNumber} from "../../config/Limits";
+import {addNewsFetch, uploadNewsImagesFetch} from "../../fetch/Fetch";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export default function AddNewsForm(props){
 
@@ -31,7 +30,7 @@ export default function AddNewsForm(props){
     const [fullTextError,setFullTextError] = useState("");
     const [imagesError,setImagesError] = useState("");
 
-    const inputValidation = () => {
+    const resetErrors = () => {
 
         setTitleError("");
         setShortTextError("");
@@ -39,111 +38,120 @@ export default function AddNewsForm(props){
         setFullTextError("");
         setImagesError("");
 
-        if(title.length < minNewsTitleLength)
+    };
+
+    const formValidation = () => {
+
+        resetErrors();
+
+        let isOk = true;
+
+        if(title.length < minNewsTitleLength){
             setTitleError("Title must be longer than " + minNewsTitleLength + "!");
+            isOk = false;
+        }
 
-        if(title.length > maxNewsTitleLength)
+        if(title.length > maxNewsTitleLength){
             setTitleError("Title must be shorter than " + maxNewsTitleLength + "!");
+            isOk = false;
+        }
 
-        if(title === "")
+        if(title === ""){
             setTitleError("Title cannot be empty!");
+            isOk = false;
+        }
 
-
-        if(shortText.length < minNewsShortTextLength)
+        if(shortText.length < minNewsShortTextLength){
             setShortTextError("Short text must be longer than " + minNewsShortTextLength + "!");
+            isOk = false;
+        }
 
-        if(shortText.length > maxNewsShortTextLength)
+        if(shortText.length > maxNewsShortTextLength){
             setShortTextError("Short text must be shorter than " + maxNewsShortTextLength + "!");
+            isOk = false;
+        }
 
-        if(shortText === "")
+        if(shortText === ""){
             setShortTextError("Short text cannot be empty!");
+            isOk = false;
+        }
 
-
-        if(linkText.length < minNewsLinkTextLength)
+        if(linkText.length < minNewsLinkTextLength){
             setLinkTextError("Link text must be longer than " + minNewsLinkTextLength);
+            isOk = false;
+        }
 
-        if(linkText.length > maxNewsLinkTextLength)
+        if(linkText.length > maxNewsLinkTextLength){
             setLinkTextError("Link text must be shorter than " + maxNewsLinkTextLength + "!");
+            isOk = false;
+        }
 
-        if(linkText === "")
+        if(linkText === ""){
             setLinkTextError("Link text cannot be empty!");
+            isOk = false;
+        }
 
-
-        if(fullText.length < minNewsFullTextLength)
+        if(fullText.length < minNewsFullTextLength){
             setFullTextError("Full text must be longer than " + minNewsFullTextLength + "!");
+            isOk = false;
+        }
 
-        if(fullText.length > maxNewsFullTextLength)
+        if(fullText.length > maxNewsFullTextLength){
             setFullTextError("Full text must be shorter than " + maxNewsFullTextLength + "!");
+            isOk = false;
+        }
 
-        if(fullText === "")
+        if(fullText === ""){
             setFullTextError("Full text cannot be empty!");
+            isOk = false;
+        }
 
-        if(images === [])
+        if(images === []){
             setImagesError("You must choose at least one image!");
+            isOk = false;
+        }
 
-        if(images.length > maxImagesNumber)
+        if(images.length > maxImagesNumber){
             setImagesError("You can choose max " + maxImagesNumber + " images!");
+            isOk = false;
+        }
 
+        return isOk;
     };
 
     const onFormSubmit = () => {
 
-        inputValidation();
+        if(formValidation()){
 
-        if(
-            titleError === "" &&
-            shortTextError === "" &&
-            linkTextError === "" &&
-            fullTextError === "" &&
-            imagesError === ""
-        ){
+            addNewsFetch(title,shortText,linkText,fullText)
 
-            const  ImageData  = new FormData();
+                .then(res => {
 
-            const NewsData = {
-                title : title,
-                shortText : shortText,
-                linkText : linkText,
-                text : fullText
-            };
+                    if(res.ok)
 
-            for(const file of images)
-                ImageData.append("images",file);
+                        uploadNewsImagesFetch(title,images)
 
-            ImageData.append("title",title);
+                            .then(res => {
 
-            fetch(serverAddress + '/news/add', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(NewsData)
+                                if(res.ok)
+                                    props.submitModal();
 
-            })
-                .then(response => {
+                                else return res.json();
 
-                    if(response.ok){
+                            })
 
-                        fetch(serverAddress + newsImagesUploadEndpoint, { // Your POST endpoint
-                            method: 'POST',
-                            body: ImageData
+                            .then(res => console.log(res))
 
-                        })
-                            .then(response => {
+                            .catch(error => console.log(error));
 
-                                props.submitModal();
+                    else return res.json();
 
+                })
 
-                                }
+                .then(res => console.log(res))
 
-                            )
-
-                            .catch(err => { console.log(err) });
-
-                    }
-
-                });
-
+                .catch(error => console.log(error));
         }
-
     };
 
       return(
@@ -201,13 +209,29 @@ export default function AddNewsForm(props){
                 />
             </Form.Group>
 
-            <Button
-                variant="primary"
-                className={"d-md-inline d-none w-50 createNewsSubmitButton mt-3"}
-                onClick={onFormSubmit}
-            >
-                Create News
-            </Button>
+            <Row>
+
+                <Col className={"col-md-6 col-12 mb-md-0 mb-3"}>
+                    <Button
+                        variant="outline-primary"
+                        className={"col-12"}
+                        onClick={onFormSubmit}
+                    >
+                        Create News
+                    </Button>
+                </Col>
+
+                <Col className={"col-md-6 col-12 mb-md-0 mb-3"}>
+                    <Button
+                        variant="outline-info"
+                        className={"col-12"}
+                        href={"/admin/panel"}
+                    >
+                        Return to admin panel
+                    </Button>
+                </Col>
+
+            </Row>
 
         </Form>
 

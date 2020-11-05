@@ -8,7 +8,7 @@ import DisplayEventsPage from "./components/display-events/page/DisplayEventsPag
 import ForgotPasswordPage from "./components/forgot-password/ForgotPasswordPage";
 import TermsPage from "./components/terms/TermsPage";
 import UserProfilePage from "./components/user-profile/UserProfilePage";
-import AboutPage from "./components/about/AboutPage";
+import AboutPage from "./components/about/page/AboutPage";
 import ContactPage from "./components/contact/ContactPage";
 import NewsPage from "./components/news/NewsPage";
 import TagPlacePage from "./components/tag-place/TagPlacePage";
@@ -17,12 +17,12 @@ import PrivateRoute from "./components/security/PrivateRoute";
 import EventDetailsPage from "./components/event-details/page/EventDetailsPage";
 import EditProfilePage from "./components/edit-profile/EditProfilePage";
 import PlaceDetailsPage from "./components/place-details/page/PlaceDetailsPage";
-import AdminPanel from "./components/admin/AdminPanel";
-import AddNews from "./components/admin/AddNews";
+import AdminPanel from "./components/admin/page/AdminPanel";
+import AddNews from "./components/admin/add/AddNews";
 import EmptyFooter from "./components/footer/EmptyFooter";
 import TestComponent from "./components/TestComponent";
-import AddSubject from "./components/admin/AddSubject";
-import AddDiscipline from "./components/admin/AddDiscipline";
+import AddSubject from "./components/admin/add/AddSubject";
+import AddDiscipline from "./components/admin/add/AddDiscipline";
 import NewsDetails from "./components/news/NewsDetails";
 
 function App() {

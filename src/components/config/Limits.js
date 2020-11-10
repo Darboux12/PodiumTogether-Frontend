@@ -53,8 +53,8 @@ export const minCityLength = 3;
 export const maxCityLength = 200;
 
 /** EVENT HOUSE NUMBER */
-export const minEventNumberLength = 0;
-export const maxEventNumberLength = 1000000;
+export const minBuildingNumberLength = 0;
+export const maxBuildingNumberLength = 1000000;
 
 /** STREET  */
 export const minStreetLength = 3;
@@ -70,16 +70,16 @@ export const minEventPeopleLength = 3;
 export const maxEventPeopleLength = 20;
 
 /** EVENT AGE */
-export const minEventMinAge = 3;
-export const maxEventMinAge = 100;
+export const minMinAge = 3;
+export const maxMinAge = 100;
 
 /** EVENT AGE */
-export const minEventMaxAge = 3;
-export const maxEventMaxAge = 100;
+export const minMaxAge = 3;
+export const maxMaxAge = 100;
 
 /** EVENT COST */
-export const minEvenCost = 3;
-export const maxEventCost = 1000000;
+export const minCost = 3;
+export const maxCost = 1000000;
 
 /** EVENT DESCRIPTION */
 export const minEventDescriptionLength = 3;
@@ -99,3 +99,12 @@ export const acceptedImagesTypes = (
 export const minSignUpAge = 13;
 
 export const maxUserDescriptionLength = 500;
+
+export const minObjectNameLength = 3;
+export const maxObjectNameLength = 200;
+
+export const minLocalizationRemarkLength = 3;
+export const maxLocalizationRemarkLength = 200;
+
+export const  minObjectReviewLength =  3;
+export const  maxObjectReviewLength =  200;

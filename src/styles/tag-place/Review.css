@@ -1,23 +1,23 @@
-.starIcon{
-    color: gold !important;
-    margin-left: 0.5em;
-}
-
 .reviewHeader{
-    font-size: 1.2em;
+    font-weight: normal;
 }
 
 .ratingHeader{
+    font-size: 1.2em;
     color: #1B75BC;
-    position: absolute;
-    left: 50%;
+
+
 }
 
 .ReviewContainer{
-    margin-bottom: 1em;
+
 
 }
 .ratings{
-    position: absolute;
-    left: 30%;
+
 }
+
+.cole{
+
+}
+

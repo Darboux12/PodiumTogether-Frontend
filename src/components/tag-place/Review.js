@@ -5,10 +5,14 @@ import {faStar} from "@fortawesome/free-regular-svg-icons";
 import "../../styles/tag-place/Review.css"
 
 import Ratings from 'react-ratings-declarative';
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export default function Review(props){
 
     const [rating,setRating] = useState(0);
+
     useEffect(() => {
 
        if(rating === 1)
@@ -27,44 +31,41 @@ export default function Review(props){
 
     return(
 
-        <div className={"d-flex flex-row align-items-center ReviewContainer"}>
+        <Container className={"mb-1 mt-1"}>
 
-            <h className={"reviewHeader mr-5 FormLabel"}>{props.title}</h>
+            <Row>
 
-            <div className={"ratings"}>
+                <Col className={"col-md-3 col-12"}>
+                    <h className={"reviewHeader mr-5 FormLabel"}>{props.title}</h>
+                </Col>
 
-                <Ratings
-                    className={"ratings"}
-                    rating={rating}
-                    widgetRatedColors="blue"
-                    changeRating={(newRating) => setRating(newRating)}
-                    widgetDimensions={"2em"}
-                >
-                    <Ratings.Widget />
-                    <Ratings.Widget />
-                    <Ratings.Widget />
-                    <Ratings.Widget />
-                    <Ratings.Widget />
-                </Ratings>
+                <Col className={"col-md-4 col-10"}>
 
+                        <Ratings
+                            className={"ratings"}
+                            rating={rating}
+                            widgetRatedColors="gold"
+                            changeRating={(newRating) => setRating(newRating)}
+                            widgetDimensions={"2em"}
+                        >
+                            <Ratings.Widget />
+                            <Ratings.Widget />
+                            <Ratings.Widget />
+                            <Ratings.Widget />
+                            <Ratings.Widget />
 
-            </div>
+                        </Ratings>
 
+                </Col>
 
+                <Col className={"col-md-4 d-md-flex d-none"}>
+                    <h id={props.id} className={"ratingHeader ml-3"}> </h>
+                </Col>
 
-            <h id={props.id} className={"ratingHeader ml-3"}> </h>
+            </Row>
 
-        </div>
-
-
-
-
-
+        </Container>
 
     );
-
-
-
-
 
 }

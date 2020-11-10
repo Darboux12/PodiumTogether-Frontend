@@ -1,18 +1,20 @@
-import React, {Component, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Form from 'react-bootstrap/Form'
 import Button from "react-bootstrap/Button";
 import InputGroup from 'react-bootstrap/InputGroup'
 import "../../styles/create-event/CreateEventForm.css"
-import serverAddress, {
-    findAllDisciplineEndpoint,
-    findAllGenderEndpoint, uploadEventFilesEndpoint,
-    uploadEventImagesEndpoint
-} from "../config/Constants"
 import * as now from "date-fns";
 import ImageUploader from "react-images-upload";
-import {maxEventMaxAge, maxEventPeopleLength, maxEventTitleLength, minEventMinAge} from "../config/Limits";
+import {maxEventPeopleLength, maxEventTitleLength, maxMaxAge, minMinAge} from "../config/Limits";
 import podiumStorage from "../config/Storage";
 import jwtDecode from "jwt-decode";
+import {
+    addEventFetch,
+    findAllDisciplineFetch,
+    findAllGendersFetch,
+    uploadEventFilesFetch,
+    uploadEventImagesFetch
+} from "../fetch/Fetch";
 
 export default function CreateEventFor(){
 
@@ -47,31 +49,30 @@ export default function CreateEventFor(){
 
     useEffect(() => {
 
-        fetch(serverAddress + findAllDisciplineEndpoint)
+        findAllDisciplineFetch()
 
             .then(res => res.json())
 
             .then(res => {
 
                 setDisciplineItems(res);
-
                 setDiscipline(res[0].discipline);
 
             })
+
+            .catch(error => console.log(error));
 
     },[]);
 
     useEffect(() => {
 
-        fetch(serverAddress + findAllGenderEndpoint)
+        findAllGendersFetch()
 
             .then(res => res.json())
 
-            .then(res => {
+            .then(res => { setGenderItems(res);})
 
-                setGenderItems(res);
-
-            })
+            .catch(error => console.log(error));
 
     },[]);
 
@@ -89,101 +90,9 @@ export default function CreateEventFor(){
 
     };
 
-    const addEventFetch = (eventRequest,imagesRequest,documentsRequest) => {
-
-        console.log(eventRequest);
-
-        fetch(serverAddress + '/event/add', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(eventRequest)
-
-        })
-
-            .then(response => {
-
-                    if(response.ok){
-                        console.log("Event was successfully added!");
-                        uploadEventImagesFetch(imagesRequest);
-                        uploadEventFilesFetch(documentsRequest)
-                    }
-
-
-                    else return response.json()
-            })
-
-            .then(res => {
-
-                console.log(res);
-
-        })
-
-            .catch((error) => {
-                console.log(error);
-            });
-
-    };
-
-    const uploadEventImagesFetch = (requestBody) => {
-
-        fetch(serverAddress + uploadEventImagesEndpoint, {
-            method: 'POST',
-            body: requestBody
-        })
-
-            .then(response => {
-
-                if(response.ok)
-                    console.log("Images was successfully uploaded!");
-
-                else return response.json()
-            })
-
-            .then(res => {
-
-                console.log(res);
-
-            })
-
-            .catch((error) => {
-                console.log(error);
-            });
-
-    };
-
-    const uploadEventFilesFetch = (requestBody) => {
-
-
-
-        fetch(serverAddress + uploadEventFilesEndpoint, {
-            method: 'POST',
-            body: requestBody
-        })
-
-            .then(response => {
-
-                if(response.ok){
-                    console.log("Files was successfully uploaded!");
-                    alert("Files send");
-                }
-
-
-                else return response.json()
-            })
-
-            .then(res => {
-
-                console.log(res);
-
-            })
-
-            .catch((error) => {
-                console.log(error);
-            });
-
-    };
-
     const formValidation = () => {
+
+        resetErrors();
 
         let isOk = true;
 
@@ -237,8 +146,8 @@ export default function CreateEventFor(){
             isOk = false;
         }
 
-        if(minAge < minEventMinAge|| maxAge > maxEventMaxAge){
-            setAgeError("Age must be contained in range " + minEventMinAge + " - " + maxEventMaxAge);
+        if(minAge < minMinAge|| maxAge > maxMaxAge){
+            setAgeError("Age must be contained in range " + minMinAge + " - " + maxMaxAge);
             isOk = false;
         }
 
@@ -263,49 +172,41 @@ export default function CreateEventFor(){
 
     const onFormSubmit = () => {
 
-        resetErrors();
-
         if(formValidation()){
 
-            const author =
-                podiumStorage.get("authorizationToken")
-                ? jwtDecode(podiumStorage.get("authorizationToken")).sub
-                    : "";
+            const author = jwtDecode(podiumStorage.get("authorizationToken")).sub;
 
-            const eventRequest = {
+            addEventFetch(title,dateFrom,dateTo,city,street,postal,number,discipline,
+                people,genders,minAge,maxAge,cost,author,description)
 
-                title : title,
-                dateFrom : dateFrom,
-                dateTo : dateTo,
-                city : city,
-                street : street,
-                postal : postal,
-                number : number,
-                discipline : discipline,
-                people : people,
-                genders : genders,
-                minAge : minAge,
-                maxAge : maxAge,
-                cost : cost,
-                author : author,
-                description : description
-            };
+                .then(res => {
 
-            const documentsRequest = new FormData();
+                    if(res.ok){
 
-            for(const file of documents)
-                documentsRequest.append("files",file);
+                        uploadEventImagesFetch(title,images)
 
-            documentsRequest.append("title",title);
+                            .then(res => {
 
-            const imagesRequest = new FormData();
+                                if(res.ok)
 
-            for(const file of images)
-                imagesRequest.append("images",file);
+                                    uploadEventFilesFetch(title,documents)
 
-            imagesRequest.append("title",title);
+                                        .then(res => {
 
-            addEventFetch(eventRequest,imagesRequest,documentsRequest);
+                                            if(!res.ok)
+                                                return res.json();
+                                        })
+
+                                        .then(res => console.log(res))
+
+                                        .catch((error) => { console.log(error); });
+
+                                else return res.json();
+                            })
+
+                            .then(res => console.log(res))
+
+                            .catch((error) => { console.log(error); });
 
 
 
@@ -313,39 +214,45 @@ export default function CreateEventFor(){
 
 
 
+                    }
+
+                    else return res.json();
 
 
 
+                })
 
+                .then(res => { console.log(res); })
 
-
-
-
-
+                .catch((error) => { console.log(error); });
 
         }
-
-
 
     };
 
     return(
-
-        <Form className={"createEventForm w-70"}>
+        <Form className={"createEventForm col-md-10 col-12"}>
 
             <h className={"categoryHeader"}>General information</h>
 
             <Form.Group controlId="formEventTitle">
+
                 <Form.Label className={"FormLabel mt-3"}>Event Title</Form.Label>
+
                 <h className={"ErrorHeader ml-4"}>{titleError}</h>
+
                 <Form.Control
                     className={"FormInputField"}
                     type="text" placeholder="Please, enter event title..."
-                    onChange = {(e) => setTitle(e.target.value)}/>
+                    onChange = {(e) => setTitle(e.target.value)}
+                />
+
             </Form.Group>
 
             <Form.Group controlId="formEventDate">
+
                 <Form.Label className={"FormLabel"}>Start Date</Form.Label>
+
                 <h className={"ErrorHeader ml-4"}>{dateError}</h>
 
                 <Form.Control
@@ -353,78 +260,93 @@ export default function CreateEventFor(){
                     type="datetime-local"
                     onChange = {(e) => setDateFrom(e.target.value)}
                 />
+
                 <Form.Label className={"FormLabel"}>End Date</Form.Label>
+
                 <Form.Control
                     className={"FormInputField mb-4"}
                     type="datetime-local"
                     onChange = {(e) => setDateTo(e.target.value)}
                 />
 
-
-
             </Form.Group>
 
             <Form.Group controlId="formEventLocalization">
+
                 <Form.Label className={"FormLabel"}>Event Localization</Form.Label>
+
                 <h className={"ErrorHeader ml-4"}>{localizationError}</h>
+
                 <InputGroup className={"d-md-flex flex-row d-none"}>
+
                     <Form.Control
                         className={"mr-3 FormInputField"}
                         type="text"
                         placeholder="City..."
                         onChange = {(e) => setCity(e.target.value)}
                     />
+
                     <Form.Control
                         className={"mr-3"}
                         type="text"
                         placeholder="Street..."
                         onChange = {(e) => setStreet(e.target.value)}
                     />
+
                     <Form.Control
                         className={"mr-3"}
                         type="number"
                         placeholder="Number..."
                         onChange = {(e) => setNumber(e.target.value)}
                     />
+
                     <Form.Control
                         className={""}
                         type="text"
                         placeholder="Postal code..."
                         onChange = {(e) => setPostal(e.target.value)}
                     />
+
                 </InputGroup>
 
                 <InputGroup className={"d-md-none flex-row d-flex"}>
+
                     <Form.Control
                         className={"w-100 mb-3"}
                         type="text"
                         placeholder="City..."
                         onChange = {(e) => setCity(e.target.value)}
                     />
+
                     <Form.Control
                         className={"w-100 mb-3"}
                         type="text"
                         placeholder="Street..."
                         onChange = {(e) => setStreet(e.target.value)}
                     />
+
                     <Form.Control
                         className={"w-100 mb-3"}
                         type="text"
                         placeholder="Number..."
                         onChange = {(e) => setNumber(e.target.value)}
                     />
+
                     <Form.Control
                         className={"w-100 mb-3"}
                         type="text"
                         placeholder="Postal code..."
                         onChange = {(e) => setPostal(e.target.value)}
                     />
+
                 </InputGroup>
 
             </Form.Group>
 
             <Form.Group controlId="formEventDiscipline">
+
                 <Form.Label className={"FormLabel"}>Discipline</Form.Label>
+
                 <Form.Control
                     as="select"
                     className={"FormInputField mb-5"}
@@ -435,13 +357,17 @@ export default function CreateEventFor(){
                     )};
 
                 </Form.Control>
+
             </Form.Group>
 
             <h className={"categoryHeader"}>Detailed Information</h>
 
             <Form.Group controlId="formEventRequiredPeople">
+
                 <Form.Label className={"FormLabel mt-3"}>Required People Number</Form.Label>
+
                 <h className={"ErrorHeader ml-4"}>{peopleError}</h>
+
                 <Form.Control
                     className={"FormInputField"}
                     type="number"
@@ -449,11 +375,15 @@ export default function CreateEventFor(){
                     placeholder="People number..."
                     onChange = {(e) => setPeople(e.target.value)}
                 />
+
             </Form.Group>
 
             <Form.Group controlId="formEventPreferredGender">
+
                 <Form.Label className={"FormLabel"}>Preferred gender</Form.Label>
+
                 <h className={"ErrorHeader ml-4"}>{genderError}</h>
+
                 <InputGroup>
 
                     {genderItems.map(item =>
@@ -469,20 +399,18 @@ export default function CreateEventFor(){
 
                     )}
 
-
-
-
-
-
-
                 </InputGroup>
 
             </Form.Group>
 
             <Form.Group controlId="formEventPreferredAgeRange">
+
                 <Form.Label className={"FormLabel"}>Preferred age range</Form.Label>
+
                 <h className={"ErrorHeader ml-4"}>{ageError}</h>
+
                 <InputGroup>
+
                     <Form.Control
                         type="number"
                         min="1"
@@ -491,6 +419,7 @@ export default function CreateEventFor(){
                         placeholder="Min age..."
                         onChange = {(e) => setMinAge(e.target.value)}
                     />
+
                     <Form.Control
                         type="number"
                         min="1"
@@ -499,13 +428,19 @@ export default function CreateEventFor(){
                         placeholder="Max age..."
                         onChange = {(e) => setMaxAge(e.target.value)}
                     />
+
                 </InputGroup>
+
             </Form.Group>
 
             <Form.Group controlId="formEventCosts">
+
                 <Form.Label className={"FormLabel"}>Event costs</Form.Label>
+
                 <h className={"ErrorHeader ml-4"}>{costError}</h>
+
                 <InputGroup>
+
                     <Form.Control
                         type="number"
                         min="0"
@@ -515,41 +450,54 @@ export default function CreateEventFor(){
                         onChange = {(e) => setCost(e.target.value)}
                     />
                 </InputGroup>
+
             </Form.Group>
 
             <Form.Group controlId="exampleForm.ControlTextarea1">
+
                 <Form.Label className={"FormLabel "}>Event Description</Form.Label>
+
                 <h className={"ErrorHeader ml-4"}>{descriptionError}</h>
+
                 <Form.Control
                     className={"FormInputField mb-5"}
                     as="textarea"
                     rows="3"
                     onChange = {(e) => setDescription(e.target.value)}
                 />
+
             </Form.Group>
 
             <h className={"categoryHeader"}>Additional elements</h>
 
             <Form.Group controlId="exampleForm.ControlInput1">
-                <Form.Label className={"FormLabel mt-3"} >Necessary documents</Form.Label>
+
+                <Form.Label className={"FormLabel mt-3 mb-3"} >Necessary documents</Form.Label>
+
                 <h className={"ErrorHeader ml-4"}>{documentsError}</h>
+
                 <Form.Control
-                    className={"FormInputField"}
+                    className={"FormInputFieldFile"}
                     type="file" multiple
                     onChange = {(e) => setDocuments(e.target.files)}
                 />
+
             </Form.Group>
 
             <Form.Group controlId="exampleForm.ControlInput1">
+
                 <Form.Label className={"FormLabel mt-1"} >Event Images</Form.Label>
+
                 <ImageUploader
+                    className={"imageEventUploader"}
                     withIcon={false}
-                    buttonText='Choose images'
+                    buttonText='Choose event images'
                     onChange={(pic) => setImages(pic)}
                     imgExtension={['.jpg', '.gif', '.png', '.gif']}
                     withPreview = {true}
                     label=""
                 />
+
             </Form.Group>
 
             <Button
@@ -561,9 +509,7 @@ export default function CreateEventFor(){
             </Button>
 
         </Form>
-
     );
-
 
 }
 

@@ -45,3 +45,7 @@ export const addDisciplineEndpoint = "/discipline/add";
 export const addNewsEndpoint = "/news/add";
 
 export const findAllUsersEndpoint = "/user/find/all";
+
+export const addEventEndpoint = "/event/add";
+
+export const addPlaceEndpoint = "/place/add";

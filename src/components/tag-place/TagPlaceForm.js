@@ -581,8 +581,9 @@ export default function TagPlaceForm(){
     
     const formValidation = () => {
 
-        resetErrors();
-        
+
+        alert(usageTime);
+
         let isOk = true;
         
         if(!nameValidation())

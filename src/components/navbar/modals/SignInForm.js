@@ -51,7 +51,7 @@ export default function SignInForm(props){
 
 
             }).catch(
-            error => console.log(error) // Handle the error response object
+            error => console.log(error) // Handle the response response object
         );
 
 

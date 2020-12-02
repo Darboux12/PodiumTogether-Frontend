@@ -107,7 +107,7 @@ export default function EditProfilePage() {
             .then((res) => {
 
                 if (res.status === 409)
-                    console.log("Server error 409");
+                    console.log("Server response 409");
 
                 else return res.json()
             })
@@ -132,7 +132,7 @@ export default function EditProfilePage() {
             .then((res) => {
 
                 if (res.status === 409)
-                    console.log("Server error 409");
+                    console.log("Server response 409");
 
                 else return res.json()
             })

@@ -558,7 +558,7 @@ export default function TagPlaceForm(){
         if(serviceRating || localizationRating || openingHoursRating || pricesRating)
             if(!(serviceRating && localizationRating &&
                 openingHoursRating && pricesRating)){
-                setStarRatingsError("All ratings must be filled or all must be empty!");
+                setStarRatingsError("All ratingDtos must be filled or all must be empty!");
                 isOk = false;
             }
 

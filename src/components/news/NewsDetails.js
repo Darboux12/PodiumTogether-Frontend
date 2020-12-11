@@ -60,7 +60,7 @@ export default function NewsDetails(props) {
                       className={"ImageButton"}>
 
                       <img
-                        src={`data:image/jpeg;base64,${newsItems.podiumFiles[0].content}`}
+                        src={`data:image/jpeg;base64,${newsItems.images[0].content}`}
                         alt={"a"}
                         className={"NewsDetailsImage"}
                          />

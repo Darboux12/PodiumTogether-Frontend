@@ -150,7 +150,7 @@ export default function SignUpForm(props){
 
 
             }).catch(
-            error => console.log(error) // Handle the response response object
+            error => console.log(error) // Handle the status status object
         );
 
         fetch(serverAddress + existUserByEmailEndpoint + email)
@@ -163,7 +163,7 @@ export default function SignUpForm(props){
 
 
             }).catch(
-            error => console.log(error) // Handle the response response object
+            error => console.log(error) // Handle the status status object
         );
 
 

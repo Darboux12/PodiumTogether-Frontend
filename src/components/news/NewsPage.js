@@ -19,6 +19,8 @@ export default function NewsPage(){
             .then(res => res.json())
             .then(res => {
 
+                console.log(res);
+
                 setIsLoaded(true);
                 setNewsItems(res);
 
@@ -38,7 +40,7 @@ export default function NewsPage(){
                         <News
                             title = {item.title}
                             shortText = {item.shortText}
-                            images = {item.podiumFiles}
+                            images = {item.images}
                             date = {item.date}
                             text = {item.text}
                             linkText = {item.linkText}

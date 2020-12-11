@@ -31,30 +31,38 @@ export const addDisciplineFetch = (discipline) => {
 
 };
 
-export const addNewsFetch = (title,shortText,linkText,fullText) => {
+export const addNewsFetch = (title,shortText,linkText,fullText,images) => {
 
-    const NewsData = {
-        title : title,
-        shortText : shortText,
-        linkText : linkText,
-        text : fullText
-    };
+    const newsFromData = new FormData();
+
+    const imageData = new FormData();
+
+    for(const file of images)
+        imageData.append("images",file);
+
+    newsFromData.append("images", ImageData);
+
+    newsFromData.append('news', new Blob([JSON.stringify({
+        "title": title,
+        "shortText": shortText,
+        "linkText": linkText,
+        "text": "fullText"
+    })], {
+        type: "application/json"
+    }));
 
     const requestOptions = {
-
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(NewsData)
-
+        method: "POST",
+        body: newsFromData
     };
 
-   return fetch(serverAddress + addNewsEndpoint,requestOptions);
+    return fetch(serverAddress + addNewsEndpoint,requestOptions);
 
 };
 
 export const uploadNewsImagesFetch = (title,images) => {
 
-    const  ImageData  = new FormData();
+    const  ImageData = new FormData();
 
     for(const file of images)
         ImageData.append("images",file);

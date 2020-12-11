@@ -123,26 +123,12 @@ export default function AddNewsForm(props){
 
         if(formValidation()){
 
-            addNewsFetch(title,shortText,linkText,fullText)
+            addNewsFetch(title,shortText,linkText,fullText,images)
 
                 .then(res => {
 
                     if(res.ok)
-
-                        uploadNewsImagesFetch(title,images)
-
-                            .then(res => {
-
-                                if(res.ok)
-                                    props.submitModal();
-
-                                else return res.json();
-
-                            })
-
-                            .then(res => console.log(res))
-
-                            .catch(error => console.log(error));
+                        props.submitModal();
 
                     else return res.json();
 
@@ -154,9 +140,7 @@ export default function AddNewsForm(props){
         }
     };
 
-      return(
-
-        <Form className={"createNewsForm w-70"}>
+    return( <Form className={"createNewsForm w-70"}>
             
             <Form.Group controlId="formNewsTitle">
                 <Form.Label className={"FormLabel mt-3"}>News Title</Form.Label>
@@ -233,10 +217,7 @@ export default function AddNewsForm(props){
 
             </Row>
 
-        </Form>
-
-    );
-
+        </Form> );
 
 }
 

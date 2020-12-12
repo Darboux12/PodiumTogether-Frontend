@@ -14,7 +14,6 @@ import { format } from "date-fns";
 export default function NewsDetails(props) {
 
 
-
     const id = props.match.params.id;
 
     const [isLoaded,setIsLoaded] = useState(false);
@@ -35,10 +34,6 @@ export default function NewsDetails(props) {
                 setIsLoaded(true);
 
             });
-
-
-
-
 
 
 
@@ -97,7 +92,7 @@ export default function NewsDetails(props) {
             <ImageModal
                 isImagesModalVisible={imagesModalVisible}
                 closeImagesModal={() => setImagesModalVisible(false)}
-                images = {newsItems.podiumFiles}
+                images = {newsItems.images}
             />
 
 

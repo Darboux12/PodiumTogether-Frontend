@@ -33,16 +33,13 @@ export const addDisciplineFetch = (discipline) => {
 
 export const addNewsFetch = (title,shortText,linkText,fullText,images) => {
 
-    const newsFromData = new FormData();
+    const newsFormData = new FormData();
 
-    const imageData = new FormData();
+    for(const file of images){
+        newsFormData.append("images",file);
+    }
 
-    for(const file of images)
-        imageData.append("images",file);
-
-    newsFromData.append("images", ImageData);
-
-    newsFromData.append('news', new Blob([JSON.stringify({
+    newsFormData.append('news', new Blob([JSON.stringify({
         "title": title,
         "shortText": shortText,
         "linkText": linkText,
@@ -53,7 +50,7 @@ export const addNewsFetch = (title,shortText,linkText,fullText,images) => {
 
     const requestOptions = {
         method: "POST",
-        body: newsFromData
+        body: newsFormData
     };
 
     return fetch(serverAddress + addNewsEndpoint,requestOptions);

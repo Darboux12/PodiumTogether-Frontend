@@ -43,7 +43,7 @@ export const addNewsFetch = (title,shortText,linkText,fullText,images) => {
         "title": title,
         "shortText": shortText,
         "linkText": linkText,
-        "text": "fullText"
+        "text": fullText
     })], {
         type: "application/json"
     }));

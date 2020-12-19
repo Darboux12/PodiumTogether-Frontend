@@ -42,7 +42,7 @@ export default function TagPlaceForm(){
     const [localizationRemarks,setLocalizationRemarks] = useState("");
     const [minAge,setMinAge] = useState("");
     const [maxAge,setMaxAge] = useState("");
-    
+
     const [localizationError,setLocalizationError] = useState("");
     const [nameError,setNameError] = useState("");
     const [openingHoursError,setOpeningHoursError] = useState("");
@@ -53,7 +53,7 @@ export default function TagPlaceForm(){
     const [starRatingsError,setStarRatingsError] = useState("");
 
     const [disciplineItems,setDisciplineItems] = useState([]);
-    
+
     const [costInputDisabled,setCostInputDisabled ] = useState(false);
     const [ageInputDisabled,setAgeInputDisabled ] = useState(false);
 
@@ -195,7 +195,7 @@ export default function TagPlaceForm(){
             btn.style.backgroundColor = "white";
             btn.style.color = "rgb(0, 123, 255)";
         }
-        
+
     });
 
     const resetErrors = () => {
@@ -209,9 +209,9 @@ export default function TagPlaceForm(){
         setStarRatingsError("");
 
     };
-    
+
     const nameValidation = () => {
-        
+
         let isOk = true;
 
         if(name === ""){
@@ -233,14 +233,63 @@ export default function TagPlaceForm(){
             setNameError("Name cannot be empty!");
             isOk = false;
         }
-        
+
         return isOk;
-        
+
     };
-    
+
     const localizationValidation = () => {
 
         let isOk = true;
+
+
+        if(street.length < minStreetLength){
+            setLocalizationError("Street must be longer than " + minStreetLength + " or empty!");
+            isOk = false;
+        }
+
+        if(street.length > maxStreetLength){
+            setLocalizationError("Street must be shorter than " + maxStreetLength + "or empty!");
+            isOk = false;
+        }
+
+        if(street === ""){
+            setLocalizationError("Street cannot be empty!");
+            isOk = false;
+        }
+
+
+        if(buildingNumber === ""){
+            setLocalizationError("Building number cannot be empty!");
+            isOk = false;
+        }
+
+        if(buildingNumber.length < minBuildingNumberLength){
+            setLocalizationError("Number must be longer than " + minBuildingNumberLength + "or empty!");
+            isOk = false;
+        }
+
+        if(buildingNumber.length > maxBuildingNumberLength){
+            setLocalizationError("Number must be shorter than " + maxBuildingNumberLength + "or empty!");
+            isOk = false;
+        }
+
+
+        if(postalCode.length < minPostalLength){
+            setLocalizationError("Postal code must be longer than " + minPostalLength + '!');
+            isOk = false;
+        }
+
+        if(postalCode.length > maxPostalLength){
+            setLocalizationError("Postal code must be longer than " + maxPostalLength + '!');
+            isOk = false;
+        }
+
+        if(postalCode === ""){
+            setLocalizationError("Postal code cannot be empty!");
+            isOk = false;
+        }
+
 
         if(city.length < minCityLength){
             setLocalizationError("City must be longer than " + minCityLength + "!");
@@ -257,48 +306,6 @@ export default function TagPlaceForm(){
             isOk = false;
         }
 
-        if(street !== ""){
-
-            if(street.length < minStreetLength){
-                setLocalizationError("Street must be longer than " + minStreetLength + " or empty!");
-                isOk = false;
-            }
-
-            if(street.length > maxStreetLength){
-                setLocalizationError("Street must be shorter than " + maxStreetLength + "or empty!");
-                isOk = false;
-            }
-
-        }
-
-        if(buildingNumber !== ""){
-
-            if(buildingNumber.length < minBuildingNumberLength){
-                setLocalizationError("Number must be longer than " + minBuildingNumberLength + "or empty!");
-                isOk = false;
-            }
-
-            if(buildingNumber.length > maxBuildingNumberLength){
-                setLocalizationError("Number must be shorter than " + maxBuildingNumberLength + "or empty!");
-                isOk = false;
-            }
-
-        }
-
-        if(postalCode !== ""){
-
-            if(postalCode.length < minPostalLength){
-                setLocalizationError("Postal code must be longer than " + minPostalLength + 'or empty!');
-                isOk = false;
-            }
-
-            if(postalCode.length > maxPostalLength){
-                setLocalizationError("Postal code must be longer than " + maxPostalLength + 'or empty!');
-                isOk = false;
-            }
-
-        }
-
         if(localizationRemarks !== ""){
 
             if(localizationRemarks.length < minLocalizationRemarkLength){
@@ -312,13 +319,13 @@ export default function TagPlaceForm(){
             }
 
         }
-        
+
         return isOk;
-        
+
     };
-    
+
     const openingDaysValidation  = () => {
-        
+
         let isOk = true;
 
         if(isMondayOpen){
@@ -488,13 +495,19 @@ export default function TagPlaceForm(){
             setSundayOpeningsHoursFrom("");
             setSundayOpeningsHoursTo("");
         }
-        
+
+        if(!(isMondayOpen || isThursdayOpen || isWednesdayOpen || isThursdayOpen
+        || isFridayOpen || isSaturdayOpen || isSundayOpen)){
+            setOpeningHoursError("At least one opening day must se selected!!");
+            isOk = false;
+        }
+
         return isOk;
-        
+
     };
-    
+
     const otherValidation = () => {
-        
+
         let isOk = true;
 
         if(!costInputDisabled){
@@ -549,7 +562,7 @@ export default function TagPlaceForm(){
             }
 
             if(maxAge === ""){
-                setCostError("Both age fields cannot be empty or no limit must be set!");
+                setAgeError("Both age fields cannot be empty or no limit must be set!");
                 isOk = false;
             }
 
@@ -558,7 +571,7 @@ export default function TagPlaceForm(){
         if(serviceRating || localizationRating || openingHoursRating || pricesRating)
             if(!(serviceRating && localizationRating &&
                 openingHoursRating && pricesRating)){
-                setStarRatingsError("All ratingDtos must be filled or all must be empty!");
+                setStarRatingsError("All star ratings must be filled or all must be empty!");
                 isOk = false;
             }
 
@@ -574,21 +587,18 @@ export default function TagPlaceForm(){
                 isOk = false;
             }
         }
-        
+
         return isOk;
-        
+
     };
-    
+
     const formValidation = () => {
 
-
-        alert(usageTime);
-
         let isOk = true;
-        
+
         if(!nameValidation())
             isOk = false;
-        
+
         if(!localizationValidation())
             isOk = false;
 
@@ -597,13 +607,13 @@ export default function TagPlaceForm(){
 
         if(!otherValidation ())
             isOk = false;
-        
+
         return isOk;
 
     };
-    
+
     const createPlaceLocalization = () => {
-        
+
         return  {
 
             city : city,
@@ -613,9 +623,9 @@ export default function TagPlaceForm(){
             localizationRemarks : localizationRemarks
 
         };
-        
+
     };
-    
+
     const createOpeningDays = () => {
 
         let openingDays = [];
@@ -722,8 +732,6 @@ export default function TagPlaceForm(){
             addPlaceFetch(name,discipline,placeLocalization,
                 openingDays,cost,usageTime,minAge,maxAge,ratings,review);
 
-
-
         }
 
     };
@@ -772,7 +780,7 @@ export default function TagPlaceForm(){
                             <Form.Control
                                 className={"FormInputField"}
                                 type="text"
-                                placeholder="Street... (optional)"
+                                placeholder="Street..."
                                 onChange = {(e) => setStreet(e.target.value)}
                             />
                         </Col>
@@ -781,7 +789,7 @@ export default function TagPlaceForm(){
                             <Form.Control
                                 className={"FormInputField"}
                                 type="text"
-                                placeholder="Number... (optional)"
+                                placeholder="Number..."
                                 onChange = {(e) => setBuildingNumber(e.target.value)}
                             />
                         </Col>
@@ -790,7 +798,7 @@ export default function TagPlaceForm(){
                             <Form.Control
                                 className={"FormInputField"}
                                 type="text"
-                                placeholder="Postal code... (optional)"
+                                placeholder="Postal code..."
                                 onChange = {(e) => setPostalCode(e.target.value)}
                             />
                         </Col>

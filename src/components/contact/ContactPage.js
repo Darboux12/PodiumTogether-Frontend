@@ -12,6 +12,8 @@ import {maxContactMessageLength} from "../config/Limits";
 import SubmitModal from "../common/SubmitModal";
 import {addContactFetch, findAllSubjectsFetch} from "../fetch/Fetch";
 
+import contactImage from "../../images/support.jpg"
+
 export default function ContactPage(){
 
     const [email, setEmail] = useState("");
@@ -118,7 +120,7 @@ export default function ContactPage(){
 
         return(
 
-            <Container className={"col-md-8 col-11 ContactContainer"}>
+            <Container className={"col-md-9 col-11 ContactContainer"}>
 
                 <Row className={"ContactUpperRow"}>
 
@@ -126,7 +128,7 @@ export default function ContactPage(){
 
                             <div className={"d-flex flex-column align-items-center mb-2"}>
 
-                                <h className={"contactHeader"}>Contact us</h>
+                                <h className={"contactHeader"}>Tell us about your problem</h>
 
                             </div>
 
@@ -147,7 +149,21 @@ export default function ContactPage(){
 
                 </Row>
 
-                <Row className={"ContactLowerRow mt-4"}>
+                <Row className={"ImageRow"}>
+
+                    <Col className={"d-flex justify-content-center m-0 p-0"}>
+
+                        <img className={"contactImage col-10 m-0 p-0"} src={contactImage} alt={"Contact image"}/>
+
+                    </Col>
+
+
+
+
+
+                </Row>
+
+                <Row className={"ContactLowerRow mt-5"}>
 
                     <Col>
 
@@ -187,7 +203,7 @@ export default function ContactPage(){
                             type={"submit"}
                             variant="primary"
                             onClick={onFormSubmit}
-                            className="signInModalButton mb-3 col-md-6 col-12"
+                            className="signInModalButton mb-3 col-md-12 col-12"
                         >
                             Send
 

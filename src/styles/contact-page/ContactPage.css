@@ -5,6 +5,14 @@
 
 }
 
+
+
+.contactImage{
+    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
+
+
+}
+
 .contactInputLabel{
     font-size: 1.1em;
     font-weight: bold;
@@ -23,6 +31,7 @@
     color: #1B75BC;
     margin-bottom: 0.5em;
     margin-top: 0.5em;
+    text-decoration: underline;
 
 
 }

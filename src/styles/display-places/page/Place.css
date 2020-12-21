@@ -1,0 +1,72 @@
+.PlaceContainer{
+    position: relative;
+    background: white;
+    height: 20em;
+    box-sizing: border-box;
+    margin-top: 1em;
+    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
+}
+
+.placeImage{
+    width: 12em;
+    height: 12em;
+    margin-right: 2em;
+}
+
+.placeInformation{
+
+
+}
+
+.placeTitle{
+    font-weight: bold;
+    color: #1B75BC;
+    font-size: 1.4em;
+}
+
+.placeDiscipline{
+    color: black;
+    opacity: 0.6;
+    font-size: 1.3em;
+}
+
+.placeLocalizationItem,
+
+.placeRequiredPeopleItem,
+
+.placeDateItem {
+    margin-right: 0.5em;
+}
+
+.localization{
+
+}
+
+.placeLocalizationIcon{
+    color: green;
+    font-size: 1.4em;
+}
+
+.placeDateIcon{
+    color: green;
+}
+
+.placePeopleIcon{
+    color: green;
+}
+
+.placeBadge{
+    position: absolute;
+    right: 1em;
+    top: 1em;
+}
+
+.placeBadgeHeader{
+    font-size: 1.2em;
+}
+
+.placeDetailsButton{
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+}

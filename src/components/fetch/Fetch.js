@@ -6,7 +6,7 @@ import serverAddress, {
     deleteUserEndpoint,
     existDisciplineByNameEndpoint,
     existSubjectByNameEndpoint,
-    findAllDisciplineEndpoint, findAllGenderEndpoint,
+    findAllDisciplineEndpoint, findAllGenderEndpoint, findAllNewsEndpoint, findAllPlacesEndpoint,
     findAllSubjectEndpoint,
     findAllUsersEndpoint,
     newsImagesUploadEndpoint, uploadEventFilesEndpoint, uploadEventImagesEndpoint
@@ -215,34 +215,64 @@ export const uploadEventImagesFetch = (title,images) => {
 
 export const addPlaceFetch = (
     name,discipline,placeLocalization,openingDays,cost,usageTime,
-    minAge,maxAge,ratings,review) => {
+    minAge,maxAge,ratings,review,images,documents) => {
 
-    const placeRequest = {
+    alert("Fetchuje");
 
+    alert(openingDays[0].isOpen);
+
+    const PlaceForm = new FormData();
+
+    const place = {
         name : name,
         discipline : discipline,
-        placeLocalization : placeLocalization,
-        openingDays : openingDays,
+        localizationDto : placeLocalization,
+        businessDayDtos : openingDays,
         cost : cost,
         usageTime : usageTime,
         minAge : minAge,
-        maxAge : maxAge,
-        ratings : ratings,
-        review : review
-
+        maxAge : maxAge
     };
 
+
+    PlaceForm.append('place', new Blob([JSON.stringify(
+
+        place
+
+    )], {
+        type: "application/json"
+    }));
+
+    for(const file of images){
+        PlaceForm.append("images",file);
+    }
+
+    for(const file of documents){
+        PlaceForm.append("documents",file);
+    }
+
+
+
     const requestOptions = {
-
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(placeRequest)
-
+        method: "POST",
+        body: PlaceForm
     };
 
     return fetch(serverAddress + addPlaceEndpoint, requestOptions);
 
 
 
+
+};
+
+export const  findAllNewsFetch = () => {
+
+    return  fetch(serverAddress + findAllNewsEndpoint)
+
+};
+
+export const  findAllPlaceFetch = () => {
+
+    return  fetch(serverAddress + findAllPlacesEndpoint)
 
 };

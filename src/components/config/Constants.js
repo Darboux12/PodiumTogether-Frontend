@@ -49,3 +49,7 @@ export const findAllUsersEndpoint = "/user/find/all";
 export const addEventEndpoint = "/event/add";
 
 export const addPlaceEndpoint = "/place/add";
+
+export const findAllNewsEndpoint = "/news/find/all";
+
+export const findAllPlacesEndpoint = "/place/find/all";

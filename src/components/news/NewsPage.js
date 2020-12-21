@@ -7,6 +7,7 @@ import NewsMobile from "./NewsMobile";
 import {Form} from "react-bootstrap";
 
 import serverAddress from "../config/Constants"
+import {findAllNewsFetch} from "../fetch/Fetch";
 
 export default function NewsPage(){
 
@@ -15,11 +16,11 @@ export default function NewsPage(){
 
     useEffect(() => {
 
-        fetch(serverAddress + '/news/find/all')
-            .then(res => res.json())
-            .then(res => {
+        findAllNewsFetch()
 
-                console.log(res);
+            .then(res => res.json())
+
+            .then(res => {
 
                 setIsLoaded(true);
                 setNewsItems(res);

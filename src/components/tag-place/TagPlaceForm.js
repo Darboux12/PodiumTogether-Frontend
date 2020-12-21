@@ -22,8 +22,14 @@ import {
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import {faRunning} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faQuestionCircle} from "@fortawesome/free-regular-svg-icons";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import QuestionTooltip from "./QuestionTooltip";
 
-export default function TagPlaceForm(){
+export default function TagPlaceForm(props){
 
     const [name,setName] = useState("");
     const [city,setCity] = useState("");
@@ -42,6 +48,7 @@ export default function TagPlaceForm(){
     const [localizationRemarks,setLocalizationRemarks] = useState("");
     const [minAge,setMinAge] = useState("");
     const [maxAge,setMaxAge] = useState("");
+    const [documents,setDocuments] = useState([]);
 
     const [localizationError,setLocalizationError] = useState("");
     const [nameError,setNameError] = useState("");
@@ -201,6 +208,7 @@ export default function TagPlaceForm(){
     const resetErrors = () => {
 
         setNameError("");
+        setLocalizationError("");
         setOpeningHoursError("");
         setCostError("");
         setAgeError("");
@@ -213,11 +221,6 @@ export default function TagPlaceForm(){
     const nameValidation = () => {
 
         let isOk = true;
-
-        if(name === ""){
-            setNameError("Name cannot be empty!");
-            isOk = false;
-        }
 
         if(name.length < minObjectNameLength){
             setNameError("Name must be longer than " + minObjectNameLength + "!");
@@ -633,57 +636,50 @@ export default function TagPlaceForm(){
         openingDays = openingDays.concat({
             day : "Monday",
             isOpen : isMondayOpen,
-            isOpenTimeLimit : !isMondayHoursDisabled,
-            openingHourFrom : mondayOpeningsHoursFrom,
-            openingHourTo : mondayOpeningsHoursTo
+            openingTimeFrom : mondayOpeningsHoursFrom,
+            openingTimeTo : mondayOpeningsHoursTo
         });
 
         openingDays = openingDays.concat({
             day : "Tuesday",
             isOpen : isTuesdayOpen,
-            isOpenTimeLimit : !isTuesdayHoursDisabled,
-            openingHourFrom : tuesdayOpeningsHoursFrom,
-            openingHourTo : tuesdayOpeningsHoursTo
+            openingTimeFrom : tuesdayOpeningsHoursFrom,
+            openingTimeTo : tuesdayOpeningsHoursTo
         });
 
         openingDays = openingDays.concat({
             day : "Wednesday",
             isOpen : isWednesdayOpen,
-            isOpenTimeLimit : !isWednesdayHoursDisabled,
-            openingHourFrom : wednesdayOpeningsHoursFrom,
-            openingHourTo : wednesdayOpeningsHoursTo
+            openingTimeFrom : wednesdayOpeningsHoursFrom,
+            openingTimeTo : wednesdayOpeningsHoursTo
         });
 
         openingDays = openingDays.concat({
             day : "Thursday",
             isOpen : isThursdayOpen,
-            isOpenTimeLimit : !isThursdayHoursDisabled,
-            openingHourFrom : thursdayOpeningsHoursFrom,
-            openingHourTo : thursdayOpeningsHoursTo
+            openingTimeFrom : thursdayOpeningsHoursFrom,
+            openingTimeTo : thursdayOpeningsHoursTo
         });
 
         openingDays = openingDays.concat({
             day : "Friday",
             isOpen : isFridayOpen,
-            isOpenTimeLimit : !isFridayHoursDisabled,
-            openingHourFrom : fridayOpeningsHoursFrom,
-            openingHourTo : fridayOpeningsHoursTo
+            openingTimeFrom : fridayOpeningsHoursFrom,
+            openingTimeTo : fridayOpeningsHoursTo
         });
 
         openingDays = openingDays.concat({
             day : "Saturday",
             isOpen : isSaturdayOpen,
-            isOpenTimeLimit : !isSaturdayHoursDisabled,
-            openingHourFrom : saturdayOpeningsHoursFrom,
-            openingHourTo : saturdayOpeningsHoursTo
+            openingTimeFrom : saturdayOpeningsHoursFrom,
+            openingTimeTo : saturdayOpeningsHoursTo
         });
 
         openingDays = openingDays.concat({
             day : "Sunday",
             isOpen : isSundayOpen,
-            isOpenTimeLimit : !isSundayHoursDisabled,
-            openingHourFrom : sundayOpeningsHoursFrom,
-            openingHourTo : sundayOpeningsHoursTo
+            openingTimeFrom : sundayOpeningsHoursFrom,
+            openingTimeTo : sundayOpeningsHoursTo
         });
 
         return openingDays;
@@ -720,6 +716,8 @@ export default function TagPlaceForm(){
 
     const onFormSubmit = () => {
 
+        resetErrors();
+
         if(formValidation()){
 
             let openingDays = createOpeningDays();
@@ -730,7 +728,20 @@ export default function TagPlaceForm(){
 
 
             addPlaceFetch(name,discipline,placeLocalization,
-                openingDays,cost,usageTime,minAge,maxAge,ratings,review);
+                openingDays,cost,usageTime,minAge,maxAge,ratings,review,images,documents)
+
+                .then(res => {
+
+                if(res.ok)
+                    props.submitModal();
+
+                else return res.json();
+
+            })
+
+                .then(res => console.log(res))
+
+                .catch(error => console.log(error));
 
         }
 
@@ -738,7 +749,7 @@ export default function TagPlaceForm(){
 
     return(
 
-        <Container className={"col-10"}>
+        <Container className={"col-md-10 col-12"}>
 
             <Form>
 
@@ -747,6 +758,8 @@ export default function TagPlaceForm(){
                 <Form.Group>
 
                     <Form.Label className={"FormLabel mt-3"}>Name</Form.Label>
+
+                    <QuestionTooltip text={"Provide name of place you want to tag"}/>
 
                     <h className={"ErrorHeader ml-4"}>{nameError}</h>
 
@@ -762,6 +775,8 @@ export default function TagPlaceForm(){
                 <Form.Group>
 
                     <Form.Label className={"FormLabel"}>Localization</Form.Label>
+
+                    <QuestionTooltip text={"Provide localization details of the place"}/>
 
                     <h className={"ErrorHeader ml-4"}>{localizationError}</h>
 
@@ -811,6 +826,8 @@ export default function TagPlaceForm(){
 
                     <Form.Label className={"FormLabel"}>Localization Remarks</Form.Label>
 
+                    <QuestionTooltip text={"Help the others to find this place. Provide short description hot to get there. "}/>
+
                     <h className={"ErrorHeader ml-4"}>{localizationRemarksError}</h>
 
                     <Form.Control
@@ -826,6 +843,8 @@ export default function TagPlaceForm(){
                 <Form.Group className={""}>
 
                     <Form.Label className={"FormLabel"}>Discipline</Form.Label>
+
+                    <QuestionTooltip text={"Provide discipline you can train in this place"}/>
 
                     <Form.Control
                         as="select"
@@ -850,6 +869,8 @@ export default function TagPlaceForm(){
                 <Form.Group>
 
                     <Form.Label className={"FormLabel mt-3"}>Opening Days</Form.Label>
+
+                    <QuestionTooltip text={"Click on the day name to let us now place is opened on this day. Than provide opening hours or check No Limit if there is no opening time limit."}/>
 
                     <h className={"ErrorHeader ml-4"}>{openingHoursError}</h>
 
@@ -1209,6 +1230,8 @@ export default function TagPlaceForm(){
 
                     <Form.Label className={"FormLabel"}>Included costs</Form.Label>
 
+                    <QuestionTooltip text={"Provide cost of using this place and usage time you can get for this price"}/>
+
                     <h className={"ErrorHeader ml-4"}>{costError}</h>
 
                     <Row>
@@ -1257,6 +1280,8 @@ export default function TagPlaceForm(){
                 <Form.Group>
 
                     <Form.Label className={"FormLabel"}>Age range</Form.Label>
+
+                    <QuestionTooltip text={"Provide minimal and maximal age of usage this place"}/>
 
                     <h className={"ErrorHeader ml-4"}>{ageError}</h>
 
@@ -1307,6 +1332,8 @@ export default function TagPlaceForm(){
 
                     <Form.Label className={"FormLabel mt-3"}>Ratings</Form.Label>
 
+                    <QuestionTooltip text={"Rate this place in all given categories"}/>
+
                     <h className={"ErrorHeader ml-4"}>{starRatingsError}</h>
 
                     <Review id={"reviewOne"} title={"Service"} onChange = {(newRating) => setServiceRating(newRating)}/>
@@ -1319,6 +1346,8 @@ export default function TagPlaceForm(){
                 <Form.Group>
 
                     <Form.Label className={"FormLabel"}>Review</Form.Label>
+
+                    <QuestionTooltip text={"Write a few words how you spend your time in this place"}/>
 
                     <h className={"ErrorHeader ml-4"}>{reviewError}</h>
 
@@ -1338,6 +1367,8 @@ export default function TagPlaceForm(){
 
                     <Form.Label className={"FormLabel mt-3"} >Images</Form.Label>
 
+                    <QuestionTooltip text={"Upload your iamges of this place"}/>
+
                     <ImageUploader
                         className={"imageEventUploader"}
                         withIcon={false}
@@ -1350,9 +1381,24 @@ export default function TagPlaceForm(){
 
                 </Form.Group>
 
+                <Form.Group controlId="exampleForm.ControlInput1">
+
+                    <Form.Label className={"FormLabel mt-3"}>Documents</Form.Label>
+
+                    <QuestionTooltip text={"Provide important documents like statute or rwquired permissions "}/>
+
+                    <Form.Control
+                        type="file"
+                        className={"FormInputField mt-3"}
+                        onChange = {(e) => setDocuments(e.target.files)}
+                        multiple
+                    />
+
+                </Form.Group>
+
                 <Button
                     variant="primary"
-                    className={"d-md-inline d-none w-50 createEventSubmitButton mt-5"}
+                    className={"d-md-inline d-none w-100 createEventSubmitButton mt-5"}
                     onClick={onFormSubmit}
                 >
                     Create Event

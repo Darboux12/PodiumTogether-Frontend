@@ -1,8 +1,11 @@
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import Container from "react-bootstrap/esm/Container";
 import TagPlaceForm from "./TagPlaceForm";
+import SubmitModal from "../common/SubmitModal";
 
 export default function TagPlacePage(){
+
+    const [submitModalVisible,setSubmitModalVisible] = useState(false);
 
     return(
 
@@ -12,8 +15,13 @@ export default function TagPlacePage(){
                 <h>Fill out our form and let other know about incredible place!</h>
             </div>
 
-            <TagPlaceForm/>
+            <TagPlaceForm submitModal = {() => setSubmitModalVisible(true)} />
 
+            <SubmitModal
+                isSubmitModalVisible={submitModalVisible}
+                closeSubmitModal={() => setSubmitModalVisible(false)}
+                text = "Place"
+            />
 
 
         </Container>

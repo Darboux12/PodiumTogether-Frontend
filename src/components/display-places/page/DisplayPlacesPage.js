@@ -1,12 +1,33 @@
-import React, {Component} from "react";
+import React, {Component, useEffect, useState} from "react";
 
 import "../../../styles/display-places/page/DisplayPlacesPage.css"
-import displayPlacesImage from "../../../images/displayPlacesImage.jpg";
+import displayPlacesImage from "../../../images/stadium.jpg";
 import PlacesSearchBar from "../search-bar/PlacesSearchBar";
 import Event from "../../display-events/page/Event";
+import {findAllNewsFetch, findAllPlaceFetch} from "../../fetch/Fetch";
+import News from "../../news/News";
+import Place from "./Place";
 
 
 export default function DisplayPlacesPage(){
+
+    const [isLoaded,setIsLoaded] = useState(false);
+    const [placeItems,setPlaceItems] = useState([]);
+
+    useEffect(() => {
+
+        findAllPlaceFetch()
+
+            .then(res => res.json())
+
+            .then(res => {
+
+                setIsLoaded(true);
+                setPlaceItems(res);
+
+            })
+
+    },[]);
 
     return(
 
@@ -18,21 +39,29 @@ export default function DisplayPlacesPage(){
 
             <div className={"PlacesList"}>
 
-                <Event
-                    title={"Common play on orlik"}
-                    discipline={"Football"}
-                    city={"Kraków"}
-                    street={"Lipowa"}
-                    postalCode={"32-060"}
-                    number={"64"}
-                    date={"12.08.2020"}
-                    bookedPeople={"3"}
-                    numberPeople={"6"}
-                />
+                {placeItems.map(item =>
+
+                    <Place
+                        name={item.name}
+                        discipline={item.discipline}
+                        city={item.localizationDto.city}
+                        street={item.localizationDto.street}
+                        postalCode={item.localizationDto.postalCode}
+                        number={item.localizationDto.buildingNumber}
+                        businessDays={item.businessDayDtos}
+                        minAge = {item.minAge}
+                        maxAge = {item.maxAge}
+                        image = {item.images[0]}
+                    />
+
+
+
+                )}
+
+
+
 
             </div>
-
-
 
         </div>
 

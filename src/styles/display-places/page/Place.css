@@ -14,8 +14,8 @@
 }
 
 .placeInformation{
-
-
+    justify-content: space-evenly !important;
+    height: 60%;
 }
 
 .placeTitle{
@@ -28,6 +28,7 @@
     color: black;
     opacity: 0.6;
     font-size: 1.3em;
+    font-weight: bold;
 }
 
 .placeLocalizationItem,
@@ -49,10 +50,12 @@
 
 .placeDateIcon{
     color: green;
+    font-size: 1.4em;
 }
 
 .placePeopleIcon{
     color: green;
+    font-size: 1.4em;
 }
 
 .placeBadge{
@@ -62,11 +65,12 @@
 }
 
 .placeBadgeHeader{
-    font-size: 1.2em;
+    font-size: 1.4em;
 }
 
 .placeDetailsButton{
     position: absolute;
     bottom: 1em;
     right: 1em;
+    width: 30%;
 }

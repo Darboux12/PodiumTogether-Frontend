@@ -2,10 +2,12 @@ import React, {Component, useState} from "react";
 import Container from "react-bootstrap/esm/Container";
 import TagPlaceForm from "./TagPlaceForm";
 import SubmitModal from "../common/SubmitModal";
+import SubmitFailModal from "../common/SubmitFailModal";
 
 export default function TagPlacePage(){
 
     const [submitModalVisible,setSubmitModalVisible] = useState(false);
+    const [submitFailModalVisible,setSubmitFailModalVisible] = useState(false);
 
     return(
 
@@ -15,12 +17,21 @@ export default function TagPlacePage(){
                 <h>Fill out our form and let other know about incredible place!</h>
             </div>
 
-            <TagPlaceForm submitModal = {() => setSubmitModalVisible(true)} />
+            <TagPlaceForm
+                submitModal = {() => setSubmitModalVisible(true)}
+                submitFailModal = {() => setSubmitFailModalVisible(true)}
+            />
 
             <SubmitModal
                 isSubmitModalVisible={submitModalVisible}
                 closeSubmitModal={() => setSubmitModalVisible(false)}
-                text = "Place"
+                text = "Place Add Request"
+            />
+
+            <SubmitFailModal
+                isSubmitFailModalVisible={submitFailModalVisible}
+                closeSubmitFailModal={() => setSubmitFailModalVisible(false)}
+                text = "Place Add Request"
             />
 
 

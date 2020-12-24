@@ -44,11 +44,11 @@ export default function DisplayPlacesPage(){
                     <Place
                         name={item.name}
                         discipline={item.discipline}
-                        city={item.localizationDto.city}
-                        street={item.localizationDto.street}
-                        postalCode={item.localizationDto.postalCode}
-                        number={item.localizationDto.buildingNumber}
-                        businessDays={item.businessDayDtos}
+                        city={item.localization.city}
+                        street={item.localization.street}
+                        postalCode={item.localization.postalCode}
+                        number={item.localization.buildingNumber}
+                        businessDays={item.businessDays}
                         minAge = {item.minAge}
                         maxAge = {item.maxAge}
                         image = {item.images[0]}

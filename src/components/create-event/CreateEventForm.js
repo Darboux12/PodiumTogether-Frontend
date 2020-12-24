@@ -479,7 +479,7 @@ export default function CreateEventFor(){
                 <Form.Control
                     className={"FormInputFieldFile"}
                     type="file" multiple
-                    onChange = {(e) => setDocuments(e.target.files)}
+                    onChange = {(e) => setDocuments(e.target.file)}
                 />
 
             </Form.Group>

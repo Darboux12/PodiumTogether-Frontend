@@ -17,3 +17,9 @@
     align-items: center !important;
     justify-content: center !important;
 }
+
+.submitModalFailIcon{
+    font-size: 4em;
+    color: red !important;
+}
+

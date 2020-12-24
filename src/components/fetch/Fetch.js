@@ -183,7 +183,7 @@ export const uploadEventFilesFetch = (title,documents) => {
     const documentsRequest = new FormData();
 
     for(const file of documents)
-        documentsRequest.append("files",file);
+        documentsRequest.append("file",file);
 
     documentsRequest.append("title",title);
 
@@ -217,17 +217,13 @@ export const addPlaceFetch = (
     name,discipline,placeLocalization,openingDays,cost,usageTime,
     minAge,maxAge,ratings,review,images,documents) => {
 
-    alert("Fetchuje");
-
-    alert(openingDays[0].isOpen);
-
     const PlaceForm = new FormData();
 
     const place = {
         name : name,
         discipline : discipline,
-        localizationDto : placeLocalization,
-        businessDayDtos : openingDays,
+        localization : placeLocalization,
+        businessDays : openingDays,
         cost : cost,
         usageTime : usageTime,
         minAge : minAge,

@@ -537,6 +537,11 @@ export default function TagPlaceForm(props){
 
         }
 
+        else {
+            setCost(0);
+            setUsageTime(0);
+        }
+
         if(!ageInputDisabled){
 
             if(minAge < minMinAge){
@@ -569,6 +574,11 @@ export default function TagPlaceForm(props){
                 isOk = false;
             }
 
+        }
+
+        else {
+            setMinAge(0);
+            setMaxAge(99);
         }
 
         if(serviceRating || localizationRating || openingHoursRating || pricesRating)
@@ -744,6 +754,8 @@ export default function TagPlaceForm(props){
                 .catch(error => console.log(error));
 
         }
+
+        else props.submitFailModal();
 
     };
 
@@ -1390,7 +1402,7 @@ export default function TagPlaceForm(props){
                     <Form.Control
                         type="file"
                         className={"FormInputField mt-3"}
-                        onChange = {(e) => setDocuments(e.target.files)}
+                        onChange = {(e) => setDocuments(e.target.file)}
                         multiple
                     />
 

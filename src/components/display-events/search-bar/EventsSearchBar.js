@@ -167,7 +167,7 @@ export default function EventsSearchBar(){
 
     const onFormSubmit = () => {
 
-        alert(dateFrom);
+        alert(keyword);
 
 
 

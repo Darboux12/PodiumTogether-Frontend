@@ -12,7 +12,7 @@ import AgeSearchTab from "../search-tabs/AgeSearchTab";
 import GenderSearchTab from "../search-tabs/GenderSearchTab";
 import CostsSearchTab from "../search-tabs/CostsSearchTab";
 
-export default function EventsSearchBar(){
+export default function EventsSearchBar(props){
 
     const eventDisciplineButtonId = "eventDisciplineButton";
     const eventDateButtonId = "eventDateButton";
@@ -23,28 +23,16 @@ export default function EventsSearchBar(){
 
     const [keyword,setKeyword] = useState("");
     const [localization,setLocalization] = useState("");
-    const [footballOption,setFootballOption] = useState(false);
-    const [volleyballOption,setVolleyballOption] = useState(false);
-    const [joggingOption,setJoggingOption] = useState(false);
-    const [basketballOption,setBasketballOption] = useState(false);
-    const [swimmingOption,setSwimmingOption] = useState(false);
-    const [otherOption,setOtherOption] = useState(false);
-
+    const [disciplines,setDisciplines] = useState([]);
     const [dateFrom,setDateFrom] = useState("");
     const [dateTo,setDateTo] = useState("");
     const [timeFrom,setTimeFrom] = useState("");
     const [timeTo,setTimeTo] = useState("");
-
     const [minPeopleNumber,setMinPeopleNumber] = useState("");
     const [maxPeopleNumber,setMaxPeopleNumber] = useState("");
-
     const [minAge, setMinAge] = useState("");
     const [maxAge, setMaxAge] = useState("");
-
-    const [maleOption, setMaleOption] = useState(false);
-    const [femaleOption, setFemaleOption] = useState(false);
-    const [allGenderOption, setAllGenderOption] = useState(false);
-
+    const [genders,setGenders] = useState([]);
     const [minCost,setMinCost] = useState("");
     const [maxCost,setMaxCost] = useState("");
 
@@ -54,6 +42,7 @@ export default function EventsSearchBar(){
     const [showAgeTab, setShowAgeTab] = useState(false);
     const [showGenderTab, setShowGenderTab] = useState(false);
     const [showCostsTab, setShowCostsTab] = useState(false);
+
 
     const handleTabClick = (e) => {
 
@@ -167,183 +156,171 @@ export default function EventsSearchBar(){
 
     const onFormSubmit = () => {
 
-        alert(keyword);
+
+
+
+
 
 
 
     };
 
+    const checkDiscipline = (discipline) => {
+
+        return discipline === "Football";
+    };
+
     return (
 
+        <Navbar className="bg-light d-flex flex-column SearchBar" collapseOnSelect expand="md">
 
-        <Navbar
-        className="bg-light d-flex flex-column SearchBar"
-        collapseOnSelect
-        expand="md"
-        >
+            <Col>
 
-        <Col>
+                <Row>
 
-            <Row>
-                <Form inline className={"w-100 d-flex flex-row mb-3"}>
-                    <FormControl
+                    <Form inline className={"w-100 d-flex flex-row mb-3"}>
+
+                        <FormControl
                         type="text"
                         placeholder="Event title, discipline, key word..."
                         className={"col-3 mr-sm-3 "}
                         onChange = {(e) => setKeyword(e.target.value)}
-                    />
-                    <FormControl
-                        type="text"
-                        placeholder="Country, city, street..."
-                        className={"col-3 mr-sm-3"}
-                        onChange = {(e) => setLocalization(e.target.value)}
-                    />
+                        />
+
+                        <FormControl
+                            type="text"
+                            placeholder="Country, city, street..."
+                            className={"col-3 mr-sm-3"}
+                            onChange = {(e) => setLocalization(e.target.value)}
+                        />
+
+                        <Button
+                            className={"col-4"}
+                            onClick={onFormSubmit}
+                        >Submit
+                        </Button>
+
+                    </Form>
+
+                </Row>
+
+                <Row className={"align-items-center"}>
+
+                    <h className={"filterHeader"}>Filter: </h>
 
                     <Button
-                        type="submit"
-                        className={"col-4"}
-                        onClick={onFormSubmit}
-                    >Submit
+                        id={eventDisciplineButtonId}
+                        className={"eventSearchBarButton"}
+                        variant={"outline-primary"}
+                        onClick={(e) => handleTabClick(e)}
+                    >Discipline
                     </Button>
 
-                </Form>
-            </Row>
+                    <Button
+                        id={eventDateButtonId}
+                        className={"eventSearchBarButton"}
+                        variant={"outline-primary"}
+                        onClick={(e) => handleTabClick(e)}
+                    >Date
+                    </Button>
 
-            <Row className={"align-items-center"}>
+                    <Button
+                        id={eventPeopleNumberButtonId}
+                        className={"eventSearchBarButton"}
+                        variant={"outline-primary"}
+                        onClick={(e) => handleTabClick(e)}
+                    >People number
+                    </Button>
 
-                <h className={"filterHeader"}>Filter: </h>
+                    <Button
+                        id={eventAgeButtonId}
+                        className={"eventSearchBarButton"}
+                        variant={"outline-primary"}
+                        onClick={(e) => handleTabClick(e)}
+                    >Age
+                    </Button>
 
-                <Button
-                    id={eventDisciplineButtonId}
-                    className={"eventSearchBarButton"}
-                    variant={"outline-primary"}
-                    onClick={(e) => handleTabClick(e)}
-                >Discipline
-                </Button>
+                    <Button
+                        id={eventGenderButtonId}
+                        className={"eventSearchBarButton"}
+                        variant={"outline-primary"}
+                        onClick={(e) => handleTabClick(e)}
+                    >Gender
+                    </Button>
 
-                <Button
-                    id={eventDateButtonId}
-                    className={"eventSearchBarButton"}
-                    variant={"outline-primary"}
-                    onClick={(e) => handleTabClick(e)}
-                >Date
-                </Button>
+                    <Button
+                        id={eventCostsButtonId}
+                        className={"eventSearchBarButton"}
+                        variant={"outline-primary"}
+                        onClick={(e) => handleTabClick(e)}
+                    >Costs
+                    </Button>
 
-                <Button
-                    id={eventPeopleNumberButtonId}
-                    className={"eventSearchBarButton"}
-                    variant={"outline-primary"}
-                    onClick={(e) => handleTabClick(e)}
-                >People number
-                </Button>
+                </Row>
 
-                <Button
-                    id={eventAgeButtonId}
-                    className={"eventSearchBarButton"}
-                    variant={"outline-primary"}
-                    onClick={(e) => handleTabClick(e)}
-                >Age
-                </Button>
+                <Row>
 
-                <Button
-                    id={eventGenderButtonId}
-                    className={"eventSearchBarButton"}
-                    variant={"outline-primary"}
-                    onClick={(e) => handleTabClick(e)}
-                >Gender
-                </Button>
+                    <DisciplineSearchTab
+                        id={"disciplineSearchTab"}
+                        show={showDisciplineTab}
+                        selectDiscipline = {(discipline) => setDisciplines(disciplines.concat(discipline))}
+                        selectedDisciplines = {disciplines}
+                    />
 
-                <Button
-                    id={eventCostsButtonId}
-                    className={"eventSearchBarButton"}
-                    variant={"outline-primary"}
-                    onClick={(e) => handleTabClick(e)}
-                >Costs
-                </Button>
+                    <DateSearchTab
+                        id={"dateSearchTab"}
+                        show = {showDateTab}
+                        dateFromOnChange = {(date) => setDateFrom(date)}
+                        dateFrom = {dateFrom}
+                        dateToOnChange = {(date) => setDateTo(date)}
+                        dateTo = {dateTo}
+                        timeFromOnChange = {(time) => setTimeFrom(time)}
+                        timeFrom = {timeFrom}
+                        timeToOnChange = {(time) => setTimeTo(time)}
+                        timeTo = {timeTo}
 
+                    />
 
+                    <PeopleNumberSearchTab
+                        id={"peopleNumberSearchTab"}
+                        show = {showPeopleNumberTab}
+                        minPeopleNumberOnChange = {(min) => setMinPeopleNumber(min)}
+                        minPeopleNumber = {minPeopleNumber}
+                        maxPeopleNumberOnChange = {(max) => setMaxPeopleNumber(max)}
+                        maxPeopleNumber = {maxPeopleNumber}
+                    />
 
-            </Row>
+                    <AgeSearchTab
+                        id={"ageSearchTab"}
+                        show = {showAgeTab}
+                        minAgeOnChange = {(min) => setMinAge(min)}
+                        minAge = {minAge}
+                        maxAgeOnChange = {(max) => setMaxAge(max)}
+                        maxAge = {maxAge}
+                    />
 
-            <Row>
+                    <GenderSearchTab
+                        id={"genderSearchTab"}
+                        show={showGenderTab}
+                        selectGender = {(gender) => setGenders(genders.concat(gender))}
+                        selectedGenders = {genders}
+                    />
 
-                <DisciplineSearchTab
-                    id={"disciplineSearchTab"}
-                    show={showDisciplineTab}
-                    footballOptionClick = {() => setFootballOption(!footballOption)}
-                    footballOption = {footballOption}
-                    volleyballOptionClick ={() => setVolleyballOption(!volleyballOption)}
-                    volleyballOption = {volleyballOption}
-                    joggingOptionClick ={() => setJoggingOption(!joggingOption)}
-                    joggingOption = {joggingOption}
-                    basketballOptionClick ={() => setBasketballOption(!basketballOption)}
-                    basketballOption = {basketballOption}
-                    swimmingOptionClick ={() => setSwimmingOption(!swimmingOption)}
-                    swimmingOption = {swimmingOption}
-                    otherOptionClick ={() => setOtherOption(!otherOption)}
-                    otherOption = {otherOption}
-                />
+                    <CostsSearchTab
+                        id={"costsSearchTab"}
+                        show={showCostsTab}
+                        minCostsOptionOnChange = {(min) => setMinCost(min)}
+                        minCosts = {minCost}
+                        maxCostsOptionOnChange = {(max) => setMaxCost(max)}
+                        maxCosts = {maxCost}
 
-                <DateSearchTab
-                    id={"dateSearchTab"}
-                    show = {showDateTab}
-                    dateFromOnChange = {(date) => setDateFrom(date)}
-                    dateFrom = {dateFrom}
-                    dateToOnChange = {(date) => setDateTo(date)}
-                    dateTo = {dateTo}
-                    timeFromOnChange = {(time) => setTimeFrom(time)}
-                    timeFrom = {timeFrom}
-                    timeToOnChange = {(time) => setTimeTo(time)}
-                    timeTo = {timeTo}
+                    />
 
-                />
+                </Row>
 
-                <PeopleNumberSearchTab
-                    id={"peopleNumberSearchTab"}
-                    show = {showPeopleNumberTab}
-                    minPeopleNumberOnChange = {(min) => setMinPeopleNumber(min)}
-                    minPeopleNumber = {minPeopleNumber}
-                    maxPeopleNumberOnChange = {(max) => setMaxPeopleNumber(max)}
-                    maxPeopleNumber = {maxPeopleNumber}
-                />
+            </Col>
 
-                <AgeSearchTab
-                    id={"ageSearchTab"}
-                    show = {showAgeTab}
-                    minAgeOnChange = {(min) => setMinAge(min)}
-                    minAge = {minAge}
-                    maxAgeOnChange = {(max) => setMaxAge(max)}
-                    maxAge = {maxAge}
-                />
-
-                <GenderSearchTab
-                    id={"genderSearchTab"}
-                    show={showGenderTab}
-                    maleOptionClick = {() => setMaleOption(!maleOption)}
-                    maleOption = {maleOption}
-                    femaleOptionClick = {() => setFemaleOption(!femaleOption)}
-                    femaleOption = {femaleOption}
-                    allGenderOptionClick = {() => setAllGenderOption(!allGenderOption)}
-                    allGenderOption = {allGenderOption}
-                />
-
-                <CostsSearchTab
-                    id={"costsSearchTab"}
-                    show={showCostsTab}
-                    minCostsOptionOnChange = {(min) => setMinCost(min)}
-                    minCosts = {minCost}
-                    maxCostsOptionOnChange = {(max) => setMaxCost(max)}
-                    maxCosts = {maxCost}
-
-                />
-
-            </Row>
-
-
-        </Col>
-
-    </Navbar>);
-
+        </Navbar>);
 
 }
 

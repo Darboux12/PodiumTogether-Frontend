@@ -1,86 +1,87 @@
 import "../../../styles/display-events/search-tabs/GenderSearchTab.css"
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import Roll from "react-reveal";
 import Button from "react-bootstrap/Button";
+import {findAllgenderFetch, findAllGendersFetch} from "../../fetch/Fetch";
 
 export default function GenderSearchTab(props) {
 
-    const maleOptionId = "maleOption";
-    const femaleOptionId = "femaleOption";
-    const allGenderOptionId = "allGenderOption";
+    const [allGenders,setAllGenders] = useState([]);
 
-    useEffect(() =>{
+    let {selectGender,selectedGenders} = props;
 
-        if(props.maleOption === true){
+    useEffect(() => {
 
-            let btn = document.getElementById(maleOptionId);
+        findAllGendersFetch()
 
-            if(btn !== null){
-                btn.style.backgroundColor = "#6d767e";
-                btn.style.color = "white";
-                btn.style.fillOpacity = "0.9"
-            }
-        }
+            .then(res => res.json())
 
-        if(props.femaleOption === true){
+            .then(res => {
 
-            let btn = document.getElementById(femaleOptionId);
+                setAllGenders(res);
 
-            if(btn !== null){
-                btn.style.backgroundColor = "#6d767e";
-                btn.style.color = "white";
-                btn.style.fillOpacity = "0.9"
-            }
-        }
+            })
 
-        if(props.allGenderOption === true){
+            .catch(error => console.log(error));
 
-            let btn = document.getElementById(allGenderOptionId);
+    },[]);
 
-            if(btn !== null){
-                btn.style.backgroundColor = "#6d767e";
-                btn.style.color = "white";
-                btn.style.fillOpacity = "0.9"
-            }
-        }
+    useEffect(() => {
+
+        selectedGenders.map(item => {
+
+            handleTabColorChange(item,true);
+
+
+        });
 
 
 
     });
 
-    const handleChange = (e) => {
+    const removeGender = (gender) => {
 
-        let id = e.target.id;
-        let btn = document.getElementById(id);
-        let style = getComputedStyle(btn);
+        let index = selectedGenders.indexOf(gender);
 
-        if(style.fillOpacity === "1"){
-
-            btn.style.backgroundColor = "#6d767e";
-            btn.style.color = "white";
-            btn.style.fillOpacity = "0.9"
-        }
-
-        else {
-            btn.style.backgroundColor = "white";
-            btn.style.color = "#6c757d";
-            btn.style.fillOpacity = "1"
-        }
-
-        sendDataToParent(id);
+        if (index > -1)
+            selectedGenders.splice(index, 1);
 
     };
 
-    const sendDataToParent = (id) => {
+    const selectCheckedGender = (gender) => selectGender(gender);
 
-        if(id === maleOptionId )
-            props.maleOptionClick();
+    const handleTabColorChange = (id,isActive) => {
 
-        if(id === femaleOptionId )
-            props.femaleOptionClick();
+        let btn = document.getElementById(id);
 
-        if(id === allGenderOptionId )
-            props.allGenderOptionClick();
+        if(btn !== null){
+
+            if(isActive){
+                btn.style.backgroundColor = "#6d767e";
+                btn.style.color = "white";
+                btn.style.fillOpacity = "0.9"
+            }
+
+            else{
+                btn.style.backgroundColor = "white";
+                btn.style.color = "#6c757d";
+                btn.style.fillOpacity = "1"
+            }
+
+        }
+    };
+
+    const handleChange = (gender) => {
+
+        if(selectedGenders.includes(gender)){
+            removeGender(gender);
+            handleTabColorChange(gender,false);
+        }
+
+        else {
+            selectCheckedGender(gender);
+            handleTabColorChange(gender,true);
+        }
 
     };
 
@@ -92,42 +93,23 @@ export default function GenderSearchTab(props) {
 
                 <div className={"searchTabContainer mt-3 ml-5"}>
 
-                    <Button
-                        id={"maleOption"}
-                        className={"searchTabButton"}
-                        onClick = {(e) => handleChange(e)}
-                        variant={"outline-secondary"}
-                    >Male
-                    </Button>
+                    {allGenders.map(item =>
 
-                    <Button
-                    id={"femaleOption"}
-                    className={"searchTabButton"}
-                    onClick = {(e) => handleChange(e)}
-                    variant={"outline-secondary"}
-                    >Female
-                    </Button>
+                        <Button
+                            id={item.gender}
+                            className={"searchTabButton"}
+                            onClick = {(e) => handleChange(e.target.id)}
+                            variant={"outline-secondary"}
+                        >{item.gender}
+                        </Button>
 
-                    <Button
-                        id={"allGenderOption"}
-                        className={"searchTabButton"}
-                        onClick = {(e) => handleChange(e)}
-                        variant={"outline-secondary"}
-                    >All
-                    </Button>
-
-
+                    )}
 
                 </div>
 
             </Roll>
 
-
-
-
-
         );
-
 
     }
 

@@ -5,7 +5,9 @@ import React from "react";
 
 export default function AgeSearchTab(props) {
 
-    if(props.show){
+    let {show,minAgeOnChange,maxAgeOnChange} = props;
+
+    if(show){
 
         return(
 
@@ -16,13 +18,16 @@ export default function AgeSearchTab(props) {
                     <div className={"d-flex flex-row mr-5"}>
 
                         <Form.Group className={"mr-3"} controlId="">
+
                             <Form.Label className={""}>Min age</Form.Label>
+
                             <Form.Control
                                 className={""}
                                 type="number"
                                 value = {props.minAge}
-                                onChange = {(e) => props.minAgeOnChange(e.target.value)}
+                                onChange = {(e) => minAgeOnChange(e.target.value)}
                             />
+
                         </Form.Group>
 
                         <Form.Group className={""} controlId="formEventTitle">
@@ -31,17 +36,13 @@ export default function AgeSearchTab(props) {
                                 className={""}
                                 type="number"
                                 value = {props.maxAge}
-                                onChange = {(e) => props.maxAgeOnChange(e.target.value)}
+                                onChange = {(e) => maxAgeOnChange(e.target.value)}
                             />
                         </Form.Group>
 
                     </div>
 
-
-
                 </Form>
-
-
 
             </Roll>
 

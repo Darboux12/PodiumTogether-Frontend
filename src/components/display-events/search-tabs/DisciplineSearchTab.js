@@ -5,197 +5,117 @@ import "../../../styles/display-events/search-tabs/DisciplineSearchTab.css"
 import Button from "react-bootstrap/Button";
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form'
+import {findAllDisciplineFetch} from "../../fetch/Fetch";
 
 export default function DisciplineSearchTab(props){
 
-    const footballOptionId = "footballOption";
-    const volleyballOptionId = "volleyballOption";
-    const joggingOptionId = "joggingOption";
-    const basketballOptionId = "basketballOption";
-    const swimmingOptionId = "swimmingOption";
-    const otherOptionId = "otherOption";
+    const [allDisciplines,setAllDisciplines] = useState([]);
 
-    useEffect(() =>{
+    let {show,selectDiscipline,selectedDisciplines} = props;
 
-        if(props.footballOption === true){
+    useEffect(() => {
 
-            let btn = document.getElementById(footballOptionId);
+        findAllDisciplineFetch()
 
-            if(btn !== null){
-                btn.style.backgroundColor = "#6d767e";
-                btn.style.color = "white";
-                btn.style.fillOpacity = "0.9"
-            }
-        }
+            .then(res => res.json())
 
-        if(props.volleyballOption === true){
+            .then(res => {
 
-            let btn = document.getElementById(volleyballOptionId);
+                setAllDisciplines(res);
 
-            if(btn !== null){
-                btn.style.backgroundColor = "#6d767e";
-                btn.style.color = "white";
-                btn.style.fillOpacity = "0.9"
-            }
-        }
+            })
 
-        if(props.joggingOption === true){
+            .catch(error => console.log(error));
 
-            let btn = document.getElementById(joggingOptionId);
+    },[]);
 
-            if(btn !== null){
-                btn.style.backgroundColor = "#6d767e";
-                btn.style.color = "white";
-                btn.style.fillOpacity = "0.9"
-            }
-        }
+    useEffect(() => {
 
-        if(props.basketballOption === true){
+        selectedDisciplines.map(item => {
 
-            let btn = document.getElementById(basketballOptionId);
+            handleTabColorChange(item,true);
 
-            if(btn !== null){
-                btn.style.backgroundColor = "#6d767e";
-                btn.style.color = "white";
-                btn.style.fillOpacity = "0.9"
-            }
-        }
 
-        if(props. swimmingOption === true){
+        });
 
-            let btn = document.getElementById( swimmingOptionId);
 
-            if(btn !== null){
-                btn.style.backgroundColor = "#6d767e";
-                btn.style.color = "white";
-                btn.style.fillOpacity = "0.9"
-            }
-        }
-
-        if(props.otherOption === true){
-
-            let btn = document.getElementById(otherOptionId);
-
-            if(btn !== null){
-                btn.style.backgroundColor = "#6d767e";
-                btn.style.color = "white";
-                btn.style.fillOpacity = "0.9"
-            }
-        }
 
     });
 
-    const handleChange = (e) => {
+    const removeDiscipline = (discipline) => {
 
-        let id = e.target.id;
+        let index = selectedDisciplines.indexOf(discipline);
+
+        if (index > -1)
+            selectedDisciplines.splice(index, 1);
+
+    };
+
+    const selectCheckedDiscipline = (discipline) => selectDiscipline(discipline);
+
+    const handleTabColorChange = (id,isActive) => {
+
         let btn = document.getElementById(id);
-        let style = getComputedStyle(btn);
 
-        if(style.fillOpacity === "1"){
+        if(btn !== null){
 
-            btn.style.backgroundColor = "#6d767e";
-            btn.style.color = "white";
-            btn.style.fillOpacity = "0.9"
+            if(isActive){
+                btn.style.backgroundColor = "#6d767e";
+                btn.style.color = "white";
+                btn.style.fillOpacity = "0.9"
             }
+
+            else{
+                btn.style.backgroundColor = "white";
+                btn.style.color = "#6c757d";
+                btn.style.fillOpacity = "1"
+            }
+
+        }
+    };
+
+    const handleChange = (discipline) => {
+
+        if(selectedDisciplines.includes(discipline)){
+            removeDiscipline(discipline);
+            handleTabColorChange(discipline,false);
+        }
 
         else {
-            btn.style.backgroundColor = "white";
-            btn.style.color = "#6c757d";
-            btn.style.fillOpacity = "1"
-            }
-
-        sendDataToParent(id);
+            selectCheckedDiscipline(discipline);
+            handleTabColorChange(discipline,true);
+        }
 
     };
 
-    const sendDataToParent = (id) => {
-
-        if(id === footballOptionId)
-            props.footballOptionClick();
-
-        if(id === volleyballOptionId)
-            props.volleyballOptionClick();
-
-        if(id === joggingOptionId)
-            props.joggingOptionClick();
-
-        if(id === basketballOptionId)
-            props.basketballOptionClick();
-
-        if(id === swimmingOptionId)
-            props.swimmingOptionClick();
-
-        if(id === otherOptionId)
-            props.otherOptionClick();
-
-    };
-
-    if(props.show){
+    if(show){
 
         return (
 
             <Roll>
 
-            <div className={"searchTabContainer mt-3 ml-5"}>
+                <div className={"searchTabContainer mt-3 ml-5"}>
 
-                <Button
-                    id={"footballOption"}
-                    className={"searchTabButton"}
-                    onClick = {(e) => handleChange(e)}
-                    variant={"outline-secondary"}
-                >Football
-                </Button>
+                    {allDisciplines.map(item =>
 
-                <Button
-                    id={"volleyballOption"}
-                    className={"searchTabButton"}
-                    onClick = {(e) => handleChange(e)}
-                    variant={"outline-secondary"}
-                >Volleyball
-                </Button>
+                        <Button
+                            id={item.discipline}
+                            className={"searchTabButton"}
+                            onClick = {(e) => handleChange(e.target.id)}
+                            variant={"outline-secondary"}
+                        >{item.discipline}
+                        </Button>
 
-                <Button
-                    id={"joggingOption"}
-                    className={"searchTabButton"}
-                    onClick = {(e) => handleChange(e)}
-                    variant={"outline-secondary"}
-                >Jogging
-                </Button>
+                    )}
 
-                <Button
-                    id={"swimmingOption"}
-                    className={"searchTabButton"}
-                    onClick = {(e) => handleChange(e)}
-                    variant={"outline-secondary"}
-                >Swimming
-                </Button>
 
-                <Button
-                    id={"basketballOption"}
-                    className={"searchTabButton"}
-                    onClick = {(e) => handleChange(e)}
-                    variant={"outline-secondary"}
-                >Basketball
-                </Button>
 
-                <Button
-                    id={"otherOption"}
-                    className={"searchTabButton"}
-                    onClick = {(e) => handleChange(e)}
-                    variant={"outline-secondary"}
-                >Other
-                </Button>
 
-            </div>
+                </div>
 
             </Roll>
 
-
-
-
-
             );
-
 
     }
 

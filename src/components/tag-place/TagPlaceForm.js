@@ -1402,7 +1402,7 @@ export default function TagPlaceForm(props){
                     <Form.Control
                         type="file"
                         className={"FormInputField mt-3"}
-                        onChange = {(e) => setDocuments(e.target.file)}
+                        onChange = {(e) => setDocuments(e.target.files)}
                         multiple
                     />
 

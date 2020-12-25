@@ -5,7 +5,9 @@ import React from "react";
 
 export default function CostsSearchTab(props) {
 
-    if(props.show){
+    let {show,minCosts,minCostsOptionOnChange,maxCosts,maxCostsOptionOnChange} = props;
+
+    if(show){
 
         return(
 
@@ -20,8 +22,8 @@ export default function CostsSearchTab(props) {
                             <Form.Control
                                 className={""}
                                 type="number"
-                                value = {props.minCosts}
-                                onChange = {(e) => props.minCostsOptionOnChange(e.target.value)}
+                                value = {minCosts}
+                                onChange = {(e) => minCostsOptionOnChange(e.target.value)}
                             />
                         </Form.Group>
 
@@ -30,24 +32,18 @@ export default function CostsSearchTab(props) {
                             <Form.Control
                                 className={""}
                                 type="number"
-                                value = {props.maxCosts}
-                                onChange = {(e) => props.maxCostsOptionOnChange(e.target.value)}
+                                value = {maxCosts}
+                                onChange = {(e) => maxCostsOptionOnChange(e.target.value)}
                             />
                         </Form.Group>
 
                     </div>
 
-
-
                 </Form>
-
-
 
             </Roll>
 
         )
-
-
     }
 
     else{

@@ -8,10 +8,10 @@ import InputGroup from "react-bootstrap/InputGroup";
 
 export default function DateSearchTab(props) {
 
+    let {show,dateFromOnChange,dateToOnChange,timeFrom,
+        timeFromOnChange,timeTo,timeToOnChange} = props;
 
-
-
-    if(props.show){
+    if(show){
 
         return(
 
@@ -22,23 +22,27 @@ export default function DateSearchTab(props) {
                     <div className={"d-flex flex-row mr-5"}>
 
                         <Form.Group className={"mr-3"} controlId="">
+
                             <Form.Label className={""}>Date From</Form.Label>
                             <Form.Control
                                 className={""}
                                 type="date"
                                 value = {props.dateFrom}
-                                onChange = {(e) => props.dateFromOnChange(e.target.value)}
+                                onChange = {(e) => dateFromOnChange(e.target.value)}
                                 />
+
                         </Form.Group>
 
                         <Form.Group className={""} controlId="formEventTitle">
+
                             <Form.Label className={""}>Date To</Form.Label>
                             <Form.Control
                                 className={""}
                                 type="date"
                                 value = {props.dateTo}
-                                onChange = {(e) => props.dateToOnChange(e.target.value)}
+                                onChange = {(e) => dateToOnChange(e.target.value)}
                             />
+
                         </Form.Group>
 
                     </div>
@@ -46,32 +50,32 @@ export default function DateSearchTab(props) {
                     <div className={"d-flex flex-row"}>
 
                         <Form.Group className={"mr-3"} controlId="">
+
                             <Form.Label className={""}>Time From</Form.Label>
                             <Form.Control
                                 className={""}
                                 type="time"
-                                value = {props.timeFrom}
-                                onChange = {(e) => props.timeFromOnChange(e.target.value)}
+                                value = {timeFrom}
+                                onChange = {(e) => timeFromOnChange(e.target.value)}
                             />
+
                         </Form.Group>
 
                         <Form.Group className={""} controlId="formEventTitle">
+
                             <Form.Label className={""}>Time To</Form.Label>
                             <Form.Control
                                 className={""}
                                 type="time"
-                                value = {props.timeTo}
-                                onChange = {(e) => props.timeToOnChange(e.target.value)}
+                                value = {timeTo}
+                                onChange = {(e) => timeToOnChange(e.target.value)}
                             />
+
                         </Form.Group>
 
                     </div>
 
-
-
                 </Form>
-
-
 
             </Roll>
 

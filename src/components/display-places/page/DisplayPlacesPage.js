@@ -2,16 +2,19 @@ import React, {Component, useEffect, useState} from "react";
 
 import "../../../styles/display-places/page/DisplayPlacesPage.css"
 import displayPlacesImage from "../../../images/stadium.jpg";
-import PlacesSearchBar from "../search-bar/PlacesSearchBar";
-import Event from "../../display-events/page/Event";
-import {findAllNewsFetch, findAllPlaceFetch} from "../../fetch/Fetch";
-import News from "../../news/News";
+
+
 import Place from "./Place";
+import EventsSearchBar from "../../search-bar/search-bar/EventsSearchBar";
+import {findAllPlaceFetch} from "../../fetch/Fetch";
 
 
 export default function DisplayPlacesPage(){
 
     const [isLoaded,setIsLoaded] = useState(false);
+
+    const [allItems,setAllItems] = useState([]);
+
     const [placeItems,setPlaceItems] = useState([]);
 
     useEffect(() => {
@@ -24,6 +27,7 @@ export default function DisplayPlacesPage(){
 
                 setIsLoaded(true);
                 setPlaceItems(res);
+                setAllItems(res);
 
             })
 
@@ -35,7 +39,7 @@ export default function DisplayPlacesPage(){
 
             <img className={"displayPlacesImage"} src={displayPlacesImage} alt={"Display Places Page Image"}/>
 
-            <PlacesSearchBar/>
+            <EventsSearchBar places = {allItems} setPlaces={(places) => setPlaceItems(places)}/>
 
             <div className={"PlacesList"}>
 

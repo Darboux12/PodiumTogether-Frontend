@@ -56,6 +56,8 @@ export default function DisplayPlacesPage(){
                         minAge = {item.minAge}
                         maxAge = {item.maxAge}
                         image = {item.images[0]}
+                        cost = {item.cost}
+                        usageTime = {item.usageTime}
                     />
 
 

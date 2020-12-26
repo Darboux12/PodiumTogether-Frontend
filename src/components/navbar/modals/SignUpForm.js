@@ -25,6 +25,7 @@ import {minPasswordLength} from "../../config/Limits";
 import {maxPasswordLength} from "../../config/Limits";
 import {maxEmailLength} from "../../config/Limits";
 import {minSignUpAge} from "../../config/Limits";
+import {addUserFetch, existUserByEmailFetch, existUserByUsernameFetch} from "../../fetch/Fetch";
 
 export default function SignUpForm(props){
 
@@ -43,25 +44,11 @@ export default function SignUpForm(props){
     const [birthdayError,setBirthdayError] = useState("");
     const [termsAgreementError,setTermsAgreementError] = useState("");
 
-    const [isLoaded, setIsLoaded] = useState(false);
     const [countryItems, setCountryItems] = useState([]);
 
-    useEffect(() => {
+    let {showSignUpSuccessModal} = props;
 
-        fetch(serverAddress + findAllCountryEndpoint)
-            .then(res => res.json())
-            .then(res => {
-
-                setIsLoaded(true);
-                setCountryItems(res);
-
-            });
-
-    },[]);
-
-    const formValidation = () => {
-
-        let isOk = true;
+    const resetErrors = () => {
 
         setEmailError("");
         setPasswordError("");
@@ -69,6 +56,28 @@ export default function SignUpForm(props){
         setUsernameError("");
         setBirthdayError("");
         setTermsAgreementError("");
+
+    };
+
+    useEffect(() => {
+
+        fetch(serverAddress + findAllCountryEndpoint)
+
+            .then(res => res.json())
+
+            .then(res => {
+
+                setCountryItems(res);
+                setCountry(res[0].name);
+            });
+
+    },[]);
+
+    const formValidation = () => {
+
+        resetErrors();
+
+        let isOk = true;
 
         if(username === ""){
             setUsernameError("Username cannot be empty!");
@@ -140,84 +149,65 @@ export default function SignUpForm(props){
             isOk = false;
         }
 
-        fetch(serverAddress + existUserByUsernameEndpoint + username)
-            .then((res) =>{
-
-                if(res.ok){
-                    setUsernameError("User with this username already exist!");
-                    isOk = false;
-                }
-
-
-            }).catch(
-            error => console.log(error) // Handle the status status object
-        );
-
-        fetch(serverAddress + existUserByEmailEndpoint + email)
-            .then((res) =>{
-
-                if(res.ok){
-                    setEmailError("Email address is already in usage!");
-                    isOk = false;
-                }
-
-
-            }).catch(
-            error => console.log(error) // Handle the status status object
-        );
-
-
         return isOk;
 
     };
 
     const onFormSubmit = () => {
 
-        if(formValidation()){
+        if(formValidation()) {
 
-            const formData = {
+            existUserByUsernameFetch(username)
 
-                email : email,
-                password : password,
-                username : username,
-                birthday : birthday,
-                country : country
-            };
+                .then(res => res.json())
 
-            fetch(serverAddress + addUserEndpoint, {
-            method: 'POST',
-            headers : {'Content-Type': 'application/json'},
-            body: JSON.stringify(formData)
+                .then((res) => {
 
-        }).then( res => {
+                    if (res === false) {
 
-            if(res.ok){props.showSignUpSuccessModal();}
+                        existUserByEmailFetch(email)
 
-            else return res.json();
-        })
+                            .then(res => res.json())
 
-        .then( res => {
+                            .then((res) => {
 
-            if(res.message === "email is not valid email address")
-                setEmailError("This is not valid email address!");
+                                if (res === false) {
+
+                                    addUserFetch(email,password,username,birthday,country)
+
+                                        .then( res => {
+
+                                            if(res.ok)
+                                                showSignUpSuccessModal();
+
+                                            else return res.json();
+                                    })
+
+                                        .then( res => {
+
+                                            if(res.message === "email is not valid email address")
+                                                setEmailError("This is not valid email address!");
+
+                                            console.log(res);
+                                        })
+
+                                        .catch(err => { console.log(err) })
+
+                                }
+
+                                else setEmailError("Email address is already in usage!");
+
+                            })
+
+                            .catch(error => console.log(error));
 
 
+                    } else setUsernameError("User with this username already exist!");
+                })
 
-
-
-
-                console.log(res);
-
-
-        })
-
-                .catch(err => { console.log(err) })
-
-
+                .catch(error => console.log(error));
 
         }
-
-
 
     };
 
@@ -337,9 +327,6 @@ export default function SignUpForm(props){
                         )};
 
                     </FormControl>
-
-
-
 
                 </InputGroup>
 

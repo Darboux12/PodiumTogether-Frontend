@@ -23,7 +23,7 @@ export default function UserProfilePage(){
 
             setProfile(true);
             setEvents(false);
-            setPlaces(false)
+            setPlaces(false);
             setWarnings(false)
 
         }
@@ -50,12 +50,12 @@ export default function UserProfilePage(){
 
             setProfile(false);
             setEvents(false);
-            setPlaces(false)
+            setPlaces(false);
             setWarnings(true)
 
         }
 
-    }
+    };
 
     if(profile === true){
 

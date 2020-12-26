@@ -14,6 +14,7 @@ import Container from "react-bootstrap/Container";
 import LocalizationRow from "./LocalizationRow";
 import AgeLimitRow from "./AgeLimitRow";
 import OpenDayRow from "./OpenDayRow";
+import CostRow from "./CostRow";
 
 export default function Place(props) {
 
@@ -45,6 +46,11 @@ export default function Place(props) {
 
                 <OpenDayRow
                     businessDays = {props.businessDays}
+                />
+
+                <CostRow
+                    usageTime = {props.usageTime}
+                    cost = {props.cost}
 
                 />
 

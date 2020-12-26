@@ -31,6 +31,9 @@ import {maxUserDescriptionLength} from "../config/Limits";
 import podiumStorage from "../config/Storage";
 import ImageUploader from 'react-images-upload';
 import jwtDecode from "jwt-decode";
+import {updateUserProfileFetch} from "../fetch/Fetch";
+
+import emptyProfile from "../../images/emptyProfile.png";
 
 export default function EditProfilePage() {
 
@@ -58,7 +61,7 @@ export default function EditProfilePage() {
     const [repeatPassword,setRepeatPassword] = useState("");
     const [oldPassword,setOldPassword] = useState("");
     const [description,setDescription] = useState("");
-    const [image,setImage] = useState("");
+    const [image,setImage] = useState(new File([""], "empty-file"));
 
     const [emailError,setEmailError] = useState("");
     const [usernameError,setUsernameError] = useState("");
@@ -82,7 +85,7 @@ export default function EditProfilePage() {
     const [submitModalVisible,setSubmitModalVisible] = useState(false);
     const [userData,setUserData] = useState("");
     const [isLoaded,setIsLoaded] = useState(false);
-    const profileImage = podiumStorage.get("profileImage")
+    let profileImage = podiumStorage.get("profileImage")
     ? `data:image/jpeg;base64,${podiumStorage.get("profileImage").content}` :
         "";
 
@@ -114,7 +117,9 @@ export default function EditProfilePage() {
 
             .then(res => {
                 setUserData(res);
+                podiumStorage.set("profileImage", res.profileImage);
                 setIsLoaded(true);
+
             })
 
             .catch((error) => {
@@ -165,8 +170,6 @@ export default function EditProfilePage() {
         findAllCountriesFetch();
 
         findUserByUsernameFetch();
-
-
 
     },[]);
 
@@ -362,135 +365,88 @@ export default function EditProfilePage() {
 
     };
 
+    const uncheckButtons = () => {
+
+        document.getElementById(emailCheckboxId).checked = false;
+        document.getElementById(usernameCheckboxId).checked = false;
+        document.getElementById(birthCheckboxId).checked = false;
+        document.getElementById(countryCheckboxId).checked = false;
+        document.getElementById(countryCheckboxId).checked = false;
+        document.getElementById(passwordCheckboxId).checked = false;
+        document.getElementById(descriptionCheckboxId).checked = false;
+        document.getElementById(imageCheckboxId).checked = false;
+
+    };
+
     const onFormSubmit = (id) => {
 
         if(formValidation(id)){
 
-            document.getElementById(emailCheckboxId).checked = false;
-            document.getElementById(usernameCheckboxId).checked = false;
-            document.getElementById(birthCheckboxId).checked = false;
-            document.getElementById(countryCheckboxId).checked = false;
-            document.getElementById(countryCheckboxId).checked = false;
-            document.getElementById(passwordCheckboxId).checked = false;
-            document.getElementById(descriptionCheckboxId).checked = false;
-            document.getElementById(imageCheckboxId).checked = false;
+            uncheckButtons();
 
-            if(id !== imageSubmitButtonId) {
+            let updateRequest = {
+                id: userData.id,
+                username: userData.username,
+                email: userData.email,
+                password: userData.password,
+                country: userData.country,
+                birthday: userData.birthday,
+                description: userData.description,
+                image : image
+            };
 
-                let updateRequest = {
-
-                    id: userData.id,
-                    username: userData.username,
-                    email: userData.email,
-                    password: userData.password,
-                    country: userData.country,
-                    birthday: userData.birthday,
-                    description: userData.description
-
-                };
-
-                if (id === usernameSubmitButtonId)
+            if (id === usernameSubmitButtonId)
                     updateRequest.username = username;
 
-                if (id === emailSubmitButtonId)
+            if (id === emailSubmitButtonId)
                     updateRequest.email = email;
 
-                if (id === birthSubmitButtonId)
+            if (id === birthSubmitButtonId)
                     updateRequest.birthday = birth;
 
-                if (id === countrySubmitButtonId)
+            if (id === countrySubmitButtonId)
                     updateRequest.country = country;
 
-                if (id === passwordSubmitButtonId)
+            if (id === passwordSubmitButtonId)
                     updateRequest.password = password;
 
-                if (id === descriptionSubmitButtonId)
+            if (id === descriptionSubmitButtonId)
                     updateRequest.description = description;
 
-                fetch(serverAddress + updateUserProfileEndpoint, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(updateRequest)
+            updateUserProfileFetch(
+                updateRequest.id,
+                updateRequest.username,
+                updateRequest.email,
+                updateRequest.password,
+                updateRequest.country,
+                updateRequest.birthday,
+                updateRequest.description,
+                updateRequest.image
+            )
 
-                })
+                .then(res => {
 
-                    .then(res => {
+                    if (res.ok) {
 
-                        if (res.ok) {
-
-                            if (id === usernameSubmitButtonId)
-                                podiumStorage.set('username', username);
-
-                            setSubmitModalVisible(true);
+                        if (id === usernameSubmitButtonId){
+                            podiumStorage.set('username', username);
+                        }
 
 
-                            setTimeout(() => {
+                        setSubmitModalVisible(true);
+
+                        findUserByUsernameFetch();
+
+                        setTimeout(() => {
                                 window.location.reload()
                             }, 1000);
 
-
-                        } else return res.json();
-                    })
-
-                    .then(res => {
-
-                        console.log(res);
-
-
-                    });
-
-            }
-
-            else if(id === imageSubmitButtonId) {
-
-                const ProfileImageData = new FormData();
-
-                ProfileImageData.append("username",userData.username);
-                ProfileImageData.append("image",image);
-
-
-                fetch(serverAddress + profileImageUploadEndpoint, {
-                    method: 'POST',
-                    body: ProfileImageData
-
+                    } else return res.json();
                 })
 
-                    .then(res => {
-
-                        if (res.ok) {
-
-                            changeUserProfileImage();
-
-                        } else return res.json();
-
-
-                        })
-
-                    .catch(err => { console.log(err) });
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                .then(res => {console.log(res);});
 
         }
-
-
-
-
-
-
 
     };
 

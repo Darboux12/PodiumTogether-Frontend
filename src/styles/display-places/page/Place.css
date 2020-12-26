@@ -46,16 +46,23 @@
 .placeLocalizationIcon{
     color: green;
     font-size: 1.4em;
+    width: 2em !important;
+    margin-top: 0.2em;
+
 }
 
 .placeDateIcon{
     color: green;
     font-size: 1.4em;
+    width: 2em !important;
+    margin-top: 0.2em;
 }
 
 .placePeopleIcon{
     color: green;
     font-size: 1.4em;
+    width: 2em !important;
+    margin-top: 0.2em;
 }
 
 .placeBadge{

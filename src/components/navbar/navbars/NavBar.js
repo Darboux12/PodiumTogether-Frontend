@@ -2,11 +2,6 @@ import React, {Component, useEffect, useState} from "react";
 
 import "../../../styles/navbar/Navbar.css"
 
-import NavBarUserNotLogged from "./NavBarUserNotLogged";
-import NavBarUserLogged from "./NavBarUserLogged";
-import NavBarUserAdmin from "./NavBarUserAdmin";
-import serverAddress, {findUserByUsernameEndpoint, findUsernameFromTokenEndpoint} from "../../config/Constants";
-import SecureLS from "../modals/SignInForm";
 import podiumStorage from "../../config/Storage";
 import jwtDecode from "jwt-decode";
 import {Nav, Navbar} from "react-bootstrap";

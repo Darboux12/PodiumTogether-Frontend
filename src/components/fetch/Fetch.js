@@ -2,14 +2,14 @@ import serverAddress, {
     addContactEndpoint,
     addDisciplineEndpoint, addEventEndpoint,
     addNewsEndpoint, addPlaceEndpoint,
-    addSubjectEndpoint,
+    addSubjectEndpoint, addUserEndpoint, authenticateEndpoint,
     deleteUserEndpoint,
     existDisciplineByNameEndpoint,
-    existSubjectByNameEndpoint,
+    existSubjectByNameEndpoint, existUserByEmailEndpoint, existUserByUsernameEndpoint,
     findAllDisciplineEndpoint, findAllGenderEndpoint, findAllNewsEndpoint, findAllPlacesEndpoint,
     findAllSubjectEndpoint,
-    findAllUsersEndpoint,
-    newsImagesUploadEndpoint, uploadEventFilesEndpoint, uploadEventImagesEndpoint
+    findAllUsersEndpoint, findUserByUsernameEndpoint,
+    newsImagesUploadEndpoint, updateUserProfileEndpoint, uploadEventFilesEndpoint, uploadEventImagesEndpoint
 } from "../config/Constants";
 
 export const existDisciplineByNameFetch = (discipline) => {
@@ -261,14 +261,98 @@ export const addPlaceFetch = (
 
 };
 
-export const  findAllNewsFetch = () => {
+export const findAllNewsFetch = () => {
 
     return  fetch(serverAddress + findAllNewsEndpoint)
 
 };
 
-export const  findAllPlaceFetch = () => {
+export const findAllPlaceFetch = () => {
 
     return  fetch(serverAddress + findAllPlacesEndpoint)
 
 };
+
+export const addUserFetch = (email,password,username,birthday,country) => {
+
+    const formData = {
+        email : email,
+        password : password,
+        username : username,
+        birthday : birthday,
+        country : country
+    };
+
+    const requestOption = {
+        method: 'POST',
+        headers : {'Content-Type': 'application/json'},
+        body: JSON.stringify(formData)
+    };
+
+    return fetch(serverAddress + addUserEndpoint,requestOption);
+
+};
+
+export const existUserByEmailFetch = (email) => {
+    return fetch(serverAddress + existUserByEmailEndpoint + email)
+};
+
+export const existUserByUsernameFetch = (username) => {
+   return  fetch(serverAddress + existUserByUsernameEndpoint + username)
+};
+
+export const signInUserFetch = (username,password) => {
+
+    const user = {
+        username: username,
+        password: password
+    };
+
+    const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(user)
+    };
+
+   return fetch(serverAddress + authenticateEndpoint, requestOptions)
+
+};
+
+export const findUserByUsernameFetch = (username) => {
+
+    return fetch(serverAddress + findUserByUsernameEndpoint + username);
+
+};
+
+export const updateUserProfileFetch = (id,username,email,password,country,
+                                       birthday,description,image) => {
+
+    const updateForm = new FormData();
+
+    const request = {
+        id: id,
+        username: username,
+        email: email,
+        password: password,
+        country: country,
+        birthday: birthday,
+        description: description
+    };
+
+    updateForm.append('request', new Blob([JSON.stringify(
+
+        request
+
+    )], {type: "application/json"}));
+
+    updateForm.append("image",image);
+
+    const requestOptions = {
+        method: "POST",
+        body: updateForm
+    };
+
+    return fetch(serverAddress + updateUserProfileEndpoint,requestOptions);
+
+};
+

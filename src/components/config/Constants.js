@@ -12,7 +12,7 @@ export const authenticateEndpoint = "/authenticate";
 export const existUserByUsernameEndpoint = "/user/exist/username/"; // Path variable {username}
 export const existUserByEmailEndpoint = "/user/exist/email/"; // Path variable {email}
 export const addUserEndpoint = "/user/add";
-export const findUserByUsernameEndpoint = "/user/find/"; // Path variable {username}
+export const findUserByUsernameEndpoint = "/user/find/username/"; // Path variable {username}
 
 export const findAllCountryEndpoint = "/country/find/all";
 

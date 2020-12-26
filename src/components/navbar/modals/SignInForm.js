@@ -15,6 +15,14 @@ import serverAddress, {
 } from "../../config/Constants";
 import podiumStorage from "../../config/Storage";
 import jwtDecode from "jwt-decode";
+import {
+    addUserFetch,
+    existUserByEmailFetch,
+    existUserByUsernameFetch,
+    findUserByUsernameFetch,
+    signInUserFetch
+} from "../../fetch/Fetch";
+
 
 export default function SignInForm(props){
 
@@ -24,14 +32,20 @@ export default function SignInForm(props){
     const [usernameError,setUsernameError] = useState("");
     const [passwordError,setPasswordError] = useState("");
 
+    let {signInUser} = props;
+
+    const resetErrors = () => {
+        setUsernameError("");
+        setPasswordError("");
+    };
+
     const formValidation = () => {
+
+        resetErrors();
 
         let isOk = true;
 
-        setUsernameError("");
-        setPasswordError("");
-
-        if(username.username === ""){
+        if(username === ""){
             setUsernameError("Username cannot be empty!");
             isOk = false;
         }
@@ -41,24 +55,7 @@ export default function SignInForm(props){
             isOk = false;
         }
 
-        fetch(serverAddress + existUserByUsernameEndpoint + username)
-            .then((res) =>{
-
-                if(!res.ok){
-                    setUsernameError("User with this username does not exist!");
-                    isOk = false;
-                }
-
-
-            }).catch(
-            error => console.log(error) // Handle the status status object
-        );
-
-
         return isOk;
-
-
-
 
     };
 
@@ -66,9 +63,9 @@ export default function SignInForm(props){
 
         let username = jwtDecode(podiumStorage.get("authorizationToken")).sub;
 
-        fetch(serverAddress + findUserByUsernameEndpoint + username)
+        findUserByUsernameFetch(username)
 
-                    .then((res) => {
+            .then((res) => {
 
                         if (res.status !== 200)
                             console.log("Cannot find user by username");
@@ -78,49 +75,32 @@ export default function SignInForm(props){
 
             .then((res) => {
 
-                        podiumStorage.set("profileImage", res.profileImage);
+                podiumStorage.set("profileImage", res.profileImage);
 
-                    })
+                signInUser();
 
-            .catch((error) => {
-                        console.log(error);
-                    });
+            })
+
+            .catch((error) => {console.log(error);});
 
     };
 
     const authenticateFetch = () => {
 
-        const user = {
-            username: username,
-            password: password
-        };
-
-        const requestOptions = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(user)
-        };
-
-        fetch(serverAddress + authenticateEndpoint, requestOptions)
+        signInUserFetch(username,password)
 
             .then((res) => {
 
-                if (!res.ok) {
-                    setPasswordError("Password is incorrect!");
+                if (!res.ok) setPasswordError("Password is incorrect!");
 
-                } else return res.json()
+                else return res.json()
             })
 
             .then(res => {
 
                     podiumStorage.set("authorizationToken",res.token);
+
                     findUserFetch(res.token);
-
-                    setTimeout(() => {
-                        props.signInUser();
-
-                    },500);
-
             })
 
             .catch((error) => {
@@ -132,7 +112,21 @@ export default function SignInForm(props){
     const onFormSubmit = () => {
 
         if(formValidation()) {
-           authenticateFetch();
+
+            existUserByUsernameFetch(username)
+
+                .then(res => res.json())
+
+                .then((res) => {
+
+                    if (res === true)
+                        authenticateFetch();
+
+                    else setUsernameError("User with this username does not exist!");
+                })
+
+                .catch(error => console.log(error));
+
         }
 
     };

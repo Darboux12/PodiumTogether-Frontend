@@ -32,6 +32,8 @@ function NavBarUserLogged(props){
             );
         }
 
+
+
         });
 
     return (

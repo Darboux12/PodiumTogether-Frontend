@@ -1,0 +1,30 @@
+.OpeningHoursIconContainer{
+    display: flex;
+    background: rgba(27, 117, 188,0.3);
+    width: 3em;
+    height: 3em;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
+}
+
+.OpeningIconOpen{
+    font-size: 1.4em;
+    color: green;
+}
+
+.OpeningIconClosed{
+    font-size: 1.4em;
+    color: red;
+}
+
+.OpeningHoursRow{
+    margin-bottom: 1em;
+}
+
+
+.OpeningContainer{
+    padding: 3em !important;
+    font-size: 1.1em;
+}

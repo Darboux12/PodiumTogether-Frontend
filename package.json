@@ -29,6 +29,7 @@
     "react-redux": "^7.2.1",
     "react-reveal": "^1.2.2",
     "react-scripts": "^4.0.0",
+    "react-scroll": "^1.8.1",
     "react-star-rating": "^1.4.2",
     "redux": "^4.0.5",
     "secure-ls": "^1.2.6"

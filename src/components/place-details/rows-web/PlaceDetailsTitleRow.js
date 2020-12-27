@@ -4,20 +4,23 @@ import React from "react";
 
 import "../../../styles/place-details/rows-web/PlaceDetailsTitleRow.css"
 
-import stadiumImage from "../../../images/stadium.jpg"
+import Badge from "react-bootstrap/Badge";
+import ImageCarousel from "../../common/ImageCarousel";
 
-export default function PlaceDetailsTitleRow() {
+export default function PlaceDetailsTitleRow(props) {
+
+    let {images,discipline} = props;
+
 
     return(
 
-        <Row className={"PlaceDetailsImageTitleRow"}>
+        <Row className={"PlaceDetailsImageTitleRow d-flex flex-column align-items-center"}>
 
-            <img className={"PlaceDetailsImage"} src={stadiumImage} alt={"Event Image"}/>
+            <Row className={"placeImagesRow"}>
+                <ImageCarousel images = {images}  />
+            </Row>
 
-            <div className={"d-flex flex-column"}>
-                <h className={"PlaceDetailsTitle"}>Orlik na Starowiślnej</h>
-
-            </div>
+            <Badge className={"PlaceDetailsBadge"} variant="primary">{discipline}</Badge>
 
         </Row>
 

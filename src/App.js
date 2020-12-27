@@ -16,7 +16,6 @@ import DisplayPlacesPage from "./components/display-places/page/DisplayPlacesPag
 import PrivateRoute from "./components/security/PrivateRoute";
 import EventDetailsPage from "./components/event-details/page/EventDetailsPage";
 import EditProfilePage from "./components/edit-profile/EditProfilePage";
-import PlaceDetailsPage from "./components/place-details/page/PlaceDetailsPage";
 import AdminPanel from "./components/admin/page/AdminPanel";
 import AddNews from "./components/admin/add/AddNews";
 import EmptyFooter from "./components/footer/EmptyFooter";
@@ -24,6 +23,7 @@ import TestComponent from "./components/TestComponent";
 import AddSubject from "./components/admin/add/AddSubject";
 import AddDiscipline from "./components/admin/add/AddDiscipline";
 import NewsDetails from "./components/news/NewsDetails";
+import PlaceDetailsPageWeb from "./components/place-details/page/PlaceDetailsPageWeb";
 
 function App() {
 
@@ -47,7 +47,7 @@ function App() {
             <Route path="/place/display" exact component={DisplayPlacesPage}/>
             <Route path="/event/details" exact component={EventDetailsPage}/>
             <Route path="/user/profile/edit" exact component={EditProfilePage}/>
-            <Route path="/place/details" exact component={PlaceDetailsPage}/>
+            <Route path="/place/details/:id" exact component={PlaceDetailsPageWeb}/>
             <Route path="/admin/panel" exact component={AdminPanel}/>
             <Route path="/news/create" exact component={AddNews}/>
             <Route path="/subject/add" exact component={AddSubject}/>

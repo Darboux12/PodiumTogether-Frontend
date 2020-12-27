@@ -7,8 +7,7 @@ import { format } from "date-fns";
 
 export default function OpenDayRow(props) {
 
-    let from = "";
-    let to = "";
+    let {businessDays} = props;
 
     const getWeekDay = () => {
 
@@ -28,51 +27,65 @@ export default function OpenDayRow(props) {
             textDay = "Friday";
         if(currentDay === 6)
             textDay = "Saturday";
-        if(currentDay === 7)
+        if(currentDay === 0)
             textDay = "Sunday";
 
         return textDay;
 
     };
 
-    const isOpen = () => {
+    const isOpenToday = (day) => {
 
         let textDay = getWeekDay();
 
-        let value = false;
+        return day.day === textDay && day.isOpen;
 
-        props.businessDays.map((day) => {
+};
 
-            if(day.day === textDay){
+    const getText = () => {
 
-                value = true;
+        let text = "";
 
-                from = day.openingTimeFrom.toString().substring(0,5);
-                to = day.openingTimeTo.toString().substring(0,5);
+        businessDays.map((day) => {
 
+            if(day.day === getWeekDay()){
+
+
+                if(!isOpenToday(day)){
+                    text = "Open on " + day.day +  " : " + "No";
+                }
+
+
+                else {
+
+
+
+                    if(day.openingTimeFrom.toString() !== "00:00:00"){
+
+                        let from = day.openingTimeFrom.toString().substring(0,5);
+                        let to = day.openingTimeTo.toString().substring(0,5);
+                        text = "Open on " + day.day +  " : " + "Yes" + " ( " + from  + " - " + to + " ) ";
+                    }
+
+                    else text = "Open on " + day.day +  " : " + "Yes" + " ( No time limit )";
+
+                }
 
             }
 
         });
 
-        return value;
 
+        return text;
 
-};
-
-    const open = isOpen() ? 'Yes' : 'No';
-
-    const day = getWeekDay();
+    };
 
     return (
 
         <div className={""}>
             <FontAwesomeIcon className={"placeDateIcon placeDateItem"} icon={faClock}/>
-            <h className={"placeLocalizationItem localization"}>Open on {day}: {open} ( {from} - {to} ) </h>
+            <h className={"placeLocalizationItem localization"}>{getText()}</h>
         </div>
-
-
-
 
     )
 

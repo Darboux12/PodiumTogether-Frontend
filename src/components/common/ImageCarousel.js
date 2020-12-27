@@ -4,9 +4,14 @@ import Carousel from "react-bootstrap/Carousel";
 import "../../styles/common/ImagesCarousel.css"
 import Container from "react-bootstrap/Container";
 
+import emptyImage from "../../images/emptyPlaceImage.jpg"
+
 export default function ImageCarousel(props) {
 
-    const images = props.images;
+    let {images} = props;
+
+
+    if(images.length !== 0)
 
     return(
 
@@ -31,6 +36,30 @@ export default function ImageCarousel(props) {
             </Carousel>
 
         </Container>
-    )
+    );
+
+    else return (
+
+        <Container>
+
+            <Carousel className="" interval="4000" data-pause="false" pause="false">
+
+                <Carousel.Item className={"ImageCarouselItem"}>
+
+                    <img
+                        className="d-block w-100 ImagesCarouselImage"
+                        src={emptyImage}
+                        alt="First slide"
+                    />
+
+                </Carousel.Item>
+
+
+
+            </Carousel>
+
+        </Container>
+
+    );
 
 }

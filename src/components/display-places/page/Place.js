@@ -62,7 +62,7 @@ export default function Place(props) {
             </h2>
 
 
-            <Button className={"placeDetailsButton"} variant={"dark"}>
+            <Button href={"/place/details/" + props.id} className={"placeDetailsButton"} variant={"dark"}>
 
                 See place details
 

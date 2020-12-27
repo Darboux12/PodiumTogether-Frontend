@@ -1,7 +1,6 @@
 .PlaceDetailsMainContainerWeb{
 
-    padding-right: 4em !important;
-    padding-left: 4em !important;
+
 
 }
 
@@ -15,15 +14,10 @@
 
 
 .PlaceDetailsMainInformationContainer{
-    margin-right: 1em;
+
 }
 
-.PlaceDetailsBadge{
-    font-size: 1.3em !important;
-    position: absolute;
-    right: 1em;
-    top: 1em;
-}
+
 
 .PlaceDetailsApplyAnotherEventsContainer{
 

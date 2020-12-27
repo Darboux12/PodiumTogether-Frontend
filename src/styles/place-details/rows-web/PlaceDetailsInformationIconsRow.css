@@ -19,12 +19,14 @@
 
 
     font-size: 1.2em;
+    width: 7em;
 
 }
 
 .PlaceDetailsIconInformationHeader{
     font-weight: bold;
     font-size: 1.3em;
+
 }
 
 
@@ -42,3 +44,4 @@
 .PlaceDetailsIconInformationDaysLeft{
     opacity: 0.4;
 }
+

@@ -1,78 +1,112 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index";
-import {faChild, faMapMarkedAlt, faMoneyBill, faUsers, faVenusMars} from "@fortawesome/free-solid-svg-icons/index";
+import {
+    faChild,
+    faMale,
+    faMapMarkedAlt,
+    faMoneyBill,
+    faUsers,
+    faVenusMars
+} from "@fortawesome/free-solid-svg-icons/index";
 import Row from "react-bootstrap/esm/Row";
 import React from "react";
-import {faCalendarAlt} from "@fortawesome/free-regular-svg-icons/index";
+import {faCalendarAlt, faCalendarTimes} from "@fortawesome/free-regular-svg-icons/index";
 import Col from "react-bootstrap/esm/Col";
 
 import "../../../styles/place-details/rows-web/PlaceDetailsInformationIconsRow.css"
-import {faWallet} from "@fortawesome/free-solid-svg-icons";
+import {faDollarSign} from "@fortawesome/free-solid-svg-icons";
 
-export default function PlaceDetailsInformationIconsRow() {
+
+export default function PlaceDetailsInformationRow(props) {
+
+    let {cost,usageTime,minAge,maxAge,city,street,buildingNumber,postalCode } = props;
+
+    const price = Math.round((cost / usageTime + Number.EPSILON) * 100) / 100;
+
+    const costText = cost > 0 ? price + "per hour" : "Free entrance";
+
+    const minAgeText = minAge > 0 ? minAge + "years old" : "No age limit";
+
+    const maxAgeText = maxAge < 99 ? maxAge + "years old" : "No age limit";
+
+    const localizationText = city + ", " + street + ", " + buildingNumber + ", " +postalCode;
 
     return(
 
-        <Row className={"IconRowsContainer"}>
+        <Row className={"IconRowsContainer OpeningContainer"}>
 
             <Col>
 
+                <Row className={"OpeningHoursRow"}>
 
-                <Row className={"InformationIconsRow"}>
+                        <Col className={"d-flex align-items-center justify-content-between"}>
 
-                    <Col className={"d-flex align-items-center justify-content-between"}>
-
-                            <div className={"DetailsIconContainer"}>
-                                <FontAwesomeIcon className={"PlaceDetailsIcon"} icon={faCalendarAlt}/>
+                            <div className={"OpeningHoursIconContainer"}>
+                                <FontAwesomeIcon className={"OpeningIconOpen"} icon={faDollarSign}/>
                             </div>
 
-                            <h className={"PlaceDetailsIconInformationHeader"}>Opening hours</h>
+                            <h className={"PlaceDetailsIconInformationHeader"}>Cost</h>
 
-                            <h className={"PlaceDetailsIconInformation"}>8:00 - 12:00</h>
+                            <h className={"PlaceDetailsIconInformation"}>{costText}</h>
 
-                    </Col>
+                        </Col>
 
-                </Row>
+                    </Row>
 
-                <Row className={"InformationIconsRow"}>
-
-                    <Col className={"d-flex align-items-center justify-content-between"}>
-
-                        <div className={"DetailsIconContainer"}>
-                            <FontAwesomeIcon className={"PlaceDetailsIcon"} icon={faWallet}/>
-                        </div>
-
-                        <h className={"PlaceDetailsIconInformationHeader"}>Costs</h>
-
-                        <h className={"PlaceDetailsIconInformation"}>12 PN per 1 hour</h>
-
-                    </Col>
-
-                </Row>
-
-                <Row className={"InformationIconsRow"}>
+                <Row className={"OpeningHoursRow"}>
 
                     <Col className={"d-flex align-items-center justify-content-between"}>
 
-                        <div className={"DetailsIconContainer"}>
-                            <FontAwesomeIcon className={"PlaceDetailsIcon"} icon={faChild}/>
+                        <div className={"OpeningHoursIconContainer"}>
+                            <FontAwesomeIcon className={"OpeningIconOpen"} icon={faChild}/>
                         </div>
 
                         <h className={"PlaceDetailsIconInformationHeader"}>Minimal age</h>
 
-                        <h className={"PlaceDetailsIconInformation"}>15 years old</h>
+                        <h className={"PlaceDetailsIconInformation"}>{minAgeText}</h>
 
                     </Col>
 
                 </Row>
 
+                <Row className={"OpeningHoursRow"}>
 
+                    <Col className={"d-flex align-items-center justify-content-between"}>
 
+                        <div className={"OpeningHoursIconContainer"}>
+                            <FontAwesomeIcon className={"OpeningIconOpen"} icon={faMale}/>
+                        </div>
+
+                        <h className={"PlaceDetailsIconInformationHeader"}>Maximal age</h>
+
+                        <h className={"PlaceDetailsIconInformation"}>{maxAgeText}</h>
+
+                    </Col>
+
+                </Row>
+
+                <Row className={"OpeningHoursRow"}>
+
+                    <Col className={"d-flex align-items-center justify-content-between"}>
+
+                        <div className={"OpeningHoursIconContainer"}>
+                            <FontAwesomeIcon className={"OpeningIconOpen"} icon={faMapMarkedAlt}/>
+                        </div>
+
+                        <h className={"PlaceDetailsIconInformationHeader"}>Localization</h>
+
+                        <h className={"PlaceDetailsIconInformation"}>{localizationText}</h>
+
+                    </Col>
+
+                </Row>
 
 
 
             </Col>
 
         </Row>
+
+
 
     )
 

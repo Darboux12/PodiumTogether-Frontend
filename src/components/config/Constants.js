@@ -53,3 +53,7 @@ export const addPlaceEndpoint = "/place/add";
 export const findAllNewsEndpoint = "/news/find/all";
 
 export const findAllPlacesEndpoint = "/place/find/all";
+
+export const findNewsByIdEndpoint = "/news/find/id/";
+
+export const findPlaceByIdEndpoint = "/place/find/id/";

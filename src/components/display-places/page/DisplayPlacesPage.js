@@ -7,15 +7,20 @@ import displayPlacesImage from "../../../images/stadium.jpg";
 import Place from "./Place";
 import EventsSearchBar from "../../search-bar/search-bar/EventsSearchBar";
 import {findAllPlaceFetch} from "../../fetch/Fetch";
+import {faDollarSign, faSearch} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import SearchMessage from "./SearchMessage";
 
 
 export default function DisplayPlacesPage(){
 
-    const [isLoaded,setIsLoaded] = useState(false);
-
     const [allItems,setAllItems] = useState([]);
 
     const [placeItems,setPlaceItems] = useState([]);
+
+    const [messageVisible,setMessageVisible] = useState(false);
+
+    const [searchMessage, setSearchMessage] = useState("");
 
     useEffect(() => {
 
@@ -24,8 +29,6 @@ export default function DisplayPlacesPage(){
             .then(res => res.json())
 
             .then(res => {
-
-                setIsLoaded(true);
                 setPlaceItems(res);
                 setAllItems(res);
 
@@ -33,13 +36,30 @@ export default function DisplayPlacesPage(){
 
     },[]);
 
+    useEffect(() => {
+
+        if(searchMessage !== "" && !messageVisible)
+            setMessageVisible(true);
+
+    });
+
+    const msg = messageVisible ? <SearchMessage message = {searchMessage}/> : <div/>;
+
     return(
 
         <div className={"displayPlacesPageContainer"}>
 
             <img className={"displayPlacesImage"} src={displayPlacesImage} alt={"Display Places Page Image"}/>
 
-            <EventsSearchBar places = {allItems} setPlaces={(places) => setPlaceItems(places)}/>
+            <EventsSearchBar
+                places = {allItems}
+                setPlaces={(places) => setPlaceItems(places)}
+                setMessage={(message) => setSearchMessage(message)}
+            />
+
+            {msg}
+
+
 
             <div className={"PlacesList"}>
 
@@ -58,6 +78,7 @@ export default function DisplayPlacesPage(){
                         image = {item.images[0]}
                         cost = {item.cost}
                         usageTime = {item.usageTime}
+                        id = {item.id}
                     />
 
 

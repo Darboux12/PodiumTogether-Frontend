@@ -8,7 +8,7 @@ import serverAddress, {
     existSubjectByNameEndpoint, existUserByEmailEndpoint, existUserByUsernameEndpoint,
     findAllDisciplineEndpoint, findAllGenderEndpoint, findAllNewsEndpoint, findAllPlacesEndpoint,
     findAllSubjectEndpoint,
-    findAllUsersEndpoint, findUserByUsernameEndpoint,
+    findAllUsersEndpoint, findNewsByIdEndpoint, findPlaceByIdEndpoint, findUserByUsernameEndpoint,
     newsImagesUploadEndpoint, updateUserProfileEndpoint, uploadEventFilesEndpoint, uploadEventImagesEndpoint
 } from "../config/Constants";
 
@@ -356,3 +356,10 @@ export const updateUserProfileFetch = (id,username,email,password,country,
 
 };
 
+export const findNewsByIdFetch = (id) => {
+    return fetch(serverAddress + findNewsByIdEndpoint + id);
+};
+
+export const findPlaceByIdFetch = (id) => {
+    return fetch(serverAddress + findPlaceByIdEndpoint + id);
+};

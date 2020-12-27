@@ -17,5 +17,6 @@
     position: sticky !important;
     top: 4em !important;
     z-index: 2 !important;
+    margin-bottom: 2em;
 }
 

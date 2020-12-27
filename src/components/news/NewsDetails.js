@@ -10,6 +10,7 @@ import Col from "react-bootstrap/Col";
 import serverAddress from "../config/Constants"
 
 import { format } from "date-fns";
+import {findNewsByIdFetch} from "../fetch/Fetch";
 
 export default function NewsDetails(props) {
 
@@ -25,13 +26,14 @@ export default function NewsDetails(props) {
 
     useEffect(() => {
 
-        fetch(serverAddress + '/news/find/id/' + id)
+        findNewsByIdFetch(id)
             .then(res => res.json())
             .then(res => {
 
                 setNewsItems(res);
                 setDate(new Date(res.date));
                 setIsLoaded(true);
+
 
             });
 

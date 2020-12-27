@@ -24,3 +24,14 @@
 .PlaceDetailsAuthorLink{
 
 }
+
+.PlaceDetailsBadge{
+    font-size: 1.7em !important;
+    position: absolute;
+    right: 0.5em;
+    top: 0.5em;
+}
+
+.placeImagesRow{
+    padding: 0 !important;
+}

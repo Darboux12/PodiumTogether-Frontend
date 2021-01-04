@@ -9,25 +9,28 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-export default function Review(props){
+export default function ReviewTagForm(props){
 
     const [rating,setRating] = useState(0);
 
-    useEffect(() => {
+    const handleRatingChange = (newRating) => {
 
-       if(rating === 1)
-           document.getElementById(props.id).innerText = "Horrible";
-        if(rating === 2)
+        if(newRating === 1)
+            document.getElementById(props.id).innerText = "Horrible";
+        if(newRating === 2)
             document.getElementById(props.id).innerText = "Bad";
-        if(rating === 3)
+        if(newRating === 3)
             document.getElementById(props.id).innerText = "Average";
-        if(rating === 4)
+        if(newRating === 4)
             document.getElementById(props.id).innerText = "Good";
-        if(rating === 5)
+        if(newRating === 5)
             document.getElementById(props.id).innerText = "Excellent";
 
-        props.onChange(rating);
-    });
+        setRating(newRating);
+
+        if(newRating !== 0)
+            props.onChange(newRating);
+    };
 
     return(
 
@@ -45,7 +48,7 @@ export default function Review(props){
                             className={"ratings"}
                             rating={rating}
                             widgetRatedColors="gold"
-                            changeRating={(newRating) => setRating(newRating)}
+                            changeRating={(newRating) => handleRatingChange(newRating)}
                             widgetDimensions={"2em"}
                         >
                             <Ratings.Widget />

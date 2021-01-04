@@ -4,29 +4,33 @@ import Button from "react-bootstrap/Button";
 import ImageUploader from "react-images-upload";
 
 import "../../styles/tag-place/TagPlaceForm.css"
-import Review from "./Review";
-import {addPlaceFetch, findAllDisciplineFetch} from "../fetch/Fetch";
-import * as now from "date-fns";
+import ReviewTagForm from "./ReviewTagForm";
+import {addPlaceFetch, findAllDisciplineFetch, findAllRatingCategoriesFetch} from "../fetch/Fetch";
 import {
     maxBuildingNumberLength,
-    maxCityLength, maxCost, maxLocalizationRemarkLength, maxMaxAge, maxMinAge,
-    maxObjectNameLength, maxObjectReviewLength,
+    maxCityLength,
+    maxCost,
+    maxLocalizationRemarkLength,
+    maxMaxAge,
+    maxMinAge,
+    maxObjectNameLength,
+    maxObjectReviewLength,
     maxPostalLength,
     maxStreetLength,
     minBuildingNumberLength,
-    minCityLength, minCost, minLocalizationRemarkLength, minMaxAge, minMinAge,
-    minObjectNameLength, minObjectReviewLength,
+    minCityLength,
+    minCost,
+    minLocalizationRemarkLength,
+    minMaxAge,
+    minMinAge,
+    minObjectNameLength,
+    minObjectReviewLength,
     minPostalLength,
     minStreetLength
 } from "../config/Limits";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import {faRunning} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faQuestionCircle} from "@fortawesome/free-regular-svg-icons";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
 import QuestionTooltip from "./QuestionTooltip";
 
 export default function TagPlaceForm(props){
@@ -39,10 +43,6 @@ export default function TagPlaceForm(props){
     const [discipline,setDiscipline] = useState("");
     const [cost,setCost] = useState(0);
     const [usageTime,setUsageTime] = useState(0);
-    const [serviceRating,setServiceRating] = useState(0);
-    const [localizationRating,setLocalizationRating] = useState(0);
-    const [pricesRating,setPricesRating] = useState(0);
-    const [openingHoursRating,setOpeningHoursRating] = useState(0);
     const [review,setReview] = useState("");
     const [images,setImages] = useState([]);
     const [localizationRemarks,setLocalizationRemarks] = useState("");
@@ -98,6 +98,9 @@ export default function TagPlaceForm(props){
     const [isSundayHoursDisabled,setIsSundayHoursDisabled] = useState(false);
     const [sundayOpeningsHoursFrom,setSundayOpeningsHoursFrom] = useState("");
     const [sundayOpeningsHoursTo,setSundayOpeningsHoursTo] = useState("");
+
+    const [ratings,setRatings] = useState([]);
+    const [ratingCategoriesItems,setRatingCategoriesItems] = useState([]);
 
     useEffect(() => {
 
@@ -204,6 +207,20 @@ export default function TagPlaceForm(props){
         }
 
     });
+
+    useEffect(() => {
+
+        findAllRatingCategoriesFetch()
+
+            .then(res => res.json())
+
+            .then(res => {
+                setRatingCategoriesItems(res);
+            })
+
+            .catch(error => console.log(error));
+
+    },[]);
 
     const resetErrors = () => {
 
@@ -581,22 +598,20 @@ export default function TagPlaceForm(props){
             setMaxAge(99);
         }
 
-        if(serviceRating || localizationRating || openingHoursRating || pricesRating)
-            if(!(serviceRating && localizationRating &&
-                openingHoursRating && pricesRating)){
-                setStarRatingsError("All star ratings must be filled or all must be empty!");
+        if(ratings.length !== ratingCategoriesItems.length){
+                setStarRatingsError("All star ratings must be filled!");
                 isOk = false;
-            }
+        }
 
         if(review !== ""){
 
             if(review.length < minObjectReviewLength){
-                setReviewError("Review must be longer than " + minObjectReviewLength + " or empty!");
+                setReviewError("ReviewTagForm must be longer than " + minObjectReviewLength + " or empty!");
                 isOk = false;
             }
 
             if(review.length > maxObjectReviewLength){
-                setReviewError("Review must be shorter than " + maxObjectReviewLength + " or empty!");
+                setReviewError("ReviewTagForm must be shorter than " + maxObjectReviewLength + " or empty!");
                 isOk = false;
             }
         }
@@ -697,31 +712,7 @@ export default function TagPlaceForm(props){
     };
 
     const createRatings = () => {
-
-        let ratings = [];
-
-        ratings =  ratings.concat({
-            category : "Service",
-            rating : serviceRating
-        });
-
-        ratings =  ratings.concat({
-            category : "Price",
-            rating : pricesRating
-        });
-
-        ratings =  ratings.concat({
-            category : "Localization",
-            rating : localizationRating
-        });
-
-        ratings =  ratings.concat({
-            category : "Opening Hours",
-            rating : openingHoursRating
-        });
-
         return ratings;
-
     };
 
     const onFormSubmit = () => {
@@ -756,6 +747,27 @@ export default function TagPlaceForm(props){
         }
 
         else props.submitFailModal();
+
+    };
+
+    const createRating = (category,rating) => {
+
+        let tmpArray = ratings;
+
+        ratings.forEach(added => {
+
+            if(added.category === category.category) {
+                tmpArray = ratings.filter(item => item.category !== added.category);
+            }
+
+        });
+
+        let starRating = {
+            category : category.category,
+            rating : rating
+        };
+
+        setRatings(tmpArray.concat(starRating));
 
     };
 
@@ -1348,10 +1360,13 @@ export default function TagPlaceForm(props){
 
                     <h className={"ErrorHeader ml-4"}>{starRatingsError}</h>
 
-                    <Review id={"reviewOne"} title={"Service"} onChange = {(newRating) => setServiceRating(newRating)}/>
-                    <Review id={"reviewTwo"} title={"Localization"} onChange = {(newRating) => setLocalizationRating(newRating)}/>
-                    <Review id={"reviewThree"} title={"Prices"} onChange = {(newRating) => setPricesRating(newRating)}/>
-                    <Review id={"reviewFour"} title={"Opening hours"} onChange = {(newRating) => setOpeningHoursRating(newRating)}/>
+                    {ratingCategoriesItems.map(category =>
+                        <ReviewTagForm
+                            id={category.category}
+                            title={category.category}
+                            onChange = {(newRating) => createRating(category,newRating)}
+                        />
+                    )}
 
                 </Form.Group>
 

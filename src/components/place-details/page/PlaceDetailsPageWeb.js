@@ -18,6 +18,9 @@ import Button from "react-bootstrap/Button";
 import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 import PlaceDetailsOpeningHoursRow from "../rows-web/PlaceDetailsOpeningHoursRow";
 import PlaceDetailsInformationRow from "../rows-web/PlaceDetailsInformationRow";
+import SignUpSuccessModal from "../../navbar/modals/SignUpSuccessModal";
+import ReviewModal from "../../review/ReviewModal";
+import SubmitModal from "../../common/SubmitModal";
 
 
 export default function PlaceDetailsPageWeb(props) {
@@ -26,6 +29,9 @@ export default function PlaceDetailsPageWeb(props) {
 
     const [placeItems,setPlaceItems] = useState();
     const [isLoaded,setIsLoaded] = useState(false);
+
+    const [reviewModalVisible,setReviewModalVisible] = useState(false);
+
 
     useEffect(() => {
 
@@ -88,17 +94,22 @@ export default function PlaceDetailsPageWeb(props) {
 
                 <Col className={"PlaceDetailsApplyAnotherEventsContainer"}>
 
-                    <PlaceDetailsTagPlaceRow/>
+                    <PlaceDetailsTagPlaceRow displayModal = {() => setReviewModalVisible(true)}/>
                 </Col>
 
             </Row>
+
+            <ReviewModal
+                isModalVisible={reviewModalVisible}
+                closeModal={() => setReviewModalVisible(false)}
+            />
+
 
 
 
         </Container>
     );
 
-    else
-        return <div/>
+    else return <div/>
 
 }

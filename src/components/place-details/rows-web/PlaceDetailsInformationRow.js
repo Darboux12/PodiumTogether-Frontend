@@ -13,7 +13,7 @@ import {faCalendarAlt, faCalendarTimes} from "@fortawesome/free-regular-svg-icon
 import Col from "react-bootstrap/esm/Col";
 
 import "../../../styles/place-details/rows-web/PlaceDetailsInformationIconsRow.css"
-import {faDollarSign} from "@fortawesome/free-solid-svg-icons";
+import {faCity, faDollarSign} from "@fortawesome/free-solid-svg-icons";
 
 
 export default function PlaceDetailsInformationRow(props) {
@@ -28,7 +28,9 @@ export default function PlaceDetailsInformationRow(props) {
 
     const maxAgeText = maxAge < 99 ? maxAge + "years old" : "No age limit";
 
-    const localizationText = city + ", " + street + ", " + buildingNumber + ", " +postalCode;
+    const cityText = city + ", " + postalCode;
+
+    const addressText =  street + ", " + buildingNumber;;
 
     return(
 
@@ -89,12 +91,28 @@ export default function PlaceDetailsInformationRow(props) {
                     <Col className={"d-flex align-items-center justify-content-between"}>
 
                         <div className={"OpeningHoursIconContainer"}>
+                            <FontAwesomeIcon className={"OpeningIconOpen"} icon={faCity}/>
+                        </div>
+
+                        <h className={"PlaceDetailsIconInformationHeader"}>City</h>
+
+                        <h className={"PlaceDetailsIconInformation"}>{cityText}</h>
+
+                    </Col>
+
+                </Row>
+
+                <Row className={"OpeningHoursRow"}>
+
+                    <Col className={"d-flex align-items-center justify-content-between"}>
+
+                        <div className={"OpeningHoursIconContainer"}>
                             <FontAwesomeIcon className={"OpeningIconOpen"} icon={faMapMarkedAlt}/>
                         </div>
 
-                        <h className={"PlaceDetailsIconInformationHeader"}>Localization</h>
+                        <h className={"PlaceDetailsIconInformationHeader"}>Street</h>
 
-                        <h className={"PlaceDetailsIconInformation"}>{localizationText}</h>
+                        <h className={"PlaceDetailsIconInformation"}>{addressText}</h>
 
                     </Col>
 
@@ -105,8 +123,6 @@ export default function PlaceDetailsInformationRow(props) {
             </Col>
 
         </Row>
-
-
 
     )
 

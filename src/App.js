@@ -52,7 +52,7 @@ function App() {
             <Route path="/news/create" exact component={AddNews}/>
             <Route path="/subject/add" exact component={AddSubject}/>
             <Route path="/discipline/add" exact component={AddDiscipline}/>
-            <Route path="/test" exact component={TestComponent}/>
+            <PrivateRoute path="/test" exact component={TestComponent}/>
             <PrivateRoute path={"/dashboard"} component={CreateEventPage}/>
           </Switch>
             <EmptyFooter/>

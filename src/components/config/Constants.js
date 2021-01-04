@@ -1,10 +1,16 @@
-export const serverAddress = "http://192.168.8.161:8080";
+import {findServerEndpointsFetch} from "../fetch/Fetch";
+
+export const serverAddress = "http://192.168.8.109:8080";
+
 export const addSubjectEndpoint = "/subject/add";
+
 export const existSubjectByNameEndpoint = "/subject/exist/"; // Path variable {name}
+
 export const addContactEndpoint = "/contact/add";
+
 export const findAllSubjectEndpoint = "/subject/find/all";
 
-export default serverAddress;
+
 
 export const authenticateEndpoint = "/authenticate";
 
@@ -57,3 +63,7 @@ export const findAllPlacesEndpoint = "/place/find/all";
 export const findNewsByIdEndpoint = "/news/find/id/";
 
 export const findPlaceByIdEndpoint = "/place/find/id/";
+
+export const findAllRatingCategoriesEndpoint = "/rating/category/find/all";
+
+export default serverAddress;

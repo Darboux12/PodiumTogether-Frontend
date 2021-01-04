@@ -1,16 +1,33 @@
 import serverAddress, {
     addContactEndpoint,
-    addDisciplineEndpoint, addEventEndpoint,
-    addNewsEndpoint, addPlaceEndpoint,
-    addSubjectEndpoint, addUserEndpoint, authenticateEndpoint,
+    addDisciplineEndpoint,
+    addEventEndpoint,
+    addNewsEndpoint,
+    addPlaceEndpoint,
+    addSubjectEndpoint,
+    addUserEndpoint,
+    authenticateEndpoint,
     deleteUserEndpoint,
     existDisciplineByNameEndpoint,
-    existSubjectByNameEndpoint, existUserByEmailEndpoint, existUserByUsernameEndpoint,
-    findAllDisciplineEndpoint, findAllGenderEndpoint, findAllNewsEndpoint, findAllPlacesEndpoint,
+    existSubjectByNameEndpoint,
+    existUserByEmailEndpoint,
+    existUserByUsernameEndpoint,
+    findAllDisciplineEndpoint,
+    findAllGenderEndpoint,
+    findAllNewsEndpoint,
+    findAllPlacesEndpoint,
+    findAllRatingCategoriesEndpoint,
     findAllSubjectEndpoint,
-    findAllUsersEndpoint, findNewsByIdEndpoint, findPlaceByIdEndpoint, findUserByUsernameEndpoint,
-    newsImagesUploadEndpoint, updateUserProfileEndpoint, uploadEventFilesEndpoint, uploadEventImagesEndpoint
+    findAllUsersEndpoint,
+    findNewsByIdEndpoint,
+    findPlaceByIdEndpoint, findServerEndpointsEndpoint,
+    findUserByUsernameEndpoint,
+    newsImagesUploadEndpoint,
+    updateUserProfileEndpoint,
+    uploadEventFilesEndpoint,
+    uploadEventImagesEndpoint
 } from "../config/Constants";
+import podiumStorage from "../config/Storage";
 
 export const existDisciplineByNameFetch = (discipline) => {
 
@@ -76,9 +93,7 @@ export const uploadNewsImagesFetch = (title,images) => {
 };
 
 export const existSubjectByNameFetch = (subject) => {
-
     return fetch(serverAddress + existSubjectByNameEndpoint + subject);
-
 };
 
 export const addSubjectFetch = (subject) => {
@@ -247,17 +262,17 @@ export const addPlaceFetch = (
         PlaceForm.append("documents",file);
     }
 
-
+    let token = podiumStorage.get("authorizationToken");
+    let bearer = 'Bearer ' + token;
 
     const requestOptions = {
         method: "POST",
+        withCredentials: true,
+        headers: {'Authorization': bearer},
         body: PlaceForm
     };
 
     return fetch(serverAddress + addPlaceEndpoint, requestOptions);
-
-
-
 
 };
 
@@ -320,7 +335,15 @@ export const signInUserFetch = (username,password) => {
 
 export const findUserByUsernameFetch = (username) => {
 
-    return fetch(serverAddress + findUserByUsernameEndpoint + username);
+    let token = podiumStorage.get("authorizationToken");
+    let bearer = 'Bearer ' + token;
+    let requestOptions = {
+        method: 'GET',
+        withCredentials: true,
+        headers: {'Authorization': bearer, 'Content-Type': 'application/json'}
+    };
+
+    return fetch(serverAddress + findUserByUsernameEndpoint + username,requestOptions);
 
 };
 
@@ -362,4 +385,8 @@ export const findNewsByIdFetch = (id) => {
 
 export const findPlaceByIdFetch = (id) => {
     return fetch(serverAddress + findPlaceByIdEndpoint + id);
+};
+
+export const findAllRatingCategoriesFetch = () => {
+    return fetch(serverAddress + findAllRatingCategoriesEndpoint);
 };

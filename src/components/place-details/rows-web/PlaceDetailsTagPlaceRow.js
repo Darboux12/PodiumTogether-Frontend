@@ -7,7 +7,9 @@ import {faMapMarkedAlt, faPrint, faShare} from "@fortawesome/free-solid-svg-icon
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStar} from "@fortawesome/free-regular-svg-icons";
 
-export default function PlaceDetailsTagPlaceRow() {
+export default function PlaceDetailsTagPlaceRow(props) {
+
+    let {displayModal} = props;
 
     return(
 
@@ -16,7 +18,12 @@ export default function PlaceDetailsTagPlaceRow() {
             <Col>
 
                 <Row className={"PlaceDetailsJoinPlaceUpperRow"}>
-                    <Button className={"PlaceDetailsJoinPlaceButton"} variant={"success"}>Add review</Button>
+                    <Button
+                        className={"PlaceDetailsJoinPlaceButton"}
+                        variant={"success"}
+                        onClick={displayModal}
+                    >Add review
+                    </Button>
                 </Row>
 
                 <Row className={"PlaceDetailsJoinPlaceLowerRow"}>

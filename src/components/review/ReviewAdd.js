@@ -12,17 +12,6 @@ export default function ReviewAdd(props){
 
     const handleRatingChange = (newRating) => {
 
-        if(newRating === 1)
-            document.getElementById(props.id).innerText = "Horrible";
-        if(newRating === 2)
-            document.getElementById(props.id).innerText = "Bad";
-        if(newRating === 3)
-            document.getElementById(props.id).innerText = "Average";
-        if(newRating === 4)
-            document.getElementById(props.id).innerText = "Good";
-        if(newRating === 5)
-            document.getElementById(props.id).innerText = "Excellent";
-
         setRating(newRating);
 
         if(newRating !== 0)
@@ -35,11 +24,11 @@ export default function ReviewAdd(props){
 
             <Row>
 
-                <Col className={"col-md-3 col-12"}>
-                    <h className={"reviewAddHeader mr-5 FormLabel"}>{props.title}</h>
+                <Col className={"col-md-5 col-12"}>
+                    <h className={"reviewAddHeader FormLabel"}>{props.title}</h>
                 </Col>
 
-                <Col className={"col-md-9 col-10"}>
+                <Col className={"col-md-auto col-10"}>
 
                     <Ratings
                         className={"ratings"}
@@ -56,10 +45,6 @@ export default function ReviewAdd(props){
 
                     </Ratings>
 
-                </Col>
-
-                <Col className={"col-md-4 d-md-flex d-none"}>
-                    <h id={props.id} className={"ratingHeader ml-3"}> </h>
                 </Col>
 
             </Row>

@@ -606,12 +606,12 @@ export default function TagPlaceForm(props){
         if(review !== ""){
 
             if(review.length < minObjectReviewLength){
-                setReviewError("ReviewTagForm must be longer than " + minObjectReviewLength + " or empty!");
+                setReviewError("Review must be longer than " + minObjectReviewLength + " or empty!");
                 isOk = false;
             }
 
             if(review.length > maxObjectReviewLength){
-                setReviewError("ReviewTagForm must be shorter than " + maxObjectReviewLength + " or empty!");
+                setReviewError("Review must be shorter than " + maxObjectReviewLength + " or empty!");
                 isOk = false;
             }
         }
@@ -1394,7 +1394,7 @@ export default function TagPlaceForm(props){
 
                     <Form.Label className={"FormLabel mt-3"} >Images</Form.Label>
 
-                    <QuestionTooltip text={"Upload your iamges of this place"}/>
+                    <QuestionTooltip text={"Upload your images of this place"}/>
 
                     <ImageUploader
                         className={"imageEventUploader"}
@@ -1412,7 +1412,7 @@ export default function TagPlaceForm(props){
 
                     <Form.Label className={"FormLabel mt-3"}>Documents</Form.Label>
 
-                    <QuestionTooltip text={"Provide important documents like statute or rwquired permissions "}/>
+                    <QuestionTooltip text={"Provide important documents like statute or required permissions "}/>
 
                     <Form.Control
                         type="file"

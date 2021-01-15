@@ -14,6 +14,7 @@ import {addContactFetch, findAllSubjectsFetch} from "../fetch/Fetch";
 
 import contactImage from "../../images/support.jpg"
 import {serverEndpoints} from "../config/Constants";
+import {useSelector} from "react-redux";
 
 export default function ContactPage(){
 
@@ -28,7 +29,11 @@ export default function ContactPage(){
     const [subjectItems, setSubjectItems] = useState([]);
     const [submitModalVisible,setSubmitModalVisible] = useState(false);
 
+    const counter = useSelector(state => state.error);
+
     useEffect(() => {
+
+        console.log(counter);
 
         findAllSubjectsFetch()
 

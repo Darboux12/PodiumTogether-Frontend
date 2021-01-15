@@ -24,6 +24,9 @@ import AddSubject from "./components/admin/add/AddSubject";
 import AddDiscipline from "./components/admin/add/AddDiscipline";
 import NewsDetails from "./components/news/NewsDetails";
 import PlaceDetailsPageWeb from "./components/place-details/page/PlaceDetailsPageWeb";
+import {FAILURE, getEndpointsDispatch, LOADING, SUCCESS} from "./components/reducers/rootReducer";
+import {useDispatch} from "react-redux";
+import serverAddress from "./components/config/Constants";
 
 function App() {
 

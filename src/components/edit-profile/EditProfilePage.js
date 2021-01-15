@@ -4,17 +4,10 @@ import Container from "react-bootstrap/Container";
 import {Form} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import serverAddress, {
-    addUserEndpoint,
-    authenticateNoToken,
-    findAllCountryEndpoint,
-    profileImageUploadEndpoint
 } from "../config/Constants"
-import {findUserByUsernameEndpoint} from "../config/Constants";
-import {updateUserProfileEndpoint} from "../config/Constants";
 import {
     maxEmailLength,
     maxPasswordLength,
@@ -31,9 +24,12 @@ import {maxUserDescriptionLength} from "../config/Limits";
 import podiumStorage from "../config/Storage";
 import ImageUploader from 'react-images-upload';
 import jwtDecode from "jwt-decode";
-import {updateUserProfileFetch} from "../fetch/Fetch";
+import {
+    authenticateNoTokenFetch,
+    findAllCountryFetch,
+    updateUserProfileFetch
+} from "../fetch/Fetch";
 
-import emptyProfile from "../../images/emptyProfile.png";
 
 export default function EditProfilePage() {
 
@@ -91,8 +87,10 @@ export default function EditProfilePage() {
 
     const findAllCountriesFetch = () => {
 
-        fetch(serverAddress + findAllCountryEndpoint)
+        findAllCountryFetch()
+
             .then(res => res.json())
+
             .then(res => {
 
                 setCountryItems(res);
@@ -105,7 +103,7 @@ export default function EditProfilePage() {
         let username = podiumStorage.get("authorizationToken")
             ? jwtDecode(podiumStorage.get("authorizationToken")).sub : "";
 
-        fetch(serverAddress + findUserByUsernameEndpoint + username)
+        findUserByUsernameFetch()
 
             .then((res) => {
 
@@ -132,7 +130,7 @@ export default function EditProfilePage() {
         let username = podiumStorage.get("authorizationToken")
             ? jwtDecode(podiumStorage.get("authorizationToken")).sub : "";
 
-        fetch(serverAddress + findUserByUsernameEndpoint + username)
+        findUserByUsernameFetch()
 
             .then((res) => {
 
@@ -302,18 +300,7 @@ export default function EditProfilePage() {
                 isOk = false;
             }
 
-            const user = {
-                    username: username,
-                    password: oldPassword
-                };
-
-            const requestOptions = {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(user)
-                };
-
-            fetch(serverAddress + authenticateNoToken, requestOptions)
+            authenticateNoTokenFetch(username,oldPassword)
 
                 .then((res) => {
 

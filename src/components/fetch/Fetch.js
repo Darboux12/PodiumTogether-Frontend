@@ -1,40 +1,51 @@
-import serverAddress, {
-    addContactEndpoint,
-    addDisciplineEndpoint,
-    addEventEndpoint,
-    addNewsEndpoint,
-    addPlaceEndpoint,
-    addSubjectEndpoint,
-    addUserEndpoint,
-    authenticateEndpoint,
-    deleteUserEndpoint,
-    existDisciplineByNameEndpoint,
-    existSubjectByNameEndpoint,
-    existUserByEmailEndpoint,
-    existUserByUsernameEndpoint,
-    findAllDisciplineEndpoint,
-    findAllGenderEndpoint,
-    findAllNewsEndpoint,
-    findAllPlacesEndpoint,
-    findAllRatingCategoriesEndpoint,
-    findAllSubjectEndpoint,
-    findAllUsersEndpoint,
-    findNewsByIdEndpoint,
-    findPlaceByIdEndpoint, findServerEndpointsEndpoint,
-    findUserByUsernameEndpoint,
-    newsImagesUploadEndpoint,
-    updateUserProfileEndpoint,
-    uploadEventFilesEndpoint,
-    uploadEventImagesEndpoint
-} from "../config/Constants";
+import serverAddress from "../config/Constants";
 import podiumStorage from "../config/Storage";
 
+export const endpoints = {
+
+    "existDisciplineByName" : "/discipline/exist/",
+    "findAllCountry" : "/country/find/all",
+    "addDiscipline" : "/discipline/add",
+    "addNews" : "/news/add",
+    "newsImages" : "/image/upload/news",
+    "existSubjectByName" : "/subject/exist/",
+    "addSubject" : "/subject/add",
+    "findAllUsers" : "/user/find/all",
+    "deleteUser" : "/user/delete/",
+    "findAllSubject" : "/subject/find/all",
+    "addContact" : "/contact/add",
+    "findAllDiscipline" : "/discipline/find/all",
+    "findAllGender" : "/gender/find/all",
+    "addEvent" : "/event/add",
+    "uploadEventFiles" : "/file/upload/event",
+    "uploadEventImages" : "/image/upload/event",
+    "addPlace" : "/place/add",
+    "findAllNews" : "/news/find/all",
+    "findAllPlaces" : "/place/find/all",
+    "addUser" : "/user/add",
+    "existUserByEmail" : "/user/exist/email/",
+    "existUserByUsername" : "/user/exist/username/",
+    "authenticate" : "/authenticate",
+    "findUserByUsername" : "/user/find/username/",
+    "updateUserProfile" : "/user/update/profile",
+    "findNewsById" : "/news/find/id/",
+    "findPlaceById" : "/place/find/id/",
+    "findAllRatingCategories" : "/rating/category/find/all",
+    "authenticateNoToken" : "/authenticate/check",
+    "findServerEndpointsCompatibility" : "/server/endpoints/compatibility",
+
+};
+
 export const existDisciplineByNameFetch = (discipline) => {
+
+    const existDisciplineByNameEndpoint = endpoints.existDisciplineByName;
 
     return fetch(serverAddress + existDisciplineByNameEndpoint + discipline);
 };
 
 export const addDisciplineFetch = (discipline) => {
+
+    const addDisciplineEndpoint = endpoints.addDiscipline;
 
     const disciplineRequest = {discipline : discipline};
 
@@ -49,6 +60,8 @@ export const addDisciplineFetch = (discipline) => {
 };
 
 export const addNewsFetch = (title,shortText,linkText,fullText,images) => {
+
+    const addNewsEndpoint = endpoints.addNews;
 
     const newsFormData = new FormData();
 
@@ -76,6 +89,8 @@ export const addNewsFetch = (title,shortText,linkText,fullText,images) => {
 
 export const uploadNewsImagesFetch = (title,images) => {
 
+    const newsImagesUploadEndpoint = endpoints.newsImagesUpload;
+
     const  ImageData = new FormData();
 
     for(const file of images)
@@ -93,10 +108,15 @@ export const uploadNewsImagesFetch = (title,images) => {
 };
 
 export const existSubjectByNameFetch = (subject) => {
+
+    const existSubjectByNameEndpoint = endpoints.existSubjectByName;
+
     return fetch(serverAddress + existSubjectByNameEndpoint + subject);
 };
 
 export const addSubjectFetch = (subject) => {
+
+    const addSubjectEndpoint = endpoints.addSubject;
 
     const subjectData = {subject : subject};
 
@@ -112,11 +132,15 @@ export const addSubjectFetch = (subject) => {
 
 export const findAllUsersFetch = () => {
 
+    const findAllUsersEndpoint = endpoints.findAllUsers;
+
     return fetch(serverAddress + findAllUsersEndpoint);
 
 };
 
 export const deleteUserFetch = (username) => {
+
+    const deleteUserEndpoint = endpoints.deleteUser;
 
     const requestOptions = { method: 'DELETE'};
 
@@ -126,11 +150,15 @@ export const deleteUserFetch = (username) => {
 
 export const findAllSubjectsFetch = () => {
 
+    const findAllSubjectEndpoint = endpoints.findAllSubject;
+
     return fetch(serverAddress + findAllSubjectEndpoint);
 
 };
 
 export const addContactFetch = (email,subject,message) => {
+
+    const addContactEndpoint = endpoints.addContact;
 
     const contactRequest = {
         userEmail: email,
@@ -150,18 +178,25 @@ export const addContactFetch = (email,subject,message) => {
 
 export const findAllDisciplineFetch = () => {
 
+    const findAllDisciplineEndpoint = endpoints.findAllDiscipline;
+
     return fetch(serverAddress + findAllDisciplineEndpoint);
 
 };
 
 export const findAllGendersFetch = () => {
 
+    const findAllGenderEndpoint = endpoints.findAllGender;
+
    return  fetch(serverAddress + findAllGenderEndpoint);
 
 };
 
 export const addEventFetch = (title,dateFrom,dateTo,city,street,postal,number,discipline,
-                              people,genders,minAge,maxAge,cost,author,description) => {
+                              people,genders,minAge,maxAge,cost,author,description) =>
+{
+
+    const addEventEndpoint = endpoints.addEvent;
 
     const eventRequest = {
         title : title,
@@ -195,6 +230,8 @@ export const addEventFetch = (title,dateFrom,dateTo,city,street,postal,number,di
 
 export const uploadEventFilesFetch = (title,documents) => {
 
+    const uploadEventFilesEndpoint = endpoints.uploadEventFiles;
+
     const documentsRequest = new FormData();
 
     for(const file of documents)
@@ -211,6 +248,8 @@ export const uploadEventFilesFetch = (title,documents) => {
 };
 
 export const uploadEventImagesFetch = (title,images) => {
+
+    const uploadEventImagesEndpoint = endpoints.uploadEventImages;
 
     const imagesRequest = new FormData();
 
@@ -231,6 +270,8 @@ export const uploadEventImagesFetch = (title,images) => {
 export const addPlaceFetch = (
     name,discipline,placeLocalization,openingDays,cost,usageTime,
     minAge,maxAge,ratings,review,images,documents) => {
+
+    const addPlaceEndpoint = endpoints.addPlace;
 
     const PlaceForm = new FormData();
 
@@ -278,17 +319,31 @@ export const addPlaceFetch = (
 
 export const findAllNewsFetch = () => {
 
+    const findAllNewsEndpoint = endpoints.findAllNews;
+
     return  fetch(serverAddress + findAllNewsEndpoint)
 
 };
 
+export const findAllCountryFetch = () => {
+
+    const findAllCountryEndpoint = endpoints.findAllCountry;
+
+    return  fetch(serverAddress + findAllCountryEndpoint)
+
+};
+
 export const findAllPlaceFetch = () => {
+
+    const findAllPlacesEndpoint = "/place/find/all";
 
     return  fetch(serverAddress + findAllPlacesEndpoint)
 
 };
 
 export const addUserFetch = (email,password,username,birthday,country) => {
+
+    const addUserEndpoint = "/user/add";
 
     const formData = {
         email : email,
@@ -309,14 +364,22 @@ export const addUserFetch = (email,password,username,birthday,country) => {
 };
 
 export const existUserByEmailFetch = (email) => {
+
+    const existUserByEmailEndpoint = "/user/exist/email/";
+
     return fetch(serverAddress + existUserByEmailEndpoint + email)
 };
 
 export const existUserByUsernameFetch = (username) => {
-   return  fetch(serverAddress + existUserByUsernameEndpoint + username)
+
+    const existUserByUsernameEndpoint = "/user/exist/username/";
+
+    return  fetch(serverAddress + existUserByUsernameEndpoint + username)
 };
 
 export const signInUserFetch = (username,password) => {
+
+    const authenticateEndpoint = "/authenticate";
 
     const user = {
         username: username,
@@ -335,8 +398,12 @@ export const signInUserFetch = (username,password) => {
 
 export const findUserByUsernameFetch = (username) => {
 
+    const findUserByUsernameEndpoint = "/user/find/username/";
+
     let token = podiumStorage.get("authorizationToken");
+
     let bearer = 'Bearer ' + token;
+
     let requestOptions = {
         method: 'GET',
         withCredentials: true,
@@ -349,6 +416,8 @@ export const findUserByUsernameFetch = (username) => {
 
 export const updateUserProfileFetch = (id,username,email,password,country,
                                        birthday,description,image) => {
+
+    const updateUserProfileEndpoint = "/user/update/profile";
 
     const updateForm = new FormData();
 
@@ -380,13 +449,72 @@ export const updateUserProfileFetch = (id,username,email,password,country,
 };
 
 export const findNewsByIdFetch = (id) => {
+
+    const findNewsByIdEndpoint = "/news/find/id/";
+
     return fetch(serverAddress + findNewsByIdEndpoint + id);
 };
 
 export const findPlaceByIdFetch = (id) => {
+
+    const findPlaceByIdEndpoint = "/place/find/id/";
+
     return fetch(serverAddress + findPlaceByIdEndpoint + id);
 };
 
 export const findAllRatingCategoriesFetch = () => {
+
+    const findAllRatingCategoriesEndpoint = "/rating/category/find/all";
+
     return fetch(serverAddress + findAllRatingCategoriesEndpoint);
 };
+
+export const authenticateNoTokenFetch = (username, oldPassword) => {
+
+    const authenticateNoToken = "/authenticate/check";
+
+    const user = {
+        username: username,
+        password: oldPassword
+    };
+
+    const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(user)
+    };
+
+    return fetch(serverAddress + authenticateNoToken, requestOptions);
+
+};
+
+export const checkEndpointCompatibility = () => {
+
+    let endpointsToSend = [];
+
+    for(let i=0; i < Object.keys(endpoints).length; i++){
+        endpointsToSend = endpointsToSend.concat({name : Object.keys(endpoints)[i], value : Object.values(endpoints)[i]})
+    }
+
+    const checkEndpoint = endpoints.findServerEndpointsCompatibility;
+
+    const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(endpointsToSend)
+    };
+
+    fetch(serverAddress + checkEndpoint, requestOptions)
+
+        .then(res => res.json())
+
+        .then(res => {
+
+           console.log(res);
+
+        });
+
+};
+
+//checkEndpointCompatibility();
+

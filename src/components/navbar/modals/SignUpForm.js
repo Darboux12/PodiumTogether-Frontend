@@ -25,7 +25,7 @@ import {minPasswordLength} from "../../config/Limits";
 import {maxPasswordLength} from "../../config/Limits";
 import {maxEmailLength} from "../../config/Limits";
 import {minSignUpAge} from "../../config/Limits";
-import {addUserFetch, existUserByEmailFetch, existUserByUsernameFetch} from "../../fetch/Fetch";
+import {addUserFetch, existUserByEmailFetch, existUserByUsernameFetch, findAllCountryFetch} from "../../fetch/Fetch";
 
 export default function SignUpForm(props){
 
@@ -61,7 +61,7 @@ export default function SignUpForm(props){
 
     useEffect(() => {
 
-        fetch(serverAddress + findAllCountryEndpoint)
+        findAllCountryFetch()
 
             .then(res => res.json())
 

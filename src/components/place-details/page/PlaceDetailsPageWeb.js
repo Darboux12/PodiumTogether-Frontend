@@ -22,7 +22,6 @@ import SignUpSuccessModal from "../../navbar/modals/SignUpSuccessModal";
 import ReviewModal from "../../review/ReviewModal";
 import SubmitModal from "../../common/SubmitModal";
 
-
 export default function PlaceDetailsPageWeb(props) {
 
     const id = props.match.params.id;
@@ -103,9 +102,6 @@ export default function PlaceDetailsPageWeb(props) {
                 isModalVisible={reviewModalVisible}
                 closeModal={() => setReviewModalVisible(false)}
             />
-
-
-
 
         </Container>
     );

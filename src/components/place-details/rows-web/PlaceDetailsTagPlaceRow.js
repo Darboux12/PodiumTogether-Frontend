@@ -49,18 +49,7 @@ export default function PlaceDetailsTagPlaceRow(props) {
                         </a>
                     </Col>
 
-
-
-
-
-
-
-
                 </Row>
-
-
-
-
 
             </Col>
 

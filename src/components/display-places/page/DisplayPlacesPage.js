@@ -59,8 +59,6 @@ export default function DisplayPlacesPage(){
 
             {msg}
 
-
-
             <div className={"PlacesList"}>
 
                 {placeItems.map(item =>

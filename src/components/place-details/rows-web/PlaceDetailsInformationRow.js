@@ -22,15 +22,15 @@ export default function PlaceDetailsInformationRow(props) {
 
     const price = Math.round((cost / usageTime + Number.EPSILON) * 100) / 100;
 
-    const costText = cost > 0 ? price + "per hour" : "Free entrance";
+    const costText = cost > 0 ? price + " per hour" : "Free entrance";
 
-    const minAgeText = minAge > 0 ? minAge + "years old" : "No age limit";
+    const minAgeText = minAge > 0 ? minAge + " years old" : "No age limit";
 
-    const maxAgeText = maxAge < 99 ? maxAge + "years old" : "No age limit";
+    const maxAgeText = maxAge < 99 ? maxAge + " years old" : "No age limit";
 
     const cityText = city + ", " + postalCode;
 
-    const addressText =  street + ", " + buildingNumber;;
+    const addressText =  street + ", " + buildingNumber;
 
     return(
 

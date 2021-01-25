@@ -5,19 +5,12 @@ import {faGlobeEurope, faUnlock, faUser} from "@fortawesome/free-solid-svg-icons
 import FormControl from "react-bootstrap/esm/FormControl";
 import Button from "react-bootstrap/esm/Button";
 import Container from "react-bootstrap/esm/Container";
-import {faCalendar, faCalendarAlt, faEnvelope, faFlag} from "@fortawesome/free-regular-svg-icons";
+import { faEnvelope, faFlag} from "@fortawesome/free-regular-svg-icons";
 import {faCalendarDay} from "@fortawesome/free-solid-svg-icons/faCalendarDay";
 import Form from 'react-bootstrap/Form'
 
 import * as emailValidator from "email-validator";
 import isValidBirthdate from "is-valid-birthdate";
-
-import {existUserByUsernameEndpoint} from "../../config/Constants";
-import {existUserByEmailEndpoint} from "../../config/Constants";
-import {addUserEndpoint} from "../../config/Constants";
-import {findAllCountryEndpoint} from "../../config/Constants";
-
-import serverAddress from "../../config/Constants"
 
 import {minUsernameLength} from "../../config/Limits";
 import {maxUsernameLength} from "../../config/Limits";
@@ -232,6 +225,7 @@ export default function SignUpForm(props){
                         aria-describedby="basic-addon1"
                         onChange = {(e) => setEmail(e.target.value)}
                     />
+
                 </InputGroup>
 
                 <h className={"ErrorHeader"}>{passwordError}</h>
@@ -305,6 +299,7 @@ export default function SignUpForm(props){
                                  placeholder="Please, write your birth date..."
                                  aria-label="birthDate"
                                  aria-describedby="basic-addon1"
+
                                  onChange = {(e) => setBirthday(e.target.value)}
                     />
                 </InputGroup>

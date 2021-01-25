@@ -7,13 +7,46 @@ import Col from "react-bootstrap/esm/Col";
 
 import "../../../styles/place-details/rows-web/PlaceDetailsStarRatingRow.css"
 import {faStar} from "@fortawesome/free-solid-svg-icons";
+import Button from "react-bootstrap/Button";
 
 
-export default function PlaceDetailsStarRatingRow() {
+export default function PlaceDetailsStarRatingRow(props) {
+
+    let {reviews} = props;
+
+
+    const createReviews = () => {
+
+        let rev = [];
+
+        if(reviews.length > 0){
+
+            reviews[0].starRatings.map(item => {
+
+                let category = item.category;
+                let rat = item.rating;
+                let toAdd = {category : category, sum : rat} ;
+                rev = rev.concat(toAdd);
+
+            });
+
+            console.log(rev);
+
+
+
+
+
+        }
+
+
+
+    };
 
     return(
 
         <Row className={"IconRowsContainer"}>
+
+            <Button onClick={createReviews}>CLICK ME</Button>
 
             <Col>
 

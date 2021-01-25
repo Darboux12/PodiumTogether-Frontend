@@ -26,7 +26,7 @@ import ImageUploader from 'react-images-upload';
 import jwtDecode from "jwt-decode";
 import {
     authenticateNoTokenFetch,
-    findAllCountryFetch,
+    findAllCountryFetch, findUserByUsernameFetch,
     updateUserProfileFetch
 } from "../fetch/Fetch";
 
@@ -98,12 +98,12 @@ export default function EditProfilePage() {
             });
     };
 
-    const findUserByUsernameFetch = () => {
+    const findUserByUsername = () => {
 
         let username = podiumStorage.get("authorizationToken")
             ? jwtDecode(podiumStorage.get("authorizationToken")).sub : "";
 
-        findUserByUsernameFetch()
+        findUserByUsernameFetch(username)
 
             .then((res) => {
 
@@ -167,7 +167,7 @@ export default function EditProfilePage() {
 
         findAllCountriesFetch();
 
-        findUserByUsernameFetch();
+        findUserByUsername();
 
     },[]);
 

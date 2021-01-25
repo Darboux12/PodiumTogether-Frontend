@@ -22,10 +22,14 @@
 }
 
 .CommentThumbIconUp{
-
-    font-size: 1.4em;
+    font-size: 1.7em;
     color: #1B75BC;
+}
 
+.CommentThumbIconUp:hover{
+    cursor: pointer;
+    opacity: 0.8;
+    color: navy;
 }
 
 .CommentThumbHeaderUp{
@@ -44,8 +48,16 @@
 
 .CommentThumbIconDown{
 
-    font-size: 1.4em;
+    font-size: 1.7em;
     color: red;
+
+}
+
+.CommentThumbIconDown:hover{
+
+    cursor: pointer;
+    opacity: 0.8;
+    color: darkred;
 
 }
 
@@ -126,4 +138,20 @@
 .CommentImage{
     width: 15%;
     padding: 1em;
+}
+
+.CommentStarRatingsContainer{
+    position: absolute;
+    top: 5em;
+    right: 5em;
+}
+
+.CommentStarsRow{
+    padding: 0.3em;display: flex;
+    align-items: center;
+}
+
+.StarRatingCommentHeader{
+    width: 9em;
+    font-weight: bold;
 }

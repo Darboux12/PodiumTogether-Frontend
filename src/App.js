@@ -47,7 +47,7 @@ function App() {
             <Route path="/news" exact component={NewsPage}/>
             <Route path="/news/details/:id" exact component={NewsDetails}/>
             <Route path="/place/create" exact component={TagPlacePage}/>
-            <Route path="/place/display" exact component={DisplayPlacesPage}/>
+            <PrivateRoute path="/place/display" exact component={DisplayPlacesPage}/>
             <Route path="/event/details" exact component={EventDetailsPage}/>
             <Route path="/user/profile/edit" exact component={EditProfilePage}/>
             <Route path="/place/details/:id" exact component={PlaceDetailsPageWeb}/>

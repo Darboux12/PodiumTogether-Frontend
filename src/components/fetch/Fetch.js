@@ -1,5 +1,6 @@
 import serverAddress from "../config/Constants";
 import podiumStorage from "../config/Storage";
+import jwtDecode from "jwt-decode";
 
 export const endpoints = {
 
@@ -32,9 +33,14 @@ export const endpoints = {
     "findPlaceById" : "/place/find/id/",
     "findAllRatingCategories" : "/rating/category/find/all",
     "authenticateNoToken" : "/authenticate/check",
+    "addReview" : "/place/review/add",
     "findServerEndpointsCompatibility" : "/server/endpoints/compatibility",
+    "incrementReviewLikes" : "/place/review/increment/likes/",
+    "incrementReviewDislikes" : "/place/review/increment/dislikes/"
 
 };
+
+// DISCIPLINE
 
 export const existDisciplineByNameFetch = (discipline) => {
 
@@ -58,6 +64,16 @@ export const addDisciplineFetch = (discipline) => {
     return fetch(serverAddress + addDisciplineEndpoint,requestOptions);
 
 };
+
+export const findAllDisciplineFetch = () => {
+
+    const findAllDisciplineEndpoint = endpoints.findAllDiscipline;
+
+    return fetch(serverAddress + findAllDisciplineEndpoint);
+
+};
+
+// NEWS
 
 export const addNewsFetch = (title,shortText,linkText,fullText,images) => {
 
@@ -87,25 +103,7 @@ export const addNewsFetch = (title,shortText,linkText,fullText,images) => {
 
 };
 
-export const uploadNewsImagesFetch = (title,images) => {
-
-    const newsImagesUploadEndpoint = endpoints.newsImagesUpload;
-
-    const  ImageData = new FormData();
-
-    for(const file of images)
-        ImageData.append("images",file);
-
-    ImageData.append("title",title);
-
-    const requestOptions = {
-        method: 'POST',
-        body: ImageData
-    };
-
-    return fetch(serverAddress + newsImagesUploadEndpoint,requestOptions);
-
-};
+// SUBJECT
 
 export const existSubjectByNameFetch = (subject) => {
 
@@ -130,6 +128,16 @@ export const addSubjectFetch = (subject) => {
 
 };
 
+export const findAllSubjectsFetch = () => {
+
+    const findAllSubjectEndpoint = endpoints.findAllSubject;
+
+    return fetch(serverAddress + findAllSubjectEndpoint);
+
+};
+
+// USER
+
 export const findAllUsersFetch = () => {
 
     const findAllUsersEndpoint = endpoints.findAllUsers;
@@ -148,13 +156,139 @@ export const deleteUserFetch = (username) => {
 
 };
 
-export const findAllSubjectsFetch = () => {
+export const addUserFetch = (email,password,username,birthday,country) => {
 
-    const findAllSubjectEndpoint = endpoints.findAllSubject;
+    const addUserEndpoint = "/user/add";
 
-    return fetch(serverAddress + findAllSubjectEndpoint);
+    const formData = {
+        email : email,
+        password : password,
+        username : username,
+        birthday : birthday,
+        country : country
+    };
+
+    const requestOption = {
+        method: 'POST',
+        headers : {'Content-Type': 'application/json'},
+        body: JSON.stringify(formData)
+    };
+
+    return fetch(serverAddress + addUserEndpoint,requestOption);
 
 };
+
+export const existUserByEmailFetch = (email) => {
+
+    const existUserByEmailEndpoint = "/user/exist/email/";
+
+    return fetch(serverAddress + existUserByEmailEndpoint + email)
+};
+
+export const existUserByUsernameFetch = (username) => {
+
+    const existUserByUsernameEndpoint = "/user/exist/username/";
+
+    return  fetch(serverAddress + existUserByUsernameEndpoint + username)
+};
+
+export const signInUserFetch = (username,password) => {
+
+    const authenticateEndpoint = "/authenticate";
+
+    const user = {
+        username: username,
+        password: password
+    };
+
+    const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(user)
+    };
+
+    return fetch(serverAddress + authenticateEndpoint, requestOptions)
+
+};
+
+export const findUserByUsernameFetch = (username) => {
+
+    const findUserByUsernameEndpoint = "/user/find/username/";
+
+    let token = podiumStorage.get("authorizationToken");
+
+    let bearer = 'Bearer ' + token;
+
+    let requestOptions = {
+        method: 'GET',
+        withCredentials: true,
+        headers: {'Authorization': bearer, 'Content-Type': 'application/json'}
+    };
+
+    return fetch(serverAddress + findUserByUsernameEndpoint + username,requestOptions);
+
+};
+
+export const updateUserProfileFetch = (id,username,email,password,country,
+                                       birthday,description,image) => {
+
+    const updateUserProfileEndpoint = "/user/update/profile";
+
+    const updateForm = new FormData();
+
+    const request = {
+        id: id,
+        username: username,
+        email: email,
+        password: password,
+        country: country,
+        birthday: birthday,
+        description: description
+    };
+
+    updateForm.append('request', new Blob([JSON.stringify(
+
+        request
+
+    )], {type: "application/json"}));
+
+    updateForm.append("image",image);
+
+    let token = podiumStorage.get("authorizationToken");
+
+    let bearer = 'Bearer ' + token;
+
+    const requestOptions = {
+        method: "POST",
+        withCredentials: true,
+        headers: {'Authorization': bearer},
+        body: updateForm
+    };
+
+    return fetch(serverAddress + updateUserProfileEndpoint,requestOptions);
+
+};
+
+export const authenticateNoTokenFetch = (username, oldPassword) => {
+
+    const authenticateNoToken = "/authenticate/check";
+
+    const user = {
+        username: username,
+        password: oldPassword
+    };
+
+    const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(user)
+    };
+
+    return fetch(serverAddress + authenticateNoToken, requestOptions);
+
+};
+
+// CONTACT
 
 export const addContactFetch = (email,subject,message) => {
 
@@ -176,21 +310,17 @@ export const addContactFetch = (email,subject,message) => {
 
 };
 
-export const findAllDisciplineFetch = () => {
-
-    const findAllDisciplineEndpoint = endpoints.findAllDiscipline;
-
-    return fetch(serverAddress + findAllDisciplineEndpoint);
-
-};
+// GENDER
 
 export const findAllGendersFetch = () => {
 
     const findAllGenderEndpoint = endpoints.findAllGender;
 
-   return  fetch(serverAddress + findAllGenderEndpoint);
+    return  fetch(serverAddress + findAllGenderEndpoint);
 
 };
+
+// EVENT
 
 export const addEventFetch = (title,dateFrom,dateTo,city,street,postal,number,discipline,
                               people,genders,minAge,maxAge,cost,author,description) =>
@@ -267,6 +397,8 @@ export const uploadEventImagesFetch = (title,images) => {
 
 };
 
+// PLACE
+
 export const addPlaceFetch = (
     name,discipline,placeLocalization,openingDays,cost,usageTime,
     minAge,maxAge,ratings,review,images,documents) => {
@@ -317,88 +449,7 @@ export const addPlaceFetch = (
 
 };
 
-export const findAllNewsFetch = () => {
-
-    const findAllNewsEndpoint = endpoints.findAllNews;
-
-    return  fetch(serverAddress + findAllNewsEndpoint)
-
-};
-
-export const findAllCountryFetch = () => {
-
-    const findAllCountryEndpoint = endpoints.findAllCountry;
-
-    return  fetch(serverAddress + findAllCountryEndpoint)
-
-};
-
 export const findAllPlaceFetch = () => {
-
-    const findAllPlacesEndpoint = "/place/find/all";
-
-    return  fetch(serverAddress + findAllPlacesEndpoint)
-
-};
-
-export const addUserFetch = (email,password,username,birthday,country) => {
-
-    const addUserEndpoint = "/user/add";
-
-    const formData = {
-        email : email,
-        password : password,
-        username : username,
-        birthday : birthday,
-        country : country
-    };
-
-    const requestOption = {
-        method: 'POST',
-        headers : {'Content-Type': 'application/json'},
-        body: JSON.stringify(formData)
-    };
-
-    return fetch(serverAddress + addUserEndpoint,requestOption);
-
-};
-
-export const existUserByEmailFetch = (email) => {
-
-    const existUserByEmailEndpoint = "/user/exist/email/";
-
-    return fetch(serverAddress + existUserByEmailEndpoint + email)
-};
-
-export const existUserByUsernameFetch = (username) => {
-
-    const existUserByUsernameEndpoint = "/user/exist/username/";
-
-    return  fetch(serverAddress + existUserByUsernameEndpoint + username)
-};
-
-export const signInUserFetch = (username,password) => {
-
-    const authenticateEndpoint = "/authenticate";
-
-    const user = {
-        username: username,
-        password: password
-    };
-
-    const requestOptions = {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(user)
-    };
-
-   return fetch(serverAddress + authenticateEndpoint, requestOptions)
-
-};
-
-export const findUserByUsernameFetch = (username) => {
-
-    const findUserByUsernameEndpoint = "/user/find/username/";
 
     let token = podiumStorage.get("authorizationToken");
 
@@ -410,41 +461,141 @@ export const findUserByUsernameFetch = (username) => {
         headers: {'Authorization': bearer, 'Content-Type': 'application/json'}
     };
 
-    return fetch(serverAddress + findUserByUsernameEndpoint + username,requestOptions);
+    const findAllPlacesEndpoint = "/place/find/all";
+
+    return  fetch(serverAddress + findAllPlacesEndpoint,requestOptions)
 
 };
 
-export const updateUserProfileFetch = (id,username,email,password,country,
-                                       birthday,description,image) => {
+export const findPlaceByIdFetch = (id) => {
 
-    const updateUserProfileEndpoint = "/user/update/profile";
+    let token = podiumStorage.get("authorizationToken");
 
-    const updateForm = new FormData();
+    let bearer = 'Bearer ' + token;
 
-    const request = {
-        id: id,
-        username: username,
-        email: email,
-        password: password,
-        country: country,
-        birthday: birthday,
-        description: description
+    let requestOptions = {
+        method: 'GET',
+        withCredentials: true,
+        headers: {'Authorization': bearer, 'Content-Type': 'application/json'}
     };
 
-    updateForm.append('request', new Blob([JSON.stringify(
+    const findPlaceByIdEndpoint = "/place/find/id/";
 
-        request
+    return fetch(serverAddress + findPlaceByIdEndpoint + id, requestOptions);
+};
 
-    )], {type: "application/json"}));
+export const findAllRatingCategoriesFetch = () => {
 
-    updateForm.append("image",image);
+    let token = podiumStorage.get("authorizationToken");
+
+    let bearer = 'Bearer ' + token;
+
+    let requestOptions = {
+        method: 'GET',
+        withCredentials: true,
+        headers: {'Authorization': bearer, 'Content-Type': 'application/json'}
+    };
+
+    const findAllRatingCategoriesEndpoint = "/rating/category/find/all";
+
+    return fetch(serverAddress + findAllRatingCategoriesEndpoint,requestOptions);
+};
+
+export const addPlaceReviewFetch = (placeName,ratings,review,images) => {
+
+    const addReviewEndpoint = endpoints.addReview;
+
+    let token = podiumStorage.get("authorizationToken");
+    let bearer = 'Bearer ' + token;
+    let author = jwtDecode(token).sub;
+
+    const ReviewForm = new FormData();
+
+    let placeReview = {
+        author : author,
+        place : placeName,
+        starRatings : ratings,
+        opinion : review
+    };
+
+    ReviewForm.append('review', new Blob([JSON.stringify(
+
+        placeReview
+
+    )], {
+        type: "application/json"
+    }));
+
+    for(const file of images){
+        ReviewForm.append("images",file);
+    }
 
     const requestOptions = {
         method: "POST",
-        body: updateForm
+        withCredentials: true,
+        headers: {'Authorization': bearer},
+        body: ReviewForm
     };
 
-    return fetch(serverAddress + updateUserProfileEndpoint,requestOptions);
+    return fetch(serverAddress + addReviewEndpoint, requestOptions);
+
+};
+
+export const incrementReviewLikesFetch = (id) => {
+    let token = podiumStorage.get("authorizationToken");
+
+    let bearer = 'Bearer ' + token;
+
+    let requestOptions = {
+        method: 'PATCH',
+        withCredentials: true,
+        headers: {'Authorization': bearer, 'Content-Type': 'application/json'}
+    };
+
+    const incrementReviewLikesEndpoint = endpoints.incrementReviewLikes;
+
+    return  fetch(serverAddress + incrementReviewLikesEndpoint + id,requestOptions)
+
+};
+
+export const incrementReviewDislikesFetch = (id) => {
+
+    let token = podiumStorage.get("authorizationToken");
+
+    let bearer = 'Bearer ' + token;
+
+    let requestOptions = {
+        method: 'PATCH',
+        withCredentials: true,
+        headers: {'Authorization': bearer, 'Content-Type': 'application/json'}
+    };
+
+    const incrementReviewDislikesEndpoint = endpoints.incrementReviewDislikes;
+
+    return  fetch(serverAddress + incrementReviewDislikesEndpoint + id,requestOptions)
+
+};
+
+
+
+
+// COUNTRY
+
+export const findAllCountryFetch = () => {
+
+    const findAllCountryEndpoint = endpoints.findAllCountry;
+
+    return  fetch(serverAddress + findAllCountryEndpoint)
+
+};
+
+// NEWS
+
+export const findAllNewsFetch = () => {
+
+    const findAllNewsEndpoint = endpoints.findAllNews;
+
+    return  fetch(serverAddress + findAllNewsEndpoint)
 
 };
 
@@ -455,38 +606,8 @@ export const findNewsByIdFetch = (id) => {
     return fetch(serverAddress + findNewsByIdEndpoint + id);
 };
 
-export const findPlaceByIdFetch = (id) => {
 
-    const findPlaceByIdEndpoint = "/place/find/id/";
-
-    return fetch(serverAddress + findPlaceByIdEndpoint + id);
-};
-
-export const findAllRatingCategoriesFetch = () => {
-
-    const findAllRatingCategoriesEndpoint = "/rating/category/find/all";
-
-    return fetch(serverAddress + findAllRatingCategoriesEndpoint);
-};
-
-export const authenticateNoTokenFetch = (username, oldPassword) => {
-
-    const authenticateNoToken = "/authenticate/check";
-
-    const user = {
-        username: username,
-        password: oldPassword
-    };
-
-    const requestOptions = {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(user)
-    };
-
-    return fetch(serverAddress + authenticateNoToken, requestOptions);
-
-};
+// SYNCHRONIZATION
 
 export const checkEndpointCompatibility = () => {
 

@@ -7,17 +7,9 @@ import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import "../../../styles/navbar/SignInModal.css"
 import {faUser} from "@fortawesome/free-regular-svg-icons";
-import serverAddress, {
-    authenticateEndpoint,
-    existUserByUsernameEndpoint,
-    findUserByUsernameEndpoint,
-
-} from "../../config/Constants";
 import podiumStorage from "../../config/Storage";
 import jwtDecode from "jwt-decode";
 import {
-    addUserFetch,
-    existUserByEmailFetch,
     existUserByUsernameFetch,
     findUserByUsernameFetch,
     signInUserFetch

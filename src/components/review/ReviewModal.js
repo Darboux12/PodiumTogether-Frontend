@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCalendarTimes, faCheckCircle} from "@fortawesome/free-regular-svg-icons";
 import React, {useEffect, useState} from "react";
 import Modal from "react-bootstrap/Modal";
-import {addPlaceFetch, findAllRatingCategoriesFetch} from "../fetch/Fetch";
+import {addPlaceFetch, addPlaceReviewFetch, findAllRatingCategoriesFetch} from "../fetch/Fetch";
 import ReviewTagForm from "../tag-place/ReviewTagForm";
 
 import "../../styles/review/ReviewModal.css"
@@ -20,7 +20,7 @@ import {maxObjectReviewLength, minObjectReviewLength} from "../config/Limits";
 
 export default function ReviewModal(props) {
 
-    let {isModalVisible, closeModal: onHide} = props;
+    let {isModalVisible, closeModal: onHide,placeName} = props;
 
     const [review,setReview] = useState("");
     const [ratings,setRatings] = useState([]);
@@ -66,6 +66,10 @@ export default function ReviewModal(props) {
 
     };
 
+    const createRatings = () => {
+        return ratings;
+    };
+
     const resetErrors = () => {
         setStarRatingsError("");
         setReviewError("");
@@ -103,24 +107,14 @@ export default function ReviewModal(props) {
 
             alert("Form validation ok");
 
-            /*
+            let placeRatings = createRatings();
 
-
-
-            let openingDays = createOpeningDays();
-
-            let placeLocalization = createPlaceLocalization();
-
-            let ratings = createRatings();
-
-
-            addPlaceFetch(name,discipline,placeLocalization,
-                openingDays,cost,usageTime,minAge,maxAge,ratings,review,images,documents)
+            addPlaceReviewFetch(placeName,placeRatings,review,images)
 
                 .then(res => {
 
                     if(res.ok)
-                        props.submitModal();
+                        console.log("Jest OK");
 
                     else return res.json();
 
@@ -128,11 +122,9 @@ export default function ReviewModal(props) {
 
                 .then(res => console.log(res))
 
-                .catch(error => console.log(error)); */
+                .catch(error => console.log(error));
 
         }
-
-
 
     };
 
@@ -213,7 +205,7 @@ export default function ReviewModal(props) {
                     className={"d-md-inline d-none w-100 createEventSubmitButton"}
                     onClick={onFormSubmit}
                 >
-                    Create Event
+                    Add review
                 </Button>
 
 

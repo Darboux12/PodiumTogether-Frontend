@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Container from "react-bootstrap/Container";
 
 import "../../../styles/place-details/rows-web/Comment.css"
@@ -8,7 +8,52 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCalendarAlt, faThumbsDown, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 
 import commentImage from "../../../images/person.jpg"
-export default function Comment() {
+import {findAllPlaceFetch, incrementReviewDislikesFetch, incrementReviewLikesFetch} from "../../fetch/Fetch";
+
+export default function Comment(props) {
+
+    let {ratings,opinion,author,images,likes,dislikes,id} = props;
+
+    const [likesItem,setLikesItem] = useState(likes);
+    const [dislikesItem,setDislikesItem] = useState(dislikes);
+
+    const calculateGrade = () => {
+
+        let sum = 0;
+
+        ratings.map(item => {sum += item.rating;});
+
+        return sum / ratings.length;
+
+    };
+
+    const incrementLikes = () => {
+
+        incrementReviewLikesFetch(id)
+
+            .then(res => {
+
+                if(res.ok){
+                    setLikesItem(likesItem + 1);
+                }
+
+            })
+
+    };
+
+    const incrementDislikes = () => {
+
+        incrementReviewDislikesFetch(id)
+
+            .then(res => {
+
+                if(res.ok){
+                    setDislikesItem(dislikesItem + 1);
+                }
+
+            })
+
+    };
 
     return (
 
@@ -17,26 +62,43 @@ export default function Comment() {
             <div className={"CommentThumbsContainer d-flex flex-row"}>
 
                 <div className={"CommentThumbContainerUp d-flex flex-row"}>
-                    <FontAwesomeIcon className={"CommentThumbIconUp"} icon={faThumbsUp}/>
-                    <h className={"CommentThumbHeaderUp"}>123</h>
+                    <FontAwesomeIcon className={"CommentThumbIconUp"} icon={faThumbsUp} onClick={incrementLikes}/>
+                    <h className={"CommentThumbHeaderUp"}>{likesItem}</h>
                 </div>
 
                 <div className={"CommentThumbContainerDown d-flex flex-row"}>
-                    <FontAwesomeIcon className={"CommentThumbIconDown"} icon={faThumbsDown}/>
-                    <h className={"CommentThumbHeaderDown"}>123</h>
+                    <FontAwesomeIcon className={"CommentThumbIconDown"} icon={faThumbsDown} onClick={incrementDislikes}/>
+                    <h className={"CommentThumbHeaderDown"}>{dislikesItem}</h>
                 </div>
+
+            </div>
+
+            <div className={"CommentStarRatingsContainer"}>
+
+
+                {ratings.map(rating =>
+
+                        <div className={"CommentStarsRow d-flex flex-row"}>
+
+                            <h className={"StarRatingCommentHeader"}>{rating.category}</h>
+
+                            {[...Array(rating.rating)].map(() => <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>)}
+
+                        </div>
+
+                    )}
 
             </div>
 
             <Row className={"CommentGradeUserRow"}>
 
-                <h className={"CommentGrade"}>9.0</h>
+                <h className={"CommentGrade"}>{calculateGrade()}</h>
 
                 <div className={"CommentPostedBy d-flex flex-column"}>
 
                     <h className={"CommentPostedByHeader"}>Posted by:</h>
 
-                    <h className={"CommentPostedByUsername"}>Janek126p</h>
+                    <h className={"CommentPostedByUsername"}>{author}</h>
 
                 </div>
 
@@ -52,27 +114,22 @@ export default function Comment() {
             <Row className={"CommentReviewRow"}>
 
                 <h className={"CommentReviewText"}>
-                    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad amet, aperiam aut beatae cumque,
-                        dolor ea enim facere ipsum minima, natus neque nobis nostrum officia praesentium quis ut velit
-                        voluptate.
-                    </div>
-                    <div>Ad amet aspernatur beatae commodi cupiditate dolore dolores earum eveniet expedita explicabo
-                        fuga hic, inventore iure iusto maxime nisi non nostrum obcaecati officiis, perferendis
-                        perspiciatis quia quo reiciendis rerum vero.
-                    </div>
-                    <div>Delectus libero maxime optio tenetur! Cum doloribus exercitationem fugit ipsum iste minus
-                        numquam ratione repudiandae velit voluptas. Delectus dolorum facilis fugiat iste minus officia
-                        rerum. Nihil sequi voluptate voluptatem voluptates.
-                    </div></h>
+                    {opinion}
+                </h>
 
             </Row>
 
             <Row className={"CommentImagesRow"}>
 
-                <img className={"CommentImage"} src={commentImage} alt={"Comment Image"}/>
-                <img className={"CommentImage"} src={commentImage} alt={"Comment Image"}/>
-                <img className={"CommentImage"} src={commentImage} alt={"Comment Image"}/>
-                <img className={"CommentImage"} src={commentImage} alt={"Comment Image"}/>
+
+                {images.map(image =>
+
+                    <img className={"CommentImage"} src={`data:image/jpeg;base64,${image.content}`} alt={"Comment Image"}/>
+
+
+
+                )}
+
 
 
 

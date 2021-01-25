@@ -12,7 +12,7 @@ import {maxNewsLinkTextLength} from "../../config/Limits";
 import {minNewsFullTextLength} from "../../config/Limits";
 import {maxNewsFullTextLength} from "../../config/Limits";
 import {maxImagesNumber} from "../../config/Limits";
-import {addNewsFetch, uploadNewsImagesFetch} from "../../fetch/Fetch";
+import {addNewsFetch} from "../../fetch/Fetch";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
@@ -141,7 +141,7 @@ export default function AddNewsForm(props){
     };
 
     return( <Form className={"createNewsForm w-70"}>
-            
+
             <Form.Group controlId="formNewsTitle">
                 <Form.Label className={"FormLabel mt-3"}>News Title</Form.Label>
                 <h className={"ErrorHeader ml-3"}>{titleError}</h>

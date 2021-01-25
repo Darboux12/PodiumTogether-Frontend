@@ -53,29 +53,29 @@ function NavBarUserLogged(props){
                 <Dropdown.Menu className={"dropdown-menu-center"}>
 
                     <Dropdown.Item href="/user/profile">
-                        <FontAwesomeIcon className={"profileIcon"} icon={faUserCircle}/>
+                        <FontAwesomeIcon className={"profileIcon SeeProfileIcon"} icon={faUserCircle}/>
                         See your profile
                     </Dropdown.Item>
 
                     <NavDropdown.Divider />
 
                     <Dropdown.Item href="/userEvents">
-                        <FontAwesomeIcon className={"profileIcon"} icon={faCalendarCheck}/>
+                        <FontAwesomeIcon className={"profileIcon MyEventsIcon"} icon={faCalendarCheck}/>
                         My events
                     </Dropdown.Item>
 
                     <Dropdown.Item href="/userPlaces">
-                        <FontAwesomeIcon className={"profileIcon"} icon={faGlobeEurope}/>
+                        <FontAwesomeIcon className={"profileIcon MyPlacesIcon"} icon={faGlobeEurope}/>
                         My places
                     </Dropdown.Item>
 
                     <Dropdown.Item href="/user/profile/edit">
-                        <FontAwesomeIcon className={"profileIcon"} icon={faCog}/>
+                        <FontAwesomeIcon className={"profileIcon SettingsIcon"} icon={faCog}/>
                         Settings
                     </Dropdown.Item>
 
                     <Dropdown.Item onClick={logOut}>
-                        <FontAwesomeIcon className={"profileIcon"} icon={faSignOutAlt}/>
+                        <FontAwesomeIcon className={"profileIcon SignOutIcon"} icon={faSignOutAlt}/>
                         Sign Out
                     </Dropdown.Item>
 

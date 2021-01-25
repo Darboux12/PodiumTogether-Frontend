@@ -20,7 +20,6 @@
 
 }
 
-
 .userProfileHeader{
     color: white;
     opacity: 0.6;
@@ -60,4 +59,24 @@
     text-align: center;
     font-weight: bold;
     font-size: 1.2em;
+}
+
+.SeeProfileIcon{
+    color: green;
+}
+
+.MyEventsIcon{
+    color: green;
+}
+
+.MyPlacesIcon{
+    color: green;
+}
+
+.SettingsIcon{
+    color: grey;
+}
+
+.SignOutIcon{
+    color: #FF0000;
 }

@@ -78,12 +78,11 @@ export default function PlaceDetailsPageWeb(props) {
                         street = {placeItems.localization.street}
                         buildingNumber = {placeItems.localization.buildingNumber}
                         postalCode = {placeItems.localization.postalCode}
-
                     />
 
-                    <PlaceDetailsStarRatingRow/>
+                    <PlaceDetailsStarRatingRow reviews = {placeItems.reviews}/>
 
-                    <PlaceDetailsCommentRow/>
+                    <PlaceDetailsCommentRow reviews = {placeItems.reviews}/>
 
 
 
@@ -101,6 +100,7 @@ export default function PlaceDetailsPageWeb(props) {
             <ReviewModal
                 isModalVisible={reviewModalVisible}
                 closeModal={() => setReviewModalVisible(false)}
+                placeName = {placeItems.name}
             />
 
         </Container>

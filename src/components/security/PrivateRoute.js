@@ -4,6 +4,7 @@ import jwtDecode from 'jwt-decode';
 
 import AuthenticationRefusedModal from "./AuthenticationRefusedModal";
 import MainPage from "../main/MainPage";
+import podiumStorage from "../config/Storage";
 
 export default function PrivateRoute(props){
 
@@ -11,7 +12,7 @@ export default function PrivateRoute(props){
 
     useEffect(() => {
 
-        let token = localStorage.getItem('authorizationToken');
+        let token = podiumStorage.get('authorizationToken');
 
         if(token){
 

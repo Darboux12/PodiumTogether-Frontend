@@ -231,9 +231,10 @@ export default function CreateEventFor(){
     };
 
     return(
+
         <Form className={"createEventForm col-md-10 col-12"}>
 
-            <h className={"categoryHeader"}>General information</h>
+            <h className={"CategoryHeader"}>General information</h>
 
             <Form.Group controlId="formEventTitle">
 
@@ -360,7 +361,7 @@ export default function CreateEventFor(){
 
             </Form.Group>
 
-            <h className={"categoryHeader"}>Detailed Information</h>
+            <h className={"CategoryHeader"}>Detailed Information</h>
 
             <Form.Group controlId="formEventRequiredPeople">
 
@@ -468,7 +469,7 @@ export default function CreateEventFor(){
 
             </Form.Group>
 
-            <h className={"categoryHeader"}>Additional elements</h>
+            <h className={"CategoryHeader"}>Additional elements</h>
 
             <Form.Group controlId="exampleForm.ControlInput1">
 

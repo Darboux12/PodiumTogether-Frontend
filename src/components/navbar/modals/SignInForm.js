@@ -83,7 +83,23 @@ export default function SignInForm(props){
 
             .then((res) => {
 
-                if (!res.ok) setPasswordError("Password is incorrect!");
+                if(res.status === 403){
+
+
+                   res.json()
+                       .then(data => {
+                           setPasswordError(data.message);
+                           setUsernameError(data.message);
+                       });
+
+
+
+
+
+
+                }
+
+                else if (!res.ok) setPasswordError("Password is incorrect!");
 
                 else return res.json()
             })

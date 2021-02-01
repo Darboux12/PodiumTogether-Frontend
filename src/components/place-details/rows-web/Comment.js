@@ -9,13 +9,17 @@ import {faCalendarAlt, faThumbsDown, faThumbsUp} from "@fortawesome/free-regular
 
 import commentImage from "../../../images/person.jpg"
 import {findAllPlaceFetch, incrementReviewDislikesFetch, incrementReviewLikesFetch} from "../../fetch/Fetch";
+import {format} from "date-fns";
 
 export default function Comment(props) {
 
-    let {ratings,opinion,author,images,likes,dislikes,id} = props;
+    let {ratings,opinion,author,images,likes,dislikes,id,date} = props;
 
     const [likesItem,setLikesItem] = useState(likes);
     const [dislikesItem,setDislikesItem] = useState(dislikes);
+
+    const commentDate = new Date(date);
+
 
     const calculateGrade = () => {
 
@@ -107,7 +111,7 @@ export default function Comment(props) {
             <Row className={"CommentDateRow"}>
                 <FontAwesomeIcon className={"CommentDateIcon"} icon={faCalendarAlt}/>
 
-                <h className={"CommentDate"}>12.03.2020 12:00</h>
+                <h className={"CommentDate"}>{format(commentDate, "dd-MM-yyyy hh:mm")}</h>
 
             </Row>
 

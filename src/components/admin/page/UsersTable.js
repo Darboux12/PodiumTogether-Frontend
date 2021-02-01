@@ -8,14 +8,29 @@ import Button from "react-bootstrap/esm/Button";
 import SubmitModal from "../../common/SubmitModal";
 import Container from "react-bootstrap/Container";
 import "../../../styles/admin/AdminPanel.css"
-import {deleteUserFetch, findAllUsersFetch} from "../../fetch/Fetch";
+import {banUserFetch, deleteUserFetch, findAllUsersFetch} from "../../fetch/Fetch";
+import {Form} from "react-bootstrap";
+import ImageUploader from "react-images-upload";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export default function UsersTable() {
 
     const [users,setUsers] = useState([]);
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+    const [isBanModalVisible, setIsBanModalVisible] = useState(false);
     const [submitModalVisible,setSubmitModalVisible] = useState(false);
     const [userUsernameAction,setUserUsernameAction] = useState("");
+    const [submitBanModalVisible,setSubmitBanModalVisible] = useState(false);
+
+    const [dateFrom,setDateFrom] = useState("");
+    const [dateTo,setDateTo] = useState("");
+    const [reason,setReason] = useState("");
+
+    const [dateFromError,setDateFromError] = useState("");
+    const [dateToError,setDateToError] = useState("");
+    const [reasonError,setReasonError] = useState("");
+
 
     useEffect(() => {
 
@@ -34,6 +49,61 @@ export default function UsersTable() {
         setUserUsernameAction(username);
         setIsDeleteModalVisible(true);
 
+    };
+
+    const banUser = (username) => {
+
+        setUserUsernameAction(username);
+        setIsBanModalVisible(true);
+
+    };
+
+    const banUserConfirmed = () => {
+
+        setDateFromError("");
+        setDateToError("");
+        setReasonError("");
+
+        let isOk = true;
+
+        if(dateFrom === ""){
+            isOk = false;
+            setDateFromError("Date From cannot be empty!");
+        }
+
+        if(dateTo === ""){
+            isOk = false;
+            setDateToError("Date From cannot be empty!");
+        }
+
+        if(reason === "") {
+            isOk = false;
+            setReasonError("Reason cannot be empty!");
+        }
+
+        if(isOk){
+
+            setIsBanModalVisible(false);
+
+            banUserFetch(dateFrom,dateTo,reason,userUsernameAction)
+
+                .then((res) => {
+
+                    if(res.ok){
+                        setSubmitBanModalVisible(true);
+                        setTimeout(() => {window.location.reload()},2000);
+                    }
+
+
+                    else return res.json();
+
+                })
+
+                .then(res => console.log(res))
+
+                .catch(err => { console.log(err) })
+
+        }
     };
 
     const deleteUserConfirmed = () => {
@@ -89,10 +159,11 @@ export default function UsersTable() {
                     <td>{item.id}</td>
                     <td>{item.username}</td>
                     <td>{item.email}</td>
-                    <td>{item.roles}</td>
+                    <td>{item.roles.join(", ")}</td>
                     <td>{item.country}</td>
                     <td><ActionIcons
                         deleteUser = {(user) => deleteUser(user)}
+                        banUser = {(user) => banUser(user)}
                         username = {item.username}
 
 
@@ -129,11 +200,78 @@ export default function UsersTable() {
                 </Modal.Footer>
             </Modal>
 
+            <Modal
+                show={isBanModalVisible}
+                onHide={() => setIsBanModalVisible(false)}
+            >
+
+                <Modal.Header closeButton>
+                    <Modal.Title>Ban User</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+
+                    <Form className={"createNewsForm w-70"}>
+
+                        <Form.Group controlId="formNewsTitle">
+                            <Form.Label className={"FormLabel"}>Ban Date From</Form.Label>
+                            <h className={"ErrorHeader ml-3"}>{dateFromError}</h>
+                            <Form.Control
+                                className={"FormInputField"}
+                                type="datetime-local"
+                                onChange = {(e) => setDateFrom(e.target.value)}/>
+                        </Form.Group>
+
+                        <Form.Group controlId="formNewsTitle">
+                            <Form.Label className={"FormLabel"}>Ban Date To</Form.Label>
+                            <h className={"ErrorHeader ml-3"}>{dateToError}</h>
+                            <Form.Control
+                                className={"FormInputField"}
+                                type="datetime-local"
+                                onChange = {(e) => setDateTo(e.target.value)}/>
+                        </Form.Group>
+
+                        <Form.Group controlId="formNewsTitle">
+                            <Form.Label className={"FormLabel"}>Ban Reason</Form.Label>
+                            <h className={"ErrorHeader ml-3"}>{reasonError}</h>
+                            <Form.Control
+                                className={"FormInputField"}
+                                as="textarea"
+                                rows="6"
+                                onChange = {(e) => setReason(e.target.value)}/>
+                        </Form.Group>
+
+                    </Form>
+
+                </Modal.Body>
+
+                <Modal.Footer>
+
+                    <Button variant="secondary" onClick={() => setIsBanModalVisible(false)}>
+                        Close
+                    </Button>
+
+                    <Button variant="danger" onClick={() => banUserConfirmed()}>
+                        Ban user
+                    </Button>
+
+                </Modal.Footer>
+
+            </Modal>
+
             <SubmitModal
                 isSubmitModalVisible={submitModalVisible}
                 closeSubmitModal={() => setSubmitModalVisible(false)}
                 text = "Delete request"
             />
+
+            <SubmitModal
+                isSubmitModalVisible={submitBanModalVisible}
+                closeSubmitModal={() => setSubmitBanModalVisible(false)}
+                text = "Ban request"
+            />
+
+
 
         </Container>
 

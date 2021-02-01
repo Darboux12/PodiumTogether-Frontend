@@ -36,7 +36,9 @@ export const endpoints = {
     "addReview" : "/place/review/add",
     "findServerEndpointsCompatibility" : "/server/endpoints/compatibility",
     "incrementReviewLikes" : "/place/review/increment/likes/",
-    "incrementReviewDislikes" : "/place/review/increment/dislikes/"
+    "incrementReviewDislikes" : "/place/review/increment/dislikes/",
+    "deletePlace" : "/place/delete/id/",
+    "banUser" : "/user/ban"
 
 };
 
@@ -94,8 +96,14 @@ export const addNewsFetch = (title,shortText,linkText,fullText,images) => {
         type: "application/json"
     }));
 
+    let token = podiumStorage.get("authorizationToken");
+
+    let bearer = 'Bearer ' + token;
+
     const requestOptions = {
         method: "POST",
+        withCredentials: true,
+        headers: {'Authorization': bearer},
         body: newsFormData
     };
 
@@ -142,15 +150,33 @@ export const findAllUsersFetch = () => {
 
     const findAllUsersEndpoint = endpoints.findAllUsers;
 
-    return fetch(serverAddress + findAllUsersEndpoint);
+    let token = podiumStorage.get("authorizationToken");
+
+    let bearer = 'Bearer ' + token;
+
+    const requestOptions = {
+        method: "GET",
+        withCredentials: true,
+        headers: {'Authorization': bearer},
+    };
+
+    return fetch(serverAddress + findAllUsersEndpoint,requestOptions);
 
 };
 
 export const deleteUserFetch = (username) => {
 
+    let token = podiumStorage.get("authorizationToken");
+
+    let bearer = 'Bearer ' + token;
+
     const deleteUserEndpoint = endpoints.deleteUser;
 
-    const requestOptions = { method: 'DELETE'};
+    const requestOptions = {
+        method: 'DELETE',
+        withCredentials: true,
+        headers: {'Authorization': bearer}
+    };
 
     return fetch(serverAddress + deleteUserEndpoint + username,requestOptions);
 
@@ -285,6 +311,32 @@ export const authenticateNoTokenFetch = (username, oldPassword) => {
     };
 
     return fetch(serverAddress + authenticateNoToken, requestOptions);
+
+};
+
+export const banUserFetch = (dateFrom,dateTo,reason,username) => {
+
+    let token = podiumStorage.get("authorizationToken");
+
+    let bearer = 'Bearer ' + token;
+
+    const banUserEndpoint = endpoints.banUser;
+
+    const request = {
+        dateFrom : dateFrom,
+        dateTo : dateTo,
+        reason : reason,
+        usernameToBan : username
+    };
+
+    const requestOptions = {
+        method: 'PATCH',
+        withCredentials: true,
+        headers: {'Authorization': bearer,'Content-Type': 'application/json'},
+        body: JSON.stringify(request)
+    };
+
+    return fetch(serverAddress + banUserEndpoint,requestOptions);
 
 };
 
@@ -573,6 +625,24 @@ export const incrementReviewDislikesFetch = (id) => {
     const incrementReviewDislikesEndpoint = endpoints.incrementReviewDislikes;
 
     return  fetch(serverAddress + incrementReviewDislikesEndpoint + id,requestOptions)
+
+};
+
+export const deletePlaceFetch = (id) => {
+
+    let token = podiumStorage.get("authorizationToken");
+
+    let bearer = 'Bearer ' + token;
+
+    const deleteUserEndpoint = endpoints.deletePlace;
+
+    const requestOptions = {
+        method: 'DELETE',
+        withCredentials: true,
+        headers: {'Authorization': bearer}
+    };
+
+    return fetch(serverAddress + deleteUserEndpoint + id,requestOptions);
 
 };
 

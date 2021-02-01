@@ -1,7 +1,7 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index";
 import {faChild, faMapMarkedAlt, faMoneyBill, faUsers, faVenusMars} from "@fortawesome/free-solid-svg-icons/index";
 import Row from "react-bootstrap/esm/Row";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {faCalendarAlt} from "@fortawesome/free-regular-svg-icons/index";
 import Col from "react-bootstrap/esm/Col";
 
@@ -14,163 +14,210 @@ export default function PlaceDetailsStarRatingRow(props) {
 
     let {reviews} = props;
 
+    const [rowRatings,setRowRatings] = useState([]);
 
-    const createReviews = () => {
-
-        let rev = [];
+    useEffect(() => {
 
         if(reviews.length > 0){
+            let rowRat = createCountedRowRatings();
+            setRowRatings(rowRat);
+        }
 
-            reviews[0].starRatings.map(item => {
+    },[]);
 
-                let category = item.category;
-                let rat = item.rating;
-                let toAdd = {category : category, sum : rat} ;
-                rev = rev.concat(toAdd);
+    const findRatingCategories = (review) => {
+
+       let categories = [];
+
+        review.starRatings.map(item => {
+            categories = categories.concat(item.category);
+        });
+
+        return categories;
+
+    };
+
+    const createRowRatings = () => {
+
+        let rowRatings = [];
+
+        let categories = findRatingCategories(reviews[0]);
+
+        categories.map(category => {
+
+            let rowRating = {
+
+                category : category,
+
+                ratings : {
+                    one : 0,
+                    two : 0,
+                    three : 0,
+                    four : 0,
+                    five : 0
+                }
+            };
+
+            rowRatings = rowRatings.concat(rowRating);
+        });
+
+        return rowRatings;
+
+    };
+
+    const createCountedRowRatings = () => {
+
+        let rowRatings = createRowRatings();
+
+        reviews.map(review => {
+
+            review.starRatings.map(rating => {
+
+                rowRatings.map(rowRating => {
+
+                    if(rating.category === rowRating.category){
+
+                        if(rating.rating === 1)
+                            rowRating.ratings.one += 1;
+
+                        if(rating.rating === 2)
+                            rowRating.ratings.two += 1;
+
+                        if(rating.rating === 3)
+                            rowRating.ratings.three += 1;
+
+                        if(rating.rating === 4)
+                            rowRating.ratings.four += 1;
+
+                        if(rating.rating === 5)
+                            rowRating.ratings.five += 1;
+
+                    }
+
+                });
 
             });
 
-            console.log(rev);
+        });
 
+        return rowRatings;
+    };
 
+    const makeFiveStarRow = (number) => {
 
+        return (
 
+        <Row className={"StarRow"}>
+            <div className={"OnlyStarsRow"}>
+            {[...Array(5)].map(() =>
+                    <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>)
+            }
+            </div>
 
-        }
+            <h className={"RatingRowNumberHeader"}>Five stars ratings ({number})</h>
 
+        </Row>
+        )
+    };
 
+    const makeFourStarRow = (number) => {
+
+        return (
+
+            <Row className={"StarRow"}>
+
+                <div className={"OnlyStarsRow"}>
+                {[...Array(4)].map(() =>
+                    <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>)
+                }
+                </div>
+
+                <h className={"RatingRowNumberHeader"}>Four stars ratings ({number})</h>
+
+            </Row>
+        )
 
     };
+
+    const makeThreeStarRow = (number) => {
+
+        return (
+
+            <Row className={"StarRow"}>
+                <div className={"OnlyStarsRow"}>
+                {[...Array(3)].map(() =>
+                    <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>)}
+                </div>
+                <h className={"RatingRowNumberHeader"}>Three stars ratings ({number})</h>
+            </Row>
+        )
+
+    };
+
+    const makeTwoStarRow = (number) => {
+
+        return (
+
+            <Row className={"StarRow"}>
+                <div className={"OnlyStarsRow"}>
+                {[...Array(2)].map(() =>
+                    <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>)}
+                </div>
+                <h className={"RatingRowNumberHeader"}>Two stars ratings ({number})</h>
+            </Row>
+        )
+
+    };
+
+    const makeOneStarRow = (number) => {
+
+        return (
+
+            <Row className={"StarRow"}>
+                <div className={"OnlyStarsRow"}>
+                {[...Array(1)].map(() =>
+                    <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>)}
+                </div>
+                <h className={"RatingRowNumberHeader"}>One star ratings ({number})</h>
+            </Row>
+        )
+
+    };
+
+    if(reviews.length > 0)
 
     return(
 
         <Row className={"IconRowsContainer"}>
 
-            <Button onClick={createReviews}>CLICK ME</Button>
-
             <Col>
 
-                <Row className={"PlaceDetailsStarRatingRow"}>
+                {rowRatings.map(rowRating =>
 
-                    <Col className={"d-flex flex-row align-items-center justify-content-between"}>
+                    <div>
 
-                        <h className={"PlaceDetailsStarRatingStarType"}>Service</h>
+                        <Row>
+                            <h className={"PlaceDetailsStarRatingStarType"}>{rowRating.category}</h>
+                        </Row>
 
-                        <div className={"PlaceDetailsStarRatingStars"}>
-
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-
+                        <div className={"AllStarRow"}>
+                        {makeFiveStarRow(rowRating.ratings.five)}
+                        {makeFourStarRow(rowRating.ratings.four)}
+                        {makeThreeStarRow(rowRating.ratings.three)}
+                        {makeTwoStarRow(rowRating.ratings.two)}
+                        {makeOneStarRow(rowRating.ratings.one)}
                         </div>
 
-                        <h className={"PlaceDetailsStarRatingNumber"}>Awesome (1300)</h>
+                    </div>
 
-                    </Col>
-
-                </Row>
-
-                <Row className={"PlaceDetailsStarRatingRow"}>
-
-                    <Col className={"d-flex flex-row align-items-center justify-content-between"}>
-
-                        <h className={"PlaceDetailsStarRatingStarType"}>Service</h>
-
-                        <div className={"PlaceDetailsStarRatingStars"}>
-
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-
-                        </div>
-
-                        <h className={"PlaceDetailsStarRatingNumber"}>Awesome (1300)</h>
-
-                    </Col>
-
-                </Row>
-
-                <Row className={"PlaceDetailsStarRatingRow"}>
-
-                    <Col className={"d-flex flex-row align-items-center justify-content-between"}>
-
-                        <h className={"PlaceDetailsStarRatingStarType"}>Service</h>
-
-                        <div className={"PlaceDetailsStarRatingStars"}>
-
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-
-                        </div>
-
-                        <h className={"PlaceDetailsStarRatingNumber"}>Awesome (1300)</h>
-
-                    </Col>
-
-                </Row>
-
-                <Row className={"PlaceDetailsStarRatingRow"}>
-
-                    <Col className={"d-flex flex-row align-items-center justify-content-between"}>
-
-                        <h className={"PlaceDetailsStarRatingStarType"}>Service</h>
-
-                        <div className={"PlaceDetailsStarRatingStars"}>
-
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-
-                        </div>
-
-                        <h className={"PlaceDetailsStarRatingNumber"}>Awesome (1300)</h>
-
-                    </Col>
-
-                </Row>
-
-                <Row className={"PlaceDetailsStarRatingRow"}>
-
-                    <Col className={"d-flex flex-row align-items-center justify-content-between"}>
-
-                        <h className={"PlaceDetailsStarRatingStarType"}>Service</h>
-
-                        <div className={"PlaceDetailsStarRatingStars"}>
-
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-                            <FontAwesomeIcon className={"PlaceDetailsStarRatingStar"} icon={faStar}/>
-
-                        </div>
-
-                        <h className={"PlaceDetailsStarRatingNumber"}>Awesome (1300)</h>
-
-                    </Col>
-
-                </Row>
-
-
-
-
-
-
-
+                  )}
 
             </Col>
 
         </Row>
 
-    )
+    );
+
+    else return (<Row className={"IconRowsContainer"}></Row>)
 
 }

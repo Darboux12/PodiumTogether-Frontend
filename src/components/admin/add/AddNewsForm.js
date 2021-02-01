@@ -140,7 +140,9 @@ export default function AddNewsForm(props){
         }
     };
 
-    return( <Form className={"createNewsForm w-70"}>
+    return(
+
+        <Form className={"createNewsForm w-70"}>
 
             <Form.Group controlId="formNewsTitle">
                 <Form.Label className={"FormLabel mt-3"}>News Title</Form.Label>

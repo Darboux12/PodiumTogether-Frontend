@@ -4,13 +4,14 @@ import React from "react";
 
 export default function AdminPanelButtonsColumn(props) {
 
-    const {isUserTableVisible, setIsUserTableVisible} = props;
+    const {isUserTableVisible, setIsUserTableVisible,isPlaceTableVisible, setIsPlaceTableVisible} = props;
 
     const userButtonText = isUserTableVisible ? 'Hide all users' : 'Display all users';
+    const placeButtonText = isPlaceTableVisible ? 'Hide all places' : 'Display all places';
 
     return(
 
-        <Col className={"d-flex flex-column col-md-3 col-12"}>
+        <Col className={"d-flex flex-column col-md-3 col-12 AdminPanelButtonsColumn"}>
 
             <Button
                 variant={"outline-dark"}
@@ -35,6 +36,13 @@ export default function AdminPanelButtonsColumn(props) {
                 variant={"outline-dark"}
                 className={"AdminMenuButton"}
                 href={"/discipline/add"}>Add discipline
+            </Button>
+
+            <Button
+                variant={"outline-dark"}
+                className={"AdminMenuButton"}
+                onClick={() => setIsPlaceTableVisible(!isPlaceTableVisible)}
+            >{placeButtonText}
             </Button>
 
         </Col>

@@ -27,6 +27,7 @@ import PlaceDetailsPageWeb from "./components/place-details/page/PlaceDetailsPag
 import {FAILURE, getEndpointsDispatch, LOADING, SUCCESS} from "./components/reducers/rootReducer";
 import {useDispatch} from "react-redux";
 import serverAddress from "./components/config/Constants";
+import AdminRoute from "./components/security/AdminRoute";
 
 function App() {
 
@@ -51,7 +52,7 @@ function App() {
             <Route path="/event/details" exact component={EventDetailsPage}/>
             <Route path="/user/profile/edit" exact component={EditProfilePage}/>
             <Route path="/place/details/:id" exact component={PlaceDetailsPageWeb}/>
-            <Route path="/admin/panel" exact component={AdminPanel}/>
+            <AdminRoute path="/admin/panel" exact component={AdminPanel}/>
             <Route path="/news/create" exact component={AddNews}/>
             <Route path="/subject/add" exact component={AddSubject}/>
             <Route path="/discipline/add" exact component={AddDiscipline}/>

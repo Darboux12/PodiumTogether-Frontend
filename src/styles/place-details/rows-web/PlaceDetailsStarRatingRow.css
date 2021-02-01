@@ -5,6 +5,8 @@
 .PlaceDetailsStarRatingStar{
     color: gold;
     font-size: 2em;
+    margin-left: 0.3em;
+
 
 }
 
@@ -20,4 +22,29 @@
 
 .PlaceDetailsStarRatingRow{
     padding: 1em;
+}
+
+.RatingRowNumberHeader{
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-left: 0.5em;
+}
+
+.StarRow{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 2em;
+    margin-top: 0.7em;
+
+
+}
+
+.AllStarRow{
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.OnlyStarsRow{
+    width: 20em;
 }

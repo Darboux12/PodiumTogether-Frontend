@@ -32,6 +32,7 @@ export default function PlaceDetailsCommentRow(props) {
                                 likes = {item.likes}
                                 dislikes = {item.dislikes}
                                 id = {item.id}
+                                date = {item.date}
                             />
                         )}
 

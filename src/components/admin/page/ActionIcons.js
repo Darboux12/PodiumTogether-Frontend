@@ -50,7 +50,7 @@ export default function ActionIcons(props) {
                 <FontAwesomeIcon
                     icon={faUserSlash}
                     className="AdminActionIcon BanIcon"
-                    onClick={() => props.banUser}
+                    onClick={() => props.banUser(props.username)}
                 />
             </OverlayTrigger>
 

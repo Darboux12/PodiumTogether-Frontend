@@ -1,64 +1,74 @@
-import React, {Component} from "react";
-
-import "../../../styles/display-events/page/Events.css"
-
-import footballEvent from "../../../images/event-football.jpg"
-import Badge from "react-bootstrap/Badge";
-import {faMapMarkedAlt, faRunning, faUsers} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCalendarAlt} from "@fortawesome/free-regular-svg-icons";
+import emptyPlaceImage from "../../../images/emptyPlaceImage.jpg";
 import Button from "react-bootstrap/Button";
+import React from "react";
 
-export default function Event(props){
+import Container from "react-bootstrap/Container";
+import LocalizationRow from "../../display-places/page/LocalizationRow";
+import "../../../styles/display-events/page/Events.css";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faMapMarkedAlt, faUsers} from "@fortawesome/free-solid-svg-icons";
+import {faCalendarCheck, faCalendarTimes} from "@fortawesome/free-regular-svg-icons";
+import {faCalendarAlt} from "@fortawesome/free-solid-svg-icons/faCalendarAlt";
+import {format} from "date-fns";
 
-        return(
 
-            <div className={"Event"}>
+export default function EventImproved(props) {
 
-                <img className={"eventImage"} src={footballEvent} alt={"footballEvent"}/>
+    const image = props.image === undefined ? emptyPlaceImage : `data:image/jpeg;base64,${props.image.content}`;
 
-                <div className={"eventInformation d-flex flex-column"}>
+    return(
 
-                    <h className={"eventTitle"}>{props.title}</h>
-                    <h className={"eventDiscipline"}>{props.discipline}</h>
+        <Container className={"EventContainer d-flex align-items-center p-3"}>
 
-                    <div className={"eventLocalization"}>
-                        <FontAwesomeIcon className={"eventLocalizationIcon eventLocalizationItem"} icon={faMapMarkedAlt}/>
-                        <h className={"eventLocalizationItem"}>{props.city}</h>
-                        <h className={"eventLocalizationItem"}>{props.postalCode}</h>
-                        <h className={"eventLocalizationItem"}>{props.street}</h>
-                        <h className={"eventLocalizationItem"}>{props.number}</h>
-                    </div>
+            <img className={"eventImage"} src={image} alt={"Event image"}/>
 
-                    <div className={"eventDate"}>
-                        <FontAwesomeIcon className={"eventDateIcon eventDateItem"} icon={faCalendarAlt}/>
-                        <h className={"eventDateItem"}>{props.date}</h>
-                    </div>
+            <div className={"eventInformation d-flex flex-column"}>
 
-                    <div className={"eventRequiredPeopleNumber"}>
-                        <FontAwesomeIcon className={"eventPeopleIcon eventRequiredPeopleItem"} icon={faUsers}/>
-                        <h className={"eventRequiredPeopleItem"}>{props.bookedPeople}</h>
-                        <h className={"eventRequiredPeopleItem"}>from</h>
-                        <h className={"eventRequiredPeopleItem"}>{props.numberPeople}</h>
-                    </div>
+                <h className={"eventTitle"}>{props.title}</h>
+
+                <h className={"eventDiscipline"}>{props.place.discipline}</h>
+
+                <div className={"eventLocalization"}>
+                    <FontAwesomeIcon className={"eventLocalizationIcon eventLocalizationItem"} icon={faMapMarkedAlt}/>
+                    <a href={"/place/details/" + props.place.id} className={"eventLocalizationItem localization"}>{props.place.name}</a>
+                </div>
+
+                <div className={"eventLocalization"}>
+                    <FontAwesomeIcon className={"eventLocalizationIcon eventLocalizationItem"} icon={faCalendarCheck}/>
+                    <h className={"eventLocalizationItem localization"}>{format(new Date(props.dateFrom), "dd-MM-yyyy hh:mm")}</h>
+                </div>
+
+                <div className={"eventLocalization"}>
+                    <FontAwesomeIcon className={"eventLocalizationIcon eventLocalizationItem"} icon={faCalendarTimes}/>
+                    <h className={"eventLocalizationItem localization"}>{format(new Date(props.dateFrom), "dd-MM-yyyy hh:mm")}</h>
+                </div>
+
+                <div className={"eventLocalization"}>
+                    <FontAwesomeIcon className={"eventLocalizationIcon eventLocalizationItem"} icon={faUsers}/>
+                    <h className={"eventLocalizationItem localization"}>{props.usersJoined.length}</h>
+                    <h className={"eventLocalizationItem localization"}>from</h>
+                    <h className={"eventLocalizationItem localization"}>{props.peopleNumber}</h>
+
 
                 </div>
 
-                <h2
-                    className={"eventBadgeHeader"}>
-                    <span className="badge badge-primary eventBadge p-2">{props.discipline}</span>
-                </h2>
 
-
-                <Button className={"eventDetailsButton"} variant={"primary"}>
-
-                    See event details
-
-                </Button>
 
             </div>
 
-        );
+            <h2
+                className={"eventBadgeHeader"}>
+                <span className="badge badge-primary eventBadge p-2">{props.place.discipline}</span>
+            </h2>
+
+            <Button href={"/place/details/" + props.id} className={"eventDetailsButton"} variant={"dark"}>
+
+                See place details
+
+            </Button>
+
+        </Container>
+
+    );
 
 }
-

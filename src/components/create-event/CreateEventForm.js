@@ -11,41 +11,38 @@ import jwtDecode from "jwt-decode";
 import {
     addEventFetch,
     findAllDisciplineFetch,
-    findAllGendersFetch,
-    uploadEventFilesFetch,
-    uploadEventImagesFetch
+    findAllGendersFetch, findAllPlaceFetch,
 } from "../fetch/Fetch";
 
-export default function CreateEventFor(){
+export default function CreateEventFor(props){
 
     const [title,setTitle] = useState("");
     const [dateFrom,setDateFrom] = useState("");
     const [dateTo,setDateTo] = useState("");
-    const [city,setCity] = useState("");
-    const [street,setStreet] = useState("");
-    const [number,setNumber] = useState("");
-    const [postal,setPostal] = useState("");
     const [discipline,setDiscipline] = useState("");
     const [people,setPeople] = useState(0);
     const [minAge,setMinAge] = useState(0);
     const [maxAge,setMaxAge] = useState(0);
-    const [cost,setCost] = useState(0);
     const [description,setDescription] = useState("");
     const [documents, setDocuments] = useState([]);
     const [images,setImages] = useState([]);
     const [genders,setGenders] = useState([]);
+    const [placeName,setPlaceName] = useState("");
 
     const [titleError,setTitleError] = useState("");
     const [dateError,setDateError] = useState("");
-    const [localizationError,setLocalizationError] = useState("");
     const [peopleError,setPeopleError] = useState("");
     const [genderError,setGenderError] = useState("");
     const [ageError,setAgeError] = useState("");
-    const [costError,setCostError] = useState("");
     const [descriptionError,setDescriptionError] = useState("");
     const [documentsError,setDocumentsError] = useState("");
+    const [placeError,setPlaceError] = useState("");
+
     const [disciplineItems, setDisciplineItems] = useState([]);
     const [genderItems, setGenderItems] = useState([]);
+    const [placeItems, setPlaceItems] = useState([]);
+
+
 
     useEffect(() => {
 
@@ -70,7 +67,25 @@ export default function CreateEventFor(){
 
             .then(res => res.json())
 
-            .then(res => { setGenderItems(res);})
+            .then(res => {
+                setGenderItems(res);
+                setDiscipline(res[0].gender);
+            })
+
+            .catch(error => console.log(error));
+
+    },[]);
+
+    useEffect(() => {
+
+        findAllPlaceFetch()
+
+            .then(res => res.json())
+
+            .then(res => {
+                setPlaceItems(res);
+                setPlaceName(res[0].placeName);
+            })
 
             .catch(error => console.log(error));
 
@@ -80,11 +95,9 @@ export default function CreateEventFor(){
 
         setTitleError("");
         setDateError("");
-        setLocalizationError("");
         setPeopleError("");
         setGenderError("");
         setAgeError("");
-        setCostError("");
         setDescriptionError("");
         setDocumentsError("");
 
@@ -121,11 +134,6 @@ export default function CreateEventFor(){
             isOk = false;
         }
 
-        if(city === "" || street === "" || number === "" || postal === ""){
-            setLocalizationError("All localization fields must be filled!");
-            isOk = false;
-        }
-
         if(people === 0){
             setPeopleError("People number cannot be null!");
             isOk = false;
@@ -151,16 +159,6 @@ export default function CreateEventFor(){
             isOk = false;
         }
 
-        if(cost === 0){
-            setCostError("Cost field cannot be empty!");
-            isOk  = false;
-        }
-
-        if(cost <= "0"){
-            setCostError("Event cost must be bigger than 0!");
-            isOk  = false;
-        }
-
         if(description === ""){
             setDescriptionError("Description cannot be empty!");
             isOk  = false;
@@ -176,50 +174,16 @@ export default function CreateEventFor(){
 
             const author = jwtDecode(podiumStorage.get("authorizationToken")).sub;
 
-            addEventFetch(title,dateFrom,dateTo,city,street,postal,number,discipline,
-                people,genders,minAge,maxAge,cost,author,description)
+            addEventFetch(title,dateFrom,dateTo,placeName,discipline,
+                people,genders,minAge,maxAge,description,images,documents)
 
                 .then(res => {
 
                     if(res.ok){
-
-                        uploadEventImagesFetch(title,images)
-
-                            .then(res => {
-
-                                if(res.ok)
-
-                                    uploadEventFilesFetch(title,documents)
-
-                                        .then(res => {
-
-                                            if(!res.ok)
-                                                return res.json();
-                                        })
-
-                                        .then(res => console.log(res))
-
-                                        .catch((error) => { console.log(error); });
-
-                                else return res.json();
-                            })
-
-                            .then(res => console.log(res))
-
-                            .catch((error) => { console.log(error); });
-
-
-
-
-
-
-
+                        props.submitModal()
                     }
 
                     else return res.json();
-
-
-
                 })
 
                 .then(res => { console.log(res); })
@@ -227,6 +191,8 @@ export default function CreateEventFor(){
                 .catch((error) => { console.log(error); });
 
         }
+
+        else props.submitFailModal();
 
     };
 
@@ -274,71 +240,31 @@ export default function CreateEventFor(){
 
             <Form.Group controlId="formEventLocalization">
 
-                <Form.Label className={"FormLabel"}>Event Localization</Form.Label>
+                <Form.Label className={"FormLabel"}>Select Event Place or Tag New</Form.Label>
 
-                <h className={"ErrorHeader ml-4"}>{localizationError}</h>
+                <h className={"ErrorHeader ml-4"}>{placeError}</h>
 
                 <InputGroup className={"d-md-flex flex-row d-none"}>
 
                     <Form.Control
-                        className={"mr-3 FormInputField"}
+                        as="select"
+                        className={"FormInputField"}
                         type="text"
-                        placeholder="City..."
-                        onChange = {(e) => setCity(e.target.value)}
-                    />
+                        onChange = {(e) => setPlaceName(e.target.value)}
+                    >
 
-                    <Form.Control
-                        className={"mr-3"}
-                        type="text"
-                        placeholder="Street..."
-                        onChange = {(e) => setStreet(e.target.value)}
-                    />
+                        {placeItems.map(item =>
+                            <option key={item.id} value={item.name}>{item.name}</option>
+                        )};
 
-                    <Form.Control
-                        className={"mr-3"}
-                        type="number"
-                        placeholder="Number..."
-                        onChange = {(e) => setNumber(e.target.value)}
-                    />
+                    </Form.Control>
 
-                    <Form.Control
-                        className={""}
-                        type="text"
-                        placeholder="Postal code..."
-                        onChange = {(e) => setPostal(e.target.value)}
-                    />
+                    <Button
+                        className={"ml-5 col-4"}
+                        variant={"success"}
+                        href={"/place/create"}
+                    >Tag New Place</Button>
 
-                </InputGroup>
-
-                <InputGroup className={"d-md-none flex-row d-flex"}>
-
-                    <Form.Control
-                        className={"w-100 mb-3"}
-                        type="text"
-                        placeholder="City..."
-                        onChange = {(e) => setCity(e.target.value)}
-                    />
-
-                    <Form.Control
-                        className={"w-100 mb-3"}
-                        type="text"
-                        placeholder="Street..."
-                        onChange = {(e) => setStreet(e.target.value)}
-                    />
-
-                    <Form.Control
-                        className={"w-100 mb-3"}
-                        type="text"
-                        placeholder="Number..."
-                        onChange = {(e) => setNumber(e.target.value)}
-                    />
-
-                    <Form.Control
-                        className={"w-100 mb-3"}
-                        type="text"
-                        placeholder="Postal code..."
-                        onChange = {(e) => setPostal(e.target.value)}
-                    />
 
                 </InputGroup>
 
@@ -434,26 +360,6 @@ export default function CreateEventFor(){
 
             </Form.Group>
 
-            <Form.Group controlId="formEventCosts">
-
-                <Form.Label className={"FormLabel"}>Event costs</Form.Label>
-
-                <h className={"ErrorHeader ml-4"}>{costError}</h>
-
-                <InputGroup>
-
-                    <Form.Control
-                        type="number"
-                        min="0"
-                        step="0.1"
-                        className={"FormInputField"}
-                        placeholder="Price in PLN..."
-                        onChange = {(e) => setCost(e.target.value)}
-                    />
-                </InputGroup>
-
-            </Form.Group>
-
             <Form.Group controlId="exampleForm.ControlTextarea1">
 
                 <Form.Label className={"FormLabel "}>Event Description</Form.Label>
@@ -480,7 +386,7 @@ export default function CreateEventFor(){
                 <Form.Control
                     className={"FormInputFieldFile"}
                     type="file" multiple
-                    onChange = {(e) => setDocuments(e.target.file)}
+                    onChange = {(e) => setDocuments(e.target.files)}
                 />
 
             </Form.Group>

@@ -38,7 +38,8 @@ export const endpoints = {
     "incrementReviewLikes" : "/place/review/increment/likes/",
     "incrementReviewDislikes" : "/place/review/increment/dislikes/",
     "deletePlace" : "/place/delete/id/",
-    "banUser" : "/user/ban"
+    "banUser" : "/user/ban",
+    "findAllEvents" : "/event/find/all",
 
 };
 
@@ -374,78 +375,72 @@ export const findAllGendersFetch = () => {
 
 // EVENT
 
-export const addEventFetch = (title,dateFrom,dateTo,city,street,postal,number,discipline,
-                              people,genders,minAge,maxAge,cost,author,description) =>
+export const addEventFetch = (title,dateFrom,dateTo,placeName,discipline,
+                              people,genders,minAge,maxAge,description,images,documents) =>
 {
-
     const addEventEndpoint = endpoints.addEvent;
 
-    const eventRequest = {
+    const EventForm = new FormData();
+
+    const event= {
         title : title,
         dateFrom : dateFrom,
         dateTo : dateTo,
-        city : city,
-        street : street,
-        postal : postal,
-        number : number,
+        placeName : placeName,
         discipline : discipline,
         people : people,
         genders : genders,
         minAge : minAge,
         maxAge : maxAge,
-        cost : cost,
-        author : author,
         description : description
     };
 
+    EventForm.append('event', new Blob([JSON.stringify(
+
+        event
+
+    )], {
+        type: "application/json"
+    }));
+
+    for(const file of images){
+        EventForm.append("images",file);
+    }
+
+    for(const file of documents){
+        EventForm.append("documents",file);
+    }
+
+    let token = podiumStorage.get("authorizationToken");
+
+    let bearer = 'Bearer ' + token;
+
     const requestOptions = {
-
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(eventRequest)
-
+        withCredentials: true,
+        headers: {'Authorization': bearer},
+        body: EventForm
     };
 
     return fetch(serverAddress + addEventEndpoint,requestOptions);
 
 };
 
-export const uploadEventFilesFetch = (title,documents) => {
+export const findAllEventsFetch = () => {
 
-    const uploadEventFilesEndpoint = endpoints.uploadEventFiles;
+    const findAllEventsEndpoint = endpoints.findAllEvents;
 
-    const documentsRequest = new FormData();
+    let token = podiumStorage.get("authorizationToken");
 
-    for(const file of documents)
-        documentsRequest.append("file",file);
+    let bearer = 'Bearer ' + token;
 
-    documentsRequest.append("title",title);
-
-    const requestOptions = {
-        method: 'POST',
-        body: documentsRequest
+    let requestOptions = {
+        method: 'GET',
+        withCredentials: true,
+        headers: {'Authorization': bearer, 'Content-Type': 'application/json'}
     };
 
-    return fetch(serverAddress + uploadEventFilesEndpoint,requestOptions);
-};
-
-export const uploadEventImagesFetch = (title,images) => {
-
-    const uploadEventImagesEndpoint = endpoints.uploadEventImages;
-
-    const imagesRequest = new FormData();
-
-    for(const file of images)
-        imagesRequest.append("images",file);
-
-    imagesRequest.append("title",title);
-
-    const requestOption = {
-        method: 'POST',
-        body: imagesRequest
-    };
-
-    return fetch(serverAddress + uploadEventImagesEndpoint,requestOption);
+    return fetch(serverAddress + findAllEventsEndpoint,requestOptions);
 
 };
 

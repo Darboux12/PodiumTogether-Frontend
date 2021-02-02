@@ -38,7 +38,7 @@ function App() {
           <Switch>
             <Route path="/" exact component={MainPage}/>
             <Route path="/home" exact component={MainPage}/>
-            <Route path="/event/create" exact component={CreateEventPage}/>
+            <PrivateRoute path="/event/create" exact component={CreateEventPage}/>
             <Route path="/event/display" exact component={DisplayEventsPage}/>
             <Route path="/new/password" exact component={ForgotPasswordPage}/>
             <Route path="/terms" exact component={TermsPage}/>

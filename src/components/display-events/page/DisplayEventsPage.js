@@ -1,11 +1,31 @@
-import React, {Component} from "react";
+import React, {Component, useEffect, useState} from "react";
 import EventsSearchBar from "../search-bar/EventsSearchBar";
 import Event from "./Event";
 import "../../../styles/common/Common.css";
 import "../../../styles/display-events/page/DisplayEventPage.css";
 import displayEventsPageImage from "../../../images/displayEventsImage.jpg";
+import {findAllEventsFetch, findAllPlaceFetch} from "../../fetch/Fetch";
+
+
 
 export default function DisplayEventsPage(){
+
+    const [allItems,setAllItems] = useState([]);
+    const [eventItems,setEventItems] = useState([]);
+
+    useEffect(() => {
+
+        findAllEventsFetch()
+
+            .then(res => res.json())
+
+            .then(res => {
+                setEventItems(res);
+                setAllItems(res);
+
+            })
+
+    },[]);
 
         return(
 
@@ -17,61 +37,28 @@ export default function DisplayEventsPage(){
 
                 <div className={"EventsList"}>
 
-                    <Event
-                        title={"Common play on orlik"}
-                        discipline={"Football"}
-                        city={"Kraków"}
-                        street={"Lipowa"}
-                        postalCode={"32-060"}
-                        number={"64"}
-                        date={"12.08.2020"}
-                        bookedPeople={"3"}
-                        numberPeople={"6"}
-                    />
-                    <Event
-                        title={"Common play on orlik"}
-                        discipline={"Football"}
-                        city={"Kraków"}
-                        street={"Lipowa"}
-                        postalCode={"32-060"}
-                        number={"64"}
-                        date={"12.08.2020"}
-                        bookedPeople={"3"}
-                        numberPeople={"6"}
-                    />
-                    <Event
-                        title={"Common play on orlik"}
-                        discipline={"Football"}
-                        city={"Kraków"}
-                        street={"Lipowa"}
-                        postalCode={"32-060"}
-                        number={"64"}
-                        date={"12.08.2020"}
-                        bookedPeople={"3"}
-                        numberPeople={"6"}
-                    />
-                    <Event
-                        title={"Common play on orlik"}
-                        discipline={"Football"}
-                        city={"Kraków"}
-                        street={"Lipowa"}
-                        postalCode={"32-060"}
-                        number={"64"}
-                        date={"12.08.2020"}
-                        bookedPeople={"3"}
-                        numberPeople={"6"}
-                    />
-                    <Event
-                        title={"Common play on orlik"}
-                        discipline={"Football"}
-                        city={"Kraków"}
-                        street={"Lipowa"}
-                        postalCode={"32-060"}
-                        number={"64"}
-                        date={"12.08.2020"}
-                        bookedPeople={"3"}
-                        numberPeople={"6"}
-                    />
+                    {eventItems.map(event =>
+
+                        <Event
+                            id={event.id}
+                            title={event.title}
+                            dateFrom={event.dateFrom}
+                            dateTo={event.dateTo}
+                            peopleNumber={event.peopleNumber}
+                            minAge={event.minAge}
+                            maxAge={event.maxAge}
+                            description={event.description}
+                            usersJoined={event.usersJoined}
+                            author={event.author}
+                            discipline={event.discipline}
+                            views={event.views}
+                            image={event.images[0]}
+                            documents={event.documents}
+                            creationDate={event.creationDate}
+                            place={event.place}
+                        />
+
+                    )}
 
                 </div>
 

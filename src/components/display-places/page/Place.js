@@ -1,14 +1,6 @@
 import emptyPlaceImage from "../../../images/emptyPlaceImage.jpg";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faMapMarkedAlt, faUsers} from "@fortawesome/free-solid-svg-icons";
-import {faCalendarAlt} from "@fortawesome/free-regular-svg-icons";
 import Button from "react-bootstrap/Button";
 import React from "react";
-
-
-
-
-
 import "../../../styles/display-places/page/Place.css"
 import Container from "react-bootstrap/Container";
 import LocalizationRow from "./LocalizationRow";

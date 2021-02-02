@@ -1,75 +1,89 @@
-.Event{
-    display: flex;
-    align-items: center;
-    flex-direction: row;
+
+
+
+
+
+.EventContainer{
     position: relative;
     background: white;
-    height: 12em;
-
+    height: 20em;
     box-sizing: border-box;
     margin-top: 1em;
-
-    width: 70%;
-
     box-shadow: 0 0 14px -3px rgba(130,127,130,0.86);
 }
 
 .eventImage{
-    display: flex;
-    width: 7em;
-    height: 7em;
-    margin-left: 1em;
+    width: 12em;
+    height: 12em;
     margin-right: 2em;
-
 }
 
 .eventInformation{
+    justify-content: space-evenly !important;
+    height: 60%;
+}
 
-
- }
-
- .eventTitle{
-     font-weight: bold;
-     color: #1B75BC;
-     font-size: 1.2em;
- }
+.eventTitle{
+    font-weight: bold;
+    color: #1B75BC;
+    font-size: 1.4em;
+}
 
 .eventDiscipline{
     color: black;
     opacity: 0.6;
-    font-size: 1.1em;
+    font-size: 1.3em;
+    font-weight: bold;
 }
 
 .eventLocalizationItem,
+
 .eventRequiredPeopleItem,
+
 .eventDateItem {
     margin-right: 0.5em;
 }
 
+.localization{
+
+}
+
 .eventLocalizationIcon{
     color: green;
+    font-size: 1.4em;
+    width: 2em !important;
+    margin-top: 0.2em;
+
 }
 
 .eventDateIcon{
     color: green;
+    font-size: 1.4em;
+    width: 2em !important;
+    margin-top: 0.2em;
 }
 
 .eventPeopleIcon{
     color: green;
+    font-size: 1.4em;
+    width: 2em !important;
+    margin-top: 0.2em;
 }
 
- .eventBadge{
-     position: absolute;
-     right: 1em;
-     top: 1em;
+.eventBadge{
+    position: absolute;
+    right: 1em;
+    top: 1em;
 }
 
 .eventBadgeHeader{
-    font-size: 1.2em;
+    font-size: 1.4em;
 }
 
 .eventDetailsButton{
     position: absolute;
     bottom: 1em;
     right: 1em;
+    width: 30%;
 }
+

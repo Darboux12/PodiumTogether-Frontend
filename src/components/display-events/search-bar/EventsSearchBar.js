@@ -1,6 +1,6 @@
-import React, {Component, useEffect, useState} from "react";
+import React, {useState} from "react";
 import Navbar from "react-bootstrap/Navbar";
-import {Form, FormControl, InputGroup} from "react-bootstrap";
+import {Form, FormControl} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import "../../../styles/display-events/search-bar/EventsSearchBar.css"
 import DisciplineSearchTab from "../search-tabs/DisciplineSearchTab";

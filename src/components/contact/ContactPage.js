@@ -6,14 +6,11 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import * as emailValidator from "email-validator";
-import {maxEmailLength} from "../config/Limits";
-import {minContactMessageLength} from "../config/Limits";
-import {maxContactMessageLength} from "../config/Limits";
+import {maxContactMessageLength, maxEmailLength, minContactMessageLength} from "../config/Limits";
 import SubmitModal from "../common/SubmitModal";
 import {addContactFetch, findAllSubjectsFetch} from "../fetch/Fetch";
 
 import contactImage from "../../images/support.jpg"
-import {serverEndpoints} from "../config/Constants";
 import {useSelector} from "react-redux";
 
 export default function ContactPage(){

@@ -1,14 +1,12 @@
-import emptyPlaceImage from "../../../images/emptyPlaceImage.jpg";
+import emptyPlaceImage from "../../../images/emptyPlaceImage.png";
 import Button from "react-bootstrap/Button";
 import React from "react";
 
 import Container from "react-bootstrap/Container";
-import LocalizationRow from "../../display-places/page/LocalizationRow";
 import "../../../styles/display-events/page/Events.css";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMapMarkedAlt, faUsers} from "@fortawesome/free-solid-svg-icons";
 import {faCalendarCheck, faCalendarTimes} from "@fortawesome/free-regular-svg-icons";
-import {faCalendarAlt} from "@fortawesome/free-solid-svg-icons/faCalendarAlt";
 import {format} from "date-fns";
 
 

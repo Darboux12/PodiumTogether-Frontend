@@ -1,5 +1,5 @@
 import Container from "react-bootstrap/esm/Container";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import Row from "react-bootstrap/esm/Row";
 import "../../../styles/admin/AdminPanel.css"
 import AdminPanelButtonsColumn from "./AdminPanelButtonsColumn";

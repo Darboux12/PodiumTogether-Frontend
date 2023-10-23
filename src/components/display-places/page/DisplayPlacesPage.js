@@ -1,14 +1,12 @@
-import React, {Component, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import "../../../styles/display-places/page/DisplayPlacesPage.css"
 import displayPlacesImage from "../../../images/stadium.jpg";
 
 
 import Place from "./Place";
-import EventsSearchBar from "../../search-bar/search-bar/EventsSearchBar";
+import EventsSearchBar from "../../display-events/search-bar/EventsSearchBar";
 import {findAllPlaceFetch} from "../../fetch/Fetch";
-import {faDollarSign, faSearch} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import SearchMessage from "./SearchMessage";
 
 

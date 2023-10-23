@@ -1,4 +1,4 @@
-import restAssuredBrand from "../../../images/restAssuredBrand.jpg";
+import restAssuredBrand from "../../../images/RestAssuredBrand.png";
 import AboutItem from "../../about-item/AboutItem";
 import React from "react";
 

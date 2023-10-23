@@ -4,7 +4,7 @@ import Carousel from "react-bootstrap/Carousel";
 import "../../styles/common/ImagesCarousel.css"
 import Container from "react-bootstrap/Container";
 
-import emptyImage from "../../images/emptyPlaceImage.jpg"
+import emptyImage from "../../images/emptyPlaceImage.png"
 
 export default function ImageCarousel(props) {
 

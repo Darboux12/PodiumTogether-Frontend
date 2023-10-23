@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import React from 'react';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import MainPage from "./components/main/MainPage"
 import NavBar from "./components/navbar/navbars/NavBar"
-import Footer from "./components/footer/Footer";
 import CreateEventPage from "./components/create-event/CreateEventPage";
 import DisplayEventsPage from "./components/display-events/page/DisplayEventsPage";
 import ForgotPasswordPage from "./components/forgot-password/ForgotPasswordPage";
@@ -19,14 +18,10 @@ import EditProfilePage from "./components/edit-profile/EditProfilePage";
 import AdminPanel from "./components/admin/page/AdminPanel";
 import AddNews from "./components/admin/add/AddNews";
 import EmptyFooter from "./components/footer/EmptyFooter";
-import TestComponent from "./components/TestComponent";
 import AddSubject from "./components/admin/add/AddSubject";
 import AddDiscipline from "./components/admin/add/AddDiscipline";
 import NewsDetails from "./components/news/NewsDetails";
 import PlaceDetailsPageWeb from "./components/place-details/page/PlaceDetailsPageWeb";
-import {FAILURE, getEndpointsDispatch, LOADING, SUCCESS} from "./components/reducers/rootReducer";
-import {useDispatch} from "react-redux";
-import serverAddress from "./components/config/Constants";
 import AdminRoute from "./components/security/AdminRoute";
 
 function App() {
@@ -39,7 +34,7 @@ function App() {
             <Route path="/" exact component={MainPage}/>
             <Route path="/home" exact component={MainPage}/>
             <PrivateRoute path="/event/create" exact component={CreateEventPage}/>
-            <Route path="/event/display" exact component={DisplayEventsPage}/>
+            <PrivateRoute path="/event/display" exact component={DisplayEventsPage}/>
             <Route path="/new/password" exact component={ForgotPasswordPage}/>
             <Route path="/terms" exact component={TermsPage}/>
             <Route path="/user/profile" exact component={UserProfilePage}/>
@@ -56,7 +51,6 @@ function App() {
             <Route path="/news/create" exact component={AddNews}/>
             <Route path="/subject/add" exact component={AddSubject}/>
             <Route path="/discipline/add" exact component={AddDiscipline}/>
-            <PrivateRoute path="/test" exact component={TestComponent}/>
             <PrivateRoute path={"/dashboard"} component={CreateEventPage}/>
           </Switch>
             <EmptyFooter/>

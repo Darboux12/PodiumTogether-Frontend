@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import Container from "react-bootstrap/esm/Container";
 import CreateEventForm from "./CreateEventForm";
 import "../../styles/create-event/CreateEventPage.css"
-import TagPlaceForm from "../tag-place/TagPlaceForm";
 import SubmitModal from "../common/SubmitModal";
 import SubmitFailModal from "../common/SubmitFailModal";
 

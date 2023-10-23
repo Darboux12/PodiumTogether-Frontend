@@ -1,6 +1,4 @@
-import UsersTable from "./UsersTable";
 import React from "react";
-import Col from "react-bootstrap/esm/Col";
 import "../../../styles/admin/AdminPanel.css"
 import PlaceTable from "./PlaceTable";
 import Row from "react-bootstrap/Row";

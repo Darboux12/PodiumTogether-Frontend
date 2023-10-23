@@ -1,6 +1,5 @@
-import React, {Component, useState} from "react";
+import React, {useState} from "react";
 import Container from "react-bootstrap/Container";
-import userProfileImage from "../../images/person.jpg";
 
 import "../../styles/user-profile/UserProfilePage.css"
 import TabsBar from "./TabsBar";

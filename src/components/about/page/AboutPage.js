@@ -25,8 +25,6 @@ export default function AboutPage() {
 
                 <BackendItem/>
 
-                <TestItem/>
-
             </Row>
 
             <Row className={"d-md-none flex-column d-flex"}>

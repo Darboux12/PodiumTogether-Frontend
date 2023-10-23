@@ -1,7 +1,5 @@
 import Table from "react-bootstrap/esm/Table";
 import React, {useEffect, useState} from "react";
-import serverAddress, {deleteUserEndpoint} from "../../config/Constants";
-import News from "../../news/News";
 import ActionIcons from "./ActionIcons";
 import Modal from "react-bootstrap/esm/Modal";
 import Button from "react-bootstrap/esm/Button";
@@ -10,9 +8,6 @@ import Container from "react-bootstrap/Container";
 import "../../../styles/admin/AdminPanel.css"
 import {banUserFetch, deleteUserFetch, findAllUsersFetch} from "../../fetch/Fetch";
 import {Form} from "react-bootstrap";
-import ImageUploader from "react-images-upload";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 export default function UsersTable() {
 

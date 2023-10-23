@@ -1,4 +1,4 @@
-import emptyPlaceImage from "../../../images/emptyPlaceImage.jpg";
+import emptyPlaceImage from "../../../images/emptyPlaceImage.png";
 import Button from "react-bootstrap/Button";
 import React from "react";
 import "../../../styles/display-places/page/Place.css"

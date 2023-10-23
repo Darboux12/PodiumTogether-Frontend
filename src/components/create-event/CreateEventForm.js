@@ -8,11 +8,7 @@ import ImageUploader from "react-images-upload";
 import {maxEventPeopleLength, maxEventTitleLength, maxMaxAge, minMinAge} from "../config/Limits";
 import podiumStorage from "../config/Storage";
 import jwtDecode from "jwt-decode";
-import {
-    addEventFetch,
-    findAllDisciplineFetch,
-    findAllGendersFetch, findAllPlaceFetch,
-} from "../fetch/Fetch";
+import {addEventFetch, findAllDisciplineFetch, findAllGendersFetch, findAllPlaceFetch,} from "../fetch/Fetch";
 
 export default function CreateEventFor(props){
 

@@ -1,8 +1,6 @@
-import React, {Component} from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRunning} from "@fortawesome/free-solid-svg-icons";
-import { faBiking} from "@fortawesome/free-solid-svg-icons";
-import { faSkating} from "@fortawesome/free-solid-svg-icons";
+import React from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faBiking, faRunning, faSkating} from "@fortawesome/free-solid-svg-icons";
 import "../../styles/logo/LogoIcons.css"
 import Container from "react-bootstrap/Container";
 

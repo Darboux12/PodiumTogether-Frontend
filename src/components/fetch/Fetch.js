@@ -58,10 +58,15 @@ export const addDisciplineFetch = (discipline) => {
 
     const disciplineRequest = {discipline : discipline};
 
+    let token = podiumStorage.get("authorizationToken");
+
+    let bearer = 'Bearer ' + token;
+
     const requestOptions = {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(disciplineRequest)
+        headers: {'Content-Type': 'application/json','Authorization': bearer},
+        body: JSON.stringify(disciplineRequest),
+        withCredentials: true,
     };
 
     return fetch(serverAddress + addDisciplineEndpoint,requestOptions);

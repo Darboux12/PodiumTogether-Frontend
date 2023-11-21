@@ -51,25 +51,33 @@ export default function AddDiscipline() {
 
                 .then((res) =>{
 
-                    if(res.ok)
-                        setDisciplineError("Discipline already exist!");
+                    if(res.ok){
 
-                    else if(res.status === 404)
+                        res.text().then(res => {
 
-                        addDisciplineFetch(discipline)
+                            if (res === "true") {
+                                setDisciplineError("Discipline already exist!");
+                            }
 
-                            .then((res) =>{
+                            else {
 
-                                if(res.ok)
-                                    setSubmitModalVisible(true);
+                                addDisciplineFetch(discipline)
 
-                                else return res.json();
+                                    .then((res) =>{
 
-                            })
+                                        if(res.ok)
+                                            setSubmitModalVisible(true);
 
-                            .then(res => console.log(res))
+                                        else return res.json();
 
-                            .catch(error => console.log(error));
+                                    })
+
+                                    .then(res => console.log(res))
+
+                                    .catch(error => console.log(error));
+                            }
+                        });
+                    }
 
                     else return res.json();
 
